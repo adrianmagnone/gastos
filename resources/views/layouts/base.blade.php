@@ -44,9 +44,10 @@
           </h1>
           <x-topbar />
           
-          @if (Auth::check())
+          <x-menubar />
+          {{-- @if (Auth::check())
             <x-menubar />
-          @endif
+          @endif --}}
         </div>
       </header>
       <div class="page-wrapper">
