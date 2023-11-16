@@ -44,7 +44,11 @@ class ResumenMioLista extends SelectAction
         $record = new \stdClass();
 
         $record->id = $modelData->id;
-        $record->fecha = MiDate::toFormat($modelData->fecha,'d/m/Y');
+        $record->futuro = (MiDate::greatToday($modelData->fecha)) ? 1 : 0; 
+        if ($modelData->es_gasto)
+            $record->fecha = ($record->futuro) ? MiDate::toFormat($modelData->fecha,'M Y') : MiDate::toFormat($modelData->fecha,'d/m/Y');
+        else
+            $record->fecha = MiDate::toFormat($modelData->fecha,'d/m/Y');
         $record->concepto = $modelData->nombre_concepto;
         $record->descripcion = $modelData->descripcion;
         $record->importe = Formatter::moneyArg($modelData->saldo);

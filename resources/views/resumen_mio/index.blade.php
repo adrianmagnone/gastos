@@ -16,8 +16,7 @@
 
     <div class="col-6">
         <h3>Resumen por Mes</h3>
-        <x-list.table columns="Mes|Ingresos|Egresos" acciones="0" :id="false" idgrid="Resumen"/>
-
+        <x-list.table columns="Mes|Ingresos|Egresos|Saldo" acciones="0" :id="false" idgrid="Resumen"/>
 
         <h3>Totales</h3>
 
@@ -94,10 +93,19 @@
             pageLength: 100,
 			dom: "rt",
 			ajaxUrl: "{{ asset('resumen_mio_mensuales') }}",
-			columns: "mes~f|ingresos_f~f|egresos_f~f",
+			columns: "mes~f|ingresos_f~f|egresos_f~f|saldo~f",
             columnDefs: [
 				{ data: "ingresos_f",     className: "text-end" },
                 { data: "egresos_f",      className: "text-end" },
+                { data: "saldo",          className: "text-end" },
+                {
+    				data: "ingresos_f",
+    				render: function ( data, type, row, meta ) {
+                        if (row.ingresoVirtual == 1)
+                            return `<span class="text-muted">${row.ingresos_f}</span>`
+                        return row.ingresos_f;
+    				}
+  				},
             ],
             createdRow: function( row, data, dataIndex ) {
     			totalIngresos += parseFloat(data.ingresos);

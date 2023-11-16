@@ -11,7 +11,7 @@ use App\Helpers\Formatter;
 
 class ResumenMioTotales extends SelectAction
 {
-
+    protected $saldo = 0;
 
     function __construct()
     {
@@ -52,10 +52,29 @@ class ResumenMioTotales extends SelectAction
         $record->mes = MiDate::toMonthYearFormat($fecha); 
         $record->ingresos_f = Formatter::moneyArg($modelData->ingresos);
         $record->egresos_f  = Formatter::moneyArg($modelData->egresos);
-        $record->ingresos   = $modelData->ingresos;
-        $record->egresos    = $modelData->egresos;
-        $record->saldo_ingresos = $modelData->saldo_ingresos;
-        $record->saldo_egresos  = $modelData->saldo_egresos;
+        $record->ingresos   = (float)$modelData->ingresos;
+        $record->egresos    = (float)$modelData->egresos;
+        $record->saldo_ingresos  = (float)$modelData->saldo_ingresos;
+        $record->saldo_egresos   = (float)$modelData->saldo_egresos;
+        $record->ingresoVirtual  = 0;
+
+        if ((float)$modelData->ingresos < 1)
+        {
+            $ingresoVirtual = (float)config('app.ingreso_virtual');
+
+            if ($ingresoVirtual)
+            {
+                $record->ingresos_f     = Formatter::moneyArg($ingresoVirtual);
+                $record->ingresos       = $ingresoVirtual;
+                $record->ingresoVirtual = 1;
+
+                $modelData->saldo_ingresos += $ingresoVirtual;
+            }
+        }
+
+        $this->saldo = $this->saldo + ($modelData->saldo_ingresos - $modelData->saldo_egresos);
+
+        $record->saldo = Formatter::moneyArg($this->saldo);
         
         return $record;
     }
