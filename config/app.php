@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Gastos'),
 
     /*
     |--------------------------------------------------------------------------
@@ -194,4 +194,5 @@ return [
         // ...
     ])->toArray(),
 
+    'ingreso_virtual' => env('APP_INGRESO_VIRTUAL', 0),
 ];
