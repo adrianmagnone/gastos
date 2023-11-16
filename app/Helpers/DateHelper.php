@@ -111,7 +111,9 @@ class DateHelper
 		{
 			$periodo = self::object($value);
 
-            return "{$periodo->locale('es')->monthName} {$periodo->year}";
+			$nombreMes = ucfirst($periodo->locale(config('app.locale'))->monthName);
+
+            return "{$nombreMes} {$periodo->year}";
 		}
 		catch (\Throwable $th)
 		{

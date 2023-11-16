@@ -46,7 +46,7 @@ class ResumenMioLista extends SelectAction
         $record->id = $modelData->id;
         $record->futuro = (MiDate::greatToday($modelData->fecha)) ? 1 : 0; 
         if ($modelData->es_gasto)
-            $record->fecha = ($record->futuro) ? MiDate::toFormat($modelData->fecha,'M Y') : MiDate::toFormat($modelData->fecha,'d/m/Y');
+            $record->fecha = ($record->futuro) ? MiDate::toMonthYearFormat($modelData->fecha) : MiDate::toFormat($modelData->fecha,'d/m/Y');
         else
             $record->fecha = MiDate::toFormat($modelData->fecha,'d/m/Y');
         $record->concepto = $modelData->nombre_concepto;
