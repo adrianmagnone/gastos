@@ -135,7 +135,7 @@ class SelectAction
     public function runForExport(&$request)
     {
         set_time_limit(0);
-        ini_set('memory_limit', config('define.exportar.memoria_excel'));
+        //ini_set('memory_limit', config('define.exportar.memoria_excel'));
 
         setcookie(
             'Pagos[downloadXlsToken]',
