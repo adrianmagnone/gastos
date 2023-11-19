@@ -35,4 +35,9 @@ class Vehiculo extends Model
 
     //     return $keys[0];
     // }
+
+    public static function activos()
+    {
+        return Vehiculo::where('estado', 1)->get();
+    }
 }
