@@ -29,6 +29,13 @@ class Formatter
         return $formatter->format($value);
     }
 
+    public static function number($value) : string
+    {
+        $formatter = NumberFormatter::create("es-AR", NumberFormatter::DEFAULT_STYLE);
+
+        return $formatter->format($value);
+    }
+
     public static function idFiscal($type, $value) : string
     {
         // switch ($type) {
