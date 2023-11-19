@@ -23,6 +23,27 @@
           </div>
         </li>
 
+
+        {{-------------------------------------}}
+        <li class="nav-item active dropdown">
+          <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
+            <span class="nav-link-icon d-md-none d-lg-inline-block">
+              <i class="ti ti-car"></i>
+            </span>
+            <span class="nav-link-title">
+              Vehiculos
+            </span>
+          </a>
+          <div class="dropdown-menu">
+            <div class="dropdown-menu-columns">
+              <div class="dropdown-menu-column">
+                <a class="dropdown-item" href="{{ route('vehiculos') }}">Vehiculos</a>
+                {{-- <a class="dropdown-item" href="{{ route('conceptos_mios') }}">Conceptos</a> --}}
+              </div>
+            </div>
+          </div>
+        </li>
+        
       </ul>
     </div>
   </div>

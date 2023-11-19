@@ -6,6 +6,8 @@ use App\Http\Controllers\ConceptosMiosController;
 use App\Http\Controllers\MovimientosMiosController;
 use App\Http\Controllers\ResumenMioController;
 
+use App\Http\Controllers\VehiculosController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -42,3 +44,11 @@ Route::get('conceptos_mios/excel',              [ConceptosMiosController::class,
 Route::get('conceptos_mios/nuevo',              [ConceptosMiosController::class, 'create']);
 Route::post('conceptos_mios/guardar',           [ConceptosMiosController::class, 'store'])->name('conceptos_mios.guardar');
 Route::get('conceptos_mios/editar/{id}',        [ConceptosMiosController::class, 'edit']);
+
+
+Route::get('vehiculos',                         [VehiculosController::class, 'index'])->name('vehiculos');
+Route::get('vehiculos_data/{id?}',              [VehiculosController::class, 'getData']);
+Route::get('vehiculos/excel',                   [VehiculosController::class, 'toExcel']);
+Route::get('vehiculo/nuevo',                    [VehiculosController::class, 'create']);
+Route::post('vehiculo/guardar',                 [VehiculosController::class, 'store'])->name('vehiculo.guardar');
+Route::get('vehiculo/editar/{id}',              [VehiculosController::class, 'edit']);
