@@ -33,6 +33,8 @@ Route::get('resumen_mio',                       [ResumenMioController::class, 'i
 Route::get('resumen_mio_data',                  [ResumenMioController::class, 'getData']);
 Route::get('resumen_mio_mensuales',             [ResumenMioController::class, 'getTotalesMensuales']);
 
+Route::get('movimientos_mios',                  [MovimientosMiosController::class, 'index'])->name('movimientos_mios');
+Route::get('movimientos_mios_data/{id?}',       [MovimientosMiosController::class, 'getData']);
 Route::get('movimientos_mios/nuevo',            [MovimientosMiosController::class, 'create']);
 Route::post('movimientos_mios/guardar',         [MovimientosMiosController::class, 'store'])->name('movimientos_mios.guardar');
 Route::get('movimientos_mios/editar/{id}',      [MovimientosMiosController::class, 'edit']);

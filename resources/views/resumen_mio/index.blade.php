@@ -1,7 +1,7 @@
 @extends('layouts.list')
 
-@section('PageTittle', 'Resumen')
-@section('ListTittle', 'Resumen de mis Movimientos')
+@section('PageTittle', 'Mis Movimientos - Saldos')
+@section('ListTittle', 'Mis Movimientos: Saldos')
 
 @section('ListActions')
 <x-list.button-add url="{{ url('movimientos_mios/nuevo') }}" text="Agregar Movimiento"/>

@@ -16,7 +16,8 @@
           <div class="dropdown-menu">
             <div class="dropdown-menu-columns">
               <div class="dropdown-menu-column">
-                <a class="dropdown-item" href="{{ route('resumen_mio') }}">Resumen</a>
+                <a class="dropdown-item" href="{{ route('resumen_mio') }}">Resumen de Saldos</a>
+                <a class="dropdown-item" href="{{ route('movimientos_mios') }}">Consulta de Movimientos</a>
                 <a class="dropdown-item" href="{{ route('conceptos_mios') }}">Conceptos</a>
               </div>
             </div>

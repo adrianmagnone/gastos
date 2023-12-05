@@ -5,11 +5,22 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
+use App\Actions\MovimientoMioLista;
 use App\Actions\MovimientoMioEditar;
 use App\Actions\MovimientoMioImputar;
 
 class MovimientosMiosController extends Controller
 {
+    public function index(MovimientoMioLista $action)
+    {
+        return $action->viewList();
+    }
+
+    public function getData(Request $request, MovimientoMioLista $action, $id = null)
+    {
+        return $action->run($request, $id);
+    }
+
     public function create(MovimientoMioEditar $action)
     {
         return $action->runForCreate();
