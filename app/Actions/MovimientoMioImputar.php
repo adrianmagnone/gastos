@@ -40,11 +40,11 @@ class MovimientoMioImputar extends EditAction
             {
                 $listaImputaciones[] = [
                     'id'         => $entidadImputar->id,
-                    'importe'    => Formatter::decimalNumber($entidadImputar->importe),
+                    'importe'    => Formatter::decimalNumber($entidadImputar->saldo),
                     'concepto'   => $entidadImputar->nombre_concepto . ' ' . $entidadImputar->descripcion,
                     'fecha'      => $entidadImputar->fecha_format,
                     'imputacion' => Formatter::decimalNumber($saldo),
-                    'saldo'      => Formatter::decimalNumber($entidadImputar->importe - $saldo),
+                    'saldo'      => Formatter::decimalNumber($entidadImputar->saldo - $saldo),
                 ];
                 $saldo = 0;
             }
@@ -52,7 +52,7 @@ class MovimientoMioImputar extends EditAction
             {
                 $listaImputaciones[] = [
                     'id'         => $entidadImputar->id,
-                    'importe'    => Formatter::decimalNumber($entidadImputar->importe),
+                    'importe'    => Formatter::decimalNumber($entidadImputar->saldo),
                     'fecha'      => $entidadImputar->fecha_format,
                     'concepto'   => $entidadImputar->nombre_concepto . ' ' . $entidadImputar->descripcion,
                     'imputacion' => Formatter::decimalNumber($entidadImputar->saldo),
