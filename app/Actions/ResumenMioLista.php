@@ -53,7 +53,6 @@ class ResumenMioLista extends SelectAction
         $record->descripcion = $modelData->descripcion;
         $record->importe = Formatter::moneyArg($modelData->saldo);
         $record->tipo = $modelData->tipo;
-        $record->futuro = (MiDate::greatToday($modelData->fecha)) ? 1 : 0; 
         
         return $record;
     }
