@@ -50,8 +50,8 @@ class ResumenMioTotales extends SelectAction
 
         $record->id = $modelData->id;
         $record->mes = MiDate::toMonthYearFormat($fecha); 
-        $record->ingresos_f = Formatter::moneyArg($modelData->ingresos);
-        $record->egresos_f  = Formatter::moneyArg($modelData->egresos);
+        $record->ingresos_f = Formatter::moneyArg($modelData->saldo_ingresos);
+        $record->egresos_f  = Formatter::moneyArg($modelData->saldo_egresos);
         $record->ingresos   = (float)$modelData->ingresos;
         $record->egresos    = (float)$modelData->egresos;
         $record->saldo_ingresos  = (float)$modelData->saldo_ingresos;
