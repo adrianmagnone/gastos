@@ -114,4 +114,6 @@
         </div>
       @endif
     </div>
-  </div>
+</div>
+<div class="collapse navbar-collapse" id="navbar-menu">
+</div>
