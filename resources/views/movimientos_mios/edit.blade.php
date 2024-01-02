@@ -1,12 +1,7 @@
 @extends('layouts.form')
 
-@section('FormTittle')
-    @if ($entity->id)
-        Editar Movimiento
-    @else
-        Nueva Movimiento
-    @endif
-@endsection
+@section('FormPreTittle', ($entity->id) ? 'Editar' : 'Agregar')
+@section('FormTittle'. 'Movimiento Mio')
 
 @section ('FormBody')
     <x-form.hide field="id" :value="$entity->id" />

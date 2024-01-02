@@ -1,6 +1,7 @@
 @extends('layouts.list')
 
 @section('PageTittle', 'Mis Movimientos')
+@section('ListPreTittle', 'Consulta')
 @section('ListTittle', 'Mis Movimientos')
 
 @section('ListActions')

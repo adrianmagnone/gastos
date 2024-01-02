@@ -1,7 +1,8 @@
 @extends('layouts.form')
 
 @section('PageTittle', 'Editar Mantenimiento Vehículo')
-@section('FormTittle', 'Editar Mantenimiento Vehículo')
+@section('FormPreTittle', ($entity->id) ? 'Editar' : 'Agregar')
+@section('FormTittle', 'Mantenimiento Vehículo')
 
 @section ('FormBody')
     <x-form.hide field="id" :value="$entity->id" />

@@ -29,10 +29,10 @@
     @yield('Bundles')
   </head>
   
-  <body @hasSection('BodyClass') class="@yield('BodyClass')" @endif>
+  <body class="layout-fluid @hasSection('BodyClass') @yield('BodyClass') @endif">
     <div class="page">
       <!-- Navbar -->
-      <header class="navbar navbar-expand-md navbar-dark navbar-overlap d-print-none">
+      {{-- <header class="navbar navbar-expand-md navbar-dark navbar-overlap d-print-none">
         <div class="container-xl">
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -47,7 +47,16 @@
           <x-menubar />
           {{-- @if (Auth::check())
             <x-menubar />
-          @endif --}}
+          @endif 
+        </div>
+      </header> --}}
+      <x-menubar />
+      <header class="navbar navbar-expand-md navbar-light d-none d-lg-flex d-print-none">
+        <div class="container-xl">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <x-topbar />
         </div>
       </header>
       <div class="page-wrapper">

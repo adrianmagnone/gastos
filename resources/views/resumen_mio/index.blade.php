@@ -1,6 +1,7 @@
 @extends('layouts.list')
 
 @section('PageTittle', 'Mis Movimientos - Saldos')
+@section('ListPreTittle', 'Resumen')
 @section('ListTittle', 'Mis Movimientos: Saldos')
 
 @section('ListActions')

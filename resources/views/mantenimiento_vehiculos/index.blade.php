@@ -1,6 +1,7 @@
 @extends('layouts.list')
 
 @section('PageTittle', 'Mantenimiento Vehículos')
+@section('ListPreTittle', 'Consulta')
 @section('ListTittle', 'Mantenimiento de Vehículos')
 
 @section('ListActions')
