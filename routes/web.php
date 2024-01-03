@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\CategoriasController;
+use App\Http\Controllers\TarjetasController;
+
 use App\Http\Controllers\ConceptosMiosController;
 use App\Http\Controllers\MovimientosMiosController;
 use App\Http\Controllers\ResumenMioController;
@@ -21,12 +24,41 @@ use App\Http\Controllers\VehiculosController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $data = [];
+
+    $fila1 = new stdClass();
+    $fila1->name = '';
+    $fila1->data = [155, 65, 465, 265, 225, 325, 80];
+
+    $fila2 = new stdClass();
+    $fila2->name = '';
+    $fila2->data = [113, 42, 65, 54, 76, 65, 35];
+
+    $data[] = $fila1;
+    $data[] = $fila2;
+
+    return view('welcome', ['serieGastos' => json_encode($data)]);
 });
 
 Route::get('/login', function () {
     return view('welcome');
 })->name('login');
+
+// CATEGORIAS----------------------------------------------------- 
+Route::get('categorias',                        [CategoriasController::class, 'index'])->name('categorias');
+Route::get('categorias_data/{id?}',             [CategoriasController::class, 'getData']);
+Route::get('categorias/excel',                  [CategoriasController::class, 'toExcel']);
+Route::get('categoria/nueva',                   [CategoriasController::class, 'create']);
+Route::post('categoria/guardar',                [CategoriasController::class, 'store'])->name('categoria.guardar');
+Route::get('categoria/editar/{id}',             [CategoriasController::class, 'edit']);
+
+// TARJETAS  ----------------------------------------------------- 
+Route::get('tarjetas',                          [TarjetasController::class, 'index'])->name('tarjetas');
+Route::get('tarjetas_data/{id?}',               [TarjetasController::class, 'getData']);
+Route::get('tarjetas/excel',                    [TarjetasController::class, 'toExcel']);
+Route::get('tarjeta/nueva',                     [TarjetasController::class, 'create']);
+Route::post('tarjeta/guardar',                  [TarjetasController::class, 'store'])->name('tarjeta.guardar');
+Route::get('tarjeta/editar/{id}',               [TarjetasController::class, 'edit']);
 
 // GASTOS MIOS ----------------------------------------------------- 
 Route::get('resumen_mio',                       [ResumenMioController::class, 'index'])->name('resumen_mio');

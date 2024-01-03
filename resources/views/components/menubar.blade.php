@@ -13,7 +13,7 @@
       <ul class="navbar-nav pt-lg-3">
         <li class="nav-item">
           <a class="nav-link" href="./" >
-            <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
+            <span class="nav-link-icon d-md-none d-lg-inline-block">
               <i class="icon ti ti-home"></i>
             </span>
             <span class="nav-link-title">
@@ -59,6 +59,28 @@
               </div>
             </div>
           </div>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('tarjetas') }}" >
+            <span class="nav-link-icon d-md-none d-lg-inline-block">
+              <i class="icon ti ti-credit-card"></i>
+            </span>
+            <span class="nav-link-title">
+              Tarjetas
+            </span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('categorias') }}" >
+            <span class="nav-link-icon d-md-none d-lg-inline-block">
+              <i class="icon ti ti-category"></i>
+            </span>
+            <span class="nav-link-title">
+              Categorias
+            </span>
+          </a>
         </li>
 
       </ul>
