@@ -11,7 +11,7 @@ class Table extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct(public $columns, public int $acciones = 0, public bool $id = true, public $idgrid = "")
+    public function __construct(public $columns, public int $acciones = 0, public bool $id = true, public $idgrid = "", public $footer = false)
     {
         if (is_string($columns))
         {

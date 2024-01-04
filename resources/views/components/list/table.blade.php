@@ -15,5 +15,20 @@
                 @endif
             </tr>
         </thead>
+        @if($footer)
+        <tfoot>
+            @if($id)
+                <th></th>
+            @endif
+            @foreach($columns as $column)
+                <th></th>
+            @endforeach
+            @if ($acciones > 0)
+                @for($index = 0; $index < $acciones; $index++)
+                <th></th>
+                @endfor
+            @endif
+        </tfoot> 
+        @endif
     </table>
 </div>

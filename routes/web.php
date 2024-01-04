@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoriasController;
 use App\Http\Controllers\TarjetasController;
 
+use App\Http\Controllers\GastosTarjetasController;
+
 use App\Http\Controllers\ConceptosMiosController;
 use App\Http\Controllers\MovimientosMiosController;
 use App\Http\Controllers\ResumenMioController;
@@ -59,6 +61,16 @@ Route::get('tarjetas/excel',                    [TarjetasController::class, 'toE
 Route::get('tarjeta/nueva',                     [TarjetasController::class, 'create']);
 Route::post('tarjeta/guardar',                  [TarjetasController::class, 'store'])->name('tarjeta.guardar');
 Route::get('tarjeta/editar/{id}',               [TarjetasController::class, 'edit']);
+
+// GASTOS TARJETAS ------------------------------------------------- 
+Route::get('gastos_tarjetas',                   [GastosTarjetasController::class, 'index'])->name('gastos_tarjetas');
+Route::get('gastos_tarjetas_data/{id?}',        [GastosTarjetasController::class, 'getData']);
+Route::get('gastos_tarjetas/excel',             [GastosTarjetasController::class, 'toExcel']);
+Route::get('gasto_tarjeta/nueva',               [GastosTarjetasController::class, 'create']);
+Route::post('gasto_tarjeta/guardar',            [GastosTarjetasController::class, 'store'])->name('gasto_tarjeta.guardar');
+Route::get('gasto_tarjeta/editar/{id}',         [GastosTarjetasController::class, 'edit']);
+Route::get('resumen_tarjetas',                  [GastosTarjetasController::class, 'resumen'])->name('resumen_tarjetas');
+Route::get('resumen_tarjetas_data/{id?}',       [GastosTarjetasController::class, 'resumenData']);
 
 // GASTOS MIOS ----------------------------------------------------- 
 Route::get('resumen_mio',                       [ResumenMioController::class, 'index'])->name('resumen_mio');
