@@ -87,6 +87,20 @@ class PagoTarjeta extends Model
         );
     }
 
+    public function totalGastosFormat(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => Formatter::moneyArg($this->total_gastos)
+        );
+    }
+
+    public function totalGastos(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->totalPagado - ($this->totalSeguros + $this->totalCuotas)
+        );
+    }
+
     public function totalPagadoEdit(): Attribute
     {
         return Attribute::make(

@@ -47,8 +47,14 @@ class PagoTarjetaLista extends SelectAction
         $record->total_pagado  = $modelData->total_pagado_format;
         $record->total_cuotas  = $modelData->total_cuotas_format;
         $record->total_seguros = $modelData->total_seguros_format;
+        $record->gastos        = $modelData->total_gastos_format;        
         
-        
+
+        $record->n_total_pagado  = $modelData->totalPagado;
+        $record->n_total_cuotas  = $modelData->totalCuotas;
+        $record->n_total_seguros = $modelData->totalSeguros;
+        $record->n_total_gastos  = $modelData->total_gastos;        
+
         return $record;
     }
 }

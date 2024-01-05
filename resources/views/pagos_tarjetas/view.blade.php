@@ -7,11 +7,13 @@
 @section ('ListBody')
 
     <div class="row">
-        <x-form.plain col="2" field="id" label="Id" :value="$entity->id" />
+        <x-form.plain col="1" field="id" label="Id" :value="$entity->id" />
 
         <x-form.plain col="2" field="periodoPago" label="Periodo de Pago" :value="$entity->periodo_format" />
+
+        <x-form.plain col="2" field="fechaPago" label="Fecha de Pago" :value="$entity->fecha_pago_format" />
         
-        <x-form.plain col="4" label="Tarjeta" field="tarjeta_id" :value="$entity->descripcion_tarjeta" />
+        <x-form.plain col="3" label="Tarjeta" field="tarjeta_id" :value="$entity->descripcion_tarjeta" />
     </div>
 
     <div class="row">
@@ -38,20 +40,15 @@
     </div>
 
     <div class="row">
-        <div class="col-4"></div>
-
         <x-form.plain col="2" label="Total de Seguros" field="totalSeguros" :value="$entity->total_seguros_format" classes="text-end"/>
 
         <x-form.plain col="2" label="Total de Cuotas"  field="totalCuotas"  :value="$entity->total_cuotas_format" classes="text-end"/>
-    </div>
 
-    <div class="row">
-        <div class="col-4"></div>
+        <x-form.plain col="2" label="Total Gastos"  field="totalGastos"  :value="$entity->total_gastos_format" classes="text-end"/>
 
-        <x-form.plain col="2" field="fechaPago" label="Fecha de Pago" :value="$entity->fecha_pago_format" />
-        
         <x-form.plain col="2" field="totalPagado" label="Importe Pagado" :value="$entity->total_pagado_format" classes="text-end"/>
     </div>
+    
 @endsection
 
 
