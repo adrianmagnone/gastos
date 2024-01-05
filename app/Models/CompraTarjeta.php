@@ -31,7 +31,7 @@ class CompraTarjeta extends Model
 
     public function categoria() : \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(\App\Models\categoria::class);
+        return $this->belongsTo(\App\Models\Categoria::class);
     }
 
     public function descripcionTarjeta(): Attribute
@@ -73,6 +73,13 @@ class CompraTarjeta extends Model
     {
         return Attribute::make(
             get: fn () => Formatter::moneyArg($this->importeCuota)
+        );
+    }
+
+    public function importeCuotaEdit(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => Formatter::decimalNumber($this->importeCuota)
         );
     }
 
