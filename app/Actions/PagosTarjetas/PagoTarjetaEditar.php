@@ -1,0 +1,77 @@
+<?php
+
+namespace App\Actions\PagosTarjetas;
+
+use App\Helpers\DateHelper as MiDate;
+use App\Lib\Actions\EditAction;
+
+use App\Models\CompraTarjeta;
+use App\Models\PagoTarjeta;
+use App\Models\DetallePagoTarjeta;
+
+class PagoTarjetaEditar extends EditAction
+{
+    function __construct()
+    {
+        $this->model = PagoTarjeta::class;
+
+        $this->urlList = route('resumen_tarjetas');
+        $this->urlSave = route('pago_tarjeta.guardar');
+
+        $this->editView   = 'pagos_tarjetas.edit';
+        $this->deleteView = '';
+
+        $this->updatedMessage = 'El Pago de Tarjeta de Credito se ha editado correctamente!';
+        $this->deletedMessage = '';
+    }
+
+    protected function aditionalDataForEdit(&$entidad = null)
+    {
+        return [
+            'listaTarjetas'   => \App\Models\Tarjeta::activas()
+        ];
+    }
+
+    public function rules(): array
+    {
+        return [
+            'tarjeta_id'      => ['numeric', 'integer', 'required', 'exists:tarjetas,id'],
+            'periodoPago'     => ['required', 'date_format:d/m/Y'],
+            'fechaPago'       => ['required', 'date_format:d/m/Y'],
+            'totalCuotas'     => ['numeric', 'decimal:2', 'required'],
+            'totalPagado'     => ['numeric', 'decimal:2', 'required'],
+            'totalSeguros'    => ['numeric', 'decimal:2', 'required'],
+        ];
+    }
+
+	public function getRecord() : array
+	{
+        return [
+            'tarjeta_id'      => $this->tarjeta_id,
+            'periodoPago'     => MiDate::fromFormatTo('d/m/Y', $this->periodoPago, 'Y-m-d'),
+            'fechaPago'       => MiDate::fromFormatTo('d/m/Y', $this->fechaPago, 'Y-m-d'),
+            'totalCuotas'     => $this->totalCuotas,
+            'totalPagado'     => $this->totalPagado,
+            'totalSeguros'    => $this->totalSeguros
+        ];
+	}
+
+    protected function completeUpdate(&$entidad, &$request)
+    {
+        foreach ($this->check as $id => $valor)
+        {
+            $gasto = CompraTarjeta::find($id);
+
+            $gasto->cuotasPendientes -= 1;
+            $gasto->save();
+
+            $detalle = [
+                'pago_id'   => $entidad->id,
+                'compra_id' => $id,
+                'importe'   => $this->pagar[$id],
+            ];
+
+            DetallePagoTarjeta::create($detalle);
+        } 
+    }
+}

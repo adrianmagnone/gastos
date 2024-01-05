@@ -8,6 +8,7 @@ use App\Actions\GastosTarjetas\GastoTarjetaLista;
 use App\Actions\GastosTarjetas\GastoTarjetaEditar;
 use App\Actions\GastosTarjetas\GastoTarjetaExcel;
 use App\Actions\GastosTarjetas\ResumenTarjetaLista;
+use App\Actions\GastosTarjetas\GastoTarjetaPendiente;
 
 class GastosTarjetasController extends Controller
 {
@@ -31,6 +32,11 @@ class GastosTarjetasController extends Controller
         return $action->runForExport($request);
     }
 
+    public function getPendientes(Request $request, GastoTarjetaPendiente $action, $id = null)
+    {
+        return $action->run($request, $id);
+    }
+    
     public function create(GastoTarjetaEditar $action)
     {
         return $action->runForCreate();

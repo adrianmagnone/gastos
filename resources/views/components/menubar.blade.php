@@ -75,6 +75,7 @@
               <div class="dropdown-menu-column">
                 <a class="dropdown-item" href="{{ route('gastos_tarjetas') }}">Consulta</a>
                 <a class="dropdown-item" href="{{ route('resumen_tarjetas') }}">Resumen</a>
+                <a class="dropdown-item" href="{{ route('pagos_tarjetas') }}">Pagos</a>
               </div>
             </div>
           </div>
