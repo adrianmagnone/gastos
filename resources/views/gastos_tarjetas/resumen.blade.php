@@ -28,21 +28,7 @@
     init = function($) {
 		let $tabla         = $("#grid"),
 			selectTarjeta  = new wrapSelect("#tarjeta",  () => $tabla.MegaDatatable("reload")),
-			totales        = {
-				a: 0,
-				b: 0,
-				c: 0,
-				d: 0,
-				e: 0,
-				f: 0,
-				g: 0,
-				h: 0,
-				i: 0,
-				j: 0,
-				k: 0,
-				l: 0,
-				t: 0
-			};
+			totales        = new Totales();
 
 		$tabla.MegaDatatable({
 			pageLength: 100,
@@ -51,7 +37,7 @@
 			columns: "id|fecha|descripcion~f|total|a|b~f|c~f|d~f|e~f|f~f|g~f|h~f|i~f|j~f|k~f|l~f",
 			columnDefs: [
 				{ data: "total",      className: "text-primary text-end"    },
-				{ data: "a",          className: "text-end" },
+				{ data: "a",          className: "text-end"    },
 				{ data: "b",          className: "text-end"    },
 				{ data: "c",          className: "text-end"    },
 				{ data: "d",          className: "text-end"    },
@@ -68,55 +54,100 @@
                 { key: "tarjeta",       control: selectTarjeta       },
 			],
 			createdRow: function( row, data, dataIndex ) {
-    			totales.a += parseFloat(data.n_a);
-				totales.b += parseFloat(data.n_b);
-				totales.c += parseFloat(data.n_c);
-				totales.d += parseFloat(data.n_d);
-				totales.e += parseFloat(data.n_e);
-				totales.f += parseFloat(data.n_f);
-				totales.g += parseFloat(data.n_g);
-				totales.h += parseFloat(data.n_h);
-				totales.i += parseFloat(data.n_i);
-				totales.j += parseFloat(data.n_j);
-				totales.k += parseFloat(data.n_k);
-				totales.l += parseFloat(data.n_l);
-
-				totales.t += parseFloat(data.n_t);
+				totales.add(data);
 			},
 			footerCallback: function (row, data, start, end, display) {
-				let api = this.api(),
-					fmt = new Intl.NumberFormat('es-AR');
+				let api = this.api();
 
 				api.column(2).footer().innerHTML = 'TOTALES';
-				api.column(3).footer().innerHTML = '$ ' + fmt.format(totales.t.toFixed(2));
-				api.column(4).footer().innerHTML = '$ ' + fmt.format(totales.a.toFixed(2));
-				api.column(5).footer().innerHTML = '$ ' + fmt.format(totales.b.toFixed(2));
-				api.column(6).footer().innerHTML = '$ ' + fmt.format(totales.c.toFixed(2));
-				api.column(7).footer().innerHTML = '$ ' + fmt.format(totales.d.toFixed(2));
-				api.column(8).footer().innerHTML = '$ ' + fmt.format(totales.e.toFixed(2));
-				api.column(9).footer().innerHTML = '$ ' + fmt.format(totales.f.toFixed(2));
-				api.column(10).footer().innerHTML = '$ ' + fmt.format(totales.g.toFixed(2));
-				api.column(11).footer().innerHTML = '$ ' + fmt.format(totales.h.toFixed(2));
-				api.column(12).footer().innerHTML = '$ ' + fmt.format(totales.i.toFixed(2));
-				api.column(13).footer().innerHTML = '$ ' + fmt.format(totales.j.toFixed(2));
-				api.column(14).footer().innerHTML = '$ ' + fmt.format(totales.k.toFixed(2));
-				api.column(15).footer().innerHTML = '$ ' + fmt.format(totales.l.toFixed(2));
+				api.column(3).footer().innerHTML  = totales.getWithFormat("t");
+				api.column(4).footer().innerHTML  = totales.getWithFormat("a");
+				api.column(5).footer().innerHTML  = totales.getWithFormat("b");
+				api.column(6).footer().innerHTML  = totales.getWithFormat("c");
+				api.column(7).footer().innerHTML  = totales.getWithFormat("d");
+				api.column(8).footer().innerHTML  = totales.getWithFormat("e");
+				api.column(9).footer().innerHTML  = totales.getWithFormat("f");
+				api.column(10).footer().innerHTML = totales.getWithFormat("g");
+				api.column(11).footer().innerHTML = totales.getWithFormat("h");
+				api.column(12).footer().innerHTML = totales.getWithFormat("i");
+				api.column(13).footer().innerHTML = totales.getWithFormat("j");
+				api.column(14).footer().innerHTML = totales.getWithFormat("k");
+				api.column(15).footer().innerHTML = totales.getWithFormat("l");
 
-				totales.t = 0;
-				totales.a = 0;
-				totales.b = 0;
-				totales.c = 0;
-				totales.d = 0;
-				totales.e = 0;
-				totales.f = 0;
-				totales.g = 0;
-				totales.h = 0;
-				totales.i = 0;
-				totales.j = 0;
-				totales.k = 0;
-				totales.l = 0;
+				api.column(6).visible(totales.hasValue("c"));
+				api.column(7).visible(totales.hasValue("d"));
+				api.column(8).visible(totales.hasValue("e"));
+				api.column(9).visible(totales.hasValue("f"));
+				api.column(10).visible(totales.hasValue("g"));
+				api.column(11).visible(totales.hasValue("h"));
+				api.column(12).visible(totales.hasValue("i"));
+				api.column(13).visible(totales.hasValue("j"));
+				api.column(14).visible(totales.hasValue("k"));
+				api.column(15).visible(totales.hasValue("l"));
+
+				totales.clear();
 			}
 		});
+	}
+</script>
+
+<script type="text/javascript">
+	class Totales
+	{
+		constructor()
+		{
+			this.clear();
+			this.fmt = new Intl.NumberFormat('es-AR');
+		}
+
+		getWithFormat(prop)
+		{
+			let value = this[prop];
+
+			return '$ ' + this.fmt.format(value.toFixed(2));
+		}
+
+		hasValue(prop)
+		{
+			let value = this[prop];
+
+			return value > 0;
+		}
+		
+		add(data)
+		{
+			this.a += parseFloat(data.n_a);
+			this.b += parseFloat(data.n_b);
+			this.c += parseFloat(data.n_c);
+			this.d += parseFloat(data.n_d);
+			this.e += parseFloat(data.n_e);
+			this.f += parseFloat(data.n_f);
+			this.g += parseFloat(data.n_g);
+			this.h += parseFloat(data.n_h);
+			this.i += parseFloat(data.n_i);
+			this.j += parseFloat(data.n_j);
+			this.k += parseFloat(data.n_k);
+			this.l += parseFloat(data.n_l);
+
+			this.t += parseFloat(data.n_t);
+		}
+
+		clear()
+		{
+			this.t = 0;
+			this.a = 0;
+			this.b = 0;
+			this.c = 0;
+			this.d = 0;
+			this.e = 0;
+			this.f = 0;
+			this.g = 0;
+			this.h = 0;
+			this.i = 0;
+			this.j = 0;
+			this.k = 0;
+			this.l = 0;
+		}
 	}
 </script>
 @endsection
