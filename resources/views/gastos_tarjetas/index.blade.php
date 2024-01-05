@@ -49,7 +49,7 @@
   				}
 			],
 			createdRow: function( row, data, dataIndex ) {
-    			if ( data.pendiente == 0 ) 
+    			if ( data.pendientes == 0 ) 
       				$(row).addClass( 'text-muted' );
   			},
 			stateSave: [
