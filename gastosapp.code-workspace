@@ -1,0 +1,45 @@
+{
+	"folders": [
+		{
+			"name": "ActionFilters",
+			"path": "app/ActionFilters"
+		},
+		{
+			"name": "Actions",
+			"path": "app/Actions"
+		},
+		{
+			"name": "Controllers",
+			"path": "app/Http/Controllers"
+		},
+		{
+			"name": "views",
+			"path": "resources/views"
+		},
+		{
+			"name": "Models",
+			"path": "app/Models"
+		},
+		{
+			"name": "Helpers",
+			"path": "app/Helpers"
+		},
+		{
+			"name": "Lib",
+			"path": "app/Lib"
+		},
+		{
+			"name": "View",
+			"path": "app/View"
+		},
+		{
+			"name": "routes",
+			"path": "routes"
+		},
+		{
+			"name": "migrations",
+			"path": "database/migrations"
+		}
+	],
+	"settings": {}
+}
