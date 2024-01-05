@@ -59,8 +59,8 @@
 			footerCallback: function (row, data, start, end, display) {
 				let api = this.api();
 
-				api.column(2).footer().innerHTML = 'TOTALES';
-				api.column(3).footer().innerHTML  = totales.getWithFormat("t");
+				api.column(2).footer().innerHTML = 'TOTALES<br/>DEUDA';
+				api.column(3).footer().innerHTML  = totales.getWithFormat("t") + "<br/>" + totales.getDeuda();
 				api.column(4).footer().innerHTML  = totales.getWithFormat("a");
 				api.column(5).footer().innerHTML  = totales.getWithFormat("b");
 				api.column(6).footer().innerHTML  = totales.getWithFormat("c");
@@ -97,7 +97,7 @@
 		constructor()
 		{
 			this.clear();
-			this.fmt = new Intl.NumberFormat('es-AR');
+			this.fmt = new Intl.NumberFormat('es-AR', { minimumFractionDigits:2, maximumFractionDigits: 2 } );
 		}
 
 		getWithFormat(prop)
@@ -105,6 +105,14 @@
 			let value = this[prop];
 
 			return '$ ' + this.fmt.format(value.toFixed(2));
+		}
+
+
+		getDeuda()
+		{
+			let deuda = this.a + this.b + this.c + this.d + this.e + this.f + this.g + this.h + this.i + this.j + this.k + this.l;
+
+			return '<span class="text-danger">$ ' + this.fmt.format(deuda.toFixed(2)) + '</span>';
 		}
 
 		hasValue(prop)
