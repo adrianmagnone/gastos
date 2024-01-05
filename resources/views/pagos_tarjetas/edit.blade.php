@@ -16,7 +16,7 @@
     <x-list.table columns="|Categoria|Descripcion|Cuota|Importe Cuota|Pagado" acciones="0" :id="false" />
 
     <div class="row">
-        <div class="col-10"></div>
+        <div class="col-8"></div>
 
         <x-form.money col="2" label="Total de Seguros" field="totalSeguros" id="importeSeguros" value="0.00" />
 
@@ -65,7 +65,7 @@
                 {
     				data: "item",
     				render: function ( data, type, row, meta ) {
-						return `<input class="form-check-input check-pago" type="checkbox" name="check[${row.id}]" data-id="${row.id}" checked >`;
+						return `<input class="form-check-input check-pago" type="checkbox" name="check[${row.id}]" data-id="${row.id}" >`;
     				}
   				},
                 {
