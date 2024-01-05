@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoriasController;
 use App\Http\Controllers\TarjetasController;
 
 use App\Http\Controllers\GastosTarjetasController;
+use App\Http\Controllers\PagosTarjetasController;
 
 use App\Http\Controllers\ConceptosMiosController;
 use App\Http\Controllers\MovimientosMiosController;
@@ -71,6 +72,17 @@ Route::post('gasto_tarjeta/guardar',            [GastosTarjetasController::class
 Route::get('gasto_tarjeta/editar/{id}',         [GastosTarjetasController::class, 'edit']);
 Route::get('resumen_tarjetas',                  [GastosTarjetasController::class, 'resumen'])->name('resumen_tarjetas');
 Route::get('resumen_tarjetas_data/{id?}',       [GastosTarjetasController::class, 'resumenData']);
+
+Route::get('gastos_tarjetas_a_pagar',           [GastosTarjetasController::class, 'getPendientes']);
+
+
+// PAGOS TARJETAS  ------------------------------------------------- 
+Route::get('pagos_tarjetas',                    [PagosTarjetasController::class, 'index'])->name('pagos_tarjetas');
+Route::get('pagos_tarjetas_data/{id?}',         [PagosTarjetasController::class, 'getData']);
+Route::get('pago_tarjeta/nuevo',                [PagosTarjetasController::class, 'create']);
+Route::post('pago_tarjeta/guardar',             [PagosTarjetasController::class, 'store'])->name('pago_tarjeta.guardar');
+Route::get('pago_tarjeta/editar/{id}',          [PagosTarjetasController::class, 'edit']);
+Route::get('pago_tarjeta/consultar/{id}',       [PagosTarjetasController::class, 'view']);
 
 // GASTOS MIOS ----------------------------------------------------- 
 Route::get('resumen_mio',                       [ResumenMioController::class, 'index'])->name('resumen_mio');
