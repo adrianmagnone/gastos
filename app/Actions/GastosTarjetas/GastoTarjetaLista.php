@@ -26,7 +26,8 @@ class GastoTarjetaLista extends SelectAction
     protected function setFieldSustitute()
     {
         return [
-            'pendientes' => 'cuotasPendientes'
+            'pendientes' => 'cuotasPendientes',
+            'categoria'  => 'categoria_id'
         ];
     }
 
@@ -46,13 +47,14 @@ class GastoTarjetaLista extends SelectAction
     {
         $record = new \stdClass();
 
-        $record->id       = $modelData->id;
-        $record->fecha    = $modelData->fecha_format;
+        $record->id          = $modelData->id;
+        $record->fecha       = $modelData->fecha_format;
         $record->descripcion = $modelData->descripcion;
-        $record->total    = $modelData->total_format;
+        $record->categoria   = $modelData->descripcion_categoria;
+        $record->total       = $modelData->total_format;
         $record->importe_cuota = $modelData->importe_cuota_format;
-        $record->cuotas   = $modelData->cuotas;
-        $record->pendientes = $modelData->cuotasPendientes;
+        $record->cuotas      = $modelData->cuotas;
+        $record->pendientes  = $modelData->cuotasPendientes;
         
         return $record;
     }
