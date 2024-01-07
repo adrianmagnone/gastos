@@ -21,6 +21,7 @@ return new class extends Migration
             $table->decimal('totalCuotas',  $precision = 18, $scale = 4);
             $table->decimal('totalSeguros', $precision = 18, $scale = 4);
             $table->decimal('totalPagado',  $precision = 18, $scale = 4);
+            $table->smallInteger('pasadoGasto')->default(0);
             $table->timestamps();
 
             $table->foreign('tarjeta_id')

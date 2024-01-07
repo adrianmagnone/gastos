@@ -96,6 +96,7 @@ Route::get('pago_tarjeta/nuevo',                [PagosTarjetasController::class,
 Route::post('pago_tarjeta/guardar',             [PagosTarjetasController::class, 'store'])->name('pago_tarjeta.guardar');
 Route::get('pago_tarjeta/editar/{id}',          [PagosTarjetasController::class, 'edit']);
 Route::get('pago_tarjeta/consultar/{id}',       [PagosTarjetasController::class, 'view']);
+Route::get('pago_tarjeta/pasar/{id}',           [PagosTarjetasController::class, 'passToGasto']);
 
 // GASTOS MIOS ----------------------------------------------------- 
 Route::get('resumen_mio',                       [ResumenMioController::class, 'index'])->name('resumen_mio');

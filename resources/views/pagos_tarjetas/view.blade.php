@@ -48,6 +48,10 @@
 
         <x-form.plain col="2" field="totalPagado" label="Importe Pagado" :value="$entity->total_pagado_format" classes="text-end"/>
     </div>
+
+    @if (! $entity->pasadoGasto)
+    <a class="btn btn-primary" href="{{ url('pago_tarjeta/pasar/' . $entity->id ) }}">Pasar a Gastos</a>
+    @endif
     
 @endsection
 

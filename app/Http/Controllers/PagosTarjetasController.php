@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Actions\PagosTarjetas\PagoTarjetaLista;
 use App\Actions\PagosTarjetas\PagoTarjetaEditar;
+use App\Actions\PagosTarjetas\PagoPasarGastos;
 
 class PagosTarjetasController extends Controller
 {
@@ -39,5 +40,10 @@ class PagosTarjetasController extends Controller
         $pago = \App\Models\PagoTarjeta::findOrFail($id);
 
         return view('pagos_tarjetas.view', ['entity' => $pago]);
+    }
+
+    public function passToGasto(Request $request, PagoPasarGastos $action, $id = null)
+    {
+        return $action->run($request, $id);
     }
 }

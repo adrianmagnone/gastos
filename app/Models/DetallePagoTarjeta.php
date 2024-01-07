@@ -43,4 +43,11 @@ class DetallePagoTarjeta extends Model
             get: fn () => $this->compra->descripcion_categoria ?? ''
         );
     }
+
+    public function categoriaId(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->compra->categoria_id ?? null
+        );
+    }
 }

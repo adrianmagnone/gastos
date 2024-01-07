@@ -18,7 +18,8 @@ class PagoTarjeta extends Model
         'periodoPago',
         'totalCuotas',
         'totalPagado',
-        'totalSeguros'
+        'totalSeguros',
+        'pasadoGasto'
     ];
 
     public function tarjeta() : \Illuminate\Database\Eloquent\Relations\BelongsTo
