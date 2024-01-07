@@ -39,6 +39,9 @@
 		{
 			"name": "migrations",
 			"path": "database/migrations"
+		},
+		{
+			"path": "config"
 		}
 	],
 	"settings": {}
