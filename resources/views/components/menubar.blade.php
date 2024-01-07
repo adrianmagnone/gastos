@@ -25,6 +25,25 @@
         <li class="nav-item active dropdown">
           <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
             <span class="nav-link-icon d-md-none d-lg-inline-block">
+              <i class="icon ti ti-report-money"></i>
+            </span>
+            <span class="nav-link-title">
+              Ingresos y Gastos
+            </span>
+          </a>
+          <div class="dropdown-menu">
+            <div class="dropdown-menu-columns">
+              <div class="dropdown-menu-column">
+                <a class="dropdown-item" href="{{ route('movimientos') }}">Movimientos</a>
+                <a class="dropdown-item" href="{{ route('movimientos_mensuales') }}">Resumen Mensual</a>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li class="nav-item active dropdown">
+          <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
+            <span class="nav-link-icon d-md-none d-lg-inline-block">
               <i class="icon ti ti-user"></i>
             </span>
             <span class="nav-link-title">

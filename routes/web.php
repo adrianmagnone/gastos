@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\CategoriasController;
 use App\Http\Controllers\TarjetasController;
+use App\Http\Controllers\MovimientosController;
 
 use App\Http\Controllers\GastosTarjetasController;
 use App\Http\Controllers\PagosTarjetasController;
@@ -54,6 +55,18 @@ Route::get('categorias/excel',                  [CategoriasController::class, 't
 Route::get('categoria/nueva',                   [CategoriasController::class, 'create']);
 Route::post('categoria/guardar',                [CategoriasController::class, 'store'])->name('categoria.guardar');
 Route::get('categoria/editar/{id}',             [CategoriasController::class, 'edit']);
+
+// CATEGORIAS----------------------------------------------------- 
+Route::get('movimientos',                       [MovimientosController::class, 'index'])->name('movimientos');
+Route::get('movimientos_data/{id?}',            [MovimientosController::class, 'getData']);
+Route::get('movimientos/excel',                 [MovimientosController::class, 'toExcel']);
+Route::get('movimiento/nuevo',                  [MovimientosController::class, 'create']);
+Route::post('movimiento/guardar',               [MovimientosController::class, 'store'])->name('movimiento.guardar');
+Route::get('movimiento/editar/{id}',            [MovimientosController::class, 'edit']);
+
+Route::get('movimientos_mensuales',             [MovimientosController::class, 'resumenMensual'])->name('movimientos_mensuales');
+Route::get('movimientos_mes_ing_data',          [MovimientosController::class, 'resumenMensualIngresos']);
+Route::get('movimientos_mes_egr_data',          [MovimientosController::class, 'resumenMensualEgresos']);
 
 // TARJETAS  ----------------------------------------------------- 
 Route::get('tarjetas',                          [TarjetasController::class, 'index'])->name('tarjetas');
