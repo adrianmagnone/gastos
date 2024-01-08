@@ -13,9 +13,9 @@
 	<div class="row w-100">
 		<x-form.periodo col="4" label="Periodo" field="periodo" value="" />
 		<div class="col-1"></div>
-		<x-form.money col="15" label="Total Ingresos"  field="ingresos"  value="" id="total_ingresos"  classesInput="text-success font-weight-bold" disabled="true" />
-		<x-form.money col="15" label="Total Egresos"   field="egresos"   value="" id="total_egresos"   classesInput="text-danger font-weight-bold" disabled="true" />
-		<x-form.money col="15" label="Resultado"       field="resultado" value="" id="total_resultado" classesInput="font-weight-bold" disabled="true" />
+		<x-form.money col="15" label="Total Ingresos"  field="ingresos"  value="" id="total_ingresos"  classesInput="text-success fw-bold" disabled="true" />
+		<x-form.money col="15" label="Total Egresos"   field="egresos"   value="" id="total_egresos"   classesInput="text-danger  fw-bold" disabled="true" />
+		<x-form.money col="15" label="Resultado"       field="resultado" value="" id="total_resultado" classesInput="fw-bold" disabled="true" />
 	</div>
 @endsection
 
@@ -129,7 +129,7 @@
 				$("#total_egresos").val(totalEgr.format(egresoMensual));
 				$("#total_resultado").val(totalEgr.format(ingresoMensual - egresoMensual));
 
-				totalIng.clear();
+				totalEgr.clear();
 			}
 		});
 	}
