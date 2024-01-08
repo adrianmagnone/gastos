@@ -26,6 +26,18 @@ class CategoriasController extends Controller
         return $action->run($request);
     }
 
+    public function selectIngresos(Request $request, CategoriaLista $action)
+    {
+        // $request->request->add(['uso' => 1, 'estado' => 'S']);
+        return $action->run($request);
+    }
+
+    public function selectGastos(Request $request, CategoriaLista $action)
+    {
+        $request->request->add(['uso' => 2, 'estado' => 'S']);
+        return $action->run($request);
+    }
+
     public function toExcel(Request $request, CategoriaExcel $action)
     {
         return $action->runForExport($request);

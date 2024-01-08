@@ -18,6 +18,18 @@ class CategoriaLista extends SelectAction
         return 'Categorias.Consulta';
     }
 
+    protected function setFilterClass()
+    {
+        return \App\ActionFilters\CategoriaFiltro::class;
+    }
+
+    protected function aditionalDataForList()
+    {
+        return [
+            'listaUsos' => Categoria::USOS
+        ];
+    }
+
     protected function setSearchFields()
     {
         return ['nombre'];
