@@ -41,8 +41,9 @@ class MensualEgreso extends SelectAction
     protected function createListOptions()
     {
         $parametro = MiDate::fromFormatTo('d/m/Y', $this->requestData['periodo'], 'Y-m-d');
-        $this->fechaPeriodo = MiDate::object($parametro);
-        $this->semanaPeriodo = $this->fechaPeriodo->week - 1;;
+        
+        $this->fechaPeriodo = ($parametro) ? MiDate::object($parametro) : MiDate::object('first day of this month');
+        $this->semanaPeriodo = $this->fechaPeriodo->week - 1;
 
         return parent::createListOptions();
     }
