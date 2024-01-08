@@ -35,7 +35,8 @@ class MovimientoLista extends SelectAction
     {
         return [
             'listaTipos'      => Movimiento::TIPOS,
-            'listaCategorias' => \App\Models\Categoria::all()
+            'listaCategorias' => \App\Models\Categoria::all(),
+            'fechaInicial'    => MiDate::object('first day of this month')->format('d/m/Y')
         ];
     }
 

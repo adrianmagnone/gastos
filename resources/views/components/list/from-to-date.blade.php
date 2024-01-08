@@ -26,7 +26,7 @@
 	@endif
 
 	<div class="input-group @if (isset($classes)) {{ $classes }} @endif">
-        <input type="text" class="form-control @if (isset($classesInput)) {{ $classesInput }} @endif" name="{{ $field }}_desde" id="{{ $field }}_desde" maxlength="100" value="" {!! $attrs !!} />
+        <input type="text" class="form-control @if (isset($classesInput)) {{ $classesInput }} @endif" name="{{ $field }}_desde" id="{{ $field }}_desde" maxlength="100" value="{{ $value }}" {!! $attrs !!} />
 
         <span class="input-group-text">
             <i class="ti ti-calendar" aria-hidden="true"></i>

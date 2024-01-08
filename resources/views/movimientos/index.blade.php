@@ -14,6 +14,8 @@
 		<x-form.select mb="1" col="2" label="Tipo" field="tipo" id="tipo" value="" :options="$listaTipos" blankText="Todos"/>
 
 		<x-form.select mb="1" col="2" label="Categoria" field="categoria" id="categoria" value="" :options="$listaCategorias" blankText="Todas" fieldValue="id" fieldText="nombre"/>
+
+		<x-list.from-to-date mb="1" col="3" field="fecha" label="Fecha" :value="$fechaInicial" />
 	</div>
 @endsection
 
@@ -29,8 +31,10 @@
 <script type="text/javascript">
     init = function($) {
 		let $tabla          = $("#grid"),
-			selectTipo      = new wrapSelect("#tipo",      () => $tabla.MegaDatatable("reload")),
-			selectCategoria = new wrapSelect("#categoria", () => $tabla.MegaDatatable("reload"));
+			selectTipo      = new wrapSelect("#tipo",         () => $tabla.MegaDatatable("reload")),
+			selectCategoria = new wrapSelect("#categoria",    () => $tabla.MegaDatatable("reload")),
+			fechaDesde      = new wrapCalendar("fecha_desde", () => $tabla.MegaDatatable("reload")),
+			fechaHasta      = new wrapCalendar("fecha_hasta", () => $tabla.MegaDatatable("reload"));
 
 		$tabla.MegaDatatable({
 			ajaxUrl: "{{ asset('movimientos_data') }}",
@@ -52,7 +56,9 @@
 			],
 			stateSave: [
                 { key: "tipo",            control: selectTipo       },
-				{ key: "categoria",       control: selectCategoria  }
+				{ key: "categoria",       control: selectCategoria  },
+				{ key: "fechaDesde",      control: fechaDesde,      parentKey: "fecha"       },
+				{ key: "fechaHasta",      control: fechaHasta,      parentKey: "fecha"       },
 			],
 		});
 	}

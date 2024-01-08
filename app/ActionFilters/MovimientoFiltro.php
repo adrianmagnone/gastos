@@ -6,7 +6,7 @@ class MovimientoFiltro extends \App\Lib\Actions\FilterBase
 {
     protected function setFiltersKeys()
     {
-        return [ 'tipo', 'categoria' ];
+        return [ 'tipo', 'categoria', 'fecha' ];
     }
 
     protected function filtroTipo(&$query, $value)
@@ -19,4 +19,8 @@ class MovimientoFiltro extends \App\Lib\Actions\FilterBase
         $query->where('categoria_id', (int)$value);
     }
 
+    protected function filtroFecha(&$query, $value)
+    {
+        $this->filtroBetweenDate($query, $value['fechaDesde'], $value['fechaHasta'], 'fecha');
+    }
 }
