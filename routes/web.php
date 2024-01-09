@@ -70,6 +70,10 @@ Route::get('movimientos_mensuales',             [MovimientosController::class, '
 Route::get('movimientos_mes_ing_data',          [MovimientosController::class, 'resumenMensualIngresos']);
 Route::get('movimientos_mes_egr_data',          [MovimientosController::class, 'resumenMensualEgresos']);
 
+Route::get('movimientos_anuales',               [MovimientosController::class, 'resumenAnual'])->name('movimientos_anuales');
+Route::get('movimientos_anual_ing_data',        [MovimientosController::class, 'resumenAnualIngresos']);
+Route::get('movimientos_anual_egr_data',        [MovimientosController::class, 'resumenAnualEgresos']);
+
 // TARJETAS  ----------------------------------------------------- 
 Route::get('tarjetas',                          [TarjetasController::class, 'index'])->name('tarjetas');
 Route::get('tarjetas_data/{id?}',               [TarjetasController::class, 'getData']);

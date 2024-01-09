@@ -13,17 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('movimientos', function (Blueprint $table) {
+        Schema::create('resumen_anual_movimientos', function (Blueprint $table) {
             $table->id();
-            $table->date('fecha')->index();
+            $table->integer('anio')->index();
+            $table->integer('mes')->index();
             $table->integer('tipo')->index();
             $table->bigInteger('categoria_id')->unsigned();
-            $table->string('descripcion')->nullable();
             $table->decimal('importe', $precision = 18, $scale = 4)->default(0);
             $table->timestamps();
-
-            $table->foreign('categoria_id')
-                  ->references('id')->on('categorias');
         });
     }
 
@@ -34,9 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('movimientos', function (Blueprint $table) {
-            $table->dropForeign(['categoria_id']);
-        });
-        Schema::dropIfExists('movimientos');
+        Schema::dropIfExists('resumen_anual_movimientos');
     }
 };

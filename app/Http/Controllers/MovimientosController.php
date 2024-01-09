@@ -9,6 +9,8 @@ use App\Actions\MovimientoLista;
 use App\Actions\MovimientoEditar;
 use App\Actions\Movimientos\MensualIngreso;
 use App\Actions\Movimientos\MensualEgreso;
+use App\Actions\Movimientos\AnualIngreso;
+use App\Actions\Movimientos\AnualEgreso;
 
 class MovimientosController extends Controller
 {
@@ -50,6 +52,23 @@ class MovimientosController extends Controller
     }
 
     public function resumenMensualEgresos(Request $request, MensualEgreso $action, $id = null)
+    {
+        return $action->run($request, $id);
+    }
+
+    // Resumen Anual
+
+    public function resumenAnual()
+    {
+        return view('movimientos.resumen_anual');
+    }
+
+    public function resumenAnualIngresos(Request $request, AnualIngreso $action, $id = null)
+    {
+        return $action->run($request, $id);
+    }
+
+    public function resumenAnualEgresos(Request $request, AnualEgreso $action, $id = null)
     {
         return $action->run($request, $id);
     }

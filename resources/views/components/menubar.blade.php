@@ -36,6 +36,7 @@
               <div class="dropdown-menu-column">
                 <a class="dropdown-item" href="{{ route('movimientos') }}">Movimientos</a>
                 <a class="dropdown-item" href="{{ route('movimientos_mensuales') }}">Resumen Mensual</a>
+                <a class="dropdown-item" href="{{ route('movimientos_anuales') }}">Resumen Anual</a>
               </div>
             </div>
           </div>
