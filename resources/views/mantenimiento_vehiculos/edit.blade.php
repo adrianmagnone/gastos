@@ -18,7 +18,7 @@
     </div>
 
     <div class="row">
-        <x-form.money col="3" field="importe" label="Importe" :value="$entity->importe_edit" />
+        <x-form.money col="3" field="importe" id="importe" label="Importe" :value="$entity->importe_edit" />
 
         <x-form.text col="6" field="descripcion" label="Descripcion" :value="$entity->descripcion" />
     </div>
@@ -36,6 +36,7 @@
 <script type="text/javascript">
     init = function($) {
 		let fecha = new wrapCalendar('fecha', null),
+            importe     = new wrapMoney("#importe", null),
             vehiculo     = new wrapSelect('#vehiculo', null);
 	}
 </script>

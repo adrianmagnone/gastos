@@ -19,7 +19,7 @@
     </div>
 
     <div class="row">
-        <x-form.money col="4" field="importe" label="Importe" :value="$entity->importe" />
+        <x-form.money col="4" field="importe" id="importe" label="Importe" :value="$entity->importe" />
 
         <x-form.text col="1" label="Cuotas" field="cuotas" value="1" />
     </div>
@@ -36,9 +36,10 @@
 @section('PageJs')
 <script type="text/javascript">
     init = function($) {
-        let fecha       = new wrapCalendar('fecha'),
-            tipo        = new wrapSelect('#tipo', null),
-            concepto    = new wrapSelect('#concepto', null);
+        let fecha       = new wrapCalendar("fecha"),
+            importe     = new wrapMoney("#importe", null),
+            tipo        = new wrapSelect("#tipo", null),
+            concepto    = new wrapSelect("#concepto", null);
     }
 </script>
 @endsection

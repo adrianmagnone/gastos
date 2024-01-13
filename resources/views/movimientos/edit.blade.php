@@ -22,7 +22,7 @@
     </div>
 
     <div class="row">
-        <x-form.money col="4" field="importe" label="Importe" :value="$entity->importe_edit" />
+        <x-form.money col="4" field="importe" id="importe" label="Importe" :value="$entity->importe_edit" />
     </div>
 @endsection
 
@@ -37,8 +37,9 @@
 @section('PageJs')
 <script type="text/javascript">
     init = function($) {
-        let fecha       = new wrapCalendar('fecha'),
-            tipo        = new wrapSelect('#tipo', null);
+        let fecha       = new wrapCalendar("fecha"),
+            importe     = new wrapMoney("#importe", null),
+            tipo        = new wrapSelect("#tipo", null);
             
         $("#select_categoria").MegaSearch({
             titulo: "Seleccionar categoria",

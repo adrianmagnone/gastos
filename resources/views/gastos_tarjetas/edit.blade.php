@@ -19,7 +19,7 @@
     </div>
 
     <div class="row">
-        <x-form.money col="4" field="total" label="Importe" :value="$entity->total_edit" />
+        <x-form.money col="4" field="total" label="Importe" id="importe" :value="$entity->total_edit" />
 
         <x-form.text col="1" label="Cuotas" field="cuotas" :value="$entity->cuotas" />
 
@@ -39,6 +39,7 @@
 <script type="text/javascript">
     init = function($) {
         let fecha       = new wrapCalendar('fecha'),
+            importe     = new wrapMoney("#importe", null),
             periodo     = new wrapCalendar('periodo'),
             tarjeta     = new wrapSelect('#tarjeta', null),
             categoria   = new wrapSelect('#categoria', null);
