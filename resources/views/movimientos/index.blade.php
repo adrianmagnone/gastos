@@ -48,9 +48,9 @@
     				data: "tipo",
     				render: function ( data, type, row, meta ) {
                         if (row.tipo == 1)
-                            return '<span class="text-success"><strong>Ingreso</strong></span>';
+                            return '<span class="text-success" title="Ingreso"><i class="icon ti ti-cash"></i></span>';
                         if (row.tipo == 2)
-                            return '<span class="text-danger"><strong>Gasto</strong></span>'
+                            return '<span class="text-danger" title="Gasto"><i class="icon ti ti-cash-off"></i></span>'
     				}
   				}
 			],
