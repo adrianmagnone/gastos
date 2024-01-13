@@ -18,9 +18,9 @@
     <div class="row">
         <div class="col-8"></div>
 
-        <x-form.money col="2" label="Total de Seguros" field="totalSeguros" id="importeSeguros" value="0.00" />
+        <x-form.money col="2" label="Total de Seguros" id="seguros" field="totalSeguros" id="importeSeguros" value="0.00" />
 
-        <x-form.money col="2" label="Total de Cuotas"  field="totalCuotas"  id="importeCuotas" value="0.00" />
+        <x-form.money col="2" label="Total de Cuotas" id="cuotas" field="totalCuotas"  id="importeCuotas" value="0.00" />
     </div>
 
     <div class="row">
@@ -28,7 +28,7 @@
 
         <x-form.date col="2" field="fechaPago" id="fecha" label="Fecha de Pago" :value="$entity->fecha_pago_format" />
         
-        <x-form.money col="2" field="totalPagado" label="Importe a Pagar" :value="$entity->total_pagado_edit" />
+        <x-form.money col="2" field="totalPagado" id="total" label="Importe a Pagar" :value="$entity->total_pagado_edit" />
     </div>
 @endsection
 
@@ -46,6 +46,9 @@
         let objPago     = new Pago(),
             $tabla      = $("#grid"),
             fecha       = new wrapCalendar('fecha'),
+			seguros     = new wrapMoney("#seguros", null),
+			cuotas      = new wrapMoney("#cuotas", null),
+			total       = new wrapMoney("#total", null),
             periodo     = new wrapCalendar('periodo', () => $tabla.MegaDatatable("reload") ),
             tarjeta     = new wrapSelect('#tarjeta',  () => $tabla.MegaDatatable("reload")  );
 
@@ -78,7 +81,11 @@
 			stateSave: [
                 { key: "tarjeta",     control: tarjeta       },
                 { key: "periodo",     control: periodo       },
-			]
+			],
+			onDraw: function() {
+				$(".pagar").mask("#0.00", {reverse: true, placeholder: "0.00" });
+				objPago.sumarMarcas()
+			}
 		});
     }
 </script>
@@ -102,6 +109,7 @@
 
 			$(".check-pago").each(function () { 
                 let id = this.dataset.id,
+					row = this.parentNode.parentNode,
 					controlImporte = $(`[name="pagar[${id}]"]`);
 
                 if (this.checked)
@@ -112,9 +120,15 @@
 					
 					if (! isNaN(valorCargado))
 						self.importe += valorCargado;
-				}
 
-                controlImporte.attr("disabled", ! this.checked)
+					row.classList.add("bg-blue-lt");
+				}
+				else
+				{
+					row.classList.remove("bg-blue-lt");
+				}
+				
+                controlImporte.attr("disabled", ! this.checked);
 			});
 
             self.textImporte.val(self.importe.toFixed(2));
