@@ -65,25 +65,6 @@
         <li class="nav-item active dropdown">
           <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
             <span class="nav-link-icon d-md-none d-lg-inline-block">
-              <i class="icon ti ti-car"></i>
-            </span>
-            <span class="nav-link-title">
-              Vehículos
-            </span>
-          </a>
-          <div class="dropdown-menu">
-            <div class="dropdown-menu-columns">
-              <div class="dropdown-menu-column">
-                <a class="dropdown-item" href="{{ route('vehiculos') }}">Vehiculos</a>
-                <a class="dropdown-item" href="{{ route('mantenimiento_vehiculos') }}">Mantenimiento</a>
-              </div>
-            </div>
-          </div>
-        </li>
-
-        <li class="nav-item active dropdown">
-          <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
-            <span class="nav-link-icon d-md-none d-lg-inline-block">
               <i class="icon ti ti-credit-card-filled"></i>
             </span>
             <span class="nav-link-title">
@@ -96,6 +77,44 @@
                 <a class="dropdown-item" href="{{ route('gastos_tarjetas') }}">Consulta</a>
                 <a class="dropdown-item" href="{{ route('resumen_tarjetas') }}">Resumen</a>
                 <a class="dropdown-item" href="{{ route('pagos_tarjetas') }}">Pagos</a>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li class="nav-item active dropdown">
+          <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
+            <span class="nav-link-icon d-md-none d-lg-inline-block">
+              <i class="icon ti ti-currency"></i>
+            </span>
+            <span class="nav-link-title">
+              Fondos
+            </span>
+          </a>
+          <div class="dropdown-menu">
+            <div class="dropdown-menu-columns">
+              <div class="dropdown-menu-column">
+                <a class="dropdown-item" href="#">Balance</a>
+                <a class="dropdown-item" href="{{ route('fondos') }}">Definir Fondos</a>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li class="nav-item active dropdown">
+          <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
+            <span class="nav-link-icon d-md-none d-lg-inline-block">
+              <i class="icon ti ti-car"></i>
+            </span>
+            <span class="nav-link-title">
+              Vehículos
+            </span>
+          </a>
+          <div class="dropdown-menu">
+            <div class="dropdown-menu-columns">
+              <div class="dropdown-menu-column">
+                <a class="dropdown-item" href="{{ route('vehiculos') }}">Vehiculos</a>
+                <a class="dropdown-item" href="{{ route('mantenimiento_vehiculos') }}">Mantenimiento</a>
               </div>
             </div>
           </div>

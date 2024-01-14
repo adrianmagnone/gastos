@@ -9,6 +9,8 @@ use App\Http\Controllers\MovimientosController;
 use App\Http\Controllers\GastosTarjetasController;
 use App\Http\Controllers\PagosTarjetasController;
 
+use App\Http\Controllers\FondosController;
+
 use App\Http\Controllers\ConceptosMiosController;
 use App\Http\Controllers\MovimientosMiosController;
 use App\Http\Controllers\ResumenMioController;
@@ -58,7 +60,7 @@ Route::get('categorias/gastos',                 [CategoriasController::class, 's
 Route::post('categoria/guardar',                [CategoriasController::class, 'store'])->name('categoria.guardar');
 Route::get('categoria/editar/{id}',             [CategoriasController::class, 'edit']);
 
-// CATEGORIAS----------------------------------------------------- 
+// MOVIMIENTOS ----------------------------------------------------- 
 Route::get('movimientos',                       [MovimientosController::class, 'index'])->name('movimientos');
 Route::get('movimientos_data/{id?}',            [MovimientosController::class, 'getData']);
 Route::get('movimientos/excel',                 [MovimientosController::class, 'toExcel']);
@@ -73,6 +75,14 @@ Route::get('movimientos_mes_egr_data',          [MovimientosController::class, '
 Route::get('movimientos_anuales',               [MovimientosController::class, 'resumenAnual'])->name('movimientos_anuales');
 Route::get('movimientos_anual_ing_data',        [MovimientosController::class, 'resumenAnualIngresos']);
 Route::get('movimientos_anual_egr_data',        [MovimientosController::class, 'resumenAnualEgresos']);
+
+// FONDOS  ----------------------------------------------------- 
+Route::get('fondos',                            [FondosController::class, 'index'])->name('fondos');
+Route::get('fondos_data/{id?}',                 [FondosController::class, 'getData']);
+Route::get('fondos/excel',                      [FondosController::class, 'toExcel']);
+Route::get('fondo/nuevo',                       [FondosController::class, 'create']);
+Route::post('fondo/guardar',                    [FondosController::class, 'store'])->name('fondo.guardar');
+Route::get('fondo/editar/{id}',                 [FondosController::class, 'edit']);
 
 // TARJETAS  ----------------------------------------------------- 
 Route::get('tarjetas',                          [TarjetasController::class, 'index'])->name('tarjetas');
