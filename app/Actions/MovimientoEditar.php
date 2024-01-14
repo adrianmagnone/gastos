@@ -30,6 +30,13 @@ class MovimientoEditar extends EditAction
         ];
     }
 
+    protected function _createModel()
+    {
+        $model = new $this->model;
+        $model->tipo = Movimiento::Tipo('Gasto');
+        return $model;
+    }
+
     public function rules(): array
     {
         return [

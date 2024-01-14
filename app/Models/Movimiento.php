@@ -78,4 +78,11 @@ class Movimiento extends Model
             get: fn () => $this->tipo == 2
         );
     }
+
+    public static function Tipo($value)
+    {
+        $keys = array_keys(self::TIPOS, $value);
+
+        return $keys[0];
+    }
 }
