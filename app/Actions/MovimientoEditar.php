@@ -14,6 +14,7 @@ class MovimientoEditar extends EditAction
 
         $this->urlList = route('movimientos');
         $this->urlSave = route('movimiento.guardar');
+        $this->urlBackEdit = 'movimiento/nuevo';
 
         $this->editView   = 'movimientos.edit';
         $this->deleteView = '';
