@@ -16,6 +16,7 @@ class EditAction
     protected $useCreateOwnInModel = false;
     protected $urlSave;
     protected $urlList;
+    protected $urlBackEdit;
     protected $relationsOfModel = [];
     protected $currentAction;
 
@@ -111,7 +112,7 @@ class EditAction
     protected function endUpdate($entidad)
     {
         $this->request->session()->flash('update_message', $this->updatedMessage);
-        return redirect($this->urlList);
+        return redirect(($this->urlBackEdit) ? $this->urlBackEdit : $this->urlList);
     }
 
     protected function update($id)
