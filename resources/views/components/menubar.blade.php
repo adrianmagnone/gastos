@@ -22,7 +22,18 @@
           </a>
         </li>
 
-        <li class="nav-item active dropdown">
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url('movimiento/nuevo') }}" >
+            <span class="nav-link-icon d-md-none d-lg-inline-block">
+              <i class="icon ti ti-clipboard-plus"></i>
+            </span>
+            <span class="nav-link-title">
+              Agregar Nuevo Movimiento
+            </span>
+          </a>
+        </li>
+
+        <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
             <span class="nav-link-icon d-md-none d-lg-inline-block">
               <i class="icon ti ti-report-money"></i>
@@ -42,7 +53,7 @@
           </div>
         </li>
 
-        <li class="nav-item active dropdown">
+        <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
             <span class="nav-link-icon d-md-none d-lg-inline-block">
               <i class="icon ti ti-user"></i>
@@ -62,7 +73,7 @@
           </div>
         </li>
 
-        <li class="nav-item active dropdown">
+        <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
             <span class="nav-link-icon d-md-none d-lg-inline-block">
               <i class="icon ti ti-credit-card-filled"></i>
@@ -82,7 +93,7 @@
           </div>
         </li>
 
-        <li class="nav-item active dropdown">
+        <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
             <span class="nav-link-icon d-md-none d-lg-inline-block">
               <i class="icon ti ti-currency"></i>
@@ -101,7 +112,7 @@
           </div>
         </li>
 
-        <li class="nav-item active dropdown">
+        <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
             <span class="nav-link-icon d-md-none d-lg-inline-block">
               <i class="icon ti ti-car"></i>
