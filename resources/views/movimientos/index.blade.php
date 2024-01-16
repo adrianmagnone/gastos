@@ -20,7 +20,7 @@
 @endsection
 
 @section('ListBody')
-<x-list.table columns="Fecha|Tipo|Categoria|Descripción|Importe" acciones="1" />
+<x-list.table columns="Fecha|Tipo|Categoria|Descripción|Importe" acciones="1" :id="false"/>
 @endsection
 
 @section('ListBundles')
@@ -40,7 +40,8 @@
 			ajaxUrl: "{{ asset('movimientos_data') }}",
 			editUrl: "{{ asset('movimiento/editar') }}",
 			deleteUrl: "{{ asset('movimiento/borrar') }}",
-			columns: "id|fecha|tipo|categoria|descripcion~f|importe~f|edit~f",
+			columns: "fecha|tipo|categoria~f|descripcion~f|importe~f|edit~f",
+			order: [[0, 'desc']],
 			columnDefs: [
 				{ data: "tipo",        className: "text-center" },
 				{ data: "importe",     className: "text-end"    },
