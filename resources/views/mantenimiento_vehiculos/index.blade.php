@@ -13,7 +13,7 @@
 	<div class="row w-100">
 		<x-form.select mb="1" col="4" label="Vehiculo" field="vehiculo" id="vehiculo" value="" :options="$listaVehiculos" fieldValue="id" fieldText="descripcion_completa" />
 
-		<x-list.from-to-date mb="1" col="4" field="fecha" label="Fecha de Nacimiento" value="" />
+		<x-list.from-to-date mb="1" col="4" field="fecha" label="Fecha" value="" />
 	</div>
 @endsection
 
@@ -21,7 +21,7 @@
 <div class="row">
     <div class="col-10">
         <h3>Detalle de Movimientos</h3>
-        <x-list.table columns="Fecha|Km|Importe|Descripcion" acciones="2" />
+        <x-list.table columns="Fecha|Km|Importe|Descripcion" acciones="2" :id="false" />
 	</div>
 
 	<div class="col-2">
@@ -47,7 +47,8 @@
 			ajaxUrl: "{{ asset('mantenimiento_vehiculos_data') }}",
 			editUrl: "{{ asset('mantenimiento_vehiculo/editar') }}",
 			deleteUrl: "{{ asset('mantenimiento_vehiculo/borrar') }}",
-			columns: "id|fecha|km~f|importe~f|descripcion~f|edit~f|delete~f",
+			columns: "fecha|km~f|importe~f|descripcion~f|edit~f|delete~f",
+			defaultOrder: [[0, 'desc']],
 			stateSave: [
                 { key: "vehiculo",        control: vehiculo       },
 				{ key: "fechaDesde",      control: fechaDesde,      parentKey: "fecha"       },
