@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\IndexController;
+
 use App\Http\Controllers\CategoriasController;
 use App\Http\Controllers\TarjetasController;
 use App\Http\Controllers\MovimientosController;
@@ -30,26 +32,12 @@ use App\Http\Controllers\VehiculosController;
 |
 */
 
-Route::get('/', function () {
-    $data = [];
-
-    $fila1 = new stdClass();
-    $fila1->name = '';
-    $fila1->data = [155, 65, 465, 265, 225, 325, 80];
-
-    $fila2 = new stdClass();
-    $fila2->name = '';
-    $fila2->data = [113, 42, 65, 54, 76, 65, 35];
-
-    $data[] = $fila1;
-    $data[] = $fila2;
-
-    return view('welcome', ['serieGastos' => json_encode($data)]);
-});
-
 Route::get('/login', function () {
     return view('welcome');
 })->name('login');
+
+
+Route::get('/',                                 [IndexController::class, 'index']);
 
 // CATEGORIAS----------------------------------------------------- 
 Route::get('categorias',                        [CategoriasController::class, 'index'])->name('categorias');
