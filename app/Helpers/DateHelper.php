@@ -17,7 +17,7 @@ class DateHelper
 
 	public static function todayWithTime()
 	{
-		return Carbon::today()->toDateTimeString();
+		return Carbon::now()->toDateTimeString();
 	}
 
 	public static function addDaysToToday($days)

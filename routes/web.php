@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoriasController;
 use App\Http\Controllers\TarjetasController;
 use App\Http\Controllers\MovimientosController;
+use App\Http\Controllers\TareasController;
 
 use App\Http\Controllers\GastosTarjetasController;
 use App\Http\Controllers\PagosTarjetasController;
@@ -113,6 +114,17 @@ Route::post('pago_tarjeta/guardar',             [PagosTarjetasController::class,
 Route::get('pago_tarjeta/editar/{id}',          [PagosTarjetasController::class, 'edit']);
 Route::get('pago_tarjeta/consultar/{id}',       [PagosTarjetasController::class, 'view']);
 Route::get('pago_tarjeta/pasar/{id}',           [PagosTarjetasController::class, 'passToGasto']);
+
+// TAREAS  ------------------------------------------------- 
+Route::get('tareas',                            [TareasController::class, 'index'])->name('tareas');
+Route::get('tareas_data/{id?}',                 [TareasController::class, 'getData']);
+Route::get('tarea/nueva',                       [TareasController::class, 'create']);
+Route::post('tarea/guardar',                    [TareasController::class, 'store'])->name('tarea.guardar');
+Route::get('tarea/editar/{id}',                 [TareasController::class, 'edit']);
+
+Route::get('tarea/fin/{id}',                    [TareasController::class, 'finish']);
+Route::get('tarea/cancelar/{id}',               [TareasController::class, 'cancel']);
+
 
 // GASTOS MIOS ----------------------------------------------------- 
 Route::get('resumen_mio',                       [ResumenMioController::class, 'index'])->name('resumen_mio');
