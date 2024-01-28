@@ -64,6 +64,7 @@ Route::get('movimientos_mes_egr_data',          [MovimientosController::class, '
 Route::get('movimientos_anuales',               [MovimientosController::class, 'resumenAnual'])->name('movimientos_anuales');
 Route::get('movimientos_anual_ing_data',        [MovimientosController::class, 'resumenAnualIngresos']);
 Route::get('movimientos_anual_egr_data',        [MovimientosController::class, 'resumenAnualEgresos']);
+Route::get('actualizar_resumen_anual',          [MovimientosController::class, 'actualizarResumen'])->name('actualizar_resumen');
 
 // FONDOS  ----------------------------------------------------- 
 Route::get('fondos',                            [FondosController::class, 'index'])->name('fondos');

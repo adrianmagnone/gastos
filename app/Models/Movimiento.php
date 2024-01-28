@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 
+use Illuminate\Support\Facades\DB;
+
 use App\Helpers\DateHelper as MiDate;
 use App\Helpers\Formatter;
 
@@ -84,5 +86,18 @@ class Movimiento extends Model
         $keys = array_keys(self::TIPOS, $value);
 
         return $keys[0];
+    }
+
+    public static function actualizarResumen($anio)
+    {
+        $anio = (int)$anio;
+
+        DB::statement("DELETE FROM resumen_anual_movimientos WHERE anio = {$anio}");
+
+        DB::statement("INSERT into resumen_anual_movimientos(anio, mes, tipo, categoria_id, importe)
+                        SELECT YEAR(fecha), MONTH(fecha), tipo, categoria_id, SUM(importe) as importe
+                        FROM movimientos
+                        WHERE YEAR(fecha) = {$anio}
+                        GROUP BY YEAR(fecha), MONTH(fecha), tipo, categoria_id");
     }
 }

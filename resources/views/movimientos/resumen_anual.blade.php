@@ -5,6 +5,9 @@
 @section('ListTittle', 'Resumen Anual')
 
 @section('ListActions')
+<a href="{{ route('actualizar_resumen') }}" class="btn" role="button">
+	<i class="icon ti ti-refresh"></i> Actualizar Resumen
+</a>
 <x-list.button-excel  url="{{ url('movimientos/excel') }}" text="Exportar Excel"/>
 @endsection
 

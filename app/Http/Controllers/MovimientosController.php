@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
+use App\Helpers\DateHelper as MiDate;
+
+use App\Models\Movimiento;
+
 use App\Actions\MovimientoLista;
 use App\Actions\MovimientoEditar;
 use App\Actions\Movimientos\MensualIngreso;
@@ -71,5 +75,14 @@ class MovimientosController extends Controller
     public function resumenAnualEgresos(Request $request, AnualEgreso $action, $id = null)
     {
         return $action->run($request, $id);
+    }
+
+    public function actualizarResumen()
+    {
+        $fecha = MiDate::object();
+
+        Movimiento::actualizarResumen($fecha->year);
+
+        return redirect()->route('movimientos_anuales');
     }
 }
