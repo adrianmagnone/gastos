@@ -4,18 +4,18 @@ namespace App\Actions;
 
 use Illuminate\Support\Facades\DB;
 use App\Lib\Actions\SelectAction;
-use App\Models\MovimientoMio;
+use App\Models\MovimientoFondo;
 
 use App\Helpers\DateHelper as MiDate;
 use App\Helpers\Formatter;
 
-class ResumenMioTotales extends SelectAction
+class ResumenFondoTotales extends SelectAction
 {
     protected $saldo = 0;
 
     function __construct()
     {
-        parent::__construct(MovimientoMio::class);
+        parent::__construct(MovimientoFondo::class);
     }
 
     protected function getQuery()
@@ -30,9 +30,14 @@ class ResumenMioTotales extends SelectAction
                     ->where('saldo' , '>', 0);
     }
 
+    protected function setFilterClass()
+    {
+        return \App\ActionFilters\MovimientoFondoFiltro::class;
+    }
+
     public function requestKey()
     {
-        return 'ResumenMio.TotalesMensual';
+        return 'ResumenFondo.TotalesMensual';
     }
 
     protected function setFieldSustitute()

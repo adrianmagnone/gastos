@@ -1,7 +1,7 @@
 @extends('layouts.form')
 
 @section('FormPreTittle', 'Imputar')
-@section('FormTittle', 'Movimiento Mio')
+@section('FormTittle', 'Movimiento de Fondo')
 
 
 @section ('FormBody')

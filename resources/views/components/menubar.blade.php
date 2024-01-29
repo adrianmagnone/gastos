@@ -67,26 +67,6 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
             <span class="nav-link-icon d-md-none d-lg-inline-block">
-              <i class="icon ti ti-user"></i>
-            </span>
-            <span class="nav-link-title">
-              Gastos Mios
-            </span>
-          </a>
-          <div class="dropdown-menu">
-            <div class="dropdown-menu-columns">
-              <div class="dropdown-menu-column">
-                <a class="dropdown-item" href="{{ route('resumen_mio') }}">Resumen de Saldos</a>
-                <a class="dropdown-item" href="{{ route('movimientos_mios') }}">Consulta de Movimientos</a>
-                <a class="dropdown-item" href="{{ route('conceptos_mios') }}">Conceptos</a>
-              </div>
-            </div>
-          </div>
-        </li>
-
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
-            <span class="nav-link-icon d-md-none d-lg-inline-block">
               <i class="icon ti ti-credit-card-filled"></i>
             </span>
             <span class="nav-link-title">
@@ -116,8 +96,10 @@
           <div class="dropdown-menu">
             <div class="dropdown-menu-columns">
               <div class="dropdown-menu-column">
-                <a class="dropdown-item" href="#">Balance</a>
+                <a class="dropdown-item" href="{{ route('resumen_fondos') }}">Balance</a>
+                <a class="dropdown-item" href="{{ route('movimientos_fondos') }}">Consulta de Movimientos</a>
                 <a class="dropdown-item" href="{{ route('fondos') }}">Definir Fondos</a>
+                <a class="dropdown-item" href="{{ route('conceptos_fondos') }}">Conceptos</a>
               </div>
             </div>
           </div>

@@ -1,16 +1,18 @@
 @extends('layouts.list')
 
-@section('PageTittle', 'Mis Movimientos')
+@section('PageTittle', 'Movimientos')
 @section('ListPreTittle', 'Consulta')
-@section('ListTittle', 'Mis Movimientos')
+@section('ListTittle', 'Movimientos de Fondos')
 
 @section('ListActions')
-<x-list.button-excel  url="{{ url('movimientos_mios/excel') }}" text="Exportar Excel"/>
-<x-list.button-add url="{{ url('movimientos_mios/nuevo') }}" text="Agregar Nuevo"/>
+<x-list.button-excel  url="{{ url('movimientos_fondos/excel') }}" text="Exportar Excel"/>
+<x-list.button-add url="{{ url('movimientos_fondos/nuevo') }}" text="Agregar Nuevo"/>
 @endsection
 
 @section('ListFilters')
 	<div class="row w-100">
+		<x-form.select mb="1" col="2" label="Fondo" field="fondo" id="fondo" value="" :options="$listaFondos" fieldValue="id" fieldText="nombre" />
+
 		<x-form.select mb="1" col="2" label="Tipo" field="tipo" id="tipo" value="" :options="$listaTipos" blankText="Todos"/>
 
 		<x-form.select mb="1" col="2" label="Concepto" field="concepto" id="concepto" value="" :options="$listaConceptos" blankText="Todos" fieldValue="id" fieldText="nombre"/>
@@ -31,14 +33,15 @@
 <script type="text/javascript">
     init = function($) {
 		let $tabla         = $("#grid"),
+			selectFondo    = new wrapSelect("#fondo",     () => $tabla.MegaDatatable("reload")),
 			selectTipo     = new wrapSelect("#tipo",      () => $tabla.MegaDatatable("reload")),
 			selectConcepto = new wrapSelect("#concepto",  () => $tabla.MegaDatatable("reload")),
 			selectSaldo    = new wrapSelect("#saldo",     () => $tabla.MegaDatatable("reload"));
 
 		$tabla.MegaDatatable({
-			ajaxUrl: "{{ asset('movimientos_mios_data') }}",
-			editUrl: "{{ asset('movimientos_mios/editar') }}",
-			deleteUrl: "{{ asset('movimientos_mios/borrar') }}",
+			ajaxUrl: "{{ asset('movimientos_fondos_data') }}",
+			editUrl: "{{ asset('movimientos_fondos/editar') }}",
+			deleteUrl: "{{ asset('movimientos_fondos/borrar') }}",
 			columns: "id|fecha|tipo~f|concepto|descripcion~f|importe~f|saldo~f|edit~f",
 			columnDefs: [
 				{ data: "tipo",        className: "text-center" },
@@ -59,6 +62,7 @@
       				$(row).addClass( 'text-muted' );
   			},
 			stateSave: [
+				{ key: "fondo",           control: selectFondo      },
                 { key: "tipo",            control: selectTipo       },
 				{ key: "concepto",        control: selectConcepto   },
 				{ key: "saldo",           control: selectSaldo      }

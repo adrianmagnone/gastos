@@ -8,14 +8,14 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use App\Helpers\DateHelper as MiDate;
 use App\Helpers\Formatter;
 
-class MovimientoMio extends Model
+class MovimientoFondo extends Model
 {
     const TIPOS = [
         1 => 'Ingreso',
         2 => 'Gasto'
     ];
 
-    protected $table = "movimientos_mios";
+    protected $table = "movimientos_fondos";
 
     protected $fillable = [
         'saldo'
@@ -23,7 +23,7 @@ class MovimientoMio extends Model
 
     public function concepto() : \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(\App\Models\ConceptoMio::class);
+        return $this->belongsTo(\App\Models\ConceptoFondo::class);
     }
 
     public function nombreConcepto(): Attribute
@@ -68,17 +68,19 @@ class MovimientoMio extends Model
         );
     }
 
-    public static function ingresosConSaldo()
+    public static function ingresosConSaldo($idFondo)
     {
-        return MovimientoMio::where('tipo', 1)
+        return MovimientoFondo::where('tipo', 1)
+            ->where('fondo_id', $idFondo)
             ->where('saldo', '>' , 0)
             ->orderBy('fecha')
             ->get();
     }
 
-    public static function gastosConSaldo()
+    public static function gastosConSaldo($idFondo)
     {
-        return MovimientoMio::where('tipo', 2)
+        return MovimientoFondo::where('tipo', 2)
+            ->where('fondo_id', $idFondo)
             ->where('saldo', '>' , 0)
             ->orderBy('fecha')
             ->get();

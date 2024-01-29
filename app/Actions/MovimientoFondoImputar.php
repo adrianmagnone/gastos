@@ -5,18 +5,18 @@ namespace App\Actions;
 use App\Helpers\DateHelper as MiDate;
 use App\Lib\Actions\EditAction;
 use App\Helpers\Formatter;
-use App\Models\MovimientoMio;
+use App\Models\MovimientoFondo;
 
-class MovimientoMioImputar extends EditAction
+class MovimientoFondoImputar extends EditAction
 {
     function __construct()
     {
-        $this->model = MovimientoMio::class;
+        $this->model = MovimientoFondo::class;
 
-        $this->urlList = route('resumen_mio');
-        $this->urlSave = route('movimientos_mios.imputar');
+        $this->urlList = route('resumen_fondos');
+        $this->urlSave = route('movimientos_fondos.imputar');
 
-        $this->editView   = 'movimientos_mios.imput';
+        $this->editView   = 'movimientos_fondos.imput';
         $this->deleteView = '';
 
         $this->updatedMessage = 'El movimiento se ha imputado correctamente!';
@@ -26,9 +26,9 @@ class MovimientoMioImputar extends EditAction
     protected function aditionalDataForEdit(&$entidad = null)
     {
         if ($entidad->es_ingreso)
-            $posiblesImputaciones = MovimientoMio::gastosConSaldo();
+            $posiblesImputaciones = MovimientoFondo::gastosConSaldo($entidad->fondo_id);
         if ($entidad->es_gasto)
-            $posiblesImputaciones = MovimientoMio::ingresosConSaldo();
+            $posiblesImputaciones = MovimientoFondo::ingresosConSaldo($entidad->fondo_id);
 
 
         $saldo = (float)$entidad->saldo;
@@ -88,7 +88,7 @@ class MovimientoMioImputar extends EditAction
     {
         foreach($request->imputar as $imputar)
         {
-            $movimiento = MovimientoMio::find($imputar['id']);
+            $movimiento = MovimientoFondo::find($imputar['id']);
 
             $movimiento->saldo -= $imputar['imputar'];
 

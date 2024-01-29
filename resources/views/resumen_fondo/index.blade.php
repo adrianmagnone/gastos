@@ -1,11 +1,17 @@
 @extends('layouts.list')
 
-@section('PageTittle', 'Mis Movimientos - Saldos')
+@section('PageTittle', 'Balance Fondo')
 @section('ListPreTittle', 'Resumen')
-@section('ListTittle', 'Mis Movimientos: Saldos')
+@section('ListTittle', 'Balance de Fondos')
 
 @section('ListActions')
-<x-list.button-add url="{{ url('movimientos_mios/nuevo') }}" text="Agregar Movimiento"/>
+<x-list.button-add url="{{ url('movimientos_fondos/nuevo') }}" text="Agregar Movimiento"/>
+@endsection
+
+@section('ListFilters')
+	<div class="row w-100">
+		<x-form.select mb="1" col="3" label="Fondo" field="fondo" id="fondo" value="" :options="$listaFondos" fieldValue="id" fieldText="nombre" />
+	</div>
 @endsection
 
 @section('ListBody')
@@ -39,10 +45,20 @@
 </div>
 @endsection
 
+@section('ListBundles')
+	<x-bundle src="wraps" />
+@endsection
+
 @section('PageJs')
 <script type="text/javascript">
     init = function($) {
-        let $celdaTotalIngresos = $("#totalIngresos"),
+        let $tabla              = $("#grid"),
+            $tablaResumen       = $("#gridResumen"),
+            selectFondo         = new wrapSelect("#fondo", function () {
+                $tabla.MegaDatatable("reload");
+                $tablaResumen.MegaDatatable("reload");
+            }),
+            $celdaTotalIngresos = $("#totalIngresos"),
             $celdaTotalEgresos  = $("#totalEgresos"),
             $celdaTotalSaldoI   = $("#totalSaldoIngresos"),
             $celdaTotalSaldoE   = $("#totalSaldoEgresos"),
@@ -51,15 +67,18 @@
             totalIngresos = 0,
             totalEgresos  = 0;
 
-		$("#grid").MegaDatatable({
+		$tabla.MegaDatatable({
             pageLength: 100,
 			dom: "rt",
-			ajaxUrl: "{{ asset('resumen_mio_data') }}",
+			ajaxUrl: "{{ asset('resumen_fondo_data') }}",
 			columns: "fecha~f|concepto~f|descripcion~f|importe~f|tipo~f|imputar~f",
             createdRow: function( row, data, dataIndex ) {
     			if ( data.futuro == 1 ) 
       				$(row).addClass( 'text-muted' );
   			},
+            stateSave: [
+				{ key: "fondo",           control: selectFondo      }
+            ],
             columnDefs: [
 				{ data: "importe",     className: "text-end" },
                 { data: "tipo",        className: "text-center" },
@@ -84,16 +103,16 @@
                 {
     				data: "imputar",
     				render: function ( data, type, row, meta ) {
-                        return renderTableCell.urlIconOrBlank({ condicion: row.tipo == 2, icono: 'dolar', titulo: 'Imputar', url: `movimientos_mios/imputar/${row.id}` });
+                        return renderTableCell.urlIconOrBlank({ condicion: row.tipo == 2, icono: 'dolar', titulo: 'Imputar', url: `movimientos_fondos/imputar/${row.id}` });
     				}
   				}
             ]
 		});
 
-        $("#gridResumen").MegaDatatable({
+        $tablaResumen.MegaDatatable({
             pageLength: 100,
 			dom: "rt",
-			ajaxUrl: "{{ asset('resumen_mio_mensuales') }}",
+			ajaxUrl: "{{ asset('resumen_fondo_mensuales') }}",
 			columns: "mes~f|ingresos_f~f|egresos_f~f|saldo~f",
             columnDefs: [
 				{ data: "ingresos_f",     className: "text-end" },
@@ -107,6 +126,9 @@
                         return row.ingresos_f;
     				}
   				},
+            ],
+            stateSave: [
+				{ key: "fondo",           control: selectFondo      }
             ],
             createdRow: function( row, data, dataIndex ) {
     			totalIngresos += parseFloat(data.ingresos);

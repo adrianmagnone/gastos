@@ -1,12 +1,12 @@
 @extends('layouts.list')
 
 @section('PageTittle', 'Conceptos')
-@section('ListPreTittle', 'Para mis gastos personales')
+@section('ListPreTittle', 'Para Fondos')
 @section('ListTittle', 'Conceptos')
 
 @section('ListActions')
-<x-list.button-excel  url="{{ url('conceptos_mios/excel') }}" text="Exportar Excel"/>
-<x-list.button-add url="{{ url('conceptos_mios/nuevo') }}" text="Agregar Nuevo"/>
+<x-list.button-excel  url="{{ url('conceptos_fondos/excel') }}" text="Exportar Excel"/>
+<x-list.button-add url="{{ url('conceptos_fondos/nuevo') }}" text="Agregar Nuevo"/>
 @endsection
 
 @section('ListBody')
@@ -20,9 +20,9 @@
 		let $tabla        = $("#grid");
 
 		$tabla.MegaDatatable({
-			ajaxUrl: "{{ asset('conceptos_mios_data') }}",
-			editUrl: "{{ asset('conceptos_mios/editar') }}",
-			deleteUrl: "{{ asset('conceptos_mios/borrar') }}",
+			ajaxUrl: "{{ asset('conceptos_fondos_data') }}",
+			editUrl: "{{ asset('conceptos_fondos/editar') }}",
+			deleteUrl: "{{ asset('conceptos_fondos/borrar') }}",
 			columns: "id|nombre|edit~f|delete~f",
 		});
 	}

@@ -3,17 +3,17 @@
 namespace App\Actions;
 
 use App\Lib\Actions\SelectAction;
-use App\Models\MovimientoMio;
+use App\Models\MovimientoFondo;
 
 use App\Helpers\DateHelper as MiDate;
 use App\Helpers\Formatter;
 
-class ResumenMioLista extends SelectAction
+class ResumenFondoLista extends SelectAction
 {
     function __construct()
     {
-        $this->viewList = 'resumen_mio.index';
-        parent::__construct(MovimientoMio::class);
+        $this->viewList = 'resumen_fondo.index';
+        parent::__construct(MovimientoFondo::class);
     }
 
     protected function getQuery()
@@ -24,7 +24,12 @@ class ResumenMioLista extends SelectAction
 
     public function requestKey()
     {
-        return 'ResumenMio.Consulta';
+        return 'ResumenFondo.Consulta';
+    }
+
+    protected function setFilterClass()
+    {
+        return \App\ActionFilters\MovimientoFondoFiltro::class;
     }
 
     protected function setFieldSustitute()
@@ -34,10 +39,12 @@ class ResumenMioLista extends SelectAction
         ];
     }
 
-    // protected function setSearchFields()
-    // {
-    //     return ['descripcion'];
-    // }
+    protected function aditionalDataForList()
+    {
+        return [
+            'listaFondos'    => \App\Models\Fondo::activos(),
+        ];
+    }
 
     protected function createRecord(&$modelData)
     {

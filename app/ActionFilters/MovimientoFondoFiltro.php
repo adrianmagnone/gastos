@@ -2,11 +2,11 @@
  
 namespace App\ActionFilters;
 
-class MovimientoMioFiltro extends \App\Lib\Actions\FilterBase
+class MovimientoFondoFiltro extends \App\Lib\Actions\FilterBase
 {
     protected function setFiltersKeys()
     {
-        return [ 'tipo', 'concepto', 'saldo' ];
+        return [ 'tipo', 'concepto', 'saldo', 'fondo'];
     }
 
     protected function filtroTipo(&$query, $value)
@@ -17,6 +17,11 @@ class MovimientoMioFiltro extends \App\Lib\Actions\FilterBase
     protected function filtroConcepto(&$query, $value)
     {
         $query->where('concepto_id', (int)$value);
+    }
+
+    protected function filtroFondo(&$query, $value)
+    {
+        $query->where('fondo_id', (int)$value);
     }
 
     protected function filtroSaldo(&$query, $value)

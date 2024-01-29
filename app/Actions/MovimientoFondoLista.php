@@ -3,27 +3,27 @@
 namespace App\Actions;
 
 use App\Lib\Actions\SelectAction;
-use App\Models\MovimientoMio;
+use App\Models\MovimientoFondo;
 
 use App\Helpers\DateHelper as MiDate;
 use App\Helpers\Formatter;
  
-class MovimientoMioLista extends SelectAction
+class MovimientoFondoLista extends SelectAction
 {
     function __construct()
     {
-        $this->viewList = 'movimientos_mios.index';
-        parent::__construct(MovimientoMio::class);
+        $this->viewList = 'movimientos_fondos.index';
+        parent::__construct(MovimientoFondo::class);
     }
 
     public function requestKey()
     {
-        return 'MovimientoMio.Consulta';
+        return 'MovimientoFondo.Consulta';
     }
 
     protected function setFilterClass()
     {
-        return \App\ActionFilters\MovimientoMioFiltro::class;
+        return \App\ActionFilters\MovimientoFondoFiltro::class;
     }
 
     protected function setSearchFields()
@@ -34,8 +34,9 @@ class MovimientoMioLista extends SelectAction
     protected function aditionalDataForList()
     {
         return [
-            'listaTipos'     => MovimientoMio::TIPOS,
-            'listaConceptos' => \App\Models\ConceptoMio::all()
+            'listaFondos'    => \App\Models\Fondo::all(),
+            'listaTipos'     => MovimientoFondo::TIPOS,
+            'listaConceptos' => \App\Models\ConceptoFondo::all()
         ];
     }
 

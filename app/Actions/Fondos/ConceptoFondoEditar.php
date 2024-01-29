@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Actions\Conceptos;
+namespace App\Actions\Fondos;
 
 use App\Lib\Actions\EditAction;
-use App\Models\ConceptoMio;
+use App\Models\ConceptoFondo;
 
-class ConceptoMioEditar extends EditAction
+class ConceptoFondoEditar extends EditAction
 {
     function __construct()
     {
-        $this->model = ConceptoMio::class;
+        $this->model = ConceptoFondo::class;
 
-        $this->urlList = route('conceptos_mios');
-        $this->urlSave = route('conceptos_mios.guardar');
+        $this->urlList = route('conceptos_fondos');
+        $this->urlSave = route('conceptos_fondos.guardar');
 
-        $this->editView   = 'conceptos_mios.edit';
+        $this->editView   = 'conceptos_fondos.edit';
         $this->deleteView = '';
 
         $this->updatedMessage = 'El Concepto se ha agregado correctamente!';

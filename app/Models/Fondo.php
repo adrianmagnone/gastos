@@ -21,6 +21,6 @@ class Fondo extends Model
 
     public static function activos()
     {
-        return Categoria::where('estado', 1)->get();
+        return Fondo::where('estado', 1)->get();
     }
 }

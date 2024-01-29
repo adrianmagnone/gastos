@@ -13,10 +13,9 @@ use App\Http\Controllers\GastosTarjetasController;
 use App\Http\Controllers\PagosTarjetasController;
 
 use App\Http\Controllers\FondosController;
-
-use App\Http\Controllers\ConceptosMiosController;
-use App\Http\Controllers\MovimientosMiosController;
-use App\Http\Controllers\ResumenMioController;
+use App\Http\Controllers\ConceptosFondosController;
+use App\Http\Controllers\MovimientosFondosController;
+use App\Http\Controllers\ResumenFondoController;
 
 use App\Http\Controllers\MantenimientoVehiculosController;
 use App\Http\Controllers\VehiculosController;
@@ -74,6 +73,25 @@ Route::get('fondo/nuevo',                       [FondosController::class, 'creat
 Route::post('fondo/guardar',                    [FondosController::class, 'store'])->name('fondo.guardar');
 Route::get('fondo/editar/{id}',                 [FondosController::class, 'edit']);
 
+Route::get('conceptos_fondos',                  [ConceptosFondosController::class, 'index'])->name('conceptos_fondos');
+Route::get('conceptos_fondos_data/{id?}',       [ConceptosFondosController::class, 'getData']);
+Route::get('conceptos_fondos/excel',            [ConceptosFondosController::class, 'toExcel']);
+Route::get('conceptos_fondos/nuevo',            [ConceptosFondosController::class, 'create']);
+Route::post('conceptos_fondos/guardar',         [ConceptosFondosController::class, 'store'])->name('conceptos_fondos.guardar');
+Route::get('conceptos_fondos/editar/{id}',      [ConceptosFondosController::class, 'edit']);
+
+Route::get('movimientos_fondos',                [MovimientosFondosController::class, 'index'])->name('movimientos_fondos');
+Route::get('movimientos_fondos_data/{id?}',     [MovimientosFondosController::class, 'getData']);
+Route::get('movimientos_fondos/nuevo',          [MovimientosFondosController::class, 'create']);
+Route::post('movimientos_fondos/guardar',       [MovimientosFondosController::class, 'store'])->name('movimientos_fondos.guardar');
+Route::get('movimientos_fondos/editar/{id}',    [MovimientosFondosController::class, 'edit']);
+Route::get('movimientos_fondos/imputar/{id}',   [MovimientosFondosController::class, 'imput']);
+Route::post('movimientos_fondos/guardar_imputacion', [MovimientosFondosController::class, 'storeImput'])->name('movimientos_fondos.imputar');
+
+Route::get('resumen_fondo',                     [ResumenFondoController::class, 'index'])->name('resumen_fondos');
+Route::get('resumen_fondo_data',                [ResumenFondoController::class, 'getData']);
+Route::get('resumen_fondo_mensuales',           [ResumenFondoController::class, 'getTotalesMensuales']);
+
 // TARJETAS  ----------------------------------------------------- 
 Route::get('tarjetas',                          [TarjetasController::class, 'index'])->name('tarjetas');
 Route::get('tarjetas_data/{id?}',               [TarjetasController::class, 'getData']);
@@ -113,27 +131,6 @@ Route::get('tarea/editar/{id}',                 [TareasController::class, 'edit'
 
 Route::get('tarea/fin/{id}',                    [TareasController::class, 'finish']);
 Route::get('tarea/cancelar/{id}',               [TareasController::class, 'cancel']);
-
-
-// GASTOS MIOS ----------------------------------------------------- 
-Route::get('resumen_mio',                       [ResumenMioController::class, 'index'])->name('resumen_mio');
-Route::get('resumen_mio_data',                  [ResumenMioController::class, 'getData']);
-Route::get('resumen_mio_mensuales',             [ResumenMioController::class, 'getTotalesMensuales']);
-
-Route::get('movimientos_mios',                  [MovimientosMiosController::class, 'index'])->name('movimientos_mios');
-Route::get('movimientos_mios_data/{id?}',       [MovimientosMiosController::class, 'getData']);
-Route::get('movimientos_mios/nuevo',            [MovimientosMiosController::class, 'create']);
-Route::post('movimientos_mios/guardar',         [MovimientosMiosController::class, 'store'])->name('movimientos_mios.guardar');
-Route::get('movimientos_mios/editar/{id}',      [MovimientosMiosController::class, 'edit']);
-Route::get('movimientos_mios/imputar/{id}',     [MovimientosMiosController::class, 'imput']);
-Route::post('movimientos_mios/guardar_imputacion', [MovimientosMiosController::class, 'storeImput'])->name('movimientos_mios.imputar');
-
-Route::get('conceptos_mios',                    [ConceptosMiosController::class, 'index'])->name('conceptos_mios');
-Route::get('conceptos_mios_data/{id?}',         [ConceptosMiosController::class, 'getData']);
-Route::get('conceptos_mios/excel',              [ConceptosMiosController::class, 'toExcel']);
-Route::get('conceptos_mios/nuevo',              [ConceptosMiosController::class, 'create']);
-Route::post('conceptos_mios/guardar',           [ConceptosMiosController::class, 'store'])->name('conceptos_mios.guardar');
-Route::get('conceptos_mios/editar/{id}',        [ConceptosMiosController::class, 'edit']);
 
 // VEHICULOS ----------------------------------------------------- 
 Route::get('mantenimiento_vehiculos',           [MantenimientoVehiculosController::class, 'index'])->name('mantenimiento_vehiculos');

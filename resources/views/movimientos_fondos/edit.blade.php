@@ -1,7 +1,7 @@
 @extends('layouts.form')
 
 @section('FormPreTittle', ($entity->id) ? 'Editar' : 'Agregar')
-@section('FormTittle'. 'Movimiento Mio')
+@section('FormTittle', 'Movimiento de Fondo')
 
 @section ('FormBody')
     <x-form.hide field="id" :value="$entity->id" />
@@ -10,6 +10,8 @@
         <x-form.date col="2" field="fecha" id="fecha" label="Fecha" :value="$entity->fecha_format" />
 
         <x-form.select col="2" label="Tipo" field="tipo" id="tipo" :value="$entity->tipo" :options="$tipos" />
+
+        <x-form.select col="4" label="Fondo" field="fondo_id" id="fondo" :value="$entity->fondo_id" :options="$listaFondos" fieldValue="id" fieldText="nombre" />            
     </div>
 
     <div class="row">
@@ -39,6 +41,7 @@
         let fecha       = new wrapCalendar("fecha"),
             importe     = new wrapMoney("#importe", null),
             tipo        = new wrapSelect("#tipo", null),
+            fondo       = new wrapSelect("#fondo", null),
             concepto    = new wrapSelect("#concepto", null);
     }
 </script>
