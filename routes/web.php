@@ -55,6 +55,10 @@ Route::get('movimientos/excel',                 [MovimientosController::class, '
 Route::get('movimiento/nuevo',                  [MovimientosController::class, 'create']);
 Route::post('movimiento/guardar',               [MovimientosController::class, 'store'])->name('movimiento.guardar');
 Route::get('movimiento/editar/{id}',            [MovimientosController::class, 'edit']);
+Route::get('movimientos/importar_ingresos',     [MovimientosController::class, 'importIng']);
+Route::post('movimientos/lee_ingresos',         [MovimientosController::class, 'readIng']);
+Route::post('movimientos/guarda_ingresos',      [MovimientosController::class, 'storeIng']);
+
 
 Route::get('movimientos_mensuales',             [MovimientosController::class, 'resumenMensual'])->name('movimientos_mensuales');
 Route::get('movimientos_mes_ing_data',          [MovimientosController::class, 'resumenMensualIngresos']);

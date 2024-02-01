@@ -15,6 +15,7 @@ use App\Actions\Movimientos\MensualIngreso;
 use App\Actions\Movimientos\MensualEgreso;
 use App\Actions\Movimientos\AnualIngreso;
 use App\Actions\Movimientos\AnualEgreso;
+use App\Actions\Movimientos\ImportarIngreso;
 
 class MovimientosController extends Controller
 {
@@ -84,5 +85,20 @@ class MovimientosController extends Controller
         Movimiento::actualizarResumen($fecha->year);
 
         return redirect()->route('movimientos_anuales');
+    }
+
+    public function importIng(ImportarIngreso $action)
+    {
+        return $action->runImport();
+    }
+
+    public function readIng(Request $request, ImportarIngreso $action)
+    {
+        return $action->runLoadFile($request);
+    }
+
+    public function storeIng(Request $request, ImportarIngreso $action)
+    {
+        return $action->runForSave($request);
     }
 }

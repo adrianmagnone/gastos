@@ -32,7 +32,7 @@
     <div class="container-xl">
         <div class="row row-deck row-cards">
             <div class="col-12">
-                <form action="{{ url($saveUrl) }}" method="post" class="card" id="frmGeneral" >
+                <form action="{{ url($saveUrl) }}" method="post" class="card" id="frmGeneral" @if(isset($formFile)) enctype="multipart/form-data" @endif>
                     {{ csrf_field() }}
                     <div class="card-body border-bottom py-3">
                         @if ($errors->any())

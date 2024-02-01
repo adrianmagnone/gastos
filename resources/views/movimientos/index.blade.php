@@ -5,6 +5,7 @@
 @section('ListTittle', 'Ingresos - Gastos')
 
 @section('ListActions')
+<x-list.button-file  url="{{ url('movimientos/importar_ingresos') }}" text="Importar Ingresos"/>
 <x-list.button-excel  url="{{ url('movimientos/excel') }}" text="Exportar Excel"/>
 <x-list.button-add url="{{ url('movimiento/nuevo') }}" text="Agregar Nuevo"/>
 @endsection

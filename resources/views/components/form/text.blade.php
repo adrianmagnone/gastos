@@ -8,6 +8,8 @@
 		: 'class="form-control"';
 	if (isset($id))
 		$attributes[] = "id=\"{$id}\"";
+	if (isset($accept))
+		$attributes[] = "accept=\"{$accept}\"";
 	if (isset($disabled))
 		$attributes[] = 'disabled';
 	if (isset($readonly))
