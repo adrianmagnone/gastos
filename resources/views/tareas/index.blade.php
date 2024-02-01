@@ -46,11 +46,11 @@
     				data: "estado",
     				render: function ( data, type, row, meta ) {
                         if (row.estado == 3)
-                            return `<span class="text-danger">Pendiente</span>`
+                            return `<span class="badge bg-danger me-1"></span><span>Pendiente</span>`
 						if (row.estado == 1)
-                            return `<span class="text-success">Finalizada</span>`
+                            return `<span class="badge bg-success me-1"></span><span>Finalizada</span>`
 						if (row.estado == 2)
-                            return `<span class="text-muted">Cancelada</span>`
+                            return `<span class="badge bg-muted me-1"></span><span>Cancelada</span>`
     				}
   				},
 				{
