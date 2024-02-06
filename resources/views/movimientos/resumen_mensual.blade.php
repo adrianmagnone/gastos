@@ -13,20 +13,20 @@
 	<div class="row w-100">
 		<x-form.periodo col="4" label="Periodo" field="periodo" value="" />
 		<div class="col-1"></div>
-		<x-form.money col="15" label="Total Ingresos"  field="ingresos"  value="" id="total_ingresos"  classesInput="text-success fw-bold" disabled="true" />
-		<x-form.money col="15" label="Total Egresos"   field="egresos"   value="" id="total_egresos"   classesInput="text-danger  fw-bold" disabled="true" />
-		<x-form.money col="15" label="Resultado"       field="resultado" value="" id="total_resultado" classesInput="fw-bold" disabled="true" />
+		<x-form.money col="2" label="Total Ingresos"  field="ingresos"  value="" id="total_ingresos"  classesInput="text-success fw-bold" disabled="true" />
+		<x-form.money col="2" label="Total Egresos"   field="egresos"   value="" id="total_egresos"   classesInput="text-danger  fw-bold" disabled="true" />
+		<x-form.money col="2" label="Resultado"       field="resultado" value="" id="total_resultado" classesInput="fw-bold" disabled="true" />
 	</div>
 @endsection
 
 @section('ListBody')
 <div class="col-12 mb-3">
     <h3 class="text-success">Detalle de Ingresos</h3>
-    <x-list.table columns="Categoria|Semana 1|Semana 2|Semana 3|Semana 4|Semana 5|Semana 6|Total" acciones="0" idgrid="Ingresos" :id="false" :footer="true"/>    
+    <x-list.table columns="Categoria|Total|Semana 1|Semana 2|Semana 3|Semana 4|Semana 5|Semana 6" acciones="0" idgrid="Ingresos" :id="false" :footer="true"/>    
 </div>
 <div class="col-12 mb-3">
     <h3 class="text-danger">Detalle de Gastos</h3>
-    <x-list.table columns="Categoria|Semana 1|Semana 2|Semana 3|Semana 4|Semana 5|Semana 6|Total" acciones="0" idgrid="Egresos" :id="false"  :footer="true"/>
+    <x-list.table columns="Categoria|Total|Semana 1|Semana 2|Semana 3|Semana 4|Semana 5|Semana 6" acciones="0" idgrid="Egresos" :id="false"  :footer="true"/>
 </div>
 
 @endsection
@@ -53,7 +53,7 @@
             pageLength: 100,
 			dom: "rt",
 			ajaxUrl: "{{ asset('movimientos_mes_ing_data') }}",
-			columns: "categoria|semana1~f|semana2~f|semana3~f|semana4~f|semana5~f|semana6~f|total~f",
+			columns: "categoria|total~f|semana1~f|semana2~f|semana3~f|semana4~f|semana5~f|semana6~f",
 			columnDefs: [
                 { data: "semana1",     className: "text-end"    },
                 { data: "semana2",     className: "text-end"    },
@@ -61,25 +61,28 @@
                 { data: "semana4",     className: "text-end"    },
                 { data: "semana5",     className: "text-end"    },
                 { data: "semana6",     className: "text-end"    },
-				{ data: "total",       className: "text-end"    },
+				{ data: "total",       className: "text-end text-primary"    },
 			],
 			stateSave: [
 				{ key: "periodo",            control: selectPeriodo     }
 			],
 			createdRow: function( row, data, dataIndex ) {
 				totalIng.add(data);
+				if (data.t == 0) {
+					$(row).addClass( 'bg-muted-lt' );
+				}
 			},
 			footerCallback: function (row, data, start, end, display) {
 				let api = this.api();
 
 				api.column(0).footer().innerHTML = 'TOTALES';
-				api.column(1).footer().innerHTML = totalIng.getWithFormat("a");
-				api.column(2).footer().innerHTML = totalIng.getWithFormat("b");
-				api.column(3).footer().innerHTML = totalIng.getWithFormat("c");
-				api.column(4).footer().innerHTML = totalIng.getWithFormat("d");
-				api.column(5).footer().innerHTML = totalIng.getWithFormat("e");
-				api.column(6).footer().innerHTML = totalIng.getWithFormat("f");
-				api.column(7).footer().innerHTML = totalIng.getWithFormat("t");
+				api.column(1).footer().innerHTML = totalIng.getWithFormat("t");
+				api.column(2).footer().innerHTML = totalIng.getWithFormat("a");
+				api.column(3).footer().innerHTML = totalIng.getWithFormat("b");
+				api.column(4).footer().innerHTML = totalIng.getWithFormat("c");
+				api.column(5).footer().innerHTML = totalIng.getWithFormat("d");
+				api.column(6).footer().innerHTML = totalIng.getWithFormat("e");
+				api.column(7).footer().innerHTML = totalIng.getWithFormat("f");
 
 				ingresoMensual = totalIng.t;
 
@@ -95,7 +98,7 @@
             pageLength: 100,
 			dom: "rt",
 			ajaxUrl: "{{ asset('movimientos_mes_egr_data') }}",
-			columns: "categoria|semana1~f|semana2~f|semana3~f|semana4~f|semana5~f|semana6~f|total~f",
+			columns: "categoria|total~f|semana1~f|semana2~f|semana3~f|semana4~f|semana5~f|semana6~f",
 			columnDefs: [
                 { data: "semana1",     className: "text-end"    },
                 { data: "semana2",     className: "text-end"    },
@@ -103,25 +106,28 @@
                 { data: "semana4",     className: "text-end"    },
                 { data: "semana5",     className: "text-end"    },
                 { data: "semana6",     className: "text-end"    },
-				{ data: "total",       className: "text-end"    },
+				{ data: "total",       className: "text-end text-primary"    },
 			],
 			stateSave: [
 				{ key: "periodo",            control: selectPeriodo     }
 			],
 			createdRow: function( row, data, dataIndex ) {
 				totalEgr.add(data);
+				if (data.t == 0) {
+					$(row).addClass( 'bg-muted-lt' );
+				}
 			},
 			footerCallback: function (row, data, start, end, display) {
 				let api = this.api();
 
 				api.column(0).footer().innerHTML = 'TOTALES';
-				api.column(1).footer().innerHTML = totalEgr.getWithFormat("a");
-				api.column(2).footer().innerHTML = totalEgr.getWithFormat("b");
-				api.column(3).footer().innerHTML = totalEgr.getWithFormat("c");
-				api.column(4).footer().innerHTML = totalEgr.getWithFormat("d");
-				api.column(5).footer().innerHTML = totalEgr.getWithFormat("e");
-				api.column(6).footer().innerHTML = totalEgr.getWithFormat("f");
-				api.column(7).footer().innerHTML = totalEgr.getWithFormat("t");
+				api.column(1).footer().innerHTML = totalEgr.getWithFormat("t");
+				api.column(2).footer().innerHTML = totalEgr.getWithFormat("a");
+				api.column(3).footer().innerHTML = totalEgr.getWithFormat("b");
+				api.column(4).footer().innerHTML = totalEgr.getWithFormat("c");
+				api.column(5).footer().innerHTML = totalEgr.getWithFormat("d");
+				api.column(6).footer().innerHTML = totalEgr.getWithFormat("e");
+				api.column(7).footer().innerHTML = totalEgr.getWithFormat("f");
 				
 				egresoMensual = totalEgr.t;
 

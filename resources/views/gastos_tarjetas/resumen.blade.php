@@ -16,7 +16,7 @@
 @endsection
 
 @section('ListBody')
-<x-list.table :columns="$titulos" acciones="0" :footer="true" />
+<x-list.table :columns="$titulos" acciones="0" :footer="true" :id="false" />
 @endsection
 
 @section('ListBundles')
@@ -34,7 +34,7 @@
 			pageLength: 100,
 			dom: "rt",
 			ajaxUrl: "{{ asset('resumen_tarjetas_data') }}",
-			columns: "id|fecha|descripcion~f|total|a|b~f|c~f|d~f|e~f|f~f|g~f|h~f|i~f|j~f|k~f|l~f",
+			columns: "fecha|descripcion~f|total|a|b~f|c~f|d~f|e~f|f~f|g~f|h~f|i~f|j~f|k~f|l~f",
 			columnDefs: [
 				{ data: "total",      className: "text-primary text-end"    },
 				{ data: "a",          className: "text-end"    },
@@ -59,31 +59,31 @@
 			footerCallback: function (row, data, start, end, display) {
 				let api = this.api();
 
-				api.column(2).footer().innerHTML = 'TOTALES<br/>DEUDA';
-				api.column(3).footer().innerHTML  = totales.getWithFormat("t") + "<br/>" + totales.getDeuda();
-				api.column(4).footer().innerHTML  = totales.getWithFormat("a");
-				api.column(5).footer().innerHTML  = totales.getWithFormat("b");
-				api.column(6).footer().innerHTML  = totales.getWithFormat("c");
-				api.column(7).footer().innerHTML  = totales.getWithFormat("d");
-				api.column(8).footer().innerHTML  = totales.getWithFormat("e");
-				api.column(9).footer().innerHTML  = totales.getWithFormat("f");
-				api.column(10).footer().innerHTML = totales.getWithFormat("g");
-				api.column(11).footer().innerHTML = totales.getWithFormat("h");
-				api.column(12).footer().innerHTML = totales.getWithFormat("i");
-				api.column(13).footer().innerHTML = totales.getWithFormat("j");
-				api.column(14).footer().innerHTML = totales.getWithFormat("k");
-				api.column(15).footer().innerHTML = totales.getWithFormat("l");
+				api.column(1).footer().innerHTML  = 'TOTALES<br/>DEUDA';
+				api.column(2).footer().innerHTML  = totales.getWithFormat("t") + "<br/>" + totales.getDeuda();
+				api.column(3).footer().innerHTML  = totales.getWithFormat("a");
+				api.column(4).footer().innerHTML  = totales.getWithFormat("b");
+				api.column(5).footer().innerHTML  = totales.getWithFormat("c");
+				api.column(6).footer().innerHTML  = totales.getWithFormat("d");
+				api.column(7).footer().innerHTML  = totales.getWithFormat("e");
+				api.column(8).footer().innerHTML  = totales.getWithFormat("f");
+				api.column(9).footer().innerHTML  = totales.getWithFormat("g");
+				api.column(10).footer().innerHTML = totales.getWithFormat("h");
+				api.column(11).footer().innerHTML = totales.getWithFormat("i");
+				api.column(12).footer().innerHTML = totales.getWithFormat("j");
+				api.column(13).footer().innerHTML = totales.getWithFormat("k");
+				api.column(14).footer().innerHTML = totales.getWithFormat("l");
 
-				api.column(6).visible(totales.hasValue("c"));
-				api.column(7).visible(totales.hasValue("d"));
-				api.column(8).visible(totales.hasValue("e"));
-				api.column(9).visible(totales.hasValue("f"));
-				api.column(10).visible(totales.hasValue("g"));
-				api.column(11).visible(totales.hasValue("h"));
-				api.column(12).visible(totales.hasValue("i"));
-				api.column(13).visible(totales.hasValue("j"));
-				api.column(14).visible(totales.hasValue("k"));
-				api.column(15).visible(totales.hasValue("l"));
+				api.column(5).visible(totales.hasValue("c"));
+				api.column(6).visible(totales.hasValue("d"));
+				api.column(7).visible(totales.hasValue("e"));
+				api.column(8).visible(totales.hasValue("f"));
+				api.column(9).visible(totales.hasValue("g"));
+				api.column(10).visible(totales.hasValue("h"));
+				api.column(11).visible(totales.hasValue("i"));
+				api.column(12).visible(totales.hasValue("j"));
+				api.column(13).visible(totales.hasValue("k"));
+				api.column(14).visible(totales.hasValue("l"));
 
 				totales.clear();
 			}

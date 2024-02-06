@@ -96,7 +96,7 @@ class ResumenTarjetaLista extends SelectAction
 
         $record->id       = $modelData->id;
         $record->fecha    = $modelData->fecha_format;
-        $record->descripcion = $modelData->descripcion;
+        $record->descripcion = $modelData->descripcion . ' (' . $modelData->descripcion_categoria . ')';
         $record->total    = $modelData->total_format;
         $record->importe_cuota = $modelData->importe_cuota_format;
         $record->a = ($cuotas[0] > 0)  ? Formatter::moneyArg($cuotas[0]) : '';
