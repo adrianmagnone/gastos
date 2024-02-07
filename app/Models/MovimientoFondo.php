@@ -26,10 +26,22 @@ class MovimientoFondo extends Model
         return $this->belongsTo(\App\Models\ConceptoFondo::class);
     }
 
+    public function fondo() : \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(\App\Models\Fondo::class);
+    }
+
     public function nombreConcepto(): Attribute
     {
         return Attribute::make(
             get: fn () => $this->concepto->nombre ?? ''
+        );
+    }
+
+    public function nombreFondo(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->fondo->nombre ?? ''
         );
     }
 

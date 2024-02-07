@@ -16,6 +16,8 @@
         <x-form.date col="2" field="fecha" id="fecha" label="Fecha" :value="$entity->fecha_format" disabled="true" />
 
         <x-form.plain col="2" label="Tipo" field="tipo" :value="$entity->nombre_tipo" />
+
+        <x-form.plain col="4" label="Fondo" field="fondo" :value="$entity->nombre_fondo" />
     </div>
 
     <div class="row">
