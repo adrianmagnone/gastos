@@ -42,6 +42,12 @@
 		},
 		{
 			"path": "config"
+		},
+		{
+			"path": "resources/css"
+		},
+		{
+			"path": "resources/js"
 		}
 	],
 	"settings": {}
