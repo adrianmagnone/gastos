@@ -5,6 +5,10 @@
 @section('ListTittle', 'Movimientos de Fondos')
 
 @section('ListActions')
+<a href="{{ route('resumen_fondos') }}" class="btn btn-default d-none d-sm-inline-block">
+    <i class="icon ti ti-currency"></i>
+    Consultar Balance
+</a>
 <x-list.button-excel  url="{{ url('movimientos_fondos/excel') }}" text="Exportar Excel"/>
 <x-list.button-add url="{{ url('movimientos_fondos/nuevo') }}" text="Agregar Nuevo"/>
 @endsection

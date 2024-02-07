@@ -5,6 +5,10 @@
 @section('ListTittle', 'Balance de Fondos')
 
 @section('ListActions')
+<a href="{{ route('movimientos_fondos') }}" class="btn btn-default d-none d-sm-inline-block">
+    <i class="icon ti ti-currency"></i>
+    Consultar Movimientos
+</a>
 <x-list.button-add url="{{ url('movimientos_fondos/nuevo') }}" text="Agregar Movimiento"/>
 @endsection
 
