@@ -77,6 +77,9 @@ class MensualIngreso extends SelectAction
 
             $valores[$semana] += $gasto->importe;
         }
+
+        if ($total == 0)
+            return false;
                             
         $record = new \stdClass();
 
