@@ -140,8 +140,8 @@ exports.bundle = parallel(
      // bundleBootstrap,
      bundleDataTables,
      // bundleCalendar,
-     bundleWraps,
-     bundleCode
+     bundleWraps
+     //bundleCode
 );
 
 
