@@ -37,7 +37,7 @@ class PagoTarjetaEditar extends EditAction
         return [
             'tarjeta_id'      => ['numeric', 'integer', 'required', 'exists:tarjetas,id'],
             'periodoPago'     => ['required', 'date_format:d/m/Y'],
-            'fechaPago'       => ['required', 'date_format:d/m/Y'],
+            'fechaPago'       => ['date_format:d/m/Y', 'nullable'],
             'totalCuotas'     => ['numeric', 'decimal:2', 'required'],
             'totalPagado'     => ['numeric', 'decimal:2', 'required'],
             'totalSeguros'    => ['numeric', 'decimal:2', 'required'],
@@ -49,7 +49,7 @@ class PagoTarjetaEditar extends EditAction
         return [
             'tarjeta_id'      => $this->tarjeta_id,
             'periodoPago'     => MiDate::fromFormatTo('d/m/Y', $this->periodoPago, 'Y-m-d'),
-            'fechaPago'       => MiDate::fromFormatTo('d/m/Y', $this->fechaPago, 'Y-m-d'),
+            'fechaPago'       => $this->dateOrNull($this->fechaPago),
             'totalCuotas'     => $this->totalCuotas,
             'totalPagado'     => $this->totalPagado,
             'totalSeguros'    => $this->totalSeguros

@@ -60,6 +60,9 @@
 				totales.b += parseFloat(data.n_total_seguros);
 				totales.c += parseFloat(data.n_total_gastos);
 				totales.d += parseFloat(data.n_total_pagado);
+
+				if ( data.fecha_pago == '' ) 
+      				$(row).addClass( 'text-muted' );
 			},
 			footerCallback: function (row, data, start, end, display) {
 				let api = this.api(),

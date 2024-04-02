@@ -42,8 +42,10 @@ class PagoTarjetaLista extends SelectAction
         $record = new \stdClass();
 
         $record->id            = $modelData->id;
-        $record->periodo       = $modelData->periodo_format;
         $record->fecha_pago    = $modelData->fecha_pago_format;
+        $record->periodo       = ($record->fecha_pago)
+                                        ? $modelData->periodo_format
+                                        : 'Liquidación ' . $modelData->periodo_format;
         $record->total_pagado  = $modelData->total_pagado_format;
         $record->total_cuotas  = $modelData->total_cuotas_format;
         $record->total_seguros = $modelData->total_seguros_format;

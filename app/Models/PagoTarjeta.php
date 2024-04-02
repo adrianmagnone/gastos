@@ -63,7 +63,7 @@ class PagoTarjeta extends Model
     public function fechaPagoFormat(): Attribute
     {
         return Attribute::make(
-            get: fn () => MiDate::toFormat($this->fechaPago, 'd/m/Y')
+            get: fn () => ($this->fechaPago) ? MiDate::toFormat($this->fechaPago, 'd/m/Y') : ''
         );
     }
 

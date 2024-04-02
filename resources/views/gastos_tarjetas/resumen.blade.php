@@ -5,7 +5,7 @@
 @section('ListTittle', 'Resumen de Gastos con Tarjetas')
 
 @section('ListActions')
-<x-list.button-add url="{{ url('pago_tarjeta/nuevo') }}" text="Nuevo Pago"/>
+<x-list.button-add url="{{ url('pago_tarjeta/nuevo') }}" text="Nuevo Pago - Liquidación"/>
 @endsection
 
 

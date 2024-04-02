@@ -23,6 +23,8 @@ class PagoPasarGastos extends ProcessOneAction
     protected function processEntidad()
     {
         // pasamos cada uno de los gastos
+        if (! $this->entidad->fechaPago)
+            $this->entidad->fechaPago = MiDate::today('Y-m-d');
 
         foreach ($this->entidad->detalle as $detalle)
         {
@@ -56,6 +58,7 @@ class PagoPasarGastos extends ProcessOneAction
         ];
         Movimiento::create($gastoTarjeta);
 
+        
         $this->entidad->pasadoGasto = 1;
         $this->entidad->save();
     }
