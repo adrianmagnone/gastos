@@ -188,6 +188,9 @@ class SelectAction
                 else
                     $record = $datos;
 
+                if ($record === false)
+                    continue;
+
                 if(! property_exists($record, 'puedeEditar'))
                     $record->puedeEditar = 1;
                 if(! property_exists($record, 'puedeEliminar'))
