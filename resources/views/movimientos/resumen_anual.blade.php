@@ -8,6 +8,10 @@
 <a href="{{ route('actualizar_resumen') }}" class="btn" role="button">
 	<i class="icon ti ti-refresh"></i> Actualizar Resumen
 </a>
+<a href="{{ route('movimientos_mensuales') }}" class="btn btn-default d-none d-sm-inline-block">
+    <i class="icon ti ti-report-money"></i>
+    Resumen Mensual
+</a>
 <x-list.button-excel  url="{{ url('movimientos/excel') }}" text="Exportar Excel"/>
 @endsection
 

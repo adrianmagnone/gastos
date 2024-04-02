@@ -5,6 +5,10 @@
 @section('ListTittle', 'Gastos Tarjetas')
 
 @section('ListActions')
+<a href="{{ route('resumen_tarjetas') }}" class="btn btn-default d-none d-sm-inline-block">
+    <i class="icon ti ti-credit-card-filled"></i>
+    Resumen
+</a>
 <x-list.button-excel  url="{{ url('gastos_tarjetas/excel') }}" text="Exportar Excel"/>
 <x-list.button-add url="{{ url('gasto_tarjeta/nueva') }}" text="Agregar Nuevo"/>
 @endsection

@@ -6,6 +6,10 @@
 
 @section('ListActions')
 <x-list.button-file  url="{{ url('movimientos/importar_ingresos') }}" text="Importar Ingresos"/>
+<a href="{{ route('movimientos_mensuales') }}" class="btn btn-default d-none d-sm-inline-block">
+    <i class="icon ti ti-report-money"></i>
+    Resumen Mensual
+</a>
 <x-list.button-excel  url="{{ url('movimientos/excel') }}" text="Exportar Excel"/>
 <x-list.button-add url="{{ url('movimiento/nuevo') }}" text="Agregar Nuevo"/>
 @endsection
