@@ -11,8 +11,9 @@ class IndexController extends Controller
     public function index()
     {
         return view('welcome', [
-            'serieGastos' => json_encode($this->getData()),
-            'widTareas'   => $this->getTareas()
+            'serieGastos'    => json_encode($this->getData()),
+            'widTareas'      => $this->getTareas(),
+            'widLiquidacion' => $this->getLiquidacion()
         ]);
     }
 
@@ -40,6 +41,11 @@ class IndexController extends Controller
             'titulo' => $titulo,
             'subtitulo' => $subtitulo
         ];
+    }
+
+    protected function getLiquidacion()
+    {
+        return \App\Models\PagoTarjeta::where('pasadoGasto', 0)->first();
     }
 
     protected function getData()

@@ -133,29 +133,25 @@
       </div>
     </div> --}}
 
-    <div class="col-md-6 col-xl-3">
-      <div class="card card-sm">
-        <div class="card-body">
-          <div class="row align-items-center">
-            <div class="col-auto">
-              <span class="bg-primary text-white avatar">
-                <i class="icon ti ti-list-check"></i>
-              </span>
-            </div>
-            <div class="col">
-              <div class="font-weight-medium">
-                {{ $widTareas['titulo'] }}
-              </div>
-              <div class="text-muted">
-                {{ $widTareas['subtitulo'] }}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <x-widget.cardsm 
+      md="6" xl="3"
+      route="tareas"
+      icon="ti-list-check"
+      :titulo="$widTareas['titulo']"
+      :subtitulo="$widTareas['subtitulo']"
+    />
 
-    <div class="col-md-6 col-xl-9">
+    @if ($widLiquidacion)
+    <x-widget.cardsm 
+      md="6" xl="3"
+      route="pagos_tarjetas"
+      icon="ti-credit-card-filled"
+      :titulo="$widLiquidacion->periodo_format . ' - ' . $widLiquidacion->total_pagado_format"
+      subtitulo="Liquidación pendiente de pago"
+    />
+    @endif
+
+    <div class="col-md-6 col-xl-6">
     </div>
 
     <div class="col-lg-6 col-xl-4">
