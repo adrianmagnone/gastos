@@ -7,7 +7,7 @@ class wrapSelect
             allowEmptyOption: true,
             closeAfterSelect: true,
             valueField: 'id',
-            labelField: 'title'
+            searchField: 'text'
         });
 
         this.select.on('change', function(){
