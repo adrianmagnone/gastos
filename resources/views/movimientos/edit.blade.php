@@ -44,6 +44,7 @@
         $("#select_categoria").MegaSearch({
             titulo: "Seleccionar categoria",
             field: "categoria",
+            focusSearch: true,
             atributoDescripcion : false,
             onElementoSeleccionado: function(dataRow){
                 $("#categoria_description").val( dataRow.nombre );
