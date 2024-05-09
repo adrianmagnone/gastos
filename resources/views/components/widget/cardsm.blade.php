@@ -4,7 +4,7 @@
             <a href="{{ route($route) }}">
                 <div class="row align-items-center">
                     <div class="col-auto">
-                        <span class="bg-primary text-white avatar">
+                        <span class="@if (isset($bg)) bg-{{ $bg }} @else bg-primary @endif text-white avatar">
                             <i class="icon ti {{ $icon }}"></i>
                         </span>
                     </div>
