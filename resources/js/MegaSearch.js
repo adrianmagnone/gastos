@@ -11,6 +11,7 @@
         validarAntesAbrir: function(){
             return true;
         },
+        focusSearch: false,
         onElementoSeleccionado: false,
         atributoId: true,
         atributoDescripcion: true,
@@ -62,12 +63,16 @@
                         $("#resultado_" + id).MegaDatatable(settings.dataTableOptions);
                     }
 
-
                     $("#resultado_" + id +" tbody").on("click", "tr", function () {
                         var dataRow = $table.MegaDatatable("row", this);
 
                         elementoSeleccionado(settings, dataRow);
                     } );
+                });
+
+                $(settings.id_div_principal).on("shown.bs.modal", function (e) {
+                    if (settings.focusSearch)
+                        $('.search-form-control').focus().select();
                 });
 
                 $(settings.id_div_principal).on("hide.bs.modal", function (e) {
