@@ -22,7 +22,13 @@
             language_zeroRecord: false,
             language_emptyTable: false,
             onDraw: false,
-            footerCallback: false
+            footerCallback: false,
+            keys: false,
+            scrollY: "",
+            scrollCollapse: true,
+            search: {
+                return: true
+            }
         };
 
     var metodos = {
@@ -96,15 +102,18 @@
 
                 var dataTable = $this.DataTable({
                     pageLength: settings.pageLength,
-                    keys: false,
+                    keys: settings.keys,
                     stateSave: true,
                     processing: true,
                     serverSide: true,
                     searchDelay: 350,
                     responsive: false,
+                    scrollY: settings.scrollY,
+                    scrollCollapse: settings.scrollCollapse,
                     dom: settings.dom,
                     deferLoading: settings.deferLoading,
                     order: settings.defaultOrder,
+                    search: settings.search,
                     ajax: {
                         url: settings.ajaxUrl,
                         data: function ( d ) {

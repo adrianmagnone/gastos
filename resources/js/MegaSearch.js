@@ -15,7 +15,11 @@
         onElementoSeleccionado: false,
         atributoId: true,
         atributoDescripcion: true,
-        dataTableOptions: {}
+        dataTableOptions: {
+            keys: true,
+            scrollCollapse: true,
+            scrollY: '50vh'
+        }
     };
 
     var metodos = {
@@ -28,6 +32,9 @@
 
                 settings.id_div_principal = "#modal_" + id;
                 settings.dataTableOptions.acciones = false;
+                settings.dataTableOptions.keys = true;
+                settings.dataTableOptions.scrollCollapse = false;
+                settings.dataTableOptions.scrollY = '50vh';
 
                 if (settings.field)
                 {
@@ -60,7 +67,7 @@
                     }
                     else
                     {
-                        $("#resultado_" + id).MegaDatatable(settings.dataTableOptions);
+                        $table.MegaDatatable(settings.dataTableOptions);
                     }
 
                     $("#resultado_" + id +" tbody").on("click", "tr", function () {
@@ -74,6 +81,8 @@
                     if (settings.focusSearch)
                         $('.search-form-control').focus().select();
                 });
+
+                $('.search-form-control').on('blur', () => $table.focus());
 
                 $(settings.id_div_principal).on("hide.bs.modal", function (e) {
                     $("#resultado_" + id +" tbody").off("click", "tr");
