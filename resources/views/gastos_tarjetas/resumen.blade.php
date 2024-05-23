@@ -33,9 +33,11 @@
 		$tabla.MegaDatatable({
 			pageLength: 100,
 			dom: "rt",
+			scrollX: true,
 			ajaxUrl: "{{ asset('resumen_tarjetas_data') }}",
 			columns: "fecha|descripcion~f|total|a|b~f|c~f|d~f|e~f|f~f|g~f|h~f|i~f|j~f|k~f|l~f",
 			columnDefs: [
+				{ data: "descripcion",className: "text-nowrap" },
 				{ data: "total",      className: "text-primary text-end"    },
 				{ data: "a",          className: "text-end"    },
 				{ data: "b",          className: "text-end"    },
@@ -104,15 +106,14 @@
 		{
 			let value = this[prop];
 
-			return '$ ' + this.fmt.format(value.toFixed(2));
+			return '<span class="text-nowrap">$ ' + this.fmt.format(value.toFixed(2)) + '</span>';
 		}
-
 
 		getDeuda()
 		{
 			let deuda = this.a + this.b + this.c + this.d + this.e + this.f + this.g + this.h + this.i + this.j + this.k + this.l;
 
-			return '<span class="text-danger">$ ' + this.fmt.format(deuda.toFixed(2)) + '</span>';
+			return '<span class="text-danger text-nowrap">$ ' + this.fmt.format(deuda.toFixed(2)) + '</span>';
 		}
 
 		hasValue(prop)
