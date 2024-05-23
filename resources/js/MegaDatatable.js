@@ -24,6 +24,7 @@
             onDraw: false,
             footerCallback: false,
             keys: false,
+            scrollX: false,
             scrollY: "",
             scrollCollapse: true,
             search: {
@@ -108,6 +109,7 @@
                     serverSide: true,
                     searchDelay: 350,
                     responsive: false,
+                    scrollX: settings.scrollX,
                     scrollY: settings.scrollY,
                     scrollCollapse: settings.scrollCollapse,
                     dom: settings.dom,
