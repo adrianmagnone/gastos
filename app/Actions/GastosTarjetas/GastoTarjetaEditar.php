@@ -22,6 +22,21 @@ class GastoTarjetaEditar extends EditAction
         $this->deletedMessage = '';
     }
 
+    protected function _createModel()
+    {
+        $hoy = MiDate::object();
+
+        if ($hoy->day < 23)
+            $periodo = MiDate::object('first day of next month');
+        else
+            $periodo = MiDate::object('first day of +2 month');
+
+        $compra = new $this->model;
+        $compra->periodoInicial = $periodo->format('Y-m-d');
+
+        return $compra;
+    }
+
     protected function aditionalDataForEdit(&$entidad = null)
     {
         return [
