@@ -143,7 +143,7 @@
 
     @if ($widLiquidacion)
     <x-widget.cardsm 
-      md="6" xl="3"
+      md="6" xl="3" bg="danger"
       route="pagos_tarjetas"
       icon="ti-credit-card-filled"
       :titulo="$widLiquidacion->periodo_format . ' - ' . $widLiquidacion->total_pagado_format"
@@ -154,7 +154,7 @@
     <div class="col-md-6 col-xl-6">
     </div>
 
-    <div class="col-lg-6 col-xl-4">
+    <div class="col-lg-6 col-xl-6">
         <div class="card">
         <div class="card-body">
             <h3 class="card-title">Mis Movimientos</h3>
@@ -164,7 +164,17 @@
         </div>
     </div>
 
-    <div class="col-lg-6 col-xl-4">
+    <div class="col-lg-6 col-xl-6">
+      <div class="card">
+      <div class="card-body">
+          <h3 class="card-title">Saldos Mensuales</h3>
+          <div id="chart-mis-saldos">
+          </div>
+      </div>
+      </div>
+  </div>
+
+    <div class="col-lg-6 col-xl-6">
         <div class="card">
         <div class="card-body">
             <h3 class="card-title">Deuda Tarjetas</h3>
@@ -238,15 +248,13 @@
                     show: false,
                 },
                 type: 'string',
-                
-
             },
             yaxis: {
                 labels: {
                     padding: 4
                 },
             },
-            labels: ["DIC 23", "ENE 24", "FEB 24", "MAR 24", "ABR 24", "MAY 24"],
+            labels: ["Jun 23","Jul 23","Ago 23","Sep 23","Oct 23","Nov 23","Dic 23", "Ene 24", "Feb 24", "Mar 24", "Abr 24", "May 24"],
             colors: [tabler.getColor("primary"), tabler.getColor("red")],
             legend: {
                 show: false,
@@ -254,5 +262,78 @@
         });
         chart8.render();
     });
-    </script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+      	window.ApexCharts && (new ApexCharts(document.getElementById('chart-mis-saldos'), {
+      		chart: {
+      			type: "line",
+      			fontFamily: 'inherit',
+      			height: 240,
+      			parentHeightOffset: 0,
+      			toolbar: {
+      				show: false,
+      			},
+      			animations: {
+      				enabled: false
+      			},
+      		},
+      		fill: {
+      			opacity: 1,
+      		},
+      		stroke: {
+      			width: 2,
+      			lineCap: "round",
+      			curve: "smooth",
+      		},
+      		series: [{
+      			name: "Saldo Mensual",
+      			data: [296043.48,21792.67,280639.06,-49090.32,272258.29,345324.57,-164670.47, 194514.36, -13549.13, -209744.42, 34082.17, 105469.92]
+      		}],
+      		tooltip: {
+      			theme: 'dark'
+      		},
+      		grid: {
+      			padding: {
+      				top: -20,
+      				right: 0,
+      				left: -4,
+      				bottom: -4
+      			},
+      			strokeDashArray: 4,
+      		},
+      		xaxis: {
+      			labels: {
+      				padding: 0,
+      			},
+      			tooltip: {
+      				enabled: false
+      			},
+      			type: 'datetime',
+      		},
+      		yaxis: {
+      			labels: {
+      				padding: 4
+      			},
+      		},
+          labels: [
+            "2023-06-01",
+            "2023-07-01",
+            "2023-08-01",
+            "2023-09-01",
+            "2023-10-01",
+            "2023-11-01",
+            "2023-12-01",
+            "2024-01-01",
+            "2024-02-01",
+            "2024-03-01",
+            "2024-04-01",
+            "2024-05-01"
+          ],
+      		colors: [tabler.getColor("primary")],
+      		legend: {
+      			show: false,
+      		},
+      	})).render();
+      });
+  </script>
   @endsection
