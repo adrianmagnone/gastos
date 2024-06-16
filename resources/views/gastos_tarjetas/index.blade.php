@@ -22,7 +22,7 @@
 @endsection
 
 @section('ListBody')
-<x-list.table columns="Fecha|Descripción|Categoria|Total|Importe Cuota|Cuotas|Pendientes" acciones="1" />
+<x-list.table columns="Fecha|Descripción|Categoria|Total|Importe Cuota|Cuotas|Pendientes" acciones="1" :id="false"/>
 @endsection
 
 @section('ListBundles')
@@ -40,7 +40,7 @@
 			ajaxUrl: "{{ asset('gastos_tarjetas_data') }}",
 			editUrl: "{{ asset('gasto_tarjeta/editar') }}",
 			deleteUrl: "{{ asset('gasto_tarjeta/borrar') }}",
-			columns: "id|fecha|descripcion~f|categoria|total|importe_cuota~f|cuotas|pendientes|edit~f",
+			columns: "fecha|descripcion~f|categoria|total|importe_cuota~f|cuotas|pendientes|edit~f",
 			columnDefs: [
 				{ data: "cuotas",         className: "text-center" },
 				{ data: "importe_cuota",  className: "text-end"    },
