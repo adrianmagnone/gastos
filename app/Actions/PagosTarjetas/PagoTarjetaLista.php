@@ -26,7 +26,7 @@ class PagoTarjetaLista extends SelectAction
     protected function setFieldSustitute()
     {
         return [
-            'pendientes' => 'cuotasPendientes'
+            'periodo' => 'periodoPago'
         ];
     }
 
