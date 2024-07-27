@@ -73,7 +73,7 @@ class wrapSelectTag
             closeAfterSelect: false,
             valueField:  'id',
             labelField:  'title',
-            searchField: 'title',
+            searchField: 'text',
             maxOptions: 1000,
         });
 
