@@ -40,11 +40,11 @@ class MovimientoFondoImputar extends EditAction
             {
                 $listaImputaciones[] = [
                     'id'         => $entidadImputar->id,
-                    'importe'    => Formatter::decimalNumber($entidadImputar->saldo),
+                    'importe'    => Formatter::money($entidadImputar->saldo),
                     'concepto'   => $entidadImputar->nombre_concepto . ' ' . $entidadImputar->descripcion,
                     'fecha'      => $entidadImputar->fecha_format,
-                    'imputacion' => Formatter::decimalNumber($saldo),
-                    'saldo'      => Formatter::decimalNumber($entidadImputar->saldo - $saldo),
+                    'imputacion' => Formatter::money($saldo),
+                    'saldo'      => Formatter::money($entidadImputar->saldo - $saldo),
                 ];
                 $saldo = 0;
             }
@@ -52,11 +52,11 @@ class MovimientoFondoImputar extends EditAction
             {
                 $listaImputaciones[] = [
                     'id'         => $entidadImputar->id,
-                    'importe'    => Formatter::decimalNumber($entidadImputar->saldo),
+                    'importe'    => Formatter::money($entidadImputar->saldo),
                     'fecha'      => $entidadImputar->fecha_format,
                     'concepto'   => $entidadImputar->nombre_concepto . ' ' . $entidadImputar->descripcion,
-                    'imputacion' => Formatter::decimalNumber($entidadImputar->saldo),
-                    'saldo'      => Formatter::decimalNumber(0),
+                    'imputacion' => Formatter::money($entidadImputar->saldo),
+                    'saldo'      => Formatter::money(0),
                 ];
                 $saldo -= $entidadImputar->saldo;
             }
@@ -66,7 +66,14 @@ class MovimientoFondoImputar extends EditAction
 
         return [
             'imputaciones' => $listaImputaciones,
-            'saldo'        => Formatter::decimalNumber($saldo),
+            'saldo'        => Formatter::money($saldo),
+        ];
+    }
+
+    protected function prepareForValidation()
+    {
+        return [
+            'saldo' => $this->toDecimal('saldo')
         ];
     }
 
@@ -90,7 +97,9 @@ class MovimientoFondoImputar extends EditAction
         {
             $movimiento = MovimientoFondo::find($imputar['id']);
 
-            $movimiento->saldo -= $imputar['imputar'];
+            $imputar = $this->valueToDecimal($imputar['imputar']);
+
+            $movimiento->saldo -= (float)$imputar;
 
             $movimiento->save();
         }

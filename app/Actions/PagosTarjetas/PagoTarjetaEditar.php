@@ -32,6 +32,15 @@ class PagoTarjetaEditar extends EditAction
         ];
     }
 
+    protected function prepareForValidation()
+    {
+        return [
+            'totalCuotas' => $this->toDecimal('totalCuotas'),
+            'totalPagado' => $this->toDecimal('totalPagado'),
+            'totalSeguros' => $this->toDecimal('totalSeguros')
+        ];
+    }
+
     public function rules(): array
     {
         return [

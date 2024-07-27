@@ -22,7 +22,7 @@
 <div class="row">
     <div class="col-6">
         <h3>Detalle de Movimientos</h3>
-        <x-list.table columns="Fecha|Concepto|Descripción|Importe" acciones="2" :id="false"/>
+        <x-list.table columns="Fecha|Concepto - Descripción|Importe" acciones="2" :id="false"/>
     </div>
 
     <div class="col-6">
@@ -75,7 +75,7 @@
             pageLength: 100,
 			dom: "rt",
 			ajaxUrl: "{{ asset('resumen_fondo_data') }}",
-			columns: "fecha~f|concepto~f|descripcion~f|importe~f|tipo~f|imputar~f",
+			columns: "fecha~f|descripcion_completa~f|importe~f|tipo~f|imputar~f",
             createdRow: function( row, data, dataIndex ) {
     			if ( data.futuro == 1 ) 
       				$(row).addClass( 'text-muted' );

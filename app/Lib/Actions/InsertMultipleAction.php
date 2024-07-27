@@ -15,6 +15,11 @@ class InsertMultipleAction extends EditAction
 
         $this->currentAction = self::INSERTANDO;
 
+        $newData = $this->prepareForValidation();
+
+        if (\is_array($newData))
+            $this->request->merge($newData);
+
         $validated = $this->request->validate($this->rules());
 
         $records = $this->getRecords();
@@ -46,6 +51,11 @@ class InsertMultipleAction extends EditAction
         $resultado = false;
 
         $this->currentAction = self::INSERTANDO;
+
+        $newData = $this->prepareForValidation();
+
+        if (\is_array($newData))
+            $this->request->merge($newData);
 
         $validated = $this->request->validate($this->rules());
 

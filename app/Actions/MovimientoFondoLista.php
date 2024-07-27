@@ -49,6 +49,7 @@ class MovimientoFondoLista extends SelectAction
         $record->fecha    = MiDate::toFormat($modelData->fecha,'d/m/Y');
         $record->concepto = $modelData->nombre_concepto;
         $record->descripcion = $modelData->descripcion;
+        $record->descripcion_completa = $modelData->nombre_concepto . ' - ' . $modelData->descripcion;
         $record->importe  = Formatter::moneyArg($modelData->importe);
         $record->saldo    = Formatter::moneyArg($modelData->saldo);
         $record->tipo     = $modelData->tipo;

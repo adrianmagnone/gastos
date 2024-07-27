@@ -29,6 +29,13 @@ class MantenimientoVehiculoEditar extends EditAction
         ];
     }
 
+    protected function prepareForValidation()
+    {
+        return [
+            'importe' => $this->toDecimal('importe')
+        ];
+    }
+
     public function rules(): array
     {
         return [

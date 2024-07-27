@@ -31,6 +31,13 @@ class MovimientoFondoEditar extends InsertMultipleAction
         ];
     }
 
+    protected function prepareForValidation()
+    {
+        return [
+            'importe' => $this->toDecimal('importe')
+        ];
+    }
+
     public function rules(): array
     {
         return [

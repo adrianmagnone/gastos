@@ -55,7 +55,7 @@ class MovimientoFondo extends Model
     public function importeFormat(): Attribute
     {
         return Attribute::make(
-            get: fn () => Formatter::decimalNumber($this->importe)
+            get: fn () => Formatter::money($this->importe)
         );
     }
 

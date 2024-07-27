@@ -70,7 +70,7 @@ class wrapMoney
     {
         this.textBox = $(selector);
 
-        this.textBox.mask("00000000.00", {reverse: true, placeholder: "0.00" });
+        this.textBox.mask("00.000.000,00", {reverse: true, placeholder: "0,00" });
 
         this.textBox.on('change', function() {
 

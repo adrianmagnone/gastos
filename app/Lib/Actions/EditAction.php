@@ -62,6 +62,11 @@ class EditAction
         {
             $this->currentAction = self::INSERTANDO;
 
+            $newData = $this->prepareForValidation();
+
+            if (\is_array($newData))
+                $this->request->merge($newData);
+
             $validated = $this->request->validate($this->rules());
 
             $record = $this->getRecord();
@@ -104,6 +109,11 @@ class EditAction
         return new $this->model;
     }
 
+    protected function prepareForValidation()
+    {
+        return false;
+    }
+
     protected function aditionalDataForEdit(&$entidad = null)
     {
         return [];
@@ -118,6 +128,11 @@ class EditAction
     protected function update($id)
     {
         $this->currentAction = self::EDITANDO;
+
+        $newData = $this->prepareForValidation();
+
+        if (\is_array($newData))
+            $this->request->merge($newData);
 
         $validated = $this->request->validate($this->rules());
 
@@ -172,6 +187,18 @@ class EditAction
         $value = $this->request->{$name};
 
         return ($value) ? (int)$value : null;
+    }
+
+    public function toDecimal(string $name) : mixed
+    {
+        $value = $this->request->{$name};
+
+        return ($value) ? \trim(\str_replace (',', '.', \str_replace('.', '', $value))) : null;
+    }
+
+    public function valueToDecimal(mixed $value) : mixed
+    {
+        return ($value) ? \trim(\str_replace (',', '.', \str_replace('.', '', $value))) : null;
     }
 
     public function valueOrNull(string $name) : mixed

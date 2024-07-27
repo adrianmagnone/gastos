@@ -38,6 +38,13 @@ class MovimientoEditar extends EditAction
         return $model;
     }
 
+    protected function prepareForValidation()
+    {
+        return [
+            'importe' => $this->toDecimal('importe')
+        ];
+    }
+
     public function rules(): array
     {
         return [

@@ -45,6 +45,13 @@ class GastoTarjetaEditar extends EditAction
         ];
     }
 
+    protected function prepareForValidation()
+    {
+        return [
+            'total' => $this->toDecimal('total')
+        ];
+    }
+
     public function rules(): array
     {
         return [

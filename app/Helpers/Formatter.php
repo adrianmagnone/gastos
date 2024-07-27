@@ -12,6 +12,11 @@ class Formatter
         return $formatter->format($value);
     }
 
+    public static function money($value) : string
+    {
+        return \number_format($value, 2, ',', '.'); 
+    }
+
     public static function decimalNumber($value) 
     {
         return number_format($value, 2, '.', ''); 
