@@ -20,6 +20,8 @@ use App\Http\Controllers\ResumenFondoController;
 use App\Http\Controllers\MantenimientoVehiculosController;
 use App\Http\Controllers\VehiculosController;
 
+use App\Http\Controllers\CuentasController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -151,3 +153,11 @@ Route::get('vehiculos/excel',                   [VehiculosController::class, 'to
 Route::get('vehiculo/nuevo',                    [VehiculosController::class, 'create']);
 Route::post('vehiculo/guardar',                 [VehiculosController::class, 'store'])->name('vehiculo.guardar');
 Route::get('vehiculo/editar/{id}',              [VehiculosController::class, 'edit']);
+
+
+// FACTURACION ----------------------------------------------------- 
+Route::get('cuentas',                           [CuentasController::class, 'index'])->name('cuentas');
+Route::get('cuentas_data/{id?}',                [CuentasController::class, 'getData']);
+Route::get('cuenta/nueva',                      [CuentasController::class, 'create']);
+Route::post('cuenta/guardar',                   [CuentasController::class, 'store'])->name('cuenta.guardar');
+Route::get('cuenta/editar/{id}',                [CuentasController::class, 'edit']);

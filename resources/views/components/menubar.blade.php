@@ -108,6 +108,27 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
             <span class="nav-link-icon d-md-none d-lg-inline-block">
+              <i class="icon ti ti-file-dollar"></i>
+            </span>
+            <span class="nav-link-title">
+              Facturacion
+            </span>
+          </a>
+          <div class="dropdown-menu">
+            <div class="dropdown-menu-columns">
+              <div class="dropdown-menu-column">
+                <a class="dropdown-item" href="{{ route('cuentas') }}">Cuentas</a>
+                <a class="dropdown-item" href="#">Cuenta Corriente</a>
+                {{-- <a class="dropdown-item" href="{{ route('facturacion') }}">Facturacion</a> --}}
+                {{-- <a class="dropdown-item" href="{{ route('monotriburo') }}">Monotributo</a> --}}
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
+            <span class="nav-link-icon d-md-none d-lg-inline-block">
               <i class="icon ti ti-car"></i>
             </span>
             <span class="nav-link-title">
