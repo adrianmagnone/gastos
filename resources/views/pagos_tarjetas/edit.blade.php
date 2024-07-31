@@ -18,9 +18,9 @@
     <div class="row">
         <div class="col-8"></div>
 
-        <x-form.money col="2" label="Total de Seguros" id="seguros" field="totalSeguros" id="importeSeguros" value="0.00" />
+        <x-form.money col="2" label="Total de Seguros" id="seguros" field="totalSeguros" id="importeSeguros" value="0,00" />
 
-        <x-form.money col="2" label="Total de Cuotas" id="cuotas" field="totalCuotas"  id="importeCuotas" value="0.00" />
+        <x-form.money col="2" label="Total de Cuotas" id="cuotas" field="totalCuotas"  id="importeCuotas" value="0,00" />
     </div>
 
     <div class="row">
@@ -83,7 +83,7 @@
                 { key: "periodo",     control: periodo       },
 			],
 			onDraw: function() {
-				$(".pagar").mask("#0.00", {reverse: true, placeholder: "0.00" });
+				$(".pagar").mask("#.##0,00", {reverse: true, placeholder: "0,00" });
 				objPago.sumarMarcas()
 			}
 		});
@@ -98,6 +98,8 @@
 			this.cantidad = 0;
 			this.importe  = 0;
             this.textImporte = $("#importeCuotas");
+
+			this.USDollar = new Intl.NumberFormat('es-AR', {minimumFractionDigits: 2});
 		}
 
         sumarMarcas()
@@ -114,7 +116,7 @@
 
                 if (this.checked)
 				{
-					let valorCargado = parseFloat(controlImporte.val());
+					let valorCargado = parseFloat(controlImporte.cleanVal() / 100);
 					
 					self.cantidad++;
 					
@@ -127,11 +129,13 @@
 				{
 					row.classList.remove("bg-blue-lt");
 				}
-				
-                controlImporte.attr("disabled", ! this.checked);
+
+				controlImporte.attr("disabled", ! this.checked);
 			});
 
-            self.textImporte.val(self.importe.toFixed(2));
+			//console.log(`The formated version of ${self.importe} is ${self.USDollar.format(self.importe)}`);
+
+            self.textImporte.val(self.USDollar.format(self.importe));
 		};
     }
 </script>

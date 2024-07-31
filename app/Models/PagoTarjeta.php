@@ -105,7 +105,7 @@ class PagoTarjeta extends Model
     public function totalPagadoEdit(): Attribute
     {
         return Attribute::make(
-            get: fn () => Formatter::decimalNumber($this->totalPagado)
+            get: fn () => Formatter::money($this->totalPagado)
         );
     }
 

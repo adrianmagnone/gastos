@@ -79,14 +79,14 @@ class CompraTarjeta extends Model
     public function importeCuotaEdit(): Attribute
     {
         return Attribute::make(
-            get: fn () => Formatter::decimalNumber($this->importeCuota)
+            get: fn () => Formatter::money($this->importeCuota)
         );
     }
 
     public function totalEdit(): Attribute
     {
         return Attribute::make(
-            get: fn () => Formatter::decimalNumber($this->total)
+            get: fn () => Formatter::money($this->total)
         );
     }
 }

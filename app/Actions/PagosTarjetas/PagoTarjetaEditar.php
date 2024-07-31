@@ -77,7 +77,7 @@ class PagoTarjetaEditar extends EditAction
             $detalle = [
                 'pago_id'   => $entidad->id,
                 'compra_id' => $id,
-                'importe'   => $this->pagar[$id],
+                'importe'   => $this->valueToDecimal($this->pagar[$id]),
             ];
 
             DetallePagoTarjeta::create($detalle);
