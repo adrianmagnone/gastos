@@ -46,8 +46,8 @@
         let objPago     = new Pago(),
             $tabla      = $("#grid"),
             fecha       = new wrapCalendar('fecha'),
-			seguros     = new wrapMoney("#seguros", null),
-			cuotas      = new wrapMoney("#cuotas", null),
+			seguros     = new wrapMoney("#importeSeguros", null),
+			cuotas      = new wrapMoney("#importeCuotas", null),
 			total       = new wrapMoney("#total", null),
             periodo     = new wrapCalendar('periodo', () => $tabla.MegaDatatable("reload") ),
             tarjeta     = new wrapSelect('#tarjeta',  () => $tabla.MegaDatatable("reload")  );
