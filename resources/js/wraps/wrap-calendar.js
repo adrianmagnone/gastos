@@ -2,6 +2,7 @@ class wrapCalendar
 {
 	constructor(selector, functionChaged)
 	{
+        this.formatter = new Intl.DateTimeFormat('es-AR', { day: '2-digit', month: '2-digit', year: 'numeric' });
         this.currentValue = '';
         this.functionChaged = functionChaged;
         this.date = new Litepicker({
@@ -51,7 +52,7 @@ class wrapCalendar
         {
             if (Object.prototype.toString.call(fecha) == "[object Object]" && typeof fecha.getMonth == "function")
             {
-                resultado = fecha.dateInstance.toLocaleDateString();
+                resultado = this.formatter.format(fecha.dateInstance);
             }
         }
 
