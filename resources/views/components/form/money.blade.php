@@ -15,9 +15,12 @@
 
 	if (! $value)
 		$value = '0.00';
+
+	if (! isset($mb))
+		$mb = 3;
 @endphp
 
-<div @if (isset($mb)) class="mb-{{ $mb }} col-{{ $col }}" @else class="mb-3 col-{{ $col }}" @endif>
+<div class="mb-{{ $mb }} col-lg{{ $col }} col-md-{{ $col }} col-xs-12"">
 	@if (isset($label))
 		<label class="form-label col-lg-1 col-md-1 col-sm-1 col-xs-12 text-nowrap" for="{{ $field }}">
 			{{ $label }}

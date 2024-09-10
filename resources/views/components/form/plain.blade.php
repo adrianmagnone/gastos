@@ -1,4 +1,8 @@
-<div @if (isset($mb)) class="mb-{{ $mb }} col-{{ $col }}" @else class="mb-3 col-{{ $col }}" @endif>
+@php
+if (! isset($mb))
+	$mb = 3;
+@endphp
+<div class="mb-{{ $mb }} col-lg{{ $col }} col-md-{{ $col }} col-xs-12">
 	@if (isset($label))
     	<label class="form-label">{{ $label }}</label>
   	@endif
