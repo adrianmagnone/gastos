@@ -63,7 +63,8 @@ class ImportFileAction
             $this->processData($this->skipRows);
 
             $data = $this->aditionalDataForEdit($entidad);
-            $data['saveUrl'] = $this->urlSave;        
+            $data['data']      = $this->data;
+            $data['saveUrl']   = $this->urlSave;        
             $data['returnUrl'] = $this->urlList;
 
             return view($this->editView, $data);
@@ -106,10 +107,22 @@ class ImportFileAction
 
         $resultado = false;
 
+        $newData = $this->prepareForValidation();
+
+        if (\is_array($newData))
+            $this->request->merge($newData);
+
         $validated = $this->request->validate($this->rules());
 
         $records = $this->getRecords();
 
+        $resultado = $this->executeSaveOneByOne($records);
+
+        return $this->endUpdate($resultado);
+    }
+
+    protected function executeSaveOneByOne(&$records)
+    {
         DB::beginTransaction();
 
         try
@@ -125,14 +138,16 @@ class ImportFileAction
             } 
 
             DB::commit();
+            return true;
         }
         catch(\Throwable $th)
         {
             DB::rollback();
-            dd($th->getMessage());
-        }
 
-        return $this->endUpdate($resultado);
+            \Illuminate\Support\Facades\Log::error($th->getMessage());
+                
+            throw new \Exception("Ocurrio un error al guardar los datos.");
+        }
     }
 
     protected function _createModel()
@@ -174,6 +189,16 @@ class ImportFileAction
     public function rules(): array
     {
         return [];
+    }
+
+    protected function getRecords() : array
+    {
+        return [];
+    }
+
+    protected function prepareForValidation()
+    {
+        return false;
     }
 
     public function __get(string $name): mixed

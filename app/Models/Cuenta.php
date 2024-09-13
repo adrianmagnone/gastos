@@ -13,4 +13,9 @@ class Cuenta extends Model
         'nombre',
         'estado'
     ];
+
+    public static function activas()
+    {
+        return Cuenta::where('estado', 1)->get();
+    }
 }

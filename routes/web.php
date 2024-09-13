@@ -21,6 +21,7 @@ use App\Http\Controllers\MantenimientoVehiculosController;
 use App\Http\Controllers\VehiculosController;
 
 use App\Http\Controllers\CuentasController;
+use App\Http\Controllers\CuentasCorrientesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -161,3 +162,14 @@ Route::get('cuentas_data/{id?}',                [CuentasController::class, 'getD
 Route::get('cuenta/nueva',                      [CuentasController::class, 'create']);
 Route::post('cuenta/guardar',                   [CuentasController::class, 'store'])->name('cuenta.guardar');
 Route::get('cuenta/editar/{id}',                [CuentasController::class, 'edit']);
+
+
+Route::get('cuentas_corrientes',                     [CuentasCorrientesController::class, 'index'])->name('cuentas_corrientes');
+Route::get('cuentas_corrientes_data/{id?}',          [CuentasCorrientesController::class, 'getData']);
+Route::get('cuenta_corriente/importar_facturacion',  [CuentasCorrientesController::class, 'importFacturacion']);
+Route::post('cuenta_corriente/archivo_facturacion',  [CuentasCorrientesController::class, 'readFacturacion']);
+Route::post('cuenta_corriente/guardar_facturacion',  [CuentasCorrientesController::class, 'storeFacturacion']);
+Route::get('cuenta_corriente/importar_pagos',        [CuentasCorrientesController::class, 'importPagos']);
+Route::post('cuenta_corriente/archivo_pagos',        [CuentasCorrientesController::class, 'readPagos']);
+Route::post('cuenta_corriente/guardar_pagos',        [CuentasCorrientesController::class, 'storePagos']);
+
