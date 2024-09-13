@@ -30,26 +30,34 @@
 <script type="text/javascript">
     init = function($) {
 		let $tabla         = $("#grid"),
+		    saldoInicial   = 0,
+			fmtMoney       = new Intl.NumberFormat('es-AR', {minimumFractionDigits: 2});
 			selectCuenta   = new wrapSelect("#cuenta",  () => $tabla.MegaDatatable("reload")),
 			selectPersona  = new wrapSelect("#persona", () => $tabla.MegaDatatable("reload"));
 
 		$tabla.MegaDatatable({
 			dom: "rti",
 			ajaxUrl: "{{ asset('cuentas_corrientes_data') }}",
-			columns: "fecha|cuit|cliente|comprobante|debe|haber|saldo~f",
+			columns: "fecha|cuit~f|cliente~f|comprobante~f|debe_f~f|haber_f~f|saldo~f",
 			columnDefs: [
 				{ data: "debe",           className: "text-end"    },
 				{ data: "haber",          className: "text-end"    },
 				{ data: "saldo",          className: "text-end"    },
 				{
     				data: "saldo",
-    				render: ( data, type, row, meta ) => 0
+    				render: ( data, type, row, meta ) => {
+						saldoInicial = saldoInicial + (row.debe - row.haber)
+						return fmtMoney.format(saldoInicial);
+					}
   				}
 			],
 			stateSave: [
                 { key: "cuenta",       control: selectCuenta       },
 				{ key: "persona",      control: selectPersona      },
-			]
+			],
+			onDraw: function() {
+				saldoInicial = 0;
+			}
 		});
 	}
 </script>

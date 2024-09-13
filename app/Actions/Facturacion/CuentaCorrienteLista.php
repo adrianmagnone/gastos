@@ -48,8 +48,10 @@ class CuentaCorrienteLista extends SelectAction
         $record->cuit       = $modelData->identificadorComprador;
         $record->cliente    = $modelData->nombre_persona;
         $record->comprobante= $modelData->comprobante;
-        $record->debe       = Formatter::moneyArg($modelData->debe);
-        $record->haber      = Formatter::moneyArg($modelData->haber);
+        $record->debe_f     = Formatter::moneyArg($modelData->debe);
+        $record->haber_f    = Formatter::moneyArg($modelData->haber);
+        $record->debe       = $modelData->debe;
+        $record->haber      = $modelData->haber;
         
         return $record;
     }
