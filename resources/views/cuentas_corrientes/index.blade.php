@@ -43,13 +43,13 @@
 				{ data: "debe",           className: "text-end"    },
 				{ data: "haber",          className: "text-end"    },
 				{ data: "saldo",          className: "text-end"    },
-				{
-    				data: "saldo",
-    				render: ( data, type, row, meta ) => {
-						saldoInicial = saldoInicial + (row.debe - row.haber)
-						return fmtMoney.format(saldoInicial);
-					}
-  				}
+				// {
+    			// 	data: "saldo",
+    			// 	render: ( data, type, row, meta ) => {
+				// 		saldoInicial = saldoInicial + (row.debe - row.haber)
+				// 		return fmtMoney.format(saldoInicial);
+				// 	}
+  				// }
 			],
 			stateSave: [
                 { key: "cuenta",       control: selectCuenta       },

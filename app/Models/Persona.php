@@ -23,4 +23,9 @@ class Persona extends Model
     {
         return Persona::where('identificador', $id)->first();
     }
+
+    public static function allByAbrev()
+    {
+        return Persona::orderBy('abreviatura')->get();
+    }
 }

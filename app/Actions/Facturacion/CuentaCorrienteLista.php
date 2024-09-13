@@ -9,8 +9,11 @@ use App\Helpers\Formatter;
  
 class CuentaCorrienteLista extends SelectAction
 {
+    protected $saldo;
+
     function __construct()
     {
+        $this->saldo = 0;
         $this->viewList = 'cuentas_corrientes.index';
         parent::__construct(CuentaCorriente::class);
     }
@@ -34,7 +37,7 @@ class CuentaCorrienteLista extends SelectAction
     {
         return [
             'cuentas'  => \App\Models\Cuenta::activas(),
-            'personas' => \App\Models\Persona::all()
+            'personas' => \App\Models\Persona::allByAbrev()
         ];
     }
 
@@ -52,6 +55,10 @@ class CuentaCorrienteLista extends SelectAction
         $record->haber_f    = Formatter::moneyArg($modelData->haber);
         $record->debe       = $modelData->debe;
         $record->haber      = $modelData->haber;
+
+        $this->saldo = $this->saldo + ($modelData->debe - $modelData->haber);
+
+        $record->saldo      = Formatter::moneyArg($this->saldo);
         
         return $record;
     }

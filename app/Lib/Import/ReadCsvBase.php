@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Lib\Csv;
+namespace App\Lib\Import;
 
 trait ReadCsvBase
 {

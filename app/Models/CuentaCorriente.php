@@ -77,4 +77,19 @@ class CuentaCorriente extends Model
             get: fn () => ($this->columna == 'H') ? $this->importe : 0
         );
     }
+
+    public static function ultimoNumeroRecibo()
+    {
+        $ultimoRecibo = CuentaCorriente::where('tipoComprobante_id', 14)
+                                       ->where('puntoVenta', 1)
+                                       ->orderBy('numeroComprobante', 'desc')
+                                       ->first();
+
+        if ($ultimoRecibo)
+        {
+            return $ultimoRecibo->numeroComprobante;
+        }
+
+        return 0;
+    }
 }

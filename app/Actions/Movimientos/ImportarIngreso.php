@@ -11,12 +11,12 @@ use App\Models\Movimiento;
 
 class ImportarIngreso extends ImportFileAction
 {
-    use \App\Lib\Csv\ReadCsvBase;
+    use \App\Lib\Import\ReadCsvBase;
 
     function __construct()
     {
         $this->model = Movimiento::class;
-        $this->reader = \App\Lib\Excel\ReadCsvBase::class;
+        $this->reader = \App\Lib\Import\ReadCsvBase::class;
 
         $this->urlList   = route('movimientos');
         $this->urlImport = 'movimientos/lee_ingresos';
@@ -141,7 +141,7 @@ class ImportarIngreso extends ImportFileAction
         ];
     }
 
-    public function getRecords()
+    public function getRecords() : array
     {
         $records = [];
 
