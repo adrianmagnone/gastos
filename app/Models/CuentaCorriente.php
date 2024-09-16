@@ -64,6 +64,20 @@ class CuentaCorriente extends Model
         );
     }
 
+    public function importeFormat(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => Formatter::money($this->importe)
+        );
+    }
+
+    public function saldoFormat(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => Formatter::money($this->saldo)
+        );
+    }
+
     public function debe(): Attribute
     {
         return Attribute::make(
@@ -86,10 +100,27 @@ class CuentaCorriente extends Model
                                        ->first();
 
         if ($ultimoRecibo)
-        {
             return $ultimoRecibo->numeroComprobante;
-        }
 
         return 0;
     }
+
+    public static function debeConSaldo($cuenta, $persona)
+    {
+        return CuentaCorriente::where('cuenta_id', $cuenta)
+                              ->where('persona_id', $persona)  
+                              ->where('columna', 'D')
+                              ->where('saldo', '>', 0)
+                              ->get();
+    }
+
+    public static function haberConSaldo($cuenta, $persona)
+    {
+        return CuentaCorriente::where('cuenta_id', $cuenta)
+                              ->where('persona_id', $persona)  
+                              ->where('columna', 'H')
+                              ->where('saldo', '>', 0)
+                              ->get();
+    }
+
 }

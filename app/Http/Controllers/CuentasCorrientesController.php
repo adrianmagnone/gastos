@@ -8,6 +8,7 @@ use Illuminate\Routing\Controller;
 use App\Actions\Facturacion\CuentaCorrienteLista;
 use App\Actions\Facturacion\CuentaCorrienteImportarFacturacion;
 use App\Actions\Facturacion\CuentaCorrienteImportarPagos;
+use App\Actions\Facturacion\CuentaCorrienteImputar;
 
 class CuentasCorrientesController extends Controller
 {
@@ -49,5 +50,16 @@ class CuentasCorrientesController extends Controller
     public function storePagos(Request $request, CuentaCorrienteImportarPagos $action)
     {
         return $action->runSaveOneByOne($request);
+    }
+
+
+    public function imput(CuentaCorrienteImputar $action, $id = null)
+    {
+        return $action->runForEdit($id);
+    }
+
+    public function storeImput(Request $request, CuentaCorrienteImputar $action)
+    {
+        return $action->runForSave($request);
     }
 }

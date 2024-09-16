@@ -173,3 +173,5 @@ Route::get('cuenta_corriente/importar_pagos',        [CuentasCorrientesControlle
 Route::post('cuenta_corriente/archivo_pagos',        [CuentasCorrientesController::class, 'readPagos']);
 Route::post('cuenta_corriente/guardar_pagos',        [CuentasCorrientesController::class, 'storePagos']);
 
+Route::get('cuenta_corriente/imputar/{id}',          [CuentasCorrientesController::class, 'imput']);
+Route::post('cuenta_corriente/imputacion',           [CuentasCorrientesController::class, 'storeImput'])->name('cuenta_corriente.imputar');
