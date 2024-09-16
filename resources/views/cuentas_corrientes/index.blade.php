@@ -50,8 +50,10 @@
 				{
     				data: "imputar",
     				render: function ( data, type, row, meta ) {
-						return renderTableCell.urlIconOrBlank({ condicion: row.saldo > 0, icono: 'dolar', titulo: 'Imputar', url: `cuenta_corriente/imputar/${row.id}` });
-                        
+						return renderTableCell.oneUrlIcon([
+							{ condicion: row.saldo > 0, icono: "dolar", titulo: "Imputar", url: `cuenta_corriente/imputar/${row.id}` },
+							{ condicion: row.saldo == 0, icono: "info",  titulo: "Ver Imputación", url: `cuenta_corriente/ver_imputacion/${row.id}`, color: "green" }
+						]);
     				}
   				}
 			],

@@ -62,4 +62,20 @@ class CuentasCorrientesController extends Controller
     {
         return $action->runForSave($request);
     }
+
+    public function viewImput($id = null)
+    {
+        $movimiento = \App\Models\CuentaCorriente::findOrFail($id);
+
+        $imputaciones = ($movimiento->columna == 'D')
+                            ? \App\Models\Imputacion::deDebe($movimiento->id)
+                            : \App\Models\Imputacion::deHaber($movimiento->id);
+
+
+        return view('cuentas_corrientes.viewimput')->with([
+            'entity'       => $movimiento,
+            'imputaciones' => $imputaciones,
+            'field'        => ($movimiento->columna == 'D') ? 'comprobanteHaber' : 'comprobanteDebe'
+        ]);
+    }
 }
