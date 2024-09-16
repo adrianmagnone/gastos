@@ -261,13 +261,20 @@ class SelectAction
             $options->desde_reg   = (int)$this->requestData['start'];
 
             $columns = $this->requestData['columns'];
-            $order   = $this->requestData['order'];
-            $search  = $this->requestData['search'];
+            $order   = isset($this->requestData['order'])  ? $this->requestData['order']  : false;
+            $search  = isset($this->requestData['search']) ? $this->requestData['search'] : [ 'value' => ''];
 
-            $options->orden = [
-                'field' => $columns[$order[0]['column']]['name'],
-                'dir'   => $order[0]['dir']
-            ];
+            if ($order)
+            {
+                $options->orden = [
+                    'field' => $columns[$order[0]['column']]['name'],
+                    'dir'   => $order[0]['dir']
+                ];
+            }
+            else
+            {
+                $options->orden = [];
+            }
             $options->filtro = [
                 'search' => $search['value'],
                 'custom' => [],
@@ -297,29 +304,32 @@ class SelectAction
     
     protected function orderLista($order)
     {
-        $columnaOrden = $order['field'];
-        if ( array_key_exists($columnaOrden, $this->fieldSustitute) )
-        {
-            $columnaOrden = $this->fieldSustitute[$columnaOrden];
-        }
-
         $ordenacion = [];
-
-        if (is_array($columnaOrden))
-        {
-            foreach ($columnaOrden as $col)
-            {
-                $ordenacion[] = [$col, $order['dir']];    
-            }
-        }
-        else
-        {
-            $ordenacion[] = [$columnaOrden, $order['dir']];
-        }
         
-        foreach ($this->aditionalOrder as $individualAditionalOrder)
+        if ($order)
         {
-            $ordenacion[] = [ $individualAditionalOrder['field'], $individualAditionalOrder['dir'] ];
+            $columnaOrden = $order['field'];
+            if ( array_key_exists($columnaOrden, $this->fieldSustitute) )
+            {
+                $columnaOrden = $this->fieldSustitute[$columnaOrden];
+            }
+
+            if (is_array($columnaOrden))
+            {
+                foreach ($columnaOrden as $col)
+                {
+                    $ordenacion[] = [$col, $order['dir']];    
+                }
+            }
+            else
+            {
+                $ordenacion[] = [$columnaOrden, $order['dir']];
+            }
+            
+            foreach ($this->aditionalOrder as $individualAditionalOrder)
+            {
+                $ordenacion[] = [ $individualAditionalOrder['field'], $individualAditionalOrder['dir'] ];
+            }
         }
 
         return $ordenacion;
