@@ -8,7 +8,7 @@ class CuentaCorrienteFiltro extends \App\Lib\Actions\FilterBase
 {
     protected function setFiltersKeys()
     {
-        return [ 'cuenta', 'persona' ];
+        return [ 'cuenta', 'persona', 'saldo' ];
     }
 
     protected function filtroCuenta(&$query, $value)
@@ -21,6 +21,17 @@ class CuentaCorrienteFiltro extends \App\Lib\Actions\FilterBase
         $query->where('persona_id', $value);
     }
 
+    protected function filtroSaldo(&$query, $value)
+    {
+        if ($value == 'S')
+        {
+            $query->where('saldo', '>', 0);
+        }
+        if ($value == 'N')
+        {
+            $query->where('saldo', 0);
+        }
+    }
 
     protected function filtroUso(&$query, $value)
     {

@@ -14,7 +14,8 @@
 @section('ListFilters')
 	<div class="row w-100">
 		<x-form.select col="3" label="Cuenta" field="cuenta_id" id="cuenta" value="" :options="$cuentas" fieldValue="id" fieldText="nombre" />
-		<x-form.select col="4" label="Cliente" field="cliente_id" id="persona" value="" :options="$personas" fieldValue="id" fieldText="abreviatura" />
+		<x-form.select col="4" label="Cliente" field="cliente_id" id="persona" value="" :options="$personas" fieldValue="id" fieldText="abreviatura" blankText="Todos" />
+		<x-form.select-by-state mb="1" col="2" id="saldo" label="Saldos" field="saldo" texts="Todos|Con Saldo|Sin Saldo"  value="T"/>
 	</div>
 @endsection
 
@@ -30,6 +31,7 @@
 <script type="text/javascript">
     init = function($) {
 		let $tabla         = $("#grid"),
+			selectSaldo    = new wrapSelect("#saldo",   () => $tabla.MegaDatatable("reload"))
 			selectCuenta   = new wrapSelect("#cuenta",  () => $tabla.MegaDatatable("reload")),
 			selectPersona  = new wrapSelect("#persona", () => $tabla.MegaDatatable("reload"));
 
@@ -56,6 +58,7 @@
 			stateSave: [
                 { key: "cuenta",       control: selectCuenta       },
 				{ key: "persona",      control: selectPersona      },
+				{ key: "saldo",        control: selectSaldo        },
 			]
 		});
 	}
