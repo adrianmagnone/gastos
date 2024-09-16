@@ -20,7 +20,7 @@
 @endsection
 
 @section('ListBody')
-<x-list.table columns="Fecha|Cuit|Cliente|Comprobante|Debe|Haber|Saldo|" acciones="1" :id="false"/>
+<x-list.table columns="Fecha|Cuit|Cliente|Comprobante|Debe|Haber|Saldo" acciones="1" :id="false"/>
 @endsection
 
 @section('ListBundles')
@@ -38,15 +38,15 @@
 		$tabla.MegaDatatable({
 			dom: "rti",
 			ajaxUrl: "{{ asset('cuentas_corrientes_data') }}",
-			columns: "fecha|cuit~f|cliente~f|comprobante~f|debe_f~f|haber_f~f|saldo_deuda~f|imputar~f",
+			columns: "fecha~=80px|cuit~f~=80px|cliente~f~=22%|comprobante~f|debe_f~f~=8%|haber_f~f~=8%|saldo_deuda~f~=8%|imputar~f",
 			createdRow: function( row, data, dataIndex ) {
     			if ( data.saldo == 0 ) 
       				$(row).addClass( 'text-muted' );
   			},
 			columnDefs: [
-				{ data: "debe",           className: "text-end"    },
-				{ data: "haber",          className: "text-end"    },
-				{ data: "saldo",          className: "text-end"    },
+				{ data: "debe_f",           className: "text-end"    },
+				{ data: "haber_f",          className: "text-end"    },
+				{ data: "saldo_deuda",      className: "text-end"    },
 				{
     				data: "imputar",
     				render: function ( data, type, row, meta ) {
