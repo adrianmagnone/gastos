@@ -26,10 +26,11 @@
             keys: false,
             scrollX: false,
             scrollY: "",
-            scrollCollapse: true,
+            scrollCollapse: false,
+            searchDelay: 400,
             search: {
                 return: true
-            }
+            },
         };
 
     var metodos = {
@@ -52,12 +53,18 @@
 
                     if (column.includes("~"))
                     {
-                        column = column.split("~");
+                        let col = column.split("~");
 
-                        columnData.name = column[0];
-                        columnData.data = column[0];
+                        columnData.name = col[0];
+                        columnData.data = col[0];
                         columnData.searchable = false;
-                        columnData.orderable  = (column[1].charAt(0) === "f" ? false : true);
+                        columnData.orderable  = (col[1].includes("f") ? false : true);
+                    }
+
+                    if (column.includes("="))
+                    {
+                        let widths = column.split("=");
+                        columnData.width = widths[1];
                     }
 
                     if (columnData.name === 'edit')
@@ -107,7 +114,7 @@
                     stateSave: true,
                     processing: true,
                     serverSide: true,
-                    searchDelay: 350,
+                    searchDelay: settings.searchDelay,
                     responsive: false,
                     scrollX: settings.scrollX,
                     scrollY: settings.scrollY,
