@@ -9,6 +9,7 @@ use App\Actions\Facturacion\CuentaCorrienteLista;
 use App\Actions\Facturacion\CuentaCorrienteImportarFacturacion;
 use App\Actions\Facturacion\CuentaCorrienteImportarPagos;
 use App\Actions\Facturacion\CuentaCorrienteImputar;
+use App\Actions\Facturacion\GastoEditar;
 
 class CuentasCorrientesController extends Controller
 {
@@ -77,5 +78,16 @@ class CuentasCorrientesController extends Controller
             'imputaciones' => $imputaciones,
             'field'        => ($movimiento->columna == 'D') ? 'comprobanteHaber' : 'comprobanteDebe'
         ]);
+    }
+
+    public function createGasto(GastoEditar $action, $id = null)
+    {
+        $action->setMovimiento($id);
+        return $action->runForCreate();
+    }
+
+    public function storeGasto(Request $request, GastoEditar $action)
+    {
+        return $action->runForSave($request);
     }
 }

@@ -176,3 +176,5 @@ Route::post('cuenta_corriente/guardar_pagos',        [CuentasCorrientesControlle
 Route::get('cuenta_corriente/imputar/{id}',          [CuentasCorrientesController::class, 'imput']);
 Route::post('cuenta_corriente/imputacion',           [CuentasCorrientesController::class, 'storeImput'])->name('cuenta_corriente.imputar');
 Route::get('cuenta_corriente/ver_imputacion/{id}',   [CuentasCorrientesController::class, 'viewImput']);
+Route::get('cuenta_corriente/crear_gasto/{id}',      [CuentasCorrientesController::class, 'createGasto']);
+Route::post('cuenta_corriente/guardar_gasto',        [CuentasCorrientesController::class, 'storeGasto'])->name('cuenta_corriente.guardar_gasto');

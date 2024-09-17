@@ -20,7 +20,7 @@
 @endsection
 
 @section('ListBody')
-<x-list.table columns="Fecha|Cuit|Cliente|Comprobante|Debe|Haber|Saldo" acciones="1" :id="false"/>
+<x-list.table columns="Fecha|Cuit|Cliente|Comprobante|Debe|Haber|Saldo" acciones="2" :id="false"/>
 @endsection
 
 @section('ListBundles')
@@ -38,7 +38,7 @@
 		$tabla.MegaDatatable({
 			dom: "rti",
 			ajaxUrl: "{{ asset('cuentas_corrientes_data') }}",
-			columns: "fecha~=80px|cuit~f~=80px|cliente~f~=22%|comprobante~f|debe_f~f~=8%|haber_f~f~=8%|saldo_deuda~f~=8%|imputar~f",
+			columns: "fecha~=80px|cuit~f~=80px|cliente~f~=22%|comprobante~f|debe_f~f~=8%|haber_f~f~=8%|saldo_deuda~f~=8%|imputar~f|gastos~f",
 			createdRow: function( row, data, dataIndex ) {
     			if ( data.saldo == 0 ) 
       				$(row).addClass( 'text-muted' );
@@ -54,6 +54,14 @@
 							{ condicion: row.saldo > 0, icono: "dolar", titulo: "Imputar", url: `cuenta_corriente/imputar/${row.id}` },
 							{ condicion: row.saldo == 0, icono: "info",  titulo: "Ver Imputación", url: `cuenta_corriente/ver_imputacion/${row.id}`, color: "green" }
 						]);
+    				}
+  				},
+				  {
+    				data: "gastos",
+    				render: function ( data, type, row, meta ) {
+						return renderTableCell.urlIconOrBlank(
+							{ condicion: row.debe > 0 && row.saldo > 0, icono: "dolar", titulo: "Gastos Administrativos", url: `cuenta_corriente/crear_gasto/${row.id}`, color: "red" }
+						);
     				}
   				}
 			],
