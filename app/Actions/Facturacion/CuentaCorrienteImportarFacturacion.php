@@ -103,11 +103,20 @@ class CuentaCorrienteImportarFacturacion extends ImportFileAction
 
                 $persona = Persona::create($recordPersona);
             }
+
+
+            $existeComprobante = CuentaCorriente::existe($persona->identificador, $idTipoComprobante, \substr($record, 11, 5), \substr($record, 16, 20));
+
+            if ($existeComprobante)
+            {
+                $confirmado = 0;
+                $observacion = 'El Comprobante ya ha sido cargado';
+            }
         }
 
         $this->data[] = [
             'confirmado'                 => $confirmado,
-            'observacion'                => '',
+            'observacion'                => $observacion,
             'fecha'                      => \substr($record, 0, 8),
             'fecha_f'                    => MiDate::fromFormatTo('Ymd', \substr($record, 0, 8), 'd/m/Y'),
             'tipoComprobante'            => $idTipoComprobante,

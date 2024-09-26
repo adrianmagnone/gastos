@@ -92,6 +92,15 @@ class CuentaCorriente extends Model
         );
     }
 
+    public static function existe($cuit, $tipo, $punto, $numero)
+    {
+        return CuentaCorriente::where('tipoComprobante_id', (int)$tipo)
+                              ->where('identificadorComprador', $cuit)
+                              ->where('puntoVenta', (int)$punto)
+                              ->where('numeroComprobante', (int)$numero)
+                              ->exists();
+    }
+
     public static function ultimoNumeroRecibo()
     {
         $ultimoRecibo = CuentaCorriente::where('tipoComprobante_id', config('define.comprobantes.recibos'))
