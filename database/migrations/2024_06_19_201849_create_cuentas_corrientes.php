@@ -13,13 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        // Schema::create('tipos_comprobantes', function (Blueprint $table) {
-        //     $table->id();
-        //     $table->string('descripcion');
-        //     $table->integer('codigoAfip')->index();
-        //     $table->integer('tipo')->nullable();
-        //     $table->timestamps();
-        // });
+        Schema::create('tipos_comprobantes', function (Blueprint $table) {
+            $table->id();
+            $table->string('descripcion');
+            $table->integer('codigoAfip')->index();
+            $table->integer('tipo')->nullable();
+            $table->timestamps();
+        });
 
         Schema::create('personas', function (Blueprint $table) {
             $table->id();
