@@ -12,8 +12,12 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <link rel="icon" href="{{ url('favicon.ico') }}" type="image/x-icon"/>
-    <link rel="shortcut icon" type="image/x-icon" href="{{ url('favicon.ico') }}" />
+
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url('apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url('favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url('favicon-16x16.png') }}">
+    <link rel="manifest" href="/site.webmanifest">
+    
     <title>{{ config('app.name') }} | @yield('PageTittle')</title>
     <!-- CSS files -->
     <x-bundle src="tabler" />
@@ -33,6 +37,7 @@
   <body >
     <div class="page page-center">
         @yield('BaseBody')
+        @include('layouts.footer')
     </div>
   </body>
 </html>
