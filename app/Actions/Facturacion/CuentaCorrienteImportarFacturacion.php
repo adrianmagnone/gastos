@@ -90,7 +90,7 @@ class CuentaCorrienteImportarFacturacion extends ImportFileAction
         }
         else
         {
-            $persona = Persona::findByIdFiscal((int)\substr($record, 58, 20));
+            $persona = Persona::findByIdFiscal(\substr($record, 58, 20));
 
             if (! $persona)
             {
@@ -98,7 +98,7 @@ class CuentaCorrienteImportarFacturacion extends ImportFileAction
                     'nombre'         => \substr($record, 78, 30),
                     'abreviatura'    => '',
                     'tipoDocumento'  => (int)\substr($record, 56, 2),
-                    'identificador'  => (int)\substr($record, 58, 20)
+                    'identificador'  => \substr($record, 58, 20)
                 ];
 
                 $persona = Persona::create($recordPersona);

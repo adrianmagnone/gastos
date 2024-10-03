@@ -19,6 +19,15 @@ class Persona extends Model
         'identificador'
     ];
 
+    public function abreviaturaCuit(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => ($this->abreviatura)
+                            ? "({$this->identificador}) " . $this->abreviatura
+                            : "({$this->identificador}) " . $this->nombre
+        );
+    }
+
     public static function findByIdFiscal($id)
     {
         return Persona::where('identificador', $id)->first();

@@ -14,8 +14,8 @@
 @section('ListFilters')
 	<div class="row w-100">
 		<x-form.select col="3" label="Cuenta" field="cuenta_id" id="cuenta" value="" :options="$cuentas" fieldValue="id" fieldText="nombre" />
-		<x-form.select col="4" label="Cliente" field="cliente_id" id="persona" value="" :options="$personas" fieldValue="id" fieldText="abreviatura" blankText="Todos" />
-		<x-form.select-by-state mb="1" col="2" id="saldo" label="Saldos" field="saldo" texts="Todos|Con Saldo|Sin Saldo"  value="T"/>
+		<x-form.select col="4" label="Cliente" field="cliente_id" id="persona" value="" :options="$personas" fieldValue="id" fieldText="abreviatura_cuit" blankText="Todos" />
+		<x-form.select-by-state mb="1" col="2" id="saldo" label="Saldos" field="saldo" texts="Todos|Con Saldo|Sin Saldo"  value="S"/>
 	</div>
 @endsection
 
@@ -37,6 +37,7 @@
 
 		$tabla.MegaDatatable({
 			dom: "rti",
+			pageLength: 1000,
 			ajaxUrl: "{{ asset('cuentas_corrientes_data') }}",
 			columns: "fecha~=80px|cuit~f~=80px|cliente~f~=22%|comprobante~f|debe_f~f~=8%|haber_f~f~=8%|saldo_deuda~f~=8%|imputar~f|gastos~f",
 			createdRow: function( row, data, dataIndex ) {
