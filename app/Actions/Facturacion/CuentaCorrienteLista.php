@@ -65,7 +65,10 @@ class CuentaCorrienteLista extends SelectAction
         $record->debe        = $modelData->debe;
         $record->haber       = $modelData->haber;
 
-        $this->saldo = $this->saldo + ($modelData->debe - $modelData->haber);
+        if ($modelData->debe)
+            $this->saldo += $modelData->saldo;
+        if ($modelData->haber)
+            $this->saldo -= $modelData->saldo;
 
         $record->saldo_deuda = Formatter::moneyArg($this->saldo);
         
