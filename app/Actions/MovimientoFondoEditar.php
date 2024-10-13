@@ -68,7 +68,7 @@ class MovimientoFondoEditar extends InsertMultipleAction
                 'tipo'        => $this->tipo,
                 'concepto_id' => $this->concepto_id,
                 'fondo_id'    => $this->fondo_id,
-                'descripcion' => ($cuotas == 1) ?  $this->descripcion : "{$this->descripcion} Cuota {$i}",
+                'descripcion' => ($cuotas == 1) ?  $this->descripcion : "{$this->descripcion} Cuota {$i} de {$cuotas}",
                 'importe'     => $importeCuota,
                 'saldo'       => $importeCuota,
             ];
