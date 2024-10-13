@@ -31,7 +31,7 @@
 
 		<span class="input-group-text">$</span>
 			
-		<input type="text" class="form-control text-end importe @if (isset($classesInput)) {{ $classesInput }} @endif" name="{{ $field }}" maxlength="100" value="{{ old($field, $value) }}" {!! $attrs !!} >
+		<input type="text" class="form-control text-end importe @if (isset($classesInput)) {{ $classesInput }} @endif" name="{{ $field }}" maxlength="100" value="{{ old($field, $value) }}" {!! $attrs !!} inputmode="numeric" >
 	</div>
 	@error($field)
 	<div class="invalid-feedback">{!! $message !!}</div>
