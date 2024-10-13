@@ -37,33 +37,15 @@
   <body class="layout-fluid @hasSection('BodyClass') @yield('BodyClass') @endif">
     <div class="page">
       <!-- Navbar -->
-      {{-- <header class="navbar navbar-expand-md navbar-dark navbar-overlap d-print-none">
+      <x-menubar />
+      {{-- <header class="navbar navbar-expand-md navbar-light d-none d-lg-flex d-print-none">
         <div class="container-xl">
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
-            <a href=".">
-              <img src="{{ url('img/logo_barra.png') }}" width="110" height="32" alt="Logo Mutual" class="navbar-brand-image">
-            </a>
-          </h1>
           <x-topbar />
-          
-          <x-menubar />
-          {{-- @if (Auth::check())
-            <x-menubar />
-          @endif 
         </div>
       </header> --}}
-      <x-menubar />
-      <header class="navbar navbar-expand-md navbar-light d-none d-lg-flex d-print-none">
-        <div class="container-xl">
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <x-topbar />
-        </div>
-      </header>
       <div class="page-wrapper">
           @yield('BaseBody')
           @include('layouts.footer')

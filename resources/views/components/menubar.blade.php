@@ -23,6 +23,25 @@
         </li>
 
         <li class="nav-item">
+          <a class="nav-link hide-theme-light" href="?theme=light" >
+            <span class="nav-link-icon d-md-none d-lg-inline-block">
+              <i class="icon ti ti-sun"></i>
+            </span>
+            <span class="nav-link-title">
+              Modo Claro
+            </span>
+          </a>
+          <a class="nav-link hide-theme-dark" href="?theme=dark" >
+            <span class="nav-link-icon d-md-none d-lg-inline-block">
+              <i class="icon ti ti-moon"></i>
+            </span>
+            <span class="nav-link-title">
+              Modo Oscuro
+            </span>
+          </a>
+        </li>
+
+        <li class="nav-item">
           <a class="nav-link" href="{{ url('movimiento/nuevo') }}" >
             <span class="nav-link-icon d-md-none d-lg-inline-block">
               <i class="icon ti ti-clipboard-plus"></i>
