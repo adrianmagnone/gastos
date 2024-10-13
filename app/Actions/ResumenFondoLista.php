@@ -16,6 +16,13 @@ class ResumenFondoLista extends SelectAction
         parent::__construct(MovimientoFondo::class);
     }
 
+    protected function setAditionalOrderFields()
+    {
+        return [
+            ['field' => 'id', 'dir'=> 'ASC']
+        ];
+    }
+
     protected function getQuery()
     {
         return $this->model
