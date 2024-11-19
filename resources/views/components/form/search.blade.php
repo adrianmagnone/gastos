@@ -6,11 +6,14 @@
 
 <div class="mb-{{ $mb }} col-lg{{ $col }} col-md-{{ $col }} col-xs-12">
     @if (isset($label))
-        <label class="form-label">{{ $label }}</label>
+        <label class="form-label">{{ $label }} @if (isset($key))<kbd>{{ $key }}</kbd>@endif</label>
     @endif
+    
     <div class="row gutters-xs">
+        
         <div class="col input-group" id="select_{{ $field }}">
             <input type="text" class="form-control" placeholder="<?php echo (isset($placeHolder)) ? $placeHolder : $tituloModal ?>" id="{{ $field }}_description" readonly tabindex="-1">
+            
             <button class="btn" type="button" data-bs-toggle="modal" data-bs-target="#modal_select_{{ $field }}" @if (isset($autoFocus) && ($autoFocus === true)) autofocus @endif>
                 <i class="ti ti-search"></i>
             </button>

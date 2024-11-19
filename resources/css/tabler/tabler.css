@@ -431,8 +431,8 @@ a > code {
 }
 
 kbd {
-  padding: 0.25rem 0.5rem;
-  font-size: var(--tblr-font-size-h5);
+  padding: 0.15rem 0.15rem;
+  font-size: var(--tblr-font-size-h6);
   color: var(--tblr-text-secondary-dark);
   background-color: var(--tblr-code-bg);
   border-radius: 2px;
@@ -24388,7 +24388,7 @@ kbd,
   display: inline-block;
   box-sizing: border-box;
   max-width: 100%;
-  font-size: var(--tblr-font-size-h5);
+  font-size: var(--tblr-font-size-h6);
   font-weight: var(--tblr-font-weight-medium);
   line-height: 1;
   vertical-align: baseline;
