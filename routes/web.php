@@ -46,8 +46,8 @@ Route::get('categorias',                        [CategoriasController::class, 'i
 Route::get('categorias_data/{id?}',             [CategoriasController::class, 'getData']);
 Route::get('categorias/excel',                  [CategoriasController::class, 'toExcel']);
 Route::get('categoria/nueva',                   [CategoriasController::class, 'create']);
-Route::get('categorias/ingresos',               [CategoriasController::class, 'selectIngresos']);
-Route::get('categorias/gastos',                 [CategoriasController::class, 'selectGastos']);
+Route::get('categorias/ingresos/{id?}',         [CategoriasController::class, 'selectIngresos']);
+Route::get('categorias/gastos/{id?}',           [CategoriasController::class, 'selectGastos']);
 Route::post('categoria/guardar',                [CategoriasController::class, 'store'])->name('categoria.guardar');
 Route::get('categoria/editar/{id}',             [CategoriasController::class, 'edit']);
 
