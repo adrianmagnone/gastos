@@ -13,7 +13,7 @@
 	<div class="row w-100">
 		<x-form.select mb="1" col="3" label="Tarjeta" field="tarjeta" id="tarjeta" value="" :options="$listaTarjetas" fieldValue="id" fieldText="nombre" />
 
-		<x-form.text mb="1" col="2" label="Año" field="anio" id="anio" value="" type="number" />
+		<x-form.text mb="1" col="2" label="Año" field="anio" id="anio" :value="$anio" type="number" />
 	</div>
 @endsection
 

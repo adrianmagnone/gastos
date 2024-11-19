@@ -23,6 +23,7 @@
                     <tr>
                         <th>Categoria</th>
                         <th>Descripcion</th>
+                        <th>Cuotas</th>
                         <th>Importe</th>
                     </tr>
                 </thead>
@@ -31,6 +32,7 @@
                     <tr>
                         <td>{{ $detalle->compra_categoria }}</td>
                         <td>{{ $detalle->compra_descripcion }}</td>
+                        <td>{{ $detalle->cantidad }}</td>
                         <td>{{ $detalle->importe_format }}</td>    
                     </tr>
                     @endforeach

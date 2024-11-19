@@ -47,7 +47,8 @@ class GastoTarjetaPendiente extends SelectAction
         $record->categoria   = $modelData->descripcion_categoria;
         $record->descripcion = $modelData->descripcion;
         $record->cuota       = ($modelData->cuotas + 1) - $modelData->cuotasPendientes . ' de ' . $modelData->cuotas;
-        $record->importe     = $modelData->importe_cuota_format;
+        $record->pendientes  = $modelData->cuotasPendientes;
+        $record->importe     = $modelData->importeCuota;
         $record->importe_real= $modelData->importe_cuota_edit;
         
         return $record;

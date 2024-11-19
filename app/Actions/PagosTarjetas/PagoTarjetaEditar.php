@@ -71,12 +71,13 @@ class PagoTarjetaEditar extends EditAction
         {
             $gasto = CompraTarjeta::find($id);
 
-            $gasto->cuotasPendientes -= 1;
+            $gasto->cuotasPendientes -= (int)$this->cantidad[$id];
             $gasto->save();
 
             $detalle = [
                 'pago_id'   => $entidad->id,
                 'compra_id' => $id,
+                'cantidad'  => (int)$this->cantidad[$id],
                 'importe'   => $this->valueToDecimal($this->pagar[$id]),
             ];
 

@@ -15,7 +15,8 @@ class DetallePagoTarjeta extends Model
     protected $fillable = [
         'pago_id',
         'compra_id',
-        'importe'
+        'importe',
+        'cantidad'
     ];
 
     public function compra() : \Illuminate\Database\Eloquent\Relations\BelongsTo

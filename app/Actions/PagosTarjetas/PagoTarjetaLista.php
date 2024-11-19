@@ -3,6 +3,7 @@
 namespace App\Actions\PagosTarjetas;
 
 use App\Lib\Actions\SelectAction;
+use App\Helpers\DateHelper as MiDate;
 use App\Models\PagoTarjeta;
  
 class PagoTarjetaLista extends SelectAction
@@ -33,7 +34,8 @@ class PagoTarjetaLista extends SelectAction
     protected function aditionalDataForList()
     {
         return [
-            'listaTarjetas' => \App\Models\Tarjeta::all()
+            'listaTarjetas' => \App\Models\Tarjeta::all(),
+            'anio'          => MiDate::today('Y')
         ];
     }
 

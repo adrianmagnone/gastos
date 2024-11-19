@@ -10,10 +10,10 @@
     <div class="row">
         <x-form.date col="2" field="periodoPago" id="periodo" label="Periodo de Pago" :value="$entity->periodo_pago_format" />
         
-        <x-form.select col="4" label="Tarjeta" field="tarjeta_id" id="tarjeta" :value="$entity->tarjeta_id" :options="$listaTarjetas" fieldValue="id" fieldText="nombre" blankText=""/>
+        <x-form.select col="4" label="Tarjeta" field="tarjeta_id" id="tarjeta" :value="$entity->tarjeta_id" :options="$listaTarjetas" fieldValue="id" fieldText="nombre" />
     </div>
 
-    <x-list.table columns="|Categoria|Descripcion|Cuota|Importe Cuota|Pagado" acciones="0" :id="false" />
+    <x-list.table columns="|Categoria|Descripcion|Cuota|Importe Cuota|Cantidad|Pagado" acciones="0" :id="false" />
 
     <div class="row">
         <div class="col-8"></div>
@@ -55,12 +55,13 @@
 
         $(document).on("change", ".check-pago", (e) => objPago.sumarMarcas());
         $(document).on("change", ".pagar",      (e) => objPago.sumarMarcas());
+		$(document).on("change", ".cantidad",   (e) => objPago.calcularImporte(e.target));
 
         $tabla.MegaDatatable({
 			pageLength: 100,
 			dom: "rt",
 			ajaxUrl: "{{ asset('gastos_tarjetas_a_pagar') }}",
-			columns: "item|categoria|descripcion~f|cuota|importe|pagar~f",
+			columns: "item|categoria|descripcion~f|cuota|importe|cantidad~=20px=|pagar~f=120px=",
 			columnDefs: [
 				{ data: "importe",    className: "text-end"    },
                 { data: "pagar",      className: "text-center" },
@@ -71,10 +72,16 @@
 						return `<input class="form-check-input check-pago" type="checkbox" name="check[${row.id}]" data-id="${row.id}" >`;
     				}
   				},
+				{
+    				data: "cantidad",
+    				render: function ( data, type, row, meta ) {
+						return `<input class="form-control form-control-sm cantidad text-center" type="number" name="cantidad[${row.id}]" value="1" max="${row.pendientes}" min="1" data-id="${row.id}">`;
+    				}
+  				},
                 {
     				data: "pagar",
     				render: function ( data, type, row, meta ) {
-						return `<input type="text" class="pagar form-control form-control-sm text-end w-50" name="pagar[${row.id}]" value="${row.importe_real}" data-original="${row.importe_real}" />`;
+						return `<input type="text" class="pagar form-control form-control-sm text-end" name="pagar[${row.id}]" value="${row.importe_real}" data-original="${row.importe}" />`;
     				}
   				},  
 			],
@@ -137,6 +144,21 @@
 
             self.textImporte.val(self.USDollar.format(self.importe));
 		};
+
+		calcularImporte(control)
+		{
+			let id = control.dataset.id,
+				controlImporte = $(`[name="pagar[${id}]"]`),
+				importeCuota = parseFloat(controlImporte.data("original")),
+				nuevaCuota = parseInt(control.value,10) * importeCuota;
+
+			controlImporte.val(this.USDollar.format(nuevaCuota));
+
+			let controlCheck = document.querySelectorAll(`[data-id='${id}']`)[0];
+
+			if (controlCheck.checked)
+				this.sumarMarcas();
+		}
     }
 </script>
 @endsection
