@@ -90,6 +90,7 @@ class CuentaCorrienteImportarPagos extends ImportFileAction
         {
             $cuit = $matches[0];
         }
+        $persona = $this->getPersona($cuit);
 
         if ($importe > 0)
         {
@@ -98,7 +99,8 @@ class CuentaCorrienteImportarPagos extends ImportFileAction
                 'importeFormat'   => Formatter::moneyArg($importe),
                 'fecha'           => $record[0],
                 'descripcion'     => $record[2],
-                'cuit'            => $cuit
+                'cuit'            => ($persona) ? $persona->identificador : '',
+                'persona'         => ($persona) ? $persona->abreviatura : ''
             ];
         }
     }
@@ -132,6 +134,7 @@ class CuentaCorrienteImportarPagos extends ImportFileAction
         {
             $cuit = $matches[0];
         }
+        $persona = $this->getPersona($cuit);
 
         if ($importe > 0)
         {
@@ -140,9 +143,23 @@ class CuentaCorrienteImportarPagos extends ImportFileAction
                 'importeFormat'   => Formatter::moneyArg($importe),
                 'fecha'           => $record[1],
                 'descripcion'     => $record[3],
-                'cuit'            => $cuit
+                'cuit'            => ($persona) ? $persona->identificador : '',
+                'persona'         => ($persona) ? $persona->abreviatura : ''
             ];
         }
+    }
+
+    protected function getPersona($cuit)
+    {
+        if (! $cuit)
+            return false;
+
+        $pagame = Persona::where('cuitPagador', $cuit)->first();
+
+        if ($pagame)
+            return $pagame;
+
+        return Persona::where('identificador', $cuit)->first();
     }
 
     protected function aditionalDataForEdit(&$entidad = null)

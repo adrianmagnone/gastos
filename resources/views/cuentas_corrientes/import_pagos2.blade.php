@@ -24,7 +24,11 @@
             @foreach ($data as $movimiento)
             <tr>
                 <td>
-                    <input class="form-check-input check-ingreso" type="checkbox" name="check[{{ $loop->index }}]" >
+                    @if ($movimiento['persona'])
+                        <input class="form-check-input check-ingreso" type="checkbox" name="check[{{ $loop->index }}]" checked >
+                    @else
+                        <input class="form-check-input check-ingreso" type="checkbox" name="check[{{ $loop->index }}]" >
+                    @endif
                     <input type="hidden" name="importe[{{ $loop->index }}]" value="{{ $movimiento['importe'] }}">
                     <input type="hidden" name="fecha[{{ $loop->index }}]" value="{{ $movimiento['fecha'] }}">
                     <input type="hidden" name="descripcion[{{ $loop->index }}]" value="{{ $movimiento['descripcion'] }}">
@@ -32,9 +36,7 @@
                 <td>{{ $movimiento['fecha'] }}</td>
                 <td>{{ $movimiento['descripcion'] }}</td>
                 <td class="text-end">{{ $movimiento['importeFormat'] }}</td>
-                <td>
-
-                </td>
+                <td>{{ $movimiento['persona'] }}</td>
                 <td>
                     <input type="text" class="form-control form-control-sm" name="idComprador[{{ $loop->index }}]" maxlength="10" value="{{ $movimiento['cuit'] }}" style="width: 200px;" >
                 </td>
