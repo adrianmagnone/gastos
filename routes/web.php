@@ -22,6 +22,7 @@ use App\Http\Controllers\VehiculosController;
 
 use App\Http\Controllers\CuentasController;
 use App\Http\Controllers\CuentasCorrientesController;
+use App\Http\Controllers\PersonasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -163,6 +164,11 @@ Route::get('cuenta/nueva',                      [CuentasController::class, 'crea
 Route::post('cuenta/guardar',                   [CuentasController::class, 'store'])->name('cuenta.guardar');
 Route::get('cuenta/editar/{id}',                [CuentasController::class, 'edit']);
 
+Route::get('personas',                               [PersonasController::class, 'index'])->name('personas');
+Route::get('personas_data/{id?}',                    [PersonasController::class, 'getData']);
+Route::get('persona/nueva',                          [PersonasController::class, 'create']);
+Route::post('persona/guardar',                       [PersonasController::class, 'store'])->name('persona.guardar');
+Route::get('persona/editar/{id}',                    [PersonasController::class, 'edit']);
 
 Route::get('cuentas_corrientes',                     [CuentasCorrientesController::class, 'index'])->name('cuentas_corrientes');
 Route::get('cuentas_corrientes_data/{id?}',          [CuentasCorrientesController::class, 'getData']);

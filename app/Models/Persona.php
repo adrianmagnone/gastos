@@ -16,8 +16,24 @@ class Persona extends Model
         'nombre',
         'abreviatura',
         'tipoDocumento',
-        'identificador'
+        'identificador',
+        'cuitPagador'
     ];
+
+    public function descripcionTipoDocumento(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => match((int)$this->tipoDocumento) {
+                80 => 'CUIT',
+                87 => 'CDI',
+                91 => 'CI Extranjera',
+                94 => 'Pasaporte',
+                96 => 'DNI',
+                99 => 'Otro',
+                default => ''
+            }
+        );
+    }
 
     public function abreviaturaCuit(): Attribute
     {

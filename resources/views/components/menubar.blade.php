@@ -138,7 +138,7 @@
               <div class="dropdown-menu-column">
                 <a class="dropdown-item" href="{{ route('cuentas') }}">Cuentas</a>
                 <a class="dropdown-item" href="{{ route('cuentas_corrientes') }}">Cuenta Corriente</a>
-                {{-- <a class="dropdown-item" href="{{ route('facturacion') }}">Facturacion</a> --}}
+                <a class="dropdown-item" href="{{ route('personas') }}">Personas</a>
                 {{-- <a class="dropdown-item" href="{{ route('monotriburo') }}">Monotributo</a> --}}
               </div>
             </div>
