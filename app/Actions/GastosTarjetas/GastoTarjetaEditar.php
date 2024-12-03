@@ -76,7 +76,7 @@ class GastoTarjetaEditar extends EditAction
             'descripcion'     => $this->descripcion,
             'total'           => $this->total,
             'cuotas'          => $this->cuotas,
-            'importeCuota'    => $importeCuota,
+            'importeCuota'    => bcdiv($importeCuota, 1, 2),
             'periodoInicial'  => MiDate::fromFormatTo('d/m/Y', $this->periodoInicial, 'Y-m-d'),
         ];
 
