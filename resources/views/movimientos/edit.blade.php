@@ -16,7 +16,7 @@
     <div class="row">
         {{-- <x-form.select col="4" label="Categoria" field="categoria_id" id="categoria" :value="$entity->categoria_id" :options="$categorias" fieldValue="id" fieldText="nombre" /> --}}
 
-        <x-form.search col="4" label="Categoria" field="categoria" columnas="#|Nombre" titulo-modal="Seleccionar Categoria" :value="$entity->categoria_id"/>            
+        <x-form.search col="4" label="Categoria" field="categoria" columnas="#|Nombre" titulo-modal="Seleccionar Categoria" :value="$entity->categoria_id" key="Alt+C"/>            
         
         <x-form.text col="4" label="Descripción" field="descripcion" :value="$entity->descripcion" />
     </div>
@@ -44,6 +44,7 @@
         $("#select_categoria").MegaSearch({
             titulo: "Seleccionar categoria",
             field: "categoria",
+            openKey: "c",
             focusSearch: true,
             atributoDescripcion : false,
             onElementoSeleccionado: function(dataRow){
@@ -52,7 +53,7 @@
             dataTableOptions: {
                 ajaxUrl: "{{ asset('categorias/ingresos') }}",
                 columns: "id|nombre"
-            },
+            }
         });
     }
 </script>

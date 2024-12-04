@@ -26,16 +26,16 @@ class CategoriasController extends Controller
         return $action->run($request);
     }
 
-    public function selectIngresos(Request $request, CategoriaLista $action)
+    public function selectIngresos(Request $request, CategoriaLista $action, $id = null)
     {
         // $request->request->add(['uso' => 1, 'estado' => 'S']);
-        return $action->run($request);
+        return $action->run($request, $id);
     }
 
-    public function selectGastos(Request $request, CategoriaLista $action)
+    public function selectGastos(Request $request, CategoriaLista $action, $id = null)
     {
         $request->request->add(['uso' => 2, 'estado' => 'S']);
-        return $action->run($request);
+        return $action->run($request, $id);
     }
 
     public function toExcel(Request $request, CategoriaExcel $action)
