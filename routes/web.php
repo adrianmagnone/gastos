@@ -23,6 +23,7 @@ use App\Http\Controllers\VehiculosController;
 use App\Http\Controllers\CuentasController;
 use App\Http\Controllers\CuentasCorrientesController;
 use App\Http\Controllers\PersonasController;
+use App\Http\Controllers\ResumenFacturacionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -184,3 +185,7 @@ Route::post('cuenta_corriente/imputacion',           [CuentasCorrientesControlle
 Route::get('cuenta_corriente/ver_imputacion/{id}',   [CuentasCorrientesController::class, 'viewImput']);
 Route::get('cuenta_corriente/crear_gasto/{id}',      [CuentasCorrientesController::class, 'createGasto']);
 Route::post('cuenta_corriente/guardar_gasto',        [CuentasCorrientesController::class, 'storeGasto'])->name('cuenta_corriente.guardar_gasto');
+
+// RESUMEN DE FACTURACION - MONOTRIBUTO
+Route::get('resumen_facturacion',                    [ResumenFacturacionController::class, 'index'])->name('resumen_facturacion');
+Route::get('resumen_facturacion_data/{id?}',         [ResumenFacturacionController::class, 'getData']);
