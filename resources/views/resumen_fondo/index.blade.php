@@ -84,7 +84,7 @@
 				{ key: "fondo",           control: selectFondo      }
             ],
             columnDefs: [
-				{ data: "importe",     className: "text-end" },
+				{ data: "importe",     className: "text-end text-nowrap fw-medium font-monospace" },
                 { data: "tipo",        className: "text-center" },
                 {
     				data: "importe",
@@ -119,9 +119,9 @@
 			ajaxUrl: "{{ asset('resumen_fondo_mensuales') }}",
 			columns: "mes~f|ingresos_f~f|egresos_f~f|saldo~f",
             columnDefs: [
-				{ data: "ingresos_f",     className: "text-end" },
-                { data: "egresos_f",      className: "text-end" },
-                { data: "saldo",          className: "text-end" },
+				{ data: "ingresos_f",     className: "text-end text-nowrap fw-medium font-monospace" },
+                { data: "egresos_f",      className: "text-end text-nowrap fw-medium font-monospace" },
+                { data: "saldo",          className: "text-end text-nowrap fw-medium font-monospace" },
                 {
     				data: "ingresos_f",
     				render: function ( data, type, row, meta ) {
@@ -147,11 +147,11 @@
                 });
 
 
-                $celdaTotalIngresos.html(fDollar.format(totalIngresos));
-                $celdaTotalEgresos.html(fDollar.format(totalEgresos));
+                $celdaTotalIngresos.html('<span class="text-end text-nowrap fw-medium font-monospace">' + fDollar.format(totalIngresos) + '</span>');
+                $celdaTotalEgresos.html('<span class="text-end text-nowrap fw-medium font-monospace">' + fDollar.format(totalEgresos) + '</span>');
 
-                $celdaTotalSaldoI.html(fDollar.format(totalSaldoIngresos));
-                $celdaTotalSaldoE.html(fDollar.format(totalSaldoEgresos));
+                $celdaTotalSaldoI.html('<span class="text-end text-nowrap fw-medium font-monospace">' + fDollar.format(totalSaldoIngresos) + '</span>');
+                $celdaTotalSaldoE.html('<span class="text-end text-nowrap fw-medium font-monospace">' + fDollar.format(totalSaldoEgresos) + '</span>');
 
                 totalEgresos = 0;
                 totalIngresos = 0;

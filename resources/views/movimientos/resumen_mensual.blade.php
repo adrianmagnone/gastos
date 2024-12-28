@@ -55,13 +55,13 @@
 			ajaxUrl: "{{ asset('movimientos_mes_ing_data') }}",
 			columns: "categoria|total~f|semana1~f|semana2~f|semana3~f|semana4~f|semana5~f|semana6~f",
 			columnDefs: [
-                { data: "semana1",     className: "text-end col-15"    },
-                { data: "semana2",     className: "text-end col-15"    },
-                { data: "semana3",     className: "text-end col-15"    },
-                { data: "semana4",     className: "text-end col-15"    },
-                { data: "semana5",     className: "text-end col-15"    },
-                { data: "semana6",     className: "text-end col-15"    },
-				{ data: "total",       className: "text-end text-primary"    },
+                { data: "semana1",     className: "text-end font-monospace fw-medium col-15"    },
+                { data: "semana2",     className: "text-end font-monospace fw-medium col-15"    },
+                { data: "semana3",     className: "text-end font-monospace fw-medium col-15"    },
+                { data: "semana4",     className: "text-end font-monospace fw-medium col-15"    },
+                { data: "semana5",     className: "text-end font-monospace fw-medium col-15"    },
+                { data: "semana6",     className: "text-end font-monospace fw-medium col-15"    },
+				{ data: "total",       className: "text-end font-monospace fw-medium text-primary"    },
 			],
 			stateSave: [
 				{ key: "periodo",            control: selectPeriodo     }
@@ -100,13 +100,13 @@
 			ajaxUrl: "{{ asset('movimientos_mes_egr_data') }}",
 			columns: "categoria|total~f|semana1~f|semana2~f|semana3~f|semana4~f|semana5~f|semana6~f",
 			columnDefs: [
-                { data: "semana1",     className: "text-end col-15"    },
-                { data: "semana2",     className: "text-end col-15"    },
-                { data: "semana3",     className: "text-end col-15"    },
-                { data: "semana4",     className: "text-end col-15"    },
-                { data: "semana5",     className: "text-end col-15"    },
-                { data: "semana6",     className: "text-end col-15"    },
-				{ data: "total",       className: "text-end text-primary"    },
+                { data: "semana1",     className: "text-end font-monospace fw-medium col-15"    },
+                { data: "semana2",     className: "text-end font-monospace fw-medium col-15"    },
+                { data: "semana3",     className: "text-end font-monospace fw-medium col-15"    },
+                { data: "semana4",     className: "text-end font-monospace fw-medium col-15"    },
+                { data: "semana5",     className: "text-end font-monospace fw-medium col-15"    },
+                { data: "semana6",     className: "text-end font-monospace fw-medium col-15"    },
+				{ data: "total",       className: "text-end font-monospace fw-medium text-primary"    },
 			],
 			stateSave: [
 				{ key: "periodo",            control: selectPeriodo     }

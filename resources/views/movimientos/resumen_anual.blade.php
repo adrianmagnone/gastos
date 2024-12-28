@@ -61,19 +61,20 @@
 			ajaxUrl: "{{ asset('movimientos_anual_ing_data') }}",
 			columns: "categoria|enero~f|febrero~f|marzo~f|abril~f|mayo~f|junio~f|julio~f|agosto~f|setiembre~f|octubre~f|noviembre~f|diciembre~f|total~f",
 			columnDefs: [
-                { data: "enero",         className: "text-end"    },
-                { data: "febrero",       className: "text-end"    },
-                { data: "marzo",         className: "text-end"    },
-                { data: "abril",         className: "text-end"    },
-                { data: "mayo",          className: "text-end"    },
-                { data: "junio",         className: "text-end"    },
-                { data: "julio",         className: "text-end"    },
-                { data: "agosto",        className: "text-end"    },
-                { data: "setiembre",     className: "text-end"    },
-                { data: "octubre",       className: "text-end"    },
-                { data: "noviembre",     className: "text-end"    },
-                { data: "diciembre",     className: "text-end"    },
-				{ data: "total",         className: "text-end"    }
+				{ data: "categoria",     className: "text-nowrap" },
+                { data: "enero",         className: "text-end text-nowrap font-monospace fw-medium"    },
+                { data: "febrero",       className: "text-end text-nowrap font-monospace fw-medium"    },
+                { data: "marzo",         className: "text-end text-nowrap font-monospace fw-medium"    },
+                { data: "abril",         className: "text-end text-nowrap font-monospace fw-medium"    },
+                { data: "mayo",          className: "text-end text-nowrap font-monospace fw-medium"    },
+                { data: "junio",         className: "text-end text-nowrap font-monospace fw-medium"    },
+                { data: "julio",         className: "text-end text-nowrap font-monospace fw-medium"    },
+                { data: "agosto",        className: "text-end text-nowrap font-monospace fw-medium"    },
+                { data: "setiembre",     className: "text-end text-nowrap font-monospace fw-medium"    },
+                { data: "octubre",       className: "text-end text-nowrap font-monospace fw-medium"    },
+                { data: "noviembre",     className: "text-end text-nowrap font-monospace fw-medium"    },
+                { data: "diciembre",     className: "text-end text-nowrap font-monospace fw-medium"    },
+				{ data: "total",         className: "text-end text-nowrap font-monospace fw-medium"    }
 			],
 			stateSave: [
                 { key: "periodo",            control: textPeriodo       }
@@ -115,19 +116,20 @@
 			ajaxUrl: "{{ asset('movimientos_anual_egr_data') }}",
 			columns: "categoria|enero~f|febrero~f|marzo~f|abril~f|mayo~f|junio~f|julio~f|agosto~f|setiembre~f|octubre~f|noviembre~f|diciembre~f|total~f",
 			columnDefs: [
-                { data: "enero",         className: "text-end"    },
-                { data: "febrero",       className: "text-end"    },
-                { data: "marzo",         className: "text-end"    },
-                { data: "abril",         className: "text-end"    },
-                { data: "mayo",          className: "text-end"    },
-                { data: "junio",         className: "text-end"    },
-                { data: "julio",         className: "text-end"    },
-                { data: "agosto",        className: "text-end"    },
-                { data: "setiembre",     className: "text-end"    },
-                { data: "octubre",       className: "text-end"    },
-                { data: "noviembre",     className: "text-end"    },
-                { data: "diciembre",     className: "text-end"    },
-				{ data: "total",         className: "text-end"    }
+				{ data: "categoria",     className: "text-nowrap" },
+                { data: "enero",         className: "text-end text-nowrap font-monospace fw-medium" },
+                { data: "febrero",       className: "text-end text-nowrap font-monospace fw-medium" },
+                { data: "marzo",         className: "text-end text-nowrap font-monospace fw-medium" },
+                { data: "abril",         className: "text-end text-nowrap font-monospace fw-medium" },
+                { data: "mayo",          className: "text-end text-nowrap font-monospace fw-medium" },
+                { data: "junio",         className: "text-end text-nowrap font-monospace fw-medium" },
+                { data: "julio",         className: "text-end text-nowrap font-monospace fw-medium" },
+                { data: "agosto",        className: "text-end text-nowrap font-monospace fw-medium" },
+                { data: "setiembre",     className: "text-end text-nowrap font-monospace fw-medium" },
+                { data: "octubre",       className: "text-end text-nowrap font-monospace fw-medium" },
+                { data: "noviembre",     className: "text-end text-nowrap font-monospace fw-medium" },
+                { data: "diciembre",     className: "text-end text-nowrap font-monospace fw-medium" },
+				{ data: "total",         className: "text-end text-nowrap font-monospace fw-medium" }
 			],
 			stateSave: [
 				{ key: "periodo",            control: textPeriodo       }
@@ -183,7 +185,7 @@
 		{
 			let value = this[prop];
 
-			return '$ ' + this.fmt.format(value.toFixed(2));
+			return '<span class="text-nowrap">$ ' + this.fmt.format(value.toFixed(2)) + '</span>';
 		}
 
 
