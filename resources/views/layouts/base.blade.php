@@ -20,10 +20,14 @@
     <title>{{ config('app.name') }} | @yield('PageTittle')</title>
     <!-- CSS files -->
     <x-bundle src="jQuery|tabler" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
     <style>
       @import url('https://rsms.me/inter/inter.css');
       :root {
       	--tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
+        --tblr-font-monospace:  "Source Code Pro", monospace;
       }
       body {
       	font-feature-settings: "cv03", "cv04", "cv11";
