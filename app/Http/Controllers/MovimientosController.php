@@ -65,7 +65,7 @@ class MovimientosController extends Controller
 
     public function resumenAnual()
     {
-        return view('movimientos.resumen_anual');
+        return view('movimientos.resumen_anual')->with(['anio' => MiDate::today('Y')]);
     }
 
     public function resumenAnualIngresos(Request $request, AnualIngreso $action, $id = null)
