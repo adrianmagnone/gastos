@@ -31,6 +31,7 @@
             search: {
                 return: true
             },
+            removeClassHeader: false
         };
 
     var metodos = {
@@ -192,6 +193,14 @@
                     columnDefs: settings.columnDefs,
                     createdRow: settings.createdRow,
                     footerCallback: settings.footerCallback,
+                    initComplete: function (config, json) {
+                        if (settings.removeClassHeader)
+                        {
+                            $( ".dataTable > thead > tr > th").each(function( index, element ) {
+                                $(element).removeClass(settings.removeClassHeader);
+                            });
+                        }
+                    },
                     stateSaveParams: function(settingsState, data) {
                         if (Array.isArray(settings.stateSave))
                         {
