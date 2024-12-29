@@ -115,6 +115,7 @@
 			dom: "rt",
 			ajaxUrl: "{{ asset('movimientos_anual_egr_data') }}",
 			columns: "categoria|enero~f|febrero~f|marzo~f|abril~f|mayo~f|junio~f|julio~f|agosto~f|setiembre~f|octubre~f|noviembre~f|diciembre~f|total~f",
+			removeClassHeader: "text-nowrap fw-medium font-monospace",
 			columnDefs: [
 				{ data: "categoria",     className: "text-nowrap" },
                 { data: "enero",         className: "text-end text-nowrap font-monospace fw-medium" },

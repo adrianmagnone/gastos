@@ -55,8 +55,8 @@
 				{ key: "fechaHasta",      control: fechaHasta,      parentKey: "fecha"       },
 			],
 			columnDefs: [
-				{ data: "importe",     className: "text-center" },
-                { data: "km",          className: "text-center" },
+				{ data: "importe",     className: "text-end text-nowrap font-monospace fw-medium" },
+                { data: "km",          className: "text-end text-nowrap font-monospace fw-medium" },
 			]
 		});
 
@@ -65,9 +65,10 @@
 			dom: "rt",
 			ajaxUrl: "{{ asset('mantenimiento_vehiculos_anual') }}",
 			columns: "anio~f|importe~f",
+			removeClassHeader: "text-nowrap fw-medium font-monospace",
             columnDefs: [
 				{ data: "anio",       className: "text-end" },
-                { data: "importe",    className: "text-end" },
+                { data: "importe",    className: "text-end text-nowrap font-monospace fw-medium" },
             ],
 			stateSave: [
                 { key: "vehiculo",        control: vehiculo       },

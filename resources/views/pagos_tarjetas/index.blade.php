@@ -41,11 +41,12 @@
 		$tabla.MegaDatatable({
 			ajaxUrl: "{{ asset('pagos_tarjetas_data') }}",
 			columns: "id|periodo|fecha_pago~f|total_cuotas~f|total_seguros~f|gastos~f|total_pagado~f|consultar~f",
+			removeClassHeader: "text-nowrap fw-medium font-monospace",
 			columnDefs: [
-				{ data: "total_cuotas",      className: "text-end"    },
-				{ data: "total_seguros",     className: "text-end"    },
-				{ data: "total_pagado",      className: "text-end"    },
-				{ data: "gastos",            className: "text-end"    },
+				{ data: "total_cuotas",      className: "text-end text-nowrap font-monospace fw-medium"    },
+				{ data: "total_seguros",     className: "text-end text-nowrap font-monospace fw-medium"    },
+				{ data: "total_pagado",      className: "text-end text-nowrap font-monospace fw-medium"    },
+				{ data: "gastos",            className: "text-end text-nowrap font-monospace fw-medium"    },
 				{
     				data: "consultar",
     				render: ( data, type, row, meta ) => renderTableCell.urlConsultIcon({ condicion: true, url: `pago_tarjeta/consultar/${row.id}` })
@@ -66,7 +67,7 @@
 			},
 			footerCallback: function (row, data, start, end, display) {
 				let api = this.api(),
-					fmt = new Intl.NumberFormat('es-AR');
+				    fmt = new Intl.NumberFormat('es-AR', { minimumFractionDigits:2, maximumFractionDigits: 2 } );
 
 				api.column(1).footer().innerHTML = 'TOTALES';
 				api.column(3).footer().innerHTML = '$ ' + fmt.format(totales.a.toFixed(2));

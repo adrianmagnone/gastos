@@ -118,6 +118,7 @@
 			dom: "rt",
 			ajaxUrl: "{{ asset('resumen_fondo_mensuales') }}",
 			columns: "mes~f|ingresos_f~f|egresos_f~f|saldo~f",
+            removeClassHeader: "text-nowrap fw-medium font-monospace",
             columnDefs: [
 				{ data: "ingresos_f",     className: "text-end text-nowrap fw-medium font-monospace" },
                 { data: "egresos_f",      className: "text-end text-nowrap fw-medium font-monospace" },

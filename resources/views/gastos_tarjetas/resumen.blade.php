@@ -36,21 +36,22 @@
 			scrollX: true,
 			ajaxUrl: "{{ asset('resumen_tarjetas_data') }}",
 			columns: "fecha|descripcion~f|total|a|b~f|c~f|d~f|e~f|f~f|g~f|h~f|i~f|j~f|k~f|l~f",
+			removeClassHeader: "text-nowrap fw-medium font-monospace",
 			columnDefs: [
 				{ data: "descripcion",className: "text-nowrap" },
-				{ data: "total",      className: "text-primary text-end"    },
-				{ data: "a",          className: "text-end"    },
-				{ data: "b",          className: "text-end"    },
-				{ data: "c",          className: "text-end"    },
-				{ data: "d",          className: "text-end"    },
-				{ data: "e",          className: "text-end"    },
-				{ data: "f",          className: "text-end"    },
-				{ data: "g",          className: "text-end"    },
-				{ data: "h",          className: "text-end"    },
-				{ data: "i",          className: "text-end"    },
-				{ data: "j",          className: "text-end"    },
-				{ data: "k",          className: "text-end"    },
-				{ data: "l",          className: "text-end"    },
+				{ data: "total",      className: "text-primary text-end text-nowrap fw-medium font-monospace"    },
+				{ data: "a",          className: "text-end text-nowrap fw-medium font-monospace"    },
+				{ data: "b",          className: "text-end text-nowrap fw-medium font-monospace"    },
+				{ data: "c",          className: "text-end text-nowrap fw-medium font-monospace"    },
+				{ data: "d",          className: "text-end text-nowrap fw-medium font-monospace"    },
+				{ data: "e",          className: "text-end text-nowrap fw-medium font-monospace"    },
+				{ data: "f",          className: "text-end text-nowrap fw-medium font-monospace"    },
+				{ data: "g",          className: "text-end text-nowrap fw-medium font-monospace"    },
+				{ data: "h",          className: "text-end text-nowrap fw-medium font-monospace"    },
+				{ data: "i",          className: "text-end text-nowrap fw-medium font-monospace"    },
+				{ data: "j",          className: "text-end text-nowrap fw-medium font-monospace"    },
+				{ data: "k",          className: "text-end text-nowrap fw-medium font-monospace"    },
+				{ data: "l",          className: "text-end text-nowrap fw-medium font-monospace"    },
 			],
 			stateSave: [
                 { key: "tarjeta",       control: selectTarjeta       },
@@ -106,14 +107,14 @@
 		{
 			let value = this[prop];
 
-			return '<span class="text-nowrap">$ ' + this.fmt.format(value.toFixed(2)) + '</span>';
+			return '<span class="text-nowrap fw-medium font-monospace">$ ' + this.fmt.format(value.toFixed(2)) + '</span>';
 		}
 
 		getDeuda()
 		{
 			let deuda = this.a + this.b + this.c + this.d + this.e + this.f + this.g + this.h + this.i + this.j + this.k + this.l;
 
-			return '<span class="text-danger text-nowrap">$ ' + this.fmt.format(deuda.toFixed(2)) + '</span>';
+			return '<span class="text-danger text-nowrap fw-medium font-monospace">$ ' + this.fmt.format(deuda.toFixed(2)) + '</span>';
 		}
 
 		hasValue(prop)

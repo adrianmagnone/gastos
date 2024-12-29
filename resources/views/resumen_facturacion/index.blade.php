@@ -39,6 +39,7 @@
 			scrollX: false,
 			ajaxUrl: "{{ asset('resumen_facturacion_data') }}",
 			columns: "fecha|total~f|acumulado~f|k~f|j~f|i~f|h~f|g~f|f~f|e~f|d~f|c~f|b~f|a~f",
+			removeClassHeader: "text-nowrap fw-medium font-monospace",
 			columnDefs: [
 				{ data: "fecha",      className: "text-nowrap" },
 				{ data: "total",      className: "text-primary text-end fw-medium font-monospace"   },
