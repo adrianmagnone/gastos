@@ -79,22 +79,25 @@ class AnualIngreso extends SelectAction
 
             $valores[$mes] += $gasto->importe;
         }
+
+        if ($total == 0)
+            return false;
                             
         $record = new \stdClass();
 
         $record->categoria = $modelData->nombre;
-        $record->enero     = Formatter::moneyArg($valores[0]);
-        $record->febrero   = Formatter::moneyArg($valores[1]);
-        $record->marzo     = Formatter::moneyArg($valores[2]);
-        $record->abril     = Formatter::moneyArg($valores[3]);
-        $record->mayo      = Formatter::moneyArg($valores[4]);
-        $record->junio     = Formatter::moneyArg($valores[5]);
-        $record->julio     = Formatter::moneyArg($valores[6]);
-        $record->agosto    = Formatter::moneyArg($valores[7]);
-        $record->setiembre = Formatter::moneyArg($valores[8]);
-        $record->octubre   = Formatter::moneyArg($valores[9]);
-        $record->noviembre = Formatter::moneyArg($valores[10]);
-        $record->diciembre = Formatter::moneyArg($valores[11]);
+        $record->enero     = ($valores[0])  ? Formatter::moneyArg($valores[0]) : '';
+        $record->febrero   = ($valores[1])  ? Formatter::moneyArg($valores[1]) : '';
+        $record->marzo     = ($valores[2])  ? Formatter::moneyArg($valores[2]) : '';
+        $record->abril     = ($valores[3])  ? Formatter::moneyArg($valores[3]) : '';
+        $record->mayo      = ($valores[4])  ? Formatter::moneyArg($valores[4]) : '';
+        $record->junio     = ($valores[5])  ? Formatter::moneyArg($valores[5]) : '';
+        $record->julio     = ($valores[6])  ? Formatter::moneyArg($valores[6]) : '';
+        $record->agosto    = ($valores[7])  ? Formatter::moneyArg($valores[7]) : '';
+        $record->setiembre = ($valores[8])  ? Formatter::moneyArg($valores[8]) : '';
+        $record->octubre   = ($valores[9])  ? Formatter::moneyArg($valores[9]) : '';
+        $record->noviembre = ($valores[10]) ? Formatter::moneyArg($valores[10]) : '';
+        $record->diciembre = ($valores[11]) ? Formatter::moneyArg($valores[11]) : '';
         $record->total     = Formatter::moneyArg($total);
         
         $record->m1        = Formatter::decimalNumber($valores[0]);
