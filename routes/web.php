@@ -22,6 +22,7 @@ use App\Http\Controllers\VehiculosController;
 
 use App\Http\Controllers\CuentasController;
 use App\Http\Controllers\CuentasCorrientesController;
+use App\Http\Controllers\MonotributoController;
 use App\Http\Controllers\PersonasController;
 use App\Http\Controllers\ResumenFacturacionController;
 
@@ -187,5 +188,11 @@ Route::get('cuenta_corriente/crear_gasto/{id}',      [CuentasCorrientesControlle
 Route::post('cuenta_corriente/guardar_gasto',        [CuentasCorrientesController::class, 'storeGasto'])->name('cuenta_corriente.guardar_gasto');
 
 // RESUMEN DE FACTURACION - MONOTRIBUTO
+Route::get('monotributo',                            [MonotributoController::class, 'index'])->name('monotributo');
+Route::get('monotributo_data/{id?}',                 [MonotributoController::class, 'getData']);
+Route::get('monotributo/nuevo',                      [MonotributoController::class, 'create']);
+Route::post('monotributo/guardar',                   [MonotributoController::class, 'store'])->name('monotributo.guardar');
+Route::get('monotributo/editar/{id}',                [MonotributoController::class, 'edit']);
+
 Route::get('resumen_facturacion',                    [ResumenFacturacionController::class, 'index'])->name('resumen_facturacion');
 Route::get('resumen_facturacion_data/{id?}',         [ResumenFacturacionController::class, 'getData']);
