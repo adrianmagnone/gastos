@@ -5,7 +5,7 @@
 @section('ListTittle', 'Resumen Anual')
 
 @section('ListActions')
-<a href="{{ route('actualizar_resumen') }}" class="btn" role="button">
+<a href="{{ route('ver_actualizar_resumen') }}" class="btn" role="button">
 	<i class="icon ti ti-refresh"></i> Actualizar Resumen
 </a>
 <a href="{{ route('movimientos_mensuales') }}" class="btn btn-default d-none d-sm-inline-block">

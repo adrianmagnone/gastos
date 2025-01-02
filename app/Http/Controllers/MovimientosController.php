@@ -78,11 +78,18 @@ class MovimientosController extends Controller
         return $action->run($request, $id);
     }
 
-    public function actualizarResumen()
+    public function viewActualizarResumen()
     {
         $fecha = MiDate::object();
+        return view('movimientos.year')->with([ 
+            'saveUrl' => route('actualizar_resumen'),
+            'year' => $fecha->year
+        ]);
+    }
 
-        Movimiento::actualizarResumen($fecha->year);
+    public function actualizarResumen(Request $request)
+    {
+        Movimiento::actualizarResumen((int)$request->year);
 
         return redirect()->route('movimientos_anuales');
     }
