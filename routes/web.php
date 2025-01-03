@@ -198,3 +198,6 @@ Route::get('monotributo/editar/{id}',                [MonotributoController::cla
 
 Route::get('resumen_facturacion',                    [ResumenFacturacionController::class, 'index'])->name('resumen_facturacion');
 Route::get('resumen_facturacion_data/{id?}',         [ResumenFacturacionController::class, 'getData']);
+
+Route::get('actualizar_resumen_facturacion',         [ResumenFacturacionController::class, 'viewActualizarResumen']);
+Route::post('actualizar_resumen_facturacion',        [ResumenFacturacionController::class, 'actualizarResumen'])->name('actualizar_resumen_facturacion');

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('anio')->index();
             $table->integer('mes')->index();
+            $table->date('periodo')->index();
             $table->bigInteger('cuenta_id')->unsigned();
             $table->decimal('importe', $precision = 18, $scale = 4)->default(0);
             $table->timestamps();

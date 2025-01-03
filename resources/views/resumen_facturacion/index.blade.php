@@ -4,9 +4,11 @@
 @section('ListPreTittle', 'Consulta')
 @section('ListTittle', 'Resumen de Facturación con Monotributo')
 
-{{-- @section('ListActions')
-<x-list.button-add url="{{ url('pago_tarjeta/nuevo') }}" text="Nuevo Pago - Liquidación"/>
-@endsection --}}
+@section('ListActions')
+<a href="{{ asset('actualizar_resumen_facturacion') }}" class="btn" role="button">
+	<i class="icon ti ti-refresh"></i> Actualizar Resumen
+</a>
+@endsection
 
 
 @section('ListFilters')
