@@ -18,7 +18,7 @@
 			</span>
 		@endif
 			
-		<input type="text" {{ $attributes->merge(['class' => 'form-control']) }} name="{{ $field }}" maxlength="100" value="{{ old($field, $value) }}" >
+		<input type="text" {{ $attributes->merge(['class' => 'form-control']) }} name="{{ $field }}" maxlength="100" value="{{ old($field, $value) }}" disabled >
 
 		@if ($iconRight)
 			<span class="input-group-text">
@@ -32,7 +32,4 @@
 		@endif
 
 	</div>
-	@error($field)
-	<div class="invalid-feedback">{!! $message !!}</div>
-	@enderror
 </div>

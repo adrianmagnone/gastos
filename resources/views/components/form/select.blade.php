@@ -1,24 +1,19 @@
-@php 
-	$value = old($field, $value);
-	if (! isset($mb))
-		$mb = 3;
-@endphp
-<div class="mb-{{ $mb }} col-lg{{ $col }} col-md-{{ $col }} col-xs-12">
-	@if (isset($label))
+@php $value = old($field, $value); @endphp
+<div class="mb-{{ $mb }} col-{{ $col }}">
+	@if ($label)
 		<label class="form-label">{{ $label }}</label>
 	@endif
-	<select name="{{ $field }}" id="{{ $id }}" class="form-control form-select @if (isset($classes)) $classes @endif" autocomplete="off">
-		@if (isset($blankText))
+	<select name="{{ $field }}" {{ $attributes->merge(['class' => 'form-control form-select']) }}  autocomplete="off">
+		@if ($blankText)
 			<option value=" " @if (! $value) selected="selected" @endif >
 				{{ $blankText }}
 			</option>
 		@endif
 
-		@if (isset($options))
+		@if ($options)
 			@foreach ($options as $index => $option)
-
 				@if (is_object($option))
-					<option value="{{ $option->$fieldValue }}" @if ($value == $option->$fieldValue) selected="selected" @endif @if (isset($fieldData)) data-{{$fieldData}}="{{ $option->$fieldData }}" @endif >
+					<option value="{{ $option->$fieldValue }}" @if ($value == $option->$fieldValue) selected="selected" @endif @if ($fieldData) data-{{$fieldData}}="{{ $option->$fieldData }}" @endif >
 						{{ $option->$fieldText }}
 					</option>
 				@else
