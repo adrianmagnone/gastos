@@ -20,7 +20,7 @@
     <div class="row">
         <x-form.text col="3" field="color" label="Color" :value="$entity->color" />
 
-        <x-form.switch col="3" field="estado" text="Activo" :value="$entity->estado" classes="mt-3"/>
+        <x-form.toggle col="3" field="estado" text="Activo" :value="$entity->estado" classes="mt-3"/>
     </div>
 
 @endsection

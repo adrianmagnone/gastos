@@ -19,9 +19,9 @@
 	<div class="row w-100">
 		<x-form.text col="1" label="Año" field="periodo" id="periodo" :value="$anio" type="number"/>
 		<div class="col-2"></div>
-		<x-form.money col="2" label="Total Ingresos"  field="ingresos"  value="" id="total_ingresos"  classesInput="text-success fw-bold" disabled="true" />
-		<x-form.money col="2" label="Total Egresos"   field="egresos"   value="" id="total_egresos"   classesInput="text-danger  fw-bold" disabled="true" />
-		<x-form.money col="2" label="Resultado"       field="resultado" value="" id="total_resultado" classesInput="fw-bold" disabled="true" />
+		<x-form.money col="2" label="Total Ingresos"  field="ingresos"  value="" id="total_ingresos"  class="text-success fw-bold" disabled="true" />
+		<x-form.money col="2" label="Total Egresos"   field="egresos"   value="" id="total_egresos"   class="text-danger  fw-bold" disabled="true" />
+		<x-form.money col="2" label="Resultado"       field="resultado" value="" id="total_resultado" class="fw-bold" disabled="true" />
 	</div>
 @endsection
 

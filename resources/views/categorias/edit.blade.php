@@ -11,7 +11,7 @@
 
     <x-form.select col="4" field="uso" label="Uso" id="uso" :value="$entity->uso" :options="$listaUsos" />
     
-    <x-form.switch col="3" field="estado" text="Activa" :value="$entity->estado" classes="mt-3"/>
+    <x-form.toggle col="3" field="estado" text="Activa" :value="$entity->estado" classes="mt-3"/>
 @endsection
 
 @section('FormFooter')

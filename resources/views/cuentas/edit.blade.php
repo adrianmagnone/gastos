@@ -12,7 +12,7 @@
     </div>
 
     <div class="row">
-        <x-form.switch col="3" field="estado" text="Activo" :value="$entity->estado" classes="mt-3"/>
+        <x-form.toggle col="3" field="estado" text="Activo" :value="$entity->estado" classes="mt-3"/>
     </div>
 
 @endsection
