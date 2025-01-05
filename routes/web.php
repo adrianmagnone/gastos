@@ -119,6 +119,9 @@ Route::get('gastos_tarjetas/excel',             [GastosTarjetasController::class
 Route::get('gasto_tarjeta/nueva',               [GastosTarjetasController::class, 'create']);
 Route::post('gasto_tarjeta/guardar',            [GastosTarjetasController::class, 'store'])->name('gasto_tarjeta.guardar');
 Route::get('gasto_tarjeta/editar/{id}',         [GastosTarjetasController::class, 'edit']);
+Route::get('gasto_tarjeta/borrar/{id}',         [GastosTarjetasController::class, 'delete']);
+Route::post('gasto_tarjeta/borrar',             [GastosTarjetasController::class, 'saveDelete'])->name('gasto_tarjeta.borrar');
+
 Route::get('resumen_tarjetas',                  [GastosTarjetasController::class, 'resumen'])->name('resumen_tarjetas');
 Route::get('resumen_tarjetas_data/{id?}',       [GastosTarjetasController::class, 'resumenData']);
 

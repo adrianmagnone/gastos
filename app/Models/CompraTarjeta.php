@@ -89,4 +89,15 @@ class CompraTarjeta extends Model
             get: fn () => Formatter::money($this->total)
         );
     }
+
+    public function sePuedeEliminar()
+    {
+        if ($this->cuotas != $this->cuotasPendientes)
+        {
+            $this->mensajeValidacion = "No se puede eliminar la Compra con Tarjeta porque ya existen cuotas pagas";
+            return false;
+        }
+
+        return true;
+    }
 }

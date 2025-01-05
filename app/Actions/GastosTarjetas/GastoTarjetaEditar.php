@@ -12,14 +12,15 @@ class GastoTarjetaEditar extends EditAction
     {
         $this->model = CompraTarjeta::class;
 
-        $this->urlList = route('gastos_tarjetas');
-        $this->urlSave = route('gasto_tarjeta.guardar');
+        $this->urlList    = route('gastos_tarjetas');
+        $this->urlSave    = route('gasto_tarjeta.guardar');
+        $this->urlDelete  = route('gasto_tarjeta.borrar');
 
         $this->editView   = 'gastos_tarjetas.edit';
-        $this->deleteView = '';
+        $this->deleteView = 'gastos_tarjetas.edit';
 
         $this->updatedMessage = 'El Gasto con Tarjeta de Credito se ha editado correctamente!';
-        $this->deletedMessage = '';
+        $this->deletedMessage = 'El Gasto con Tarjeta de Credito se ha eliminado correctamente!';
     }
 
     protected function _createModel()

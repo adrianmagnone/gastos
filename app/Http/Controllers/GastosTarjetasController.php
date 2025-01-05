@@ -52,6 +52,16 @@ class GastosTarjetasController extends Controller
         return $action->runForSave($request);
     }
 
+    public function delete(GastoTarjetaEditar $action, $id = null)
+    {
+        return $action->runForDelete($id);
+    }
+
+    public function saveDelete(Request $request, GastoTarjetaEditar $action)
+    {
+        return $action->runForSaveDelete($request);
+    }
+
     public function resumen(ResumenTarjetaLista $action)
     {
         return $action->viewList();

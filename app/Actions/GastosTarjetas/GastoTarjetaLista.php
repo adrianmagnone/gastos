@@ -55,6 +55,8 @@ class GastoTarjetaLista extends SelectAction
         $record->importe_cuota = $modelData->importe_cuota_format;
         $record->cuotas      = $modelData->cuotas;
         $record->pendientes  = $modelData->cuotasPendientes;
+
+        $record->puedeEliminar = ($modelData->cuotas == $modelData->cuotasPendientes) ? 1 : 0;
         
         return $record;
     }
