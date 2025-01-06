@@ -55,7 +55,7 @@ class ResumenFacturacion extends Model
         $year  = $periodo->format('Y');
         $month = $periodo->format('m');
 
-        \DB::statement('DELETE FROM resumen_facturacion WHERE periodo = "' . $ym . '-01"');
+        \DB::statement("DELETE FROM resumen_facturacion WHERE cuenta_id = {$cuenta} AND periodo = \"{$ym}-01\"");
 
         \DB::statement("INSERT into resumen_facturacion(anio, mes, cuenta_id, periodo, importe)
                         SELECT YEAR(c.fecha), MONTH(c.fecha), c.cuenta_id, '{$periodo->format('Y-m-d')}',
