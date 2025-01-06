@@ -369,6 +369,11 @@ class EditAction
         return ($value) ? \trim(\str_replace (',', '.', \str_replace('.', '', $value))) : null;
     }
 
+    public function valueToDecimal(mixed $value) : mixed
+    {
+        return ($value) ? \trim(\str_replace (',', '.', \str_replace('.', '', $value))) : null;
+    }
+
     public function intOrNull(string $name) : mixed
     {
         $value = $this->request->{$name};
