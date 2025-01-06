@@ -1,4 +1,4 @@
-<div class="mb-{{ $mb }} col-{{ $col }}">
+<div class="mb-{{ $mb }} col-md-{{ $col }} col-lg-{{ $col }} col-xl-{{ $col }} col-xs-12">
     @if (isset($label))
         <label class="form-label">{{ $label }}</label>
     @endif

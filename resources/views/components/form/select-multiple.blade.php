@@ -1,5 +1,5 @@
 @php $value = old($field, $value); @endphp
-<div class="mb-{{ $mb }} col-{{ $col }}">
+<div class="mb-{{ $mb }} col-lg-{{ $col }} col-md-{{ $col }} col-xs-12">
 	@if ($label)
 		<label class="form-label">{{ $label }}</label>
 	@endif

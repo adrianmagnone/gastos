@@ -1,4 +1,4 @@
-<div class="mb-{{ $mb }} col-{{ $col }}">
+<div class="mb-{{ $mb }} col-lg-{{ $col }} col-md-{{ $col }} col-xs-12">
   @if ($label)
     <div class="form-label">{{ $label }}</div>
   @endif

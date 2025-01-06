@@ -1,4 +1,4 @@
-<div @if ($mb != false) class="mb-{{ $mb }} col-{{ $col }}" @else class="mb-3 col-{{ $col }}" @endif>
+<div @if ($mb != false) class="mb-{{ $mb }} col-lg-{{ $col }} col-md-{{ $col }} col-xs-12" @else class="mb-3 col-lg-{{ $col }} col-md-{{ $col }} col-xs-12" @endif>
     @if ($label != false)
 		<label class="form-label col-lg-1 col-md-1 col-sm-1 col-xs-12 text-nowrap" for="{{ $field }}">
 			{{ $label }}
