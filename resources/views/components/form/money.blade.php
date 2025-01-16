@@ -9,7 +9,7 @@
 
 		<span class="input-group-text">$</span>
 			
-		<input type="text" {{ $attributes->merge(['class' => 'form-control text-end importe']) }} name="{{ $field }}" maxlength="100" value="{{ old($field, $value) }}" >
+		<input type="text" {{ $attributes->merge(['class' => 'form-control text-end importe']) }} name="{{ $field }}" maxlength="100" value="{{ old($field, $value) }}" inputmode="numeric">
 	</div>
 	@error($field)
 	<div class="invalid-feedback">{!! $message !!}</div>
