@@ -194,8 +194,7 @@
 
 @section('PageJs')
 <script>
-    init = function($) {};
-
+    init = function($) {};  
     document.addEventListener("DOMContentLoaded", function () {
         var chart8 = new ApexCharts(document.getElementById('chart-mis-movimientos'), {
             chart: {
@@ -254,7 +253,7 @@
                     padding: 4
                 },
             },
-            labels: ["Dic 23", "Ene 24", "Feb 24", "Mar 24", "Abr 24", "May 24","Jun 24","Jul 24","Ago 24","Sep 24","Oct 24","Nov 24"],
+            labels: ["Feb 24", "Mar 24", "Abr 24", "May 24","Jun 24","Jul 24","Ago 24","Sep 24","Oct 24","Nov 24", 'Dic 24', "Ene 25"],
             colors: [tabler.getColor("primary"), tabler.getColor("red")],
             legend: {
                 show: false,
@@ -287,7 +286,7 @@
       		},
       		series: [{
       			name: "Saldo Mensual",
-      			data: [-164670.47, 194514.36, -13549.13, -209744.42, 34082.17, 105469.92, -365523.41, 1495864.45, 2078248.48, -105094.76, 700405.55, -683211.4]
+      			data: [-13549.13, -209744.42, 34082.17, 105469.92, -365523.41, 1495864.45, 2078248.48, -105094.76, 700405.55, -683211.4, -2149757.16, -167990.15]
       		}],
       		tooltip: {
       			theme: 'dark'
@@ -316,8 +315,6 @@
       			},
       		},
           labels: [
-            "2023-12-01",
-            "2024-01-01",
             "2024-02-01",
             "2024-03-01",
             "2024-04-01",
@@ -327,7 +324,9 @@
             "2024-08-01",
             "2024-09-01",
             "2024-10-01",
-            "2024-11-01"
+            "2024-11-01",
+            "2024-12-01",
+            "2025-01-01",
           ],
       		colors: [tabler.getColor("primary")],
       		legend: {
