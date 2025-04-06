@@ -5,15 +5,22 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
+use App\Models\TotalMensualGasto;
+
 
 class IndexController extends Controller
 {
     public function index()
     {
+        $data = TotalMensualGasto::getLast();
+
         return view('welcome', [
-            'serieGastos'    => json_encode($this->getData()),
-            'widTareas'      => $this->getTareas(),
-            'widLiquidacion' => $this->getLiquidacion()
+            'serieGastos'      => \json_encode(TotalMensualGasto::formatImporteGastos($data)),
+            'labelGastos'      => \json_encode(TotalMensualGasto::formatLabelGastos($data)),
+            'serieDiferencias' => \json_encode(TotalMensualGasto::formatImporteDiferencia($data)),
+            'labelDiferencias' => \json_encode(TotalMensualGasto::formatLabelDiferencia($data)),
+            'widTareas'        => $this->getTareas(),
+            'widLiquidacion'   => $this->getLiquidacion()
         ]);
     }
 
@@ -46,23 +53,5 @@ class IndexController extends Controller
     protected function getLiquidacion()
     {
         return \App\Models\PagoTarjeta::where('pasadoGasto', 0)->first();
-    }
-
-    protected function getData()
-    {
-        $data = [];
-
-        $fila1 = new \stdClass();
-        $fila1->name = 'Ingresos';
-        $fila1->data = [2240387.91, 1791078.01, 2326091.80, 1732821.63, 4273135.28, 5475971.65, 5142265.04, 4536801.39, 4918385.29, 4868966.53, 5002122.72, 4578681.12  ];
-
-        $fila2 = new \stdClass();
-        $fila2->name = 'Gastos';
-        $fila2->data = [2450132.33, 1756995.84, 2220621.88, 2098345.04, 2777270.83, 3397723.17, 5247359.80, 3836395.84, 5601596.69, 7018723.69, 5120885.88, 4505864.93 ];
-
-        $data[] = $fila1;
-        $data[] = $fila2;
-
-        return $data;
     }
 }

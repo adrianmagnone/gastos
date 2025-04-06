@@ -97,7 +97,7 @@ class DateHelper
 	{
 		try
 		{
-			return Carbon::parse($value)->format($format);
+			return Carbon::parse($value)->locale(config('app.locale'))->translatedFormat($format);
 		}
 		catch (\Throwable $th)
 		{

@@ -253,7 +253,7 @@
                     padding: 4
                 },
             },
-            labels: ["Mar 24", "Abr 24", "May 24","Jun 24","Jul 24","Ago 24","Sep 24","Oct 24","Nov 24", 'Dic 24', "Ene 25", "Feb 25" ],
+            labels: {!! $labelGastos !!},
             colors: [tabler.getColor("primary"), tabler.getColor("red")],
             legend: {
                 show: false,
@@ -286,7 +286,7 @@
       		},
       		series: [{
       			name: "Saldo Mensual",
-      			data: [-209744.42, 34082.17, 105469.92, -365523.41, 1495864.45, 2078248.48, -105094.76, 700405.55, -683211.4, -2149757.16, -118763.16, 72816.19]
+      			data: {!! $serieDiferencias !!}
       		}],
       		tooltip: {
       			theme: 'dark'
@@ -314,20 +314,7 @@
       				padding: 4
       			},
       		},
-          labels: [
-            "2024-03-01",
-            "2024-04-01",
-            "2024-05-01",
-            "2024-06-01",
-            "2024-07-01",
-            "2024-08-01",
-            "2024-09-01",
-            "2024-10-01",
-            "2024-11-01",
-            "2024-12-01",
-            "2025-01-01",
-            "2025-02-01"
-          ],
+          labels: {!! $labelDiferencias !!},
       		colors: [tabler.getColor("primary")],
       		legend: {
       			show: false,
