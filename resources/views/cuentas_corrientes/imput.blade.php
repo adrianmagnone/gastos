@@ -45,8 +45,8 @@
                     </td>
                     <td>{{ $imputacion->fecha_format }}</td>
                     <td>{{ $imputacion->comprobante }}</td>
-                    <td class="text-end">$ {{ $imputacion->importe_format }}</td>
-                    <td class="text-end">$ {{ $imputacion->saldo_format }}</td>
+                    <td class="text-end text-nowrap text-mono">$ {{ $imputacion->importe_format }}</td>
+                    <td class="text-end text-nowrap text-mono">$ {{ $imputacion->saldo_format }}</td>
                     <td>
                         <div class="input-group">
                             <span class="input-group-text">$</span>
