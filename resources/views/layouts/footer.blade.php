@@ -12,12 +12,12 @@
           <ul class="list-inline list-inline-dots mb-0">
             <li class="list-inline-item">
               Copyright &copy; 2023
-              <a href="." class="link-secondary">Tabler</a>.
+              <a href="https://tabler.io" class="link-secondary">Tabler</a>.
               All rights reserved.
             </li>
             <li class="list-inline-item">
-              <a href="./changelog.html" class="link-secondary" rel="noopener">
-                v1.0.0-beta20
+              <a href="https://tabler.io/changelog" class="link-secondary" rel="noopener">
+                v1.3.0
               </a>
             </li>
           </ul>

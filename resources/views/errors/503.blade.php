@@ -3,7 +3,7 @@
 @section('BaseBody')
 <div class="container-tight py-4">
     <div class="empty">
-      <div class="empty-img"><img src="{{ asset('illustrations/undraw_bug_fixing.svg') }}" height="128" alt="">
+      <div class="empty-img"><img src="{{ asset('illustrations/undraw_bug_fixing.svg') }}" style="height: 128px" alt="">
       </div>
       <p class="empty-title">Estamos realizando tareas de mantenimiento</p>
       <p class="empty-subtitle text-muted">

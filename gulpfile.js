@@ -23,8 +23,10 @@ function bundleJQuery()
 function bundleTabler()
 {
      src([
+          `${path.res_css}/tabler/tom-select.css`,
           `${path.res_css}/tabler/tabler.css`,
           `${path.res_css}/tabler/tabler-vendors.css`,
+          `${path.res_css}/tabler/tabler-themes.css`,
           `${path.res_css}/tabler/demo.css`,
           `${path.res_css}/tabler/litepicker.css`,
           `${path.res_css}/megaTabler.css`
@@ -34,7 +36,7 @@ function bundleTabler()
 
      return src([
           `${path.res_js}/tabler/tabler.js`,
-          `${path.res_js}/tabler/demo-theme.js`,
+          `${path.res_js}/tabler/tabler-theme.js`,
           `${path.res_js}/tabler/tom-select.popular.js`,
           `${path.res_js}/tabler/litepicker.js`,
           `${path.node}/imask/dist/imask.min.js`,
@@ -79,6 +81,7 @@ function bundleDataTables()
 {
      src([
           `${path.node}/datatables.net/js/jquery.dataTables.min.js`,
+          `${path.res_js}/datatable/datatable.keytable.js`,
           `${path.res_js}/MegaDatatable.js`,
           `${path.res_js}/renderTableCell.js`
      ])
@@ -96,6 +99,7 @@ function bundleDataTables()
 
      return src([
           `${path.node}/datatables.net-dt/css/jquery.dataTables.min.css`,
+          `${path.res_css}/datatable/datatable.keytable.css`,
           `${path.res_css}/dataTable.css`
      ])
      .pipe(concat("datatables.min.css"))

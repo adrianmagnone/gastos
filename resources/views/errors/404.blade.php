@@ -3,7 +3,7 @@
 @section('CustomBody')
 <div class="container-tight py-4">
     <div class="empty">
-      <div class="empty-img"><img src="{{ asset('illustrations/undraw_searching.svg') }}" height="128" alt="">
+      <div class="empty-img"><img src="{{ asset('illustrations/undraw_searching.svg') }}" style="height: 128px" alt="">
       </div>
       <p class="empty-title">El recurso solicitado no existe.</p>
       <p class="empty-subtitle text-muted">

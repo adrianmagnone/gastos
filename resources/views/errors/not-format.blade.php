@@ -3,7 +3,7 @@
 @section('CustomBody')
 <div class="container-narrow py-2">
     <div class="empty">
-      <div class="empty-img"><img src="{{ asset('illustrations/undraw_file_analysis.svg') }}" height="128" alt="">
+      <div class="empty-img"><img src="{{ asset('illustrations/undraw_file_analysis.svg') }}" style="height: 128px" alt="">
       </div>
       <p class="empty-title">
         {{ $tittle }}

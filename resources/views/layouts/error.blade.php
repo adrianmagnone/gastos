@@ -1,7 +1,7 @@
 <!doctype html>
 <!--
 * Tabler - Premium and Open Source dashboard template with responsive and high quality UI.
-* @version 1.0.0-beta20
+* @version 1.3.0
 * @link https://tabler.io
 * Copyright 2018-2023 The Tabler Authors
 * Copyright 2018-2023 codecalm.net Paweł Kuna
@@ -25,9 +25,7 @@
       @import url('https://rsms.me/inter/inter.css');
       :root {
       	--tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
-      }
-      body {
-      	font-feature-settings: "cv03", "cv04", "cv11";
+        --tblr-body-font-size: 0.75rem;
       }
     </style>
 

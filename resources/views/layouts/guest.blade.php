@@ -1,7 +1,7 @@
 <!doctype html>
 <!--
 * Tabler - Premium and Open Source dashboard template with responsive and high quality UI.
-* @version 1.0.0-beta20
+* @version 1.3.0
 * @link https://tabler.io
 * Copyright 2018-2023 The Tabler Authors
 * Copyright 2018-2023 codecalm.net Paweł Kuna
@@ -55,5 +55,16 @@
             });
         </script>
     @endif
+        <script type="text/javascript">
+            document.addEventListener("DOMContentLoaded", function () {
+              var themeConfig = {
+                "theme": "light",
+                "theme-base": "gray",
+                "theme-font": "sans-serif",
+                "theme-primary": "azure",
+                "theme-radius": "1",
+              };
+            });
+        </script>
   </body>
 </html>    

@@ -134,7 +134,7 @@
     </div> --}}
 
     <x-widget.cardsm 
-      md="6" xl="3"
+      md="6" xl="4"
       route="tareas"
       icon="ti-list-check"
       :titulo="$widTareas['titulo']"
@@ -143,7 +143,7 @@
 
     @if ($widLiquidacion)
     <x-widget.cardsm 
-      md="6" xl="3" bg="danger"
+      md="6" xl="4" bg="danger"
       route="pagos_tarjetas"
       icon="ti-credit-card-filled"
       :titulo="$widLiquidacion->periodo_format . ' - ' . $widLiquidacion->total_pagado_format"
@@ -151,7 +151,7 @@
     />
     @endif
 
-    <div class="col-md-6 col-xl-6">
+    <div class="col-md-6 col-xl-4">
     </div>
 
     <div class="col-lg-6 col-xl-6">
@@ -254,7 +254,7 @@
                 },
             },
             labels: {!! $labelGastos !!},
-            colors: [tabler.getColor("primary"), tabler.getColor("red")],
+            colors: ["color-mix(in srgb, transparent, var(--tblr-primary) 100%)", "color-mix(in srgb, transparent, var(--tblr-danger) 100%)"],
             legend: {
                 show: false,
             }
@@ -315,7 +315,7 @@
       			},
       		},
           labels: {!! $labelDiferencias !!},
-      		colors: [tabler.getColor("primary")],
+      		colors: ["color-mix(in srgb, transparent, var(--tblr-primary) 100%)"],
       		legend: {
       			show: false,
       		}

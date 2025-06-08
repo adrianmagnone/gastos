@@ -21,3 +21,7 @@
 	outline: 0;
 	box-shadow: 0 0 0 .10rem rgba(32,107,196,.25);
 }
+
+table.dataTable thead th, table.dataTable tfoot th {
+	font-weight: normal !important; 
+}

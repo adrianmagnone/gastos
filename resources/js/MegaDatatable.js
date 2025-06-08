@@ -82,7 +82,7 @@
                     {
                         columnData.render = function(data, type, row, meta ){
                             if (row.puedeEliminar)
-                                return `<a href="${settings.deleteUrl}/${row.id}" title="Eliminar" class="text-primary">
+                                return `<a href="${settings.deleteUrl}/${row.id}" title="Eliminar" class="text-danger">
                                             <i class="icon ti ti-trash"></i>
                                         </a>`;
                             return '';
@@ -106,7 +106,7 @@
                 if (! settings.language_emptyTable)
                 {
                     let notFound = Main.url('illustrations/undraw_quitting_time.svg');
-                    settings.language_emptyTable = `<img src="${notFound}" height="128"><p>Ups! No hay datos disponibles.</p>`;
+                    settings.language_emptyTable = `<img src="${notFound}" style="height: 128px"><p>Ups! No hay datos disponibles.</p>`;
                 }
 
                 var dataTable = $this.DataTable({
