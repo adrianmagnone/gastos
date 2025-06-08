@@ -15,11 +15,7 @@
         onElementoSeleccionado: false,
         atributoId: true,
         atributoDescripcion: true,
-        dataTableOptions: {
-            keys: true,
-            scrollCollapse: true,
-            scrollY: '50vh'
-        }
+        openKey: false
     };
 
     var metodos = {
@@ -34,7 +30,11 @@
                 settings.dataTableOptions.acciones = false;
                 settings.dataTableOptions.keys = true;
                 settings.dataTableOptions.scrollCollapse = false;
-                settings.dataTableOptions.scrollY = '50vh';
+                settings.dataTableOptions.searchDelay = 400;
+                //settings.dataTableOptions.scrollY = '50vh';
+                settings.dataTableOptions.search = {
+                    return: false
+                };
 
                 if (settings.field)
                 {
@@ -82,7 +82,11 @@
                         $('.search-form-control').focus().select();
                 });
 
-                $('.search-form-control').on('blur', () => $table.focus());
+                //$('.search-form-control', settings.id_div_principal).on('blur', () => $("td:first", "#resultado_" + id).focus());
+
+                // $(document).on('blur', '.search-form-control', settings.id_div_principal, function() {
+                //     $("td:first", "#resultado_" + id).focus();
+                // });
 
                 $(settings.id_div_principal).on("hide.bs.modal", function (e) {
                     $("#resultado_" + id +" tbody").off("click", "tr");
@@ -90,6 +94,16 @@
 
                 $(document).on('click', `.${settings.field}-clear-value`, function() {
                     limpiarElementoSeleccionado(settings);
+                });
+
+                $(document).on('keyup', function(event) {
+                    if (settings.openKey && event.altKey)
+                    {
+                        if (event.key.toLowerCase() == settings.openKey.toLowerCase())
+                        {
+                            $(settings.id_div_principal).modal("show");
+                        }
+                    }
                 });
 
                 var idEntidad = (typeof settings.atributoId === 'string')
