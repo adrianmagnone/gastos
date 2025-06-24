@@ -29,7 +29,7 @@
 
     <div class="col-6">
         <h3>Resumen por Mes</h3>
-        <x-list.table columns="Mes|Ingresos|Posible|Egresos|Saldo|Puedo Gastar" acciones="0" :id="false" idgrid="Resumen"/>
+        <x-list.table columns="Mes|Ingresos|Egresos|Saldo|Puedo Gastar" acciones="0" :id="false" idgrid="Resumen"/>
 
         <h3>Totales</h3>
 
@@ -120,12 +120,11 @@
             pageLength: 100,
 			dom: "rt",
 			ajaxUrl: "{{ asset('resumen_fondo_mensuales') }}",
-			columns: "mes~f|ingresos_f~f|posible_f~f|egresos_f~f|saldo~f|puedoGastar_f~f",
+			columns: "mes~f|ingresos_f~f|egresos_f~f|saldo~f|puedoGastar_f~f",
             removeClassHeader: "text-nowrap fw-medium font-monospace",
             columnDefs: [
                 { data: "mes",            className: "text-nowrap" },
 				{ data: "ingresos_f",     className: "text-end text-nowrap fw-medium font-monospace" },
-                { data: "posible_f",      className: "text-end text-nowrap fw-medium font-monospace" },
                 { data: "egresos_f",      className: "text-end text-nowrap fw-medium font-monospace" },
                 { data: "saldo",          className: "text-end text-nowrap fw-medium font-monospace" },
                 { data: "puedoGastar_f",  className: "text-end text-nowrap fw-medium font-monospace" },
