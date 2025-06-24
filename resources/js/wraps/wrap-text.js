@@ -83,16 +83,26 @@ class wrapMoney
 
     getValue()
     {
-        return this.textBox.cleanVal();
+        if (this.textBox)
+            return this.textBox.cleanVal() / 100;
+    
+        return 0;
     }
 
     getText()
     {
-        return this.textBox.val();
+        if (this.textBox)
+            return this.textBox.val();
+
+        return '';
     }
 
     set(value)
     {
-        this.textBox.val(value);
+        if (this.textBox)
+        {
+            let valMasked = this.textBox.masked(value);
+            this.textBox.val(valMasked);
+        }
     }
 };
