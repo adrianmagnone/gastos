@@ -68,7 +68,7 @@ class ResumenFondoTotales extends SelectAction
         $record->ingresoVirtual  = $this->ingresoVirtual;
 
         $record->posible_f       = Formatter::moneyArg(0);
-        $record->puedoGastar_f   = Formatter::moneyArg(0);
+        $record->puedoGastar_f   = Formatter::moneyArg($this->puedoGastar);
 
         $this->saldo = $this->saldo + ($modelData->saldo_ingresos - $modelData->saldo_egresos);
 
@@ -81,7 +81,7 @@ class ResumenFondoTotales extends SelectAction
             {
                 $record->posible_f      = Formatter::moneyArg($ingresoPosible);
                 $this->puedoGastar      = $this->puedoGastar + ($modelData->saldo_ingresos + $ingresoPosible - $modelData->saldo_egresos);
-                $record->puedoGastar_f  = Formatter::moneyArg($this->puedoGastar);
+                //$record->puedoGastar_f  = Formatter::moneyArg($this->puedoGastar);
             }
         }
         return $record;
