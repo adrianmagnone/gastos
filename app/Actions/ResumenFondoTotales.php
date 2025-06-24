@@ -51,11 +51,15 @@ class ResumenFondoTotales extends SelectAction
 
     protected function createRecord(&$modelData)
     {
-        $this->ingresoVirtual = (float)$this->myFilter->get('ingreso') / 100;
+        $this->ingresoVirtual = (float)$this->myFilter->get('ingreso');
 
         $record = new \stdClass();
 
-        $fecha = $modelData->{"YEAR(fecha)"} . '-' . $modelData->{"MONTH(fecha)"} . '-01';
+        $fecha  = $modelData->{"YEAR(fecha)"} . '-' . $modelData->{"MONTH(fecha)"} . '-01';
+        $finMes = date("Y-m-t", strtotime($fecha));
+
+        $periodoFuturo = (MiDate::greatToday($finMes)) ? 1 : 0; 
+        $this->saldo   = $this->saldo + ($modelData->saldo_ingresos - $modelData->saldo_egresos);
 
         $record->id              = $modelData->id;
         $record->mes             = MiDate::toMonthYearFormat($fecha); 
@@ -65,23 +69,17 @@ class ResumenFondoTotales extends SelectAction
         $record->egresos         = (float)$modelData->egresos;
         $record->saldo_ingresos  = (float)$modelData->saldo_ingresos;
         $record->saldo_egresos   = (float)$modelData->saldo_egresos;
-        $record->ingresoVirtual  = $this->ingresoVirtual;
-
-        $record->posible_f       = Formatter::moneyArg(0);
-        $record->puedoGastar_f   = Formatter::moneyArg($this->puedoGastar);
-
-        $this->saldo = $this->saldo + ($modelData->saldo_ingresos - $modelData->saldo_egresos);
-
         $record->saldo           = Formatter::moneyArg($this->saldo);
+        $record->posible_f       = Formatter::moneyArg(0);
+        $record->puedoGastar_f   = Formatter::moneyArg($this->puedoGastar + $this->saldo);
 
-        if ($this->ingresoVirtual)
+        if ($periodoFuturo && $this->ingresoVirtual)
         {
             $ingresoPosible = $this->ingresoVirtual - $record->ingresos;
             if ($ingresoPosible > 0)
             {
                 $record->posible_f      = Formatter::moneyArg($ingresoPosible);
-                $this->puedoGastar      = $this->puedoGastar + ($modelData->saldo_ingresos + $ingresoPosible - $modelData->saldo_egresos);
-                //$record->puedoGastar_f  = Formatter::moneyArg($this->puedoGastar);
+                $this->puedoGastar      = $this->puedoGastar + ($modelData->saldo_ingresos + $ingresoPosible);
             }
         }
         return $record;
