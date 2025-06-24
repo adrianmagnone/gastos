@@ -12,6 +12,8 @@ use App\Helpers\Formatter;
 class ResumenFondoTotales extends SelectAction
 {
     protected $saldo = 0;
+    protected $puedoGastar = 0;
+    protected $ingresoVirtual = 0;
 
     function __construct()
     {
@@ -49,38 +51,39 @@ class ResumenFondoTotales extends SelectAction
 
     protected function createRecord(&$modelData)
     {
+        $this->ingresoVirtual = (float)$this->myFilter->get('ingreso') / 100;
+
         $record = new \stdClass();
 
         $fecha = $modelData->{"YEAR(fecha)"} . '-' . $modelData->{"MONTH(fecha)"} . '-01';
 
-        $record->id = $modelData->id;
-        $record->mes = MiDate::toMonthYearFormat($fecha); 
-        $record->ingresos_f = Formatter::moneyArg($modelData->saldo_ingresos);
-        $record->egresos_f  = Formatter::moneyArg($modelData->saldo_egresos);
-        $record->ingresos   = (float)$modelData->ingresos;
-        $record->egresos    = (float)$modelData->egresos;
+        $record->id              = $modelData->id;
+        $record->mes             = MiDate::toMonthYearFormat($fecha); 
+        $record->ingresos_f      = Formatter::moneyArg($modelData->saldo_ingresos);
+        $record->egresos_f       = Formatter::moneyArg($modelData->saldo_egresos);
+        $record->ingresos        = (float)$modelData->ingresos;
+        $record->egresos         = (float)$modelData->egresos;
         $record->saldo_ingresos  = (float)$modelData->saldo_ingresos;
         $record->saldo_egresos   = (float)$modelData->saldo_egresos;
-        $record->ingresoVirtual  = 0;
+        $record->ingresoVirtual  = $this->ingresoVirtual;
 
-        if ((float)$modelData->ingresos < 1)
-        {
-            $ingresoVirtual = (float)config('app.ingreso_virtual');
-
-            if ($ingresoVirtual)
-            {
-                $record->ingresos_f     = Formatter::moneyArg($ingresoVirtual);
-                $record->ingresos       = $ingresoVirtual;
-                $record->ingresoVirtual = 1;
-
-                $modelData->saldo_ingresos += $ingresoVirtual;
-            }
-        }
+        $record->posible_f       = Formatter::moneyArg(0);
+        $record->puedoGastar_f   = Formatter::moneyArg(0);
 
         $this->saldo = $this->saldo + ($modelData->saldo_ingresos - $modelData->saldo_egresos);
 
-        $record->saldo = Formatter::moneyArg($this->saldo);
-        
+        $record->saldo           = Formatter::moneyArg($this->saldo);
+
+        if ($this->ingresoVirtual)
+        {
+            $ingresoPosible = $this->ingresoVirtual - $record->ingresos;
+            if ($ingresoPosible > 0)
+            {
+                $record->posible_f      = Formatter::moneyArg($ingresoPosible);
+                $this->puedoGastar      = $this->puedoGastar + ($modelData->saldo_ingresos + $ingresoPosible - $modelData->saldo_egresos);
+                $record->puedoGastar_f  = Formatter::moneyArg($this->puedoGastar);
+            }
+        }
         return $record;
     }
 }

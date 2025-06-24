@@ -193,6 +193,4 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // ...
     ])->toArray(),
-
-    'ingreso_virtual' => env('APP_INGRESO_VIRTUAL', 0),
 ];

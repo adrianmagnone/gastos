@@ -15,6 +15,8 @@
 @section('ListFilters')
 	<div class="row w-100">
 		<x-form.select mb="1" col="3" label="Fondo" field="fondo" id="fondo" value="" :options="$listaFondos" fieldValue="id" fieldText="nombre" />
+        <div class="col-6"></div>
+        <x-form.money mb="1" col="3" label="Ingreso Supuesto" field="ingreso" id="ingreso" value="" />
 	</div>
 @endsection
 
@@ -27,7 +29,7 @@
 
     <div class="col-6">
         <h3>Resumen por Mes</h3>
-        <x-list.table columns="Mes|Ingresos|Egresos|Saldo" acciones="0" :id="false" idgrid="Resumen"/>
+        <x-list.table columns="Mes|Ingresos|Posible|Egresos|Saldo|Puedo Gastar" acciones="0" :id="false" idgrid="Resumen"/>
 
         <h3>Totales</h3>
 
@@ -62,6 +64,7 @@
                 $tabla.MegaDatatable("reload");
                 $tablaResumen.MegaDatatable("reload");
             }),
+            ingreso             = new wrapMoney("#ingreso", () => $tablaResumen.MegaDatatable("reload")),
             $celdaTotalIngresos = $("#totalIngresos"),
             $celdaTotalEgresos  = $("#totalEgresos"),
             $celdaTotalSaldoI   = $("#totalSaldoIngresos"),
@@ -117,12 +120,15 @@
             pageLength: 100,
 			dom: "rt",
 			ajaxUrl: "{{ asset('resumen_fondo_mensuales') }}",
-			columns: "mes~f|ingresos_f~f|egresos_f~f|saldo~f",
+			columns: "mes~f|ingresos_f~f|posible_f~f|egresos_f~f|saldo~f|puedoGastar_f~f",
             removeClassHeader: "text-nowrap fw-medium font-monospace",
             columnDefs: [
+                { data: "mes",            className: "text-nowrap" },
 				{ data: "ingresos_f",     className: "text-end text-nowrap fw-medium font-monospace" },
+                { data: "posible_f",      className: "text-end text-nowrap fw-medium font-monospace" },
                 { data: "egresos_f",      className: "text-end text-nowrap fw-medium font-monospace" },
                 { data: "saldo",          className: "text-end text-nowrap fw-medium font-monospace" },
+                { data: "puedoGastar_f",  className: "text-end text-nowrap fw-medium font-monospace" },
                 {
     				data: "ingresos_f",
     				render: function ( data, type, row, meta ) {
@@ -133,7 +139,8 @@
   				},
             ],
             stateSave: [
-				{ key: "fondo",           control: selectFondo      }
+				{ key: "fondo",           control: selectFondo      },
+                { key: "ingreso",         control: ingreso          }
             ],
             createdRow: function( row, data, dataIndex ) {
     			totalIngresos += parseFloat(data.ingresos);
