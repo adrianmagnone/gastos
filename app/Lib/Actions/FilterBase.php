@@ -6,6 +6,7 @@ use App\Helpers\DateHelper as MiDate;
 class FilterBase
 {
     protected $filtersKeys;
+    protected $requestData;
 
     function __construct()
     {
@@ -14,15 +15,15 @@ class FilterBase
 
     public function execute(&$query, $requestData)
     {
+        $this->requestData = $requestData;
         $filterValues = [];
 
         if ($this->filtersKeys)
             {
                 foreach ($this->filtersKeys as $field)
                 {
-                    $filterValues[$field] =  (isset($requestData[$field]))
-                                                ? $requestData[$field]
-                                                : 0;
+                    if (isset($requestData[$field]))
+                        $filterValues[$field] = $requestData[$field];
                 }
             }
 
@@ -45,6 +46,16 @@ class FilterBase
     protected function setFiltersKeys()
     {
         return [];
+    }
+
+    public function get($key)
+    {
+        if (array_key_exists($key, $this->requestData))
+        {
+            return $this->requestData[$key];
+        }
+
+        return false;
     }
 
     protected function filtroBetweenDate(&$query, $desde, $hasta, $field)
