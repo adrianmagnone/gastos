@@ -25,11 +25,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
     <style>
       @import url('https://rsms.me/inter/inter.css');
-      :root {
-      	--tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
-        --tblr-font-monospace:  "Source Code Pro", monospace;
-        --tblr-body-font-size: 0.75rem;
-      }
     </style>
 
     <!-- Libs CSS - JS  -->

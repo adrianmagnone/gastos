@@ -1,3 +1,9 @@
+:root {
+	--tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
+	--tblr-font-monospace:  "Source Code Pro", monospace;
+	--tblr-body-font-size: 0.75rem;
+}
+
 .invalid-feedback {
     display: block;
 }
@@ -16,4 +22,7 @@
 	white-space: nowrap;
 	background-color: transparent;
 	border: 0;
+}
+.form-control {
+	font-size: 0.75rem !important;
 }

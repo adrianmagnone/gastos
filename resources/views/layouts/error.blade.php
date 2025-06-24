@@ -23,10 +23,6 @@
     <x-bundle src="tabler" />
     <style>
       @import url('https://rsms.me/inter/inter.css');
-      :root {
-      	--tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
-        --tblr-body-font-size: 0.75rem;
-      }
     </style>
 
     <!-- Libs CSS - JS  -->
