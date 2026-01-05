@@ -3,7 +3,7 @@
 namespace App\Actions;
 
 use Illuminate\Support\Facades\DB;
-use App\Lib\Actions\SelectAction;
+use Aiglos\Lba\Actions\SelectAction;
 use App\Models\MovimientoFondo;
 
 use App\Helpers\DateHelper as MiDate;
@@ -30,6 +30,11 @@ class ResumenFondoTotales extends SelectAction
                     ->selectRaw('sum(CASE WHEN tipo = 2 then `saldo` else 0 END) as saldo_egresos')
                     ->groupByRaw('MONTH(fecha), YEAR(fecha)')
                     ->where('saldo' , '>', 0);
+    }
+
+    protected function setAditionalOrderFields()
+    {
+        return [];
     }
 
     protected function setFilterClass()

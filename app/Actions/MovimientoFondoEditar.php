@@ -3,7 +3,7 @@
 namespace App\Actions;
 
 use App\Helpers\DateHelper as MiDate;
-use App\Lib\Actions\InsertMultipleAction;
+use Aiglos\Lba\Actions\InsertMultipleAction;
 use App\Models\MovimientoFondo;
 
 class MovimientoFondoEditar extends InsertMultipleAction

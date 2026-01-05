@@ -2,7 +2,7 @@
 
 namespace App\Actions;
 
-use App\Lib\Actions\SelectAction;
+use Aiglos\Lba\Actions\SelectAction;
 use App\Models\MovimientoFondo;
 
 use App\Helpers\DateHelper as MiDate;
@@ -14,13 +14,6 @@ class ResumenFondoLista extends SelectAction
     {
         $this->viewList = 'resumen_fondo.index';
         parent::__construct(MovimientoFondo::class);
-    }
-
-    protected function setAditionalOrderFields()
-    {
-        return [
-            ['field' => 'id', 'dir'=> 'ASC']
-        ];
     }
 
     protected function getQuery()

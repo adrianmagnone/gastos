@@ -2,7 +2,7 @@
 
 namespace App\Actions\Facturacion;
 
-use App\Lib\Actions\SelectAction;
+use Aiglos\Lba\Actions\SelectAction;
 use App\Models\CuentaCorriente;
 
 use App\Helpers\Formatter;
@@ -30,10 +30,7 @@ class CuentaCorrienteLista extends SelectAction
 
     protected function setAditionalOrderFields()
     {
-        return [
-            ['field' => 'fecha',   'dir' => 'asc'],
-            ['field' => 'id',      'dir' => 'asc']
-        ];
+        return [ 'fecha', 'id' ];
     }
 
     protected function setFilterClass()

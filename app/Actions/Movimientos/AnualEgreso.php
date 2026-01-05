@@ -3,7 +3,7 @@
 namespace App\Actions\Movimientos;
 
 use Illuminate\Support\Facades\DB;
-use App\Lib\Actions\SelectAction;
+use Aiglos\Lba\Actions\SelectAction;
 use App\Models\Categoria;
 use App\Models\ResumenAnual;
 

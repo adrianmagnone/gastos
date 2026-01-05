@@ -2,7 +2,7 @@
 
 namespace App\Actions\Facturacion;
 
-use App\Lib\Actions\SelectAction;
+use Aiglos\Lba\Actions\SelectAction;
 use App\Helpers\DateHelper as MiDate;
 use App\Helpers\Formatter;
 

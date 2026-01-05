@@ -2,7 +2,7 @@
 
 namespace App\Actions;
 
-use App\Lib\Actions\SelectAction;
+use Aiglos\Lba\Actions\SelectAction;
 use App\Models\Movimiento;
 
 use App\Helpers\DateHelper as MiDate;

@@ -3,7 +3,7 @@
 namespace App\Actions\Fondos;
 
 use App\Helpers\DateHelper as MiDate;
-use App\Lib\Actions\EditAction;
+use Aiglos\Lba\Actions\EditAction;
 use App\Models\Fondo;
 
 class FondoEditar extends EditAction

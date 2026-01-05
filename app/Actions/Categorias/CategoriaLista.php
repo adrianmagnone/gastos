@@ -2,7 +2,7 @@
 
 namespace App\Actions\Categorias;
 
-use App\Lib\Actions\SelectAction;
+use Aiglos\Lba\Actions\SelectAction;
 use App\Models\Categoria;
  
 class CategoriaLista extends SelectAction

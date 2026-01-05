@@ -2,7 +2,7 @@
 
 namespace App\Actions\Movimientos;
 
-use App\Lib\Actions\ImportFileAction;
+use Aiglos\Lba\Actions\ImportFileAction;
 use Illuminate\Support\Facades\Storage;
 use App\Helpers\DateHelper as MiDate;
 use App\Helpers\Formatter;

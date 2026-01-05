@@ -2,7 +2,7 @@
 
 namespace App\Actions\GastosTarjetas;
 
-use App\Lib\Actions\SelectAction;
+use Aiglos\Lba\Actions\SelectAction;
 use App\Models\CompraTarjeta;
  
 class GastoTarjetaLista extends SelectAction

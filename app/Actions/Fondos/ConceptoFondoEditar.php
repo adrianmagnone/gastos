@@ -2,7 +2,7 @@
 
 namespace App\Actions\Fondos;
 
-use App\Lib\Actions\EditAction;
+use Aiglos\Lba\Actions\EditAction;
 use App\Models\ConceptoFondo;
 
 class ConceptoFondoEditar extends EditAction

@@ -2,7 +2,7 @@
 
 namespace App\Actions\Facturacion;
 
-use App\Lib\Actions\SelectAction;
+use Aiglos\Lba\Actions\SelectAction;
 use App\Models\CategoriaMonotributo;
  
 class MonotributoLista extends SelectAction

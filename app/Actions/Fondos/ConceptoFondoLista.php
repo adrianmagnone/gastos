@@ -2,7 +2,7 @@
 
 namespace App\Actions\Fondos;
 
-use App\Lib\Actions\SelectAction;
+use Aiglos\Lba\Actions\SelectAction;
 use App\Models\ConceptoFondo;
  
 class ConceptoFondoLista extends SelectAction

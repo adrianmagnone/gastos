@@ -3,7 +3,7 @@
 namespace App\Actions\PagosTarjetas;
 
 use App\Helpers\DateHelper as MiDate;
-use App\Lib\Actions\ProcessOneAction;
+use Aiglos\Lba\Actions\ProcessOneAction;
 
 use App\Models\PagoTarjeta;
 use App\Models\Movimiento;

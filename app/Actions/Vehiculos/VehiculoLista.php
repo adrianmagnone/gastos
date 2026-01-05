@@ -2,7 +2,7 @@
 
 namespace App\Actions\Vehiculos;
 
-use App\Lib\Actions\SelectAction;
+use Aiglos\Lba\Actions\SelectAction;
 use App\Models\Vehiculo;
  
 class VehiculoLista extends SelectAction
