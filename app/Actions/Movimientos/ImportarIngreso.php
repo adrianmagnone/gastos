@@ -35,7 +35,8 @@ class ImportarIngreso extends ImportFileAction
         return [
             'listaBancos' => [
                 1 => 'Banco Macro',
-                2 => 'Banco Hipotecario'
+                2 => 'Banco Hipotecario',
+                3 => 'Banco Hipotecario - 2026', 
             ]
         ];
     }
@@ -43,7 +44,7 @@ class ImportarIngreso extends ImportFileAction
     public function rulesFile(): array
     {
         return [
-            'banco'        => ['numeric', 'integer', 'in:1,2', 'required'],
+            'banco'        => ['numeric', 'integer', 'in:1,2,3', 'required'],
             'fileIngresos' => ['required', 'mimes:csv', 'max:2048'],
         ];
     }
@@ -62,6 +63,7 @@ class ImportarIngreso extends ImportFileAction
         match ((int)$this->banco) {
             1 => $this->procesarBancoMacro($record),
             2 => $this->procesarBancoHipotecacio($record),
+            3 => $this->procesarBancoHipotecacio2026($record),
         };
     }
 
@@ -117,6 +119,28 @@ class ImportarIngreso extends ImportFileAction
                 'importeFormat'   => Formatter::moneyArg($importe),
                 'fecha'           => $record[1],
                 'descripcion'     => $record[3],
+            ];
+        }
+    }
+
+    /*
+    * 0 => string '28/09/2023' (length=10)        Fecha
+    * 1 => string 'MERCADOPAGO*MCART' (length=0)  Descripcion del Movimiento
+    * 2 => string '-6250' (length=5)             Importe del Movimiento
+    * 3 => string '20699,67' (length=8)          Saldo 
+    */
+    protected function procesarBancoHipotecacio2026($record)
+    {
+        $importe = (float)str_replace ('.', '', $record[2]);
+        $importe = (float)str_replace (',', '.', $importe);
+
+        if ($importe > 0)
+        {
+            $this->data[] = [
+                'importe'         => $importe,
+                'importeFormat'   => Formatter::moneyArg($importe),
+                'fecha'           => $record[0],
+                'descripcion'     => $record[1],
             ];
         }
     }
