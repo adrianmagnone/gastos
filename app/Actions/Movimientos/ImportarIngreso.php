@@ -131,7 +131,7 @@ class ImportarIngreso extends ImportFileAction
     */
     protected function procesarBancoHipotecacio2026($record)
     {
-        $importe = (float)str_replace ('.', '', $record[2]);
+        $importe = str_replace ('.', '', $record[2]);
         $importe = (float)str_replace (',', '.', $importe);
 
         if ($importe > 0)

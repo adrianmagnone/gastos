@@ -159,8 +159,12 @@ class CuentaCorrienteImportarPagos extends ImportFileAction
     */
     protected function procesarBancoHipotecario2026($record)
     {
-        $importe = (float)str_replace ('.', '', $record[2]);
+        \Log::info($record[2]);    
+        $importe = str_replace ('.', '', $record[2]);
+        \Log::info($importe);    
         $importe = (float)str_replace (',', '.', $importe);
+        \Log::info($importe);    
+        \Log::info("=======================================");    
 
         $cuit    = '';
         
