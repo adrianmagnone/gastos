@@ -1,5 +1,7 @@
 const { parallel, src, dest } = require('gulp');
-var concat = require("gulp-concat");
+var concat   = require("gulp-concat");
+var cleanCss = require("gulp-clean-css");
+
 
 var path = {
     node: "node_modules",
@@ -32,6 +34,7 @@ function bundleTabler()
           `${path.res_css}/megaTabler.css`
      ])
      .pipe(concat("tabler.min.css"))
+     .pipe(cleanCss())
      .pipe(dest(path.css));
 
      return src([
@@ -81,7 +84,6 @@ function bundleDataTables()
 {
      src([
           `${path.node}/datatables.net/js/jquery.dataTables.min.js`,
-          `${path.res_js}/datatable/datatable.keytable.js`,
           `${path.res_js}/MegaDatatable.js`,
           `${path.res_js}/renderTableCell.js`
      ])
@@ -99,7 +101,6 @@ function bundleDataTables()
 
      return src([
           `${path.node}/datatables.net-dt/css/jquery.dataTables.min.css`,
-          `${path.res_css}/datatable/datatable.keytable.css`,
           `${path.res_css}/dataTable.css`
      ])
      .pipe(concat("datatables.min.css"))
