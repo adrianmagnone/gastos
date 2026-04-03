@@ -17,7 +17,7 @@
             </li>
             <li class="list-inline-item">
               <a href="https://tabler.io/changelog" class="link-secondary" rel="noopener">
-                v1.3.0
+                v1.4.0
               </a>
             </li>
           </ul>
