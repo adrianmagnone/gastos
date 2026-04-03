@@ -133,6 +133,7 @@ class CuentaCorriente extends Model
                               ->where('persona_id', $persona)  
                               ->where('columna', 'D')
                               ->where('saldo', '>', 0)
+                              ->orderBy('fecha', 'asc')
                               ->get();
     }
 
@@ -142,6 +143,7 @@ class CuentaCorriente extends Model
                               ->where('persona_id', $persona)  
                               ->where('columna', 'H')
                               ->where('saldo', '>', 0)
+                              ->orderBy('fecha', 'asc')
                               ->get();
     }
 
