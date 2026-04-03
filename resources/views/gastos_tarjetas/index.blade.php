@@ -43,8 +43,8 @@
 			columns: "fecha|descripcion~f|categoria|total|importe_cuota~f|cuotas|pendientes|edit~f|delete~f",
 			columnDefs: [
 				{ data: "cuotas",         className: "text-center" },
-				{ data: "importe_cuota",  className: "text-end"    },
-				{ data: "total",          className: "text-end"    },
+				{ data: "importe_cuota",  className: "text-end text-nowrap font-monospace fw-medium"    },
+				{ data: "total",          className: "text-end text-nowrap font-monospace fw-medium"    },
 				{
     				data: "pendientes",
     				render: function( data, type, row, meta ) {

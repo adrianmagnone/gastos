@@ -49,8 +49,8 @@
 			columns: "id|fecha|tipo~f|concepto|descripcion~f|importe~f|saldo~f|edit~f",
 			columnDefs: [
 				{ data: "tipo",        className: "text-center" },
-				{ data: "importe",     className: "text-end"    },
-				{ data: "saldo",       className: "text-end"    },
+				{ data: "importe",     className: "text-end text-nowrap font-monospace fw-medium"    },
+				{ data: "saldo",       className: "text-end text-nowrap font-monospace fw-medium"    },
 				{
     				data: "tipo",
     				render: function ( data, type, row, meta ) {

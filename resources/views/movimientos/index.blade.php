@@ -49,7 +49,7 @@
 			order: [[0, 'desc']],
 			columnDefs: [
 				{ data: "tipo",        className: "text-center" },
-				{ data: "importe",     className: "text-end"    },
+				{ data: "importe",     className: "text-end text-nowrap font-monospace fw-medium"    },
 				{
     				data: "tipo",
     				render: function ( data, type, row, meta ) {
