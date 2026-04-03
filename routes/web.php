@@ -61,6 +61,8 @@ Route::get('movimientos/excel',                 [MovimientosController::class, '
 Route::get('movimiento/nuevo',                  [MovimientosController::class, 'create']);
 Route::post('movimiento/guardar',               [MovimientosController::class, 'store'])->name('movimiento.guardar');
 Route::get('movimiento/editar/{id}',            [MovimientosController::class, 'edit']);
+Route::get('movimiento/borrar/{id}',            [MovimientosController::class, 'delete']);
+Route::post('movimiento/borrar',                [MovimientosController::class, 'saveDelete'])->name('movimiento.borrar');
 Route::get('movimientos/importar_ingresos',     [MovimientosController::class, 'importIng']);
 Route::post('movimientos/lee_ingresos',         [MovimientosController::class, 'readIng']);
 Route::post('movimientos/guarda_ingresos',      [MovimientosController::class, 'storeIng']);

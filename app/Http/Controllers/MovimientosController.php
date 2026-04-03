@@ -44,6 +44,16 @@ class MovimientosController extends Controller
         return $action->runForSave($request);
     }
 
+    public function delete(MovimientoEditar $action, $id = null)
+    {
+        return $action->runForDelete($id);
+    }
+
+    public function saveDelete(Request $request, MovimientoEditar $action)
+    {
+        return $action->runForSaveDelete($request);
+    }
+
     // Resumen Mensual
 
     public function resumenMensual()

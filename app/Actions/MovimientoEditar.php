@@ -12,15 +12,16 @@ class MovimientoEditar extends EditAction
     {
         $this->model = Movimiento::class;
 
-        $this->urlList = route('movimientos');
-        $this->urlSave = route('movimiento.guardar');
+        $this->urlList     = route('movimientos');
+        $this->urlSave     = route('movimiento.guardar');
+        $this->urlDelete   = route('movimiento.borrar');
         $this->urlBackEdit = 'movimiento/nuevo';
 
-        $this->editView   = 'movimientos.edit';
-        $this->deleteView = '';
+        $this->editView    = 'movimientos.edit';
+        $this->deleteView  = 'movimientos.edit';
 
         $this->updatedMessage = 'El movimiento se ha agregado correctamente!';
-        $this->deletedMessage = '';
+        $this->deletedMessage = 'El movimiento se ha borrado correctamente!';
     }
 
     protected function aditionalDataForEdit(&$entidad = null)
