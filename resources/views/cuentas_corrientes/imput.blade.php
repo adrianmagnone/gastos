@@ -14,7 +14,7 @@
 
         <x-form.plain col="2" label="CUIT" field="cuit" :value="$entity->identificadorComprador" />
 
-        <x-form.plain col="4" label="Cliente" field="cliente" :value="$entity->nombre_persona" />
+        <x-form.plain col="6" label="Cliente" field="cliente" :value="$entity->nombre_persona" />
     </div>
 
     <div class="row">
@@ -22,7 +22,9 @@
 
         <x-form.money col="2" field="saldo" label="Saldo" :value="$entity->saldo_format" disabled="true" />
 
-        <x-form.plain col="4" label="Comprobante" field="comrprobante" :value="$entity->comprobante" />
+        <x-form.money col="2" field="saldoSinImputar" id="saldoSinImputar" label="Sin Imputar" :value="$entity->saldo_format" disabled="true" />
+
+        <x-form.plain col="4" label="Comprobante" field="comprobante" :value="$entity->comprobante" />
     </div>
 
     <div class="row">
@@ -69,6 +71,7 @@
 @endsection
 
 @section('PageJs')
+<x-bundle src="wraps" />
 <script type="text/javascript">
     init = function($) {
         let objImputar = new Reimputacion();
@@ -89,6 +92,8 @@
             this.nuevoSaldo = $("#nuevoSaldo");
             this.saldoComprobante = parseFloat($("#saldo").val());
 			this.cantidad = 0;
+
+            this.saldoSinImputar = new wrapMoney("#saldoSinImputar", null); 
 
 			this.money = new Intl.NumberFormat('es-AR', {minimumFractionDigits: 2});
 		}
@@ -131,6 +136,7 @@
                 this.cantidad--;
             }
             this.nuevoSaldo.val(this.saldoComprobante);
+            this.saldoSinImputar.set(this.money.format(this.saldoComprobante));
 		}
 
         iniciarMarcas()
