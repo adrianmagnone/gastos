@@ -44,7 +44,7 @@ return [
             'serve' => true,
             'throw' => false,
             'report' => false,
-            'url' => env('APP_URL').'/storage',
+            'url' => rtrim(env('APP_URL', 'http://localhost'), '/').'/storage',
             'visibility' => 'public',
         ],
 
