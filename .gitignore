@@ -17,6 +17,7 @@ public_html/hot
 
 public/css
 public/js
+public/libs
 
 storage/*.key
 .env
