@@ -50,5 +50,11 @@
 			"path": "resources/js"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"editor.fontSize": 12,
+		"mcp": {
+			"inputs": [],
+			"servers": {}
+		}
+	}
 }
