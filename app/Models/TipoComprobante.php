@@ -20,6 +20,13 @@ class TipoComprobante extends Model
         'tipo'
     ];
 
+    public static function Tipos($value)
+    {
+        $keys = array_keys(self::TIPOS, $value);
+
+        return $keys[0];
+    }
+
     public static function findByAfip($value)
     {
         return TipoComprobante::where('codigoAfip', $value)->first();

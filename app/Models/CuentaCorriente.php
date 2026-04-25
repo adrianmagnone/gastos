@@ -114,9 +114,12 @@ class CuentaCorriente extends Model
         return 0;
     }
 
-    public static function ultimoNumeroGasto()
+    public static function ultimoNumeroGasto($tipoComprobante_id = null)
     {
-        $ultimoRecibo = CuentaCorriente::where('tipoComprobante_id', config('define.comprobantes.gastos'))
+        if (! $tipoComprobante_id)
+            $tipoComprobante_id = config('define.comprobantes.gastos');
+
+        $ultimoRecibo = CuentaCorriente::where('tipoComprobante_id', $tipoComprobante_id)
                                        ->where('puntoVenta', 1)
                                        ->orderBy('numeroComprobante', 'desc')
                                        ->first();
@@ -133,6 +136,7 @@ class CuentaCorriente extends Model
                               ->where('persona_id', $persona)  
                               ->where('columna', 'D')
                               ->where('saldo', '>', 0)
+                              ->orderBy('fecha', 'asc')
                               ->get();
     }
 
@@ -142,6 +146,7 @@ class CuentaCorriente extends Model
                               ->where('persona_id', $persona)  
                               ->where('columna', 'H')
                               ->where('saldo', '>', 0)
+                              ->orderBy('fecha', 'asc')
                               ->get();
     }
 

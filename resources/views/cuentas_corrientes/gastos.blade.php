@@ -30,7 +30,9 @@
     <div class="row">
         <x-form.date col="2" field="fecha" id="fecha" label="Fecha" :value="$movimiento->fecha_format" />
 
-        <x-form.money col="2" field="importe" label="Importe" :value="$movimiento->saldo_format" />
+        <x-form.money col="2" field="importe" id="importe" label="Importe" :value="$movimiento->saldo_format" />
+
+        <x-form.search col="4" label="Tipo Comprobante" field="tipoComprobante" columnas="#|Nombre" titulo-modal="Seleccionar Tipo Comprobante" :value="$tipoComprobanteGasto" key="Alt+C" :$action/>  
     </div>
 @endsection
 
@@ -39,7 +41,7 @@
 @endsection
 
 @section('Bundles')
-<x-bundle src="wraps" />
+<x-bundle src="dataTable|search|wraps" />
 @endsection
 
 @section('PageJs')
@@ -47,6 +49,17 @@
     init = function($) {
         let fecha       = new wrapCalendar('fecha'),
             importe     = new wrapMoney("#importe", null);
+
+        $("#select_tipoComprobante").MegaSearch({
+            titulo: "Seleccionar Tipo Comprobante",
+            field: "tipoComprobante",
+            openKey: "c",
+            focusSearch: true,
+            dataTableOptions: {
+                ajaxUrl: "{{ asset('tipos_comprobantes/creditos') }}",
+                columns: "id|descripcion"
+            }
+        });
     }
 </script>
 

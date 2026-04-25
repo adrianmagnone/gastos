@@ -35,9 +35,9 @@
                 </td>
                 <td>{{ $movimiento['fecha'] }}</td>
                 <td>{{ $movimiento['descripcion'] }}</td>
-                <td class="text-end">{{ $movimiento['importeFormat'] }}</td>
+                <td class="text-end text-nowrap font-monospace fw-medium">{{ $movimiento['importeFormat'] }}</td>
                 <td>{{ $movimiento['persona'] }}</td>
-                <td>
+                <td style="padding: .2rem .2rem;">
                     <input type="text" class="form-control form-control-sm" name="idComprador[{{ $loop->index }}]" maxlength="10" value="{{ $movimiento['cuit'] }}" style="width: 200px;" >
                 </td>
             </tr>

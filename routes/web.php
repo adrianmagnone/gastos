@@ -24,18 +24,8 @@ use App\Http\Controllers\CuentasController;
 use App\Http\Controllers\CuentasCorrientesController;
 use App\Http\Controllers\MonotributoController;
 use App\Http\Controllers\PersonasController;
+use App\Http\Controllers\TiposComprobantesController;
 use App\Http\Controllers\ResumenFacturacionController;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 Route::get('/login', function () {
     return view('welcome');
@@ -61,6 +51,8 @@ Route::get('movimientos/excel',                 [MovimientosController::class, '
 Route::get('movimiento/nuevo',                  [MovimientosController::class, 'create']);
 Route::post('movimiento/guardar',               [MovimientosController::class, 'store'])->name('movimiento.guardar');
 Route::get('movimiento/editar/{id}',            [MovimientosController::class, 'edit']);
+Route::get('movimiento/borrar/{id}',            [MovimientosController::class, 'delete']);
+Route::post('movimiento/borrar',                [MovimientosController::class, 'saveDelete'])->name('movimiento.borrar');
 Route::get('movimientos/importar_ingresos',     [MovimientosController::class, 'importIng']);
 Route::post('movimientos/lee_ingresos',         [MovimientosController::class, 'readIng']);
 Route::post('movimientos/guarda_ingresos',      [MovimientosController::class, 'storeIng']);
@@ -191,6 +183,10 @@ Route::post('cuenta_corriente/imputacion',           [CuentasCorrientesControlle
 Route::get('cuenta_corriente/ver_imputacion/{id}',   [CuentasCorrientesController::class, 'viewImput']);
 Route::get('cuenta_corriente/crear_gasto/{id}',      [CuentasCorrientesController::class, 'createGasto']);
 Route::post('cuenta_corriente/guardar_gasto',        [CuentasCorrientesController::class, 'storeGasto'])->name('cuenta_corriente.guardar_gasto');
+
+// TIPOS DE COMPROBANTES
+Route::get('tipos_comprobantes/creditos/{id?}',      [TiposComprobantesController::class, 'getCreditos']);
+Route::get('tipos_comprobantes/debitos/{id?}',       [TiposComprobantesController::class, 'getDebitos']);
 
 // RESUMEN DE FACTURACION - MONOTRIBUTO
 Route::get('monotributo',                            [MonotributoController::class, 'index'])->name('monotributo');

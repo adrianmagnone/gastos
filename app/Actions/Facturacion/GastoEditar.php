@@ -11,6 +11,7 @@ use App\Models\Imputacion;
 class GastoEditar extends EditAction
 {
     protected $movimiento;
+    protected $importeImputar;
 
     function __construct()
     {
@@ -34,7 +35,8 @@ class GastoEditar extends EditAction
     protected function aditionalDataForEdit(&$entidad = null)
     {
         return [
-            'movimiento'   => CuentaCorriente::find($this->movimiento)
+            'movimiento'   => CuentaCorriente::find($this->movimiento),
+            'tipoComprobanteGasto' => config('define.comprobantes.gastos'),
         ];
     }
 
@@ -50,17 +52,22 @@ class GastoEditar extends EditAction
         return [
             'fecha'       => ['date_format:d/m/Y', 'nullable'],
             'importe'     => ['numeric', 'decimal:2', 'required'],
+            'tipoComprobante_id' => ['required', 'numeric', 'integer', 'exists:tipos_comprobantes,id'],
         ];
     }
 
 	public function getRecord() : array
 	{
+        $this->movimiento = CuentaCorriente::find($this->idMovimiento);
+        
+        $this->importeImputar = \min((float)$this->importe, (float)$this->movimiento->saldo);
+
         return [
             'cuenta_id'                  => $this->cuenta_id,
             'fecha'                      => $this->dateOrNull('fecha'),
-            'tipoComprobante_id'         => config('define.comprobantes.gastos'),
+            'tipoComprobante_id'         => $this->tipoComprobante_id,
             'puntoVenta'                 => 1,
-            'numeroComprobante'          => CuentaCorriente::ultimoNumeroGasto() + 1,
+            'numeroComprobante'          => CuentaCorriente::ultimoNumeroGasto($this->tipoComprobante_id) + 1,
             'tipoDocumento'              => $this->tipoDocumento,
             'identificadorComprador'     => $this->identificadorComprador,
             'persona_id'                 => $this->persona_id,
@@ -72,7 +79,7 @@ class GastoEditar extends EditAction
             'importePercepcionIB'        => 0,
             'importePercepcionMunicipal' => 0,
             'importeImpuestoInterno'     => 0,
-            'saldo'                      => 0,
+            'saldo'                      => $this->importe - $this->importeImputar,
             'columna'                    => 'H',
         ];
 	}
@@ -82,12 +89,11 @@ class GastoEditar extends EditAction
         $imputar = [
             'comprobante_debe'  => $this->idMovimiento,
             'comprobante_haber' => $entidad->id,
-            'importe'           => $this->importe,
+            'importe'           => $this->importeImputar,
         ];
         Imputacion::create($imputar);
 
-        $movimiento = CuentaCorriente::find($this->idMovimiento);
-        $movimiento->saldo -= $this->importe;
-        $movimiento->save();
+        $this->movimiento->saldo -= $this->importeImputar;
+        $this->movimiento->save();
     }
 }

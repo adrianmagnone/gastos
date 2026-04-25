@@ -43,13 +43,29 @@
 			columns: "fecha|descripcion~f|categoria|total|importe_cuota~f|cuotas|pendientes|edit~f|delete~f",
 			columnDefs: [
 				{ data: "cuotas",         className: "text-center" },
-				{ data: "importe_cuota",  className: "text-end"    },
-				{ data: "total",          className: "text-end"    },
+				{ data: "importe_cuota",  className: "text-end text-nowrap font-monospace fw-medium"    },
+				{ data: "total",          className: "text-end text-nowrap font-monospace fw-medium"    },
 				{
     				data: "pendientes",
-    				render: ( data, type, row, meta ) => (row.pendientes > 0) 
-								? `${row.pendientes} de ${row.cuotas}<progress class="progress" value="${row.pendientes}" max="12"></progress>`
-								: ''
+    				render: function( data, type, row, meta ) {
+						if (row.pendientes > 0) 
+						{
+							let miPorc     = (row.cuotas* 100) / 12,
+							    porcDeuda  = (miPorc * row.pendientes) / row.cuotas,
+								porcPagado = miPorc - porcDeuda;
+
+							return `${row.pendientes} de ${row.cuotas}
+								<div class="progress-stacked">
+									<div class="progress" style="width: ${porcDeuda}%">
+										<div class="progress-bar bg-danger"></div>
+									</div>
+									<div class="progress" style="width: ${porcPagado}%">
+										<div class="progress-bar bg-success"></div>
+									</div>
+								</div>`
+						}
+						return ''
+					} 
   				}
 			],
 			createdRow: function( row, data, dataIndex ) {

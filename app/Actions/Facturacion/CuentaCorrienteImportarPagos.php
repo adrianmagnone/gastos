@@ -40,7 +40,8 @@ class CuentaCorrienteImportarPagos extends ImportFileAction
         return [
             'listaBancos' => [
                 1 => 'Banco Macro',
-                2 => 'Banco Hipotecario'
+                2 => 'Banco Hipotecario',
+                3 => 'Banco Hipotecario 2026'
             ]
         ];
     }
@@ -48,7 +49,7 @@ class CuentaCorrienteImportarPagos extends ImportFileAction
     public function rulesFile(): array
     {
         return [
-            'banco'        => ['numeric', 'integer', 'in:1,2', 'required'],
+            'banco'        => ['numeric', 'integer', 'in:1,2,3', 'required'],
             'fileIngresos' => ['required', 'mimes:csv', 'max:2048'],
         ];
     }
@@ -71,6 +72,7 @@ class CuentaCorrienteImportarPagos extends ImportFileAction
         match ((int)$this->banco) {
             1 => $this->procesarBancoMacro($record),
             2 => $this->procesarBancoHipotecacio($record),
+            3 => $this->procesarBancoHipotecario2026($record),  
         };
     }
 
@@ -143,6 +145,42 @@ class CuentaCorrienteImportarPagos extends ImportFileAction
                 'importeFormat'   => Formatter::moneyArg($importe),
                 'fecha'           => $record[1],
                 'descripcion'     => $record[3],
+                'cuit'            => ($persona) ? $persona->identificador : '',
+                'persona'         => ($persona) ? $persona->abreviatura : ''
+            ];
+        }
+    }
+
+    /* 
+    * 0 => string '28/09/2023' (length=10)        Fecha
+    * 1 => string 'MERCADOPAGO*MCART' (length=0)  Descripcion del Movimiento
+    * 2 => string '-6250' (length=5)             Importe del Movimiento
+    * 3 => string '20699,67' (length=8)          Saldo 
+    */
+    protected function procesarBancoHipotecario2026($record)
+    {
+        \Log::info($record[2]);    
+        $importe = str_replace ('.', '', $record[2]);
+        \Log::info($importe);    
+        $importe = (float)str_replace (',', '.', $importe);
+        \Log::info($importe);    
+        \Log::info("=======================================");    
+
+        $cuit    = '';
+        
+        if (preg_match('/[0-9]{8,11}/', $record[1], $matches))
+        {
+            $cuit = $matches[0];
+        }
+        $persona = $this->getPersona($cuit);
+
+        if ($importe > 0)
+        {
+            $this->data[] = [
+                'importe'         => $importe,
+                'importeFormat'   => Formatter::moneyArg($importe),
+                'fecha'           => $record[0],
+                'descripcion'     => $record[1],
                 'cuit'            => ($persona) ? $persona->identificador : '',
                 'persona'         => ($persona) ? $persona->abreviatura : ''
             ];
