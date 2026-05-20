@@ -45,7 +45,7 @@ class MovimientoEditar extends EditAction
     protected function _createModel()
     {
         $model = new $this->model;
-        $model->tipo = Movimiento::Tipo('Gasto');
+        $model->tipo = Movimiento::TipoFrom('Gasto');
         return $model;
     }
 

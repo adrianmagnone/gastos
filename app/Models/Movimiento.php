@@ -94,14 +94,14 @@ class Movimiento extends Model
         );
     }
 
-    public static function Tipo($value)
+    public static function TipoFrom($value)
     {
         $keys = \array_keys(self::TIPOS, $value);
 
         return \array_key_exists(0, $keys) ? $keys[0] : '';
     }
 
-    public static function TipoPago($value)
+    public static function TipoPagoFrom($value = 0)
     {
         $keys = \array_keys(self::TIPOS_PAGOS, $value);
 
