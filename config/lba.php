@@ -31,7 +31,8 @@ return [
             'secure'   => env('DEFINE_EXCEL_COOKIE_SECURE', false),
             'httpOnly' => env('DEFINE_EXCEL_COOKIE_HTTPONLY', false)
         ],
-        'clase_formato' => env('DEFINE_CLASE_FORMATO_EXCEL', Aiglos\Lba\Excel\FormatBase::class)
+        'clase_formato' => env('DEFINE_CLASE_FORMATO_EXCEL', Aiglos\Lba\Excel\FormatBase::class),
+        'excelTable'    => env('DEFINE_EXCEL_TABLE', 1)
     ],
 
 
