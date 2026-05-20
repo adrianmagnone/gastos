@@ -46,6 +46,7 @@ class MovimientoEditar extends EditAction
     {
         $model = new $this->model;
         $model->tipo = Movimiento::TipoFrom('Gasto');
+        $model->tipoPago = Movimiento::TipoPagoFrom('Tarjeta de debito');
         return $model;
     }
 
