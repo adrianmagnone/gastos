@@ -148,7 +148,8 @@ class ImportarIngreso extends ImportFileAction
     protected function aditionalDataForEdit(&$entidad = null)
     {
         return [
-            'data' => $this->data
+            'data' => $this->data,
+            'formasPagos' => Movimiento::TIPOS_PAGOS,
         ];
     }
 
@@ -161,6 +162,7 @@ class ImportarIngreso extends ImportFileAction
             // 'fecha.*'      => ['required', 'date_format:d/m/Y'],
             'descripcion'  => ['array'],
             'importe'      => ['required', 'array', 'min:1'],
+            'tipoPago'     => ['required', 'numeric', 'integer', 'in:1,2,3,4,5,6,7,99'],
             // 'importe.*'    => ['required', 'numeric', 'decimal:2'],
         ];
     }
@@ -178,7 +180,8 @@ class ImportarIngreso extends ImportFileAction
                 'descripcion'  => ($this->observacion[$index])
                                         ? $this->descripcion[$index] . ' - ' . $this->observacion[$index]
                                         : $this->descripcion[$index],
-                'importe'      => (float)$this->importe[$index],    
+                'importe'      => (float)$this->importe[$index],
+                'tipoPago'     => (int)$this->tipoPago,
             ];
         }
 

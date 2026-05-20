@@ -8,6 +8,8 @@
 
 <div class="row">
     <x-form.search col="4" label="Categoria" field="categoria" columnas="#|Nombre" titulo-modal="Seleccionar Categoria" value=""/>
+
+    <x-form.select col="4" label="Tipo de Pago" field="tipoPago" id="tipoPago" :options="$formasPagos" value="" />
 </div>
 
 <div class="row">
@@ -52,6 +54,8 @@
 @section('PageJs')
 <script type="text/javascript">
     init = function($) {
+
+        let tipoPago = new wrapSelect("#tipoPago", null);
         
         $("#select_categoria").MegaSearch({
             titulo: "Seleccionar categoria",

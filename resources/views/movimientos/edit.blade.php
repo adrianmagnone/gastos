@@ -22,6 +22,10 @@
     <div class="row">
         <x-form.money col="4" field="importe" id="importe" label="Importe" :value="$entity->importe_edit" :$action />
     </div>
+
+    <div class="row">
+        <x-form.toggle-icons col="8" field="tipoPago" label="Tipo de pago" :value="$entity->tipoPago" :options="$tiposPagos" :$action />
+    </div>
 @endsection
 
 @section('FormFooter')

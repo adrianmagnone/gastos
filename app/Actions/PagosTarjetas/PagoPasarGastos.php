@@ -33,7 +33,8 @@ class PagoPasarGastos extends ProcessOneAction
                 'tipo'         => 2,
                 'categoria_id' => $detalle->categoria_id,
                 'descripcion'  => $detalle->compra_descripcion,
-                'importe'      => $detalle->importe
+                'importe'      => $detalle->importe,
+                'tipoPago'     => Movimiento::TipoPago('Tarjeta de credito')
             ];
             Movimiento::create($gasto);
         }
@@ -44,7 +45,8 @@ class PagoPasarGastos extends ProcessOneAction
             'tipo'         => 2,
             'categoria_id' => config('define.categorias.seguros'),
             'descripcion'  => 'Tarjeta',
-            'importe'      => $this->entidad->totalSeguros
+            'importe'      => $this->entidad->totalSeguros,
+            'tipoPago'     => Movimiento::TipoPago('Tarjeta de credito')
         ];
         Movimiento::create($gastoSeguro);
 
@@ -54,7 +56,8 @@ class PagoPasarGastos extends ProcessOneAction
             'tipo'         => 2,
             'categoria_id' => config('define.categorias.tarjeta'),
             'descripcion'  => $this->entidad->descripcion_tarjeta,
-            'importe'      => $this->entidad->total_gastos
+            'importe'      => $this->entidad->total_gastos,
+            'tipoPago'     => Movimiento::TipoPago('Tarjeta de credito')
         ];
         Movimiento::create($gastoTarjeta);
 

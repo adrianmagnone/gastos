@@ -17,6 +17,18 @@ class Movimiento extends Model
         2 => 'Gasto'
     ];
 
+    const TIPOS_PAGOS = [
+        0 => 'Sin especificar',
+        1 => 'Efectivo',
+        2 => 'Tarjeta de credito',
+        3 => 'Tarjeta de debito',
+        4 => 'Transferencia',
+        5 => 'Cheque',
+        6 => 'Billetera virtual',
+        7 => 'Pago Bancario',
+        99 => 'Otro'
+    ];
+
     protected $table = "movimientos";
 
     protected $fillable = [
@@ -24,7 +36,8 @@ class Movimiento extends Model
         'tipo',
         'categoria_id',
         'descripcion',
-        'importe'
+        'importe',
+        'tipoPago'
     ];
 
     public function categoria() : \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -83,9 +96,16 @@ class Movimiento extends Model
 
     public static function Tipo($value)
     {
-        $keys = array_keys(self::TIPOS, $value);
+        $keys = \array_keys(self::TIPOS, $value);
 
-        return $keys[0];
+        return \array_key_exists(0, $keys) ? $keys[0] : '';
+    }
+
+    public static function TipoPago($value)
+    {
+        $keys = \array_keys(self::TIPOS_PAGOS, $value);
+
+        return \array_key_exists(0, $keys) ? $keys[0] : 'No definido';
     }
 
     public static function actualizarResumen($anio)

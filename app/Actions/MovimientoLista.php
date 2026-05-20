@@ -50,6 +50,7 @@ class MovimientoLista extends SelectAction
         $record->descripcion = $modelData->descripcion;
         $record->importe     = Formatter::moneyArg($modelData->importe);
         $record->tipo        = $modelData->tipo;
+        $record->tipoPago    = Movimiento::TIPOS_PAGOS[$modelData->tipoPago] ?? 'No definido';
         
         return $record;
     }
