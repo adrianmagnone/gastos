@@ -29,7 +29,7 @@ return [
     'css' => [
         'tabler' => [
             'css/tabler.min.css',
-            'https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css'
+            'https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css'
         ],
         'dataTable' => [
             'css/datatables.min.css'
