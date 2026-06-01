@@ -47,17 +47,18 @@ class GastoTarjetaLista extends SelectAction
     {
         $record = new \stdClass();
 
-        $record->id          = $modelData->id;
-        $record->fecha       = $modelData->fecha_format;
-        $record->descripcion = $modelData->descripcion;
-        $record->categoria   = $modelData->descripcion_categoria;
-        $record->total       = $modelData->total_format;
+        $record->id            = $modelData->id;
+        $record->fecha         = $modelData->fecha_format;
+        $record->descripcion   = $modelData->descripcion;
+        $record->categoria     = $modelData->descripcion_categoria;
+        $record->total         = $modelData->total_format;
         $record->importe_cuota = $modelData->importe_cuota_format;
-        $record->cuotas      = $modelData->cuotas;
-        $record->pendientes  = $modelData->cuotasPendientes;
+        $record->cuotas        = $modelData->cuotas;
+        $record->pendientes    = $modelData->cuotasPendientes;
 
-        $record->puedeEliminar = ($modelData->cuotas == $modelData->cuotasPendientes) ? 1 : 0;
-        
+        $record->puedeEditar   = ((int)$modelData->cuotas == (int)$modelData->cuotasPendientes) ? 1 : 0;
+        $record->puedeEliminar = ((int)$modelData->cuotas == (int)$modelData->cuotasPendientes) ? 1 : 0;
+
         return $record;
     }
 }
