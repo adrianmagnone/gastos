@@ -76,17 +76,31 @@ class ResumenFondoTotales extends SelectAction
         $record->saldo_egresos   = (float)$modelData->saldo_egresos;
         $record->saldo           = Formatter::moneyArg($this->saldo);
         $record->posible_f       = Formatter::moneyArg(0);
-        $record->puedoGastar_f   = Formatter::moneyArg($this->puedoGastar + $this->saldo);
 
-        if ($periodoFuturo && $this->ingresoVirtual)
+        if ($this->ingresoVirtual)
         {
             $ingresoPosible = $this->ingresoVirtual - $record->ingresos;
-            if ($ingresoPosible > 0)
+            if ($periodoFuturo)
             {
-                $record->posible_f      = Formatter::moneyArg($ingresoPosible);
-                $this->puedoGastar      = $this->puedoGastar + ($modelData->saldo_ingresos + $ingresoPosible);
+                if ($ingresoPosible > 0)
+                {
+                    $record->posible_f      = Formatter::moneyArg($ingresoPosible);
+                    $this->puedoGastar      = $this->puedoGastar + ($modelData->saldo_ingresos + $ingresoPosible);
+                }
+            }
+            else
+            {
+                $cincoPercert = $record->ingresos * 0.05;
+                if ($ingresoPosible > $cincoPercert)
+                {
+                    $record->posible_f      = Formatter::moneyArg($ingresoPosible);
+                    $this->puedoGastar      = $this->puedoGastar + ($ingresoPosible - $modelData->saldo_ingresos);
+                }
             }
         }
+
+        $record->puedoGastar_f   = Formatter::moneyArg($this->puedoGastar + $this->saldo);
+
         return $record;
     }
 }
