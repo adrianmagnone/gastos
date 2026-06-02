@@ -141,14 +141,16 @@
       :subtitulo="$widTareas['subtitulo']"
     />
 
-    @if ($widLiquidacion)
-    <x-widget.cardsm 
-      md="6" xl="4" bg="danger"
-      route="pagos_tarjetas"
-      icon="ti-credit-card-filled"
-      :titulo="$widLiquidacion->periodo_format . ' - ' . $widLiquidacion->total_pagado_format"
-      subtitulo="Liquidación pendiente de pago"
-    />
+    @if ($widLiquidaciones->count() > 0)
+        @foreach ($widLiquidaciones as $widLiquidacion)
+            <x-widget.cardsm 
+                md="6" xl="4" bg="danger"
+                route="pagos_tarjetas"
+                icon="ti-credit-card"
+                :titulo="$widLiquidacion->descripcion_tarjeta . ' ' . $widLiquidacion->periodo_format . ' - ' . $widLiquidacion->total_pagado_format"
+                :subtitulo="'Liquidación a pagar el ' . $widLiquidacion->fecha_pago_format"
+            />
+        @endforeach
     @endif
 
     <div class="col-md-6 col-xl-4">
@@ -178,7 +180,7 @@
         <div class="card">
         <div class="card-body">
             <h3 class="card-title">Deuda Tarjetas</h3>
-            <div id="chart-completion-tasks-8">
+            <div id="chart-deuda-tarjetas">
             </div>
         </div>
         </div>
@@ -196,7 +198,7 @@
 <script>
     init = function($) {};  
     document.addEventListener("DOMContentLoaded", function () {
-        var chart8 = new ApexCharts(document.getElementById('chart-mis-movimientos'), {
+        let chart1 = new ApexCharts(document.getElementById('chart-mis-movimientos'), {
             chart: {
                 type: "bar",
                 fontFamily: 'inherit',
@@ -259,12 +261,10 @@
                 show: false,
             }
         });
-        chart8.render();
-    });
+        chart1.render();
 
-    document.addEventListener("DOMContentLoaded", function () {
-      	window.ApexCharts && (new ApexCharts(document.getElementById('chart-mis-saldos'), {
-      		chart: {
+        let chart2 = new ApexCharts(document.getElementById('chart-mis-saldos'), {
+          chart: {
       			type: "line",
       			fontFamily: 'inherit',
       			height: 240,
@@ -319,7 +319,90 @@
       		legend: {
       			show: false,
       		}
-      	})).render();
-      });
-  </script>
+        });
+        chart2.render();
+
+        let chart3 = new ApexCharts(document.getElementById('chart-deuda-tarjetas'), {
+          chart: {
+              type: "bar",
+              fontFamily: "inherit",
+              height: 240,
+              parentHeightOffset: 0,
+              toolbar: {
+                show: false,
+              },
+              animations: {
+                enabled: false,
+              },
+            },
+            plotOptions: {
+              bar: {
+                columnWidth: "50%",
+              },
+            },
+            dataLabels: {
+              enabled: false,
+            },
+            series: [
+              {
+                name: "Development",
+                data: [30, 20, 50, 40, 60, 50],
+              },
+              {
+                name: "Marketing",
+                data: [200, 130, 90, 240, 130, 220],
+              },
+              {
+                name: "Sales",
+                data: [300, 200, 160, 400, 250, 250],
+              },
+              {
+                name: "Sales",
+                data: [200, 130, 90, 240, 130, 220],
+              },
+            ],
+            tooltip: {
+              theme: "dark",
+            },
+            grid: {
+              padding: {
+                top: -20,
+                right: 0,
+                left: -4,
+                bottom: -4,
+              },
+              strokeDashArray: 4,
+            },
+            xaxis: {
+              labels: {
+                padding: 0,
+              },
+              tooltip: {
+                enabled: false,
+              },
+              axisBorder: {
+                show: false,
+              },
+              categories: ["2013", "2014", "2015", "2016", "2017", "2018"],
+            },
+            yaxis: {
+              labels: {
+                padding: 4,
+              },
+            },
+            colors: [
+              "color-mix(in srgb, transparent, var(--tblr-green) 100%)",
+              "color-mix(in srgb, transparent, var(--tblr-pink) 100%)",
+              "color-mix(in srgb, transparent, var(--tblr-green) 100%)",
+              "color-mix(in srgb, transparent, var(--tblr-primary) 100%)",
+            ],
+            legend: {
+              show: false,
+            }
+        });
+        chart3.render();
+    });
+    
+
+</script>
   @endsection

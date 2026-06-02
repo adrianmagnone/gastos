@@ -20,7 +20,7 @@ class IndexController extends Controller
             'serieDiferencias' => \json_encode(TotalMensualGasto::formatImporteDiferencia($data)),
             'labelDiferencias' => \json_encode(TotalMensualGasto::formatLabelDiferencia($data)),
             'widTareas'        => $this->getTareas(),
-            'widLiquidacion'   => $this->getLiquidacion()
+            'widLiquidaciones' => $this->getLiquidacion()
         ]);
     }
 
@@ -52,6 +52,6 @@ class IndexController extends Controller
 
     protected function getLiquidacion()
     {
-        return \App\Models\PagoTarjeta::where('pasadoGasto', 0)->first();
+        return \App\Models\PagoTarjeta::where('pasadoGasto', 0)->get();
     }
 }
