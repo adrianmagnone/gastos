@@ -15,7 +15,7 @@
 
 @section('ListFilters')
 	<div class="row w-100">
-		<x-form.select mb="1" col="2" label="Tarjeta" field="tarjeta" id="tarjeta" value="" :options="$listaTarjetas" fieldValue="id" fieldText="nombre" />
+		<x-form.select mb="1" col="2" label="Tarjeta" field="tarjeta" id="tarjeta" value="" :options="$listaTarjetas" fieldValue="id" fieldText="nombre"  blankText="Todas las Tarjetas"/>
 
 		<x-form.select-by-state mb="1" col="2" id="estado" label="Estado" field="estado" texts="Todos|Adeudados|Pagados"  value="S" />
 	</div>
