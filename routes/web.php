@@ -31,6 +31,11 @@ Route::get('/login', function () {
     return view('welcome');
 })->name('login');
 
+Route::get('/job', function () {
+    $job = new \App\Jobs\ActualizarTotalesMensuales();
+    dispatch($job);
+})->name('job');
+
 
 Route::get('/',                                 [IndexController::class, 'index']);
 

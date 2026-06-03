@@ -11,6 +11,12 @@ class TotalMensualGasto extends Model
 {
     protected $table = "totales_mensuales_gastos";
 
+    protected $fillable = [
+        'periodo',
+        'total_ingresos',
+        'total_egresos'
+    ];
+
     public static function getLast()
     {
         $originalData = TotalMensualGasto::orderBy('periodo', 'desc')->take(12)->get();
