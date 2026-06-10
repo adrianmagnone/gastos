@@ -11,128 +11,6 @@
 @section('ListBody')
 
 <div class="row row-deck row-cards">
-    {{-- <div class="col-sm-6 col-lg-3">
-      <div class="card">
-        <div class="card-body">
-          <div class="d-flex align-items-center">
-            <div class="subheader">Sales</div>
-            <div class="ms-auto lh-1">
-              <div class="dropdown">
-                <a class="dropdown-toggle text-muted" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Last 7 days</a>
-                <div class="dropdown-menu dropdown-menu-end">
-                  <a class="dropdown-item active" href="#">Last 7 days</a>
-                  <a class="dropdown-item" href="#">Last 30 days</a>
-                  <a class="dropdown-item" href="#">Last 3 months</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="h1 mb-3">75%</div>
-          <div class="d-flex mb-2">
-            <div>Conversion rate</div>
-            <div class="ms-auto">
-              <span class="text-green d-inline-flex align-items-center lh-1">
-                7% <!-- Download SVG icon from http://tabler-icons.io/i/trending-up -->
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="3 17 9 11 13 15 21 7" /><polyline points="14 7 21 7 21 14" /></svg>
-              </span>
-            </div>
-          </div>
-          <div class="progress progress-sm">
-            <div class="progress-bar bg-primary" style="width: 75%" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" aria-label="75% Complete">
-              <span class="visually-hidden">75% Complete</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-6 col-lg-3">
-      <div class="card">
-        <div class="card-body">
-          <div class="d-flex align-items-center">
-            <div class="subheader">Revenue</div>
-            <div class="ms-auto lh-1">
-              <div class="dropdown">
-                <a class="dropdown-toggle text-muted" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Last 7 days</a>
-                <div class="dropdown-menu dropdown-menu-end">
-                  <a class="dropdown-item active" href="#">Last 7 days</a>
-                  <a class="dropdown-item" href="#">Last 30 days</a>
-                  <a class="dropdown-item" href="#">Last 3 months</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="d-flex align-items-baseline">
-            <div class="h1 mb-0 me-2">$4,300</div>
-            <div class="me-auto">
-              <span class="text-green d-inline-flex align-items-center lh-1">
-                8% <!-- Download SVG icon from http://tabler-icons.io/i/trending-up -->
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="3 17 9 11 13 15 21 7" /><polyline points="14 7 21 7 21 14" /></svg>
-              </span>
-            </div>
-          </div>
-        </div>
-        <div id="chart-revenue-bg" class="chart-sm"></div>
-      </div>
-    </div>
-    <div class="col-sm-6 col-lg-3">
-      <div class="card">
-        <div class="card-body">
-          <div class="d-flex align-items-center">
-            <div class="subheader">New clients</div>
-            <div class="ms-auto lh-1">
-              <div class="dropdown">
-                <a class="dropdown-toggle text-muted" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Last 7 days</a>
-                <div class="dropdown-menu dropdown-menu-end">
-                  <a class="dropdown-item active" href="#">Last 7 days</a>
-                  <a class="dropdown-item" href="#">Last 30 days</a>
-                  <a class="dropdown-item" href="#">Last 3 months</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="d-flex align-items-baseline">
-            <div class="h1 mb-3 me-2">6,782</div>
-            <div class="me-auto">
-              <span class="text-yellow d-inline-flex align-items-center lh-1">
-                0% <!-- Download SVG icon from http://tabler-icons.io/i/minus -->
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><line x1="5" y1="12" x2="19" y2="12" /></svg>
-              </span>
-            </div>
-          </div>
-          <div id="chart-new-clients" class="chart-sm"></div>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-6 col-lg-3">
-      <div class="card">
-        <div class="card-body">
-          <div class="d-flex align-items-center">
-            <div class="subheader">Active users</div>
-            <div class="ms-auto lh-1">
-              <div class="dropdown">
-                <a class="dropdown-toggle text-muted" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Last 7 days</a>
-                <div class="dropdown-menu dropdown-menu-end">
-                  <a class="dropdown-item active" href="#">Last 7 days</a>
-                  <a class="dropdown-item" href="#">Last 30 days</a>
-                  <a class="dropdown-item" href="#">Last 3 months</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="d-flex align-items-baseline">
-            <div class="h1 mb-3 me-2">2,986</div>
-            <div class="me-auto">
-              <span class="text-green d-inline-flex align-items-center lh-1">
-                4% <!-- Download SVG icon from http://tabler-icons.io/i/trending-up -->
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="3 17 9 11 13 15 21 7" /><polyline points="14 7 21 7 21 14" /></svg>
-              </span>
-            </div>
-          </div>
-          <div id="chart-active-users" class="chart-sm"></div>
-        </div>
-      </div>
-    </div> --}}
-
     <x-widget.cardsm 
       md="6" xl="4"
       route="tareas"
@@ -152,11 +30,10 @@
             />
         @endforeach
     @endif
+</div>
 
-    <div class="col-md-6 col-xl-4">
-    </div>
-
-    <div class="col-lg-6 col-xl-6">
+<div class="row row-deck row-cards">
+   <div class="col-lg-6 col-xl-6">
         <div class="card">
         <div class="card-body">
             <h3 class="card-title">Mis Movimientos</h3>
@@ -176,7 +53,8 @@
       </div>
   </div>
 
-    <div class="col-lg-6 col-xl-6">
+</div>
+    <!-- <div class="col-lg-6 col-xl-6">
         <div class="card">
         <div class="card-body">
             <h3 class="card-title">Deuda Tarjetas</h3>
@@ -184,7 +62,7 @@
             </div>
         </div>
         </div>
-    </div>
+    </div> -->
 
 </div>
 
@@ -322,85 +200,85 @@
         });
         chart2.render();
 
-        let chart3 = new ApexCharts(document.getElementById('chart-deuda-tarjetas'), {
-          chart: {
-              type: "bar",
-              fontFamily: "inherit",
-              height: 240,
-              parentHeightOffset: 0,
-              toolbar: {
-                show: false,
-              },
-              animations: {
-                enabled: false,
-              },
-            },
-            plotOptions: {
-              bar: {
-                columnWidth: "50%",
-              },
-            },
-            dataLabels: {
-              enabled: false,
-            },
-            series: [
-              {
-                name: "Development",
-                data: [30, 20, 50, 40, 60, 50],
-              },
-              {
-                name: "Marketing",
-                data: [200, 130, 90, 240, 130, 220],
-              },
-              {
-                name: "Sales",
-                data: [300, 200, 160, 400, 250, 250],
-              },
-              {
-                name: "Sales",
-                data: [200, 130, 90, 240, 130, 220],
-              },
-            ],
-            tooltip: {
-              theme: "dark",
-            },
-            grid: {
-              padding: {
-                top: -20,
-                right: 0,
-                left: -4,
-                bottom: -4,
-              },
-              strokeDashArray: 4,
-            },
-            xaxis: {
-              labels: {
-                padding: 0,
-              },
-              tooltip: {
-                enabled: false,
-              },
-              axisBorder: {
-                show: false,
-              },
-              categories: ["2013", "2014", "2015", "2016", "2017", "2018"],
-            },
-            yaxis: {
-              labels: {
-                padding: 4,
-              },
-            },
-            colors: [
-              "color-mix(in srgb, transparent, var(--tblr-green) 100%)",
-              "color-mix(in srgb, transparent, var(--tblr-pink) 100%)",
-              "color-mix(in srgb, transparent, var(--tblr-green) 100%)",
-              "color-mix(in srgb, transparent, var(--tblr-primary) 100%)",
-            ],
-            legend: {
-              show: false,
-            }
-        });
-        chart3.render();
+        // let chart3 = new ApexCharts(document.getElementById('chart-deuda-tarjetas'), {
+        //   chart: {
+        //       type: "bar",
+        //       fontFamily: "inherit",
+        //       height: 240,
+        //       parentHeightOffset: 0,
+        //       toolbar: {
+        //         show: false,
+        //       },
+        //       animations: {
+        //         enabled: false,
+        //       },
+        //     },
+        //     plotOptions: {
+        //       bar: {
+        //         columnWidth: "50%",
+        //       },
+        //     },
+        //     dataLabels: {
+        //       enabled: false,
+        //     },
+        //     series: [
+        //       {
+        //         name: "Development",
+        //         data: [30, 20, 50, 40, 60, 50],
+        //       },
+        //       {
+        //         name: "Marketing",
+        //         data: [200, 130, 90, 240, 130, 220],
+        //       },
+        //       {
+        //         name: "Sales",
+        //         data: [300, 200, 160, 400, 250, 250],
+        //       },
+        //       {
+        //         name: "Sales",
+        //         data: [200, 130, 90, 240, 130, 220],
+        //       },
+        //     ],
+        //     tooltip: {
+        //       theme: "dark",
+        //     },
+        //     grid: {
+        //       padding: {
+        //         top: -20,
+        //         right: 0,
+        //         left: -4,
+        //         bottom: -4,
+        //       },
+        //       strokeDashArray: 4,
+        //     },
+        //     xaxis: {
+        //       labels: {
+        //         padding: 0,
+        //       },
+        //       tooltip: {
+        //         enabled: false,
+        //       },
+        //       axisBorder: {
+        //         show: false,
+        //       },
+        //       categories: ["2013", "2014", "2015", "2016", "2017", "2018"],
+        //     },
+        //     yaxis: {
+        //       labels: {
+        //         padding: 4,
+        //       },
+        //     },
+        //     colors: [
+        //       "color-mix(in srgb, transparent, var(--tblr-green) 100%)",
+        //       "color-mix(in srgb, transparent, var(--tblr-pink) 100%)",
+        //       "color-mix(in srgb, transparent, var(--tblr-green) 100%)",
+        //       "color-mix(in srgb, transparent, var(--tblr-primary) 100%)",
+        //     ],
+        //     legend: {
+        //       show: false,
+        //     }
+        // });
+        // chart3.render();
     });
     
 
