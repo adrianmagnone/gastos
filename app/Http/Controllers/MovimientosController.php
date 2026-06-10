@@ -16,6 +16,7 @@ use App\Actions\Movimientos\MensualEgreso;
 use App\Actions\Movimientos\AnualIngreso;
 use App\Actions\Movimientos\AnualEgreso;
 use App\Actions\Movimientos\ImportarIngreso;
+use App\Actions\Movimientos\ImportarEgreso;
 
 class MovimientosController extends Controller
 {
@@ -104,6 +105,8 @@ class MovimientosController extends Controller
         return redirect()->route('movimientos_anuales');
     }
 
+    // Importar Ingresos
+
     public function importIng(ImportarIngreso $action)
     {
         return $action->runImport();
@@ -115,6 +118,22 @@ class MovimientosController extends Controller
     }
 
     public function storeIng(Request $request, ImportarIngreso $action)
+    {
+        return $action->runForSave($request);
+    }
+
+    // Importar Egresos
+    public function importEgr(ImportarEgreso $action)
+    {
+        return $action->runImport();
+    }
+
+    public function readEgr(Request $request, ImportarEgreso $action)
+    {
+        return $action->runLoadFile($request);
+    }
+
+    public function storeEgr(Request $request, ImportarEgreso $action)
     {
         return $action->runForSave($request);
     }

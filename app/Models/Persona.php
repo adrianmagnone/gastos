@@ -44,6 +44,19 @@ class Persona extends Model
         );
     }
 
+    public static function findByCuit($cuit)
+    {
+        if (! $cuit)
+            return false;
+
+        $pagame = Persona::where('cuitPagador', $cuit)->first();
+
+        if ($pagame)
+            return $pagame;
+
+        return Persona::where('identificador', $cuit)->first();
+    }
+
     public static function findByIdFiscal($id)
     {
         return Persona::where('identificador', $id)->first();

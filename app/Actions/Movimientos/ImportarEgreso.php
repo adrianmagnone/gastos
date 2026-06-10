@@ -9,7 +9,7 @@ use App\Helpers\Formatter;
 
 use App\Models\Movimiento;
 
-class ImportarIngreso extends ImportFileAction
+class ImportarEgreso extends ImportFileAction
 {
     use \App\Lib\Import\ReadCsvBase;
 
@@ -19,15 +19,15 @@ class ImportarIngreso extends ImportFileAction
         $this->reader = \App\Lib\Import\ReadCsvBase::class;
 
         $this->urlList   = route('movimientos');
-        $this->urlImport = 'movimientos/lee_ingresos';
-        $this->urlSave   = 'movimientos/guarda_ingresos';
+        $this->urlImport = 'movimientos/lee_egresos';
+        $this->urlSave   = 'movimientos/guarda_egresos';
 
-        $this->loadView  = 'movimientos.import';
-        $this->editView  = 'movimientos.import2';
+        $this->loadView  = 'movimientos.import_egr';
+        $this->editView  = 'movimientos.import_egr2';
 
         $this->skipRows  = 1;
 
-        $this->updatedMessage = 'Los Ingresos se han importado correctamente.';
+        $this->updatedMessage = 'Los Egresos se han importado correctamente.';
     }
 
     protected function aditionalDataForLoad()
@@ -45,15 +45,15 @@ class ImportarIngreso extends ImportFileAction
     {
         return [
             'banco'        => ['numeric', 'integer', 'in:1,2,3', 'required'],
-            'fileIngresos' => ['required', 'mimes:csv', 'max:2048'],
+            'fileEgresos' => ['required', 'mimes:csv', 'max:2048'],
         ];
     }
 
     protected function loadFile()
     {
-        if ($this->request->hasFile('fileIngresos'))
+        if ($this->request->hasFile('fileEgresos'))
         {
-            return Storage::disk('local')->putFile('importar', $this->request->file('fileIngresos'));
+            return Storage::disk('local')->putFile('importar', $this->request->file('fileEgresos'));
         }
         return false;
     }
@@ -66,29 +66,29 @@ class ImportarIngreso extends ImportFileAction
             3 => \App\Lib\ArchivoBancos\LeerRegistros::BancoHipotecario2026($record),
         };
 
-        if ($registro['tipo'] === 'Ingreso')
+        if ($registro['tipo'] === 'Gasto')
             $this->data[] = $registro;
     }
 
     protected function aditionalDataForEdit(&$entidad = null)
     {
         return [
-            'data' => $this->data,
+            'data'        => $this->data,
             'formasPagos' => Movimiento::TIPOS_PAGOS,
+            'categorias'  => \App\Models\Categoria::paraEgresosPorNombre(),
         ];
     }
 
     public function rules() : array
     {
         return [
-            'categoria_id' => ['numeric', 'integer', 'required', 'exists:categorias,id'],
             'check'        => ['required', 'array', 'min:1'],
             'fecha'        => ['required', 'array', 'min:1'],
-            // 'fecha.*'      => ['required', 'date_format:d/m/Y'],
-            'descripcion'  => ['array'],
+            'observacion'  => ['array'], 
             'importe'      => ['required', 'array', 'min:1'],
-            'tipoPago'     => ['required', 'numeric', 'integer', 'in:1,2,3,4,5,6,7,99'],
-            // 'importe.*'    => ['required', 'numeric', 'decimal:2'],
+            'formaPago'    => ['required', 'array', 'min:1'],
+            'categoria'    => ['required', 'array', 'min:1'],
+            
         ];
     }
 
@@ -100,13 +100,13 @@ class ImportarIngreso extends ImportFileAction
         {
             $records[] = [
                 'fecha'        => MiDate::fromFormatTo('d/m/Y', $this->fecha[$index], 'Y-m-d'),
-                'tipo'         => Movimiento::TipoFrom('Ingreso'),
-                'categoria_id' => (int)$this->categoria_id,
+                'tipo'         => Movimiento::TipoFrom('Gasto'),
+                'categoria_id' => (int)$this->categoria[$index],
                 'descripcion'  => ($this->observacion[$index])
-                                        ? $this->descripcion[$index] . ' - ' . $this->observacion[$index]
-                                        : $this->descripcion[$index],
+                                        ? $this->observacion[$index]
+                                        : null,
                 'importe'      => (float)$this->importe[$index],
-                'tipoPago'     => (int)$this->tipoPago,
+                'tipoPago'     => (int)$this->formaPago[$index],
             ];
         }
 

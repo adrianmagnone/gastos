@@ -5,7 +5,8 @@
 @section('ListTittle', 'Ingresos - Gastos')
 
 @section('ListActions')
-<x-list.button-file  url="{{ url('movimientos/importar_ingresos') }}" text="Importar Ingresos"/>
+<x-list.button-file  url="{{ url('movimientos/importar_ingresos') }}" text="Ingresos"/>
+<x-list.button-file  url="{{ url('movimientos/importar_egresos') }}" text="Egresos"/>
 <a href="{{ route('movimientos_mensuales') }}" class="btn btn-default d-none d-sm-inline-block">
     <i class="icon ti ti-report-money"></i>
     Resumen Mensual
@@ -25,7 +26,7 @@
 @endsection
 
 @section('ListBody')
-<x-list.table columns="Fecha|Importe|Tipo|Pago|Categoria|Descripción" acciones="2" :id="false"/>
+<x-list.table :$columns acciones="2" :id="false"/>
 @endsection
 
 @section('ListBundles')
@@ -45,7 +46,7 @@
 			ajaxUrl: "{{ asset('movimientos_data') }}",
 			editUrl: "{{ asset('movimiento/editar') }}",
 			deleteUrl: "{{ asset('movimiento/borrar') }}",
-			columns: "fecha|importe~f|tipo|tipoPago|categoria~f|descripcion~f|edit~f|delete~f",
+			columns: "{{ $columnsData }}",
 			order: [[0, 'desc']],
 			columnDefs: [
 				{ data: "tipo",        className: "text-center" },

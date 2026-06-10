@@ -69,137 +69,20 @@ class CuentaCorrienteImportarPagos extends ImportFileAction
 
     public function processRecord($record)
     {
-        match ((int)$this->banco) {
-            1 => $this->procesarBancoMacro($record),
-            2 => $this->procesarBancoHipotecacio($record),
-            3 => $this->procesarBancoHipotecario2026($record),  
+        $registro = match ((int)$this->banco) {
+            1 => \App\Lib\ArchivoBancos\LeerRegistros::BancoMacro($record),
+            2 => \App\Lib\ArchivoBancos\LeerRegistros::BancoHipotecario($record),
+            3 => \App\Lib\ArchivoBancos\LeerRegistros::BancoHipotecario2026($record),
         };
-    }
 
-        /*
-    * 0 => string '09/10/2023' (length=10)   Fecha del movimiento
-    * 1 => string '69200' (length=5)         Identificacion o tipo de movimiento
-    * 2 => string 'SANCOR SALUD' (length=12) Descripcion
-    * 3 => string '-15092,13' (length=9)     Importe del movimiento
-    * 4 => string '146810,76' (length=9)     Saldo
-    */
-    protected function procesarBancoMacro($record)
-    {
-        $importe = (float)str_replace (',', '.', $record[3]);
-        $cuit    = '';
-        
-        if (preg_match('/[0-9]{8,11}/', $record[2], $matches))
+        if ($registro['tipo'] === 'Ingreso')
         {
-            $cuit = $matches[0];
-        }
-        $persona = $this->getPersona($cuit);
-
-        if ($importe > 0)
-        {
-            $this->data[] = [
-                'importe'         => $importe,
-                'importeFormat'   => Formatter::moneyArg($importe),
-                'fecha'           => $record[0],
-                'descripcion'     => $record[2],
-                'cuit'            => ($persona) ? $persona->identificador : '',
-                'persona'         => ($persona) ? $persona->abreviatura : ''
-            ];
+            $persona = Persona::findByCuit($registro['cuit']);
+            $registro['persona'] = ($persona) ? $persona->abreviatura : '';
+            $this->data[] = $registro;
         }
     }
-
-    /*
-    * 0 => string '' (length=0)
-    * 1 => string '28/09/2023' (length=10)        Fecha
-    * 2 => string '' (length=0)
-    * 3 => string 'MERCADOPAGO*MCART' (length=0)  Descripcion del Movimiento
-    * 4 => string '' (length=0)
-    * 5 => string '' (length=0)
-    * 6 => string '' (length=0)
-    * 7 => string '' (length=0)
-    * 8 => string '' (length=0)
-    * 9 => string '' (length=0)
-    * 10 => string '' (length=0)
-    * 11 => string '' (length=0)
-    * 12 => string '' (length=0)
-    * 13 => string '' (length=0)
-    * 14 => string '-6250' (length=5)             Importe del Movimiento
-    * 15 => string '' (length=0)
-    * 16 => string '20699,67' (length=8)          Saldo 
-    */
-    protected function procesarBancoHipotecacio($record)
-    {
-        $importe = (float)str_replace (',', '.', $record[14]);
-
-        $cuit    = '';
-        
-        if (preg_match('/[0-9]{8,11}/', $record[3], $matches))
-        {
-            $cuit = $matches[0];
-        }
-        $persona = $this->getPersona($cuit);
-
-        if ($importe > 0)
-        {
-            $this->data[] = [
-                'importe'         => $importe,
-                'importeFormat'   => Formatter::moneyArg($importe),
-                'fecha'           => $record[1],
-                'descripcion'     => $record[3],
-                'cuit'            => ($persona) ? $persona->identificador : '',
-                'persona'         => ($persona) ? $persona->abreviatura : ''
-            ];
-        }
-    }
-
-    /* 
-    * 0 => string '28/09/2023' (length=10)        Fecha
-    * 1 => string 'MERCADOPAGO*MCART' (length=0)  Descripcion del Movimiento
-    * 2 => string '-6250' (length=5)             Importe del Movimiento
-    * 3 => string '20699,67' (length=8)          Saldo 
-    */
-    protected function procesarBancoHipotecario2026($record)
-    {
-        \Log::info($record[2]);    
-        $importe = str_replace ('.', '', $record[2]);
-        \Log::info($importe);    
-        $importe = (float)str_replace (',', '.', $importe);
-        \Log::info($importe);    
-        \Log::info("=======================================");    
-
-        $cuit    = '';
-        
-        if (preg_match('/[0-9]{8,11}/', $record[1], $matches))
-        {
-            $cuit = $matches[0];
-        }
-        $persona = $this->getPersona($cuit);
-
-        if ($importe > 0)
-        {
-            $this->data[] = [
-                'importe'         => $importe,
-                'importeFormat'   => Formatter::moneyArg($importe),
-                'fecha'           => $record[0],
-                'descripcion'     => $record[1],
-                'cuit'            => ($persona) ? $persona->identificador : '',
-                'persona'         => ($persona) ? $persona->abreviatura : ''
-            ];
-        }
-    }
-
-    protected function getPersona($cuit)
-    {
-        if (! $cuit)
-            return false;
-
-        $pagame = Persona::where('cuitPagador', $cuit)->first();
-
-        if ($pagame)
-            return $pagame;
-
-        return Persona::where('identificador', $cuit)->first();
-    }
-
+ 
     protected function aditionalDataForEdit(&$entidad = null)
     {
         return [
@@ -257,67 +140,4 @@ class CuentaCorrienteImportarPagos extends ImportFileAction
 
         return $records;
     }
-
-    // protected function executeSaveOneByOne(&$records)
-    // {
-    //     \DB::beginTransaction();
-
-    //     $cantidad = 0;
-    //     $recibo   = 1;
-
-    //     // Obtener el ultimo numero de recibo
-    //     $ultimoRecibo = CuentaCorriente::where('tipoComprobante_id', 14)
-    //                                    ->where('puntoVenta', 1)
-    //                                    ->orderBy('numeroComprobante', 'desc')
-    //                                    ->first();
-
-    //     if ($ultimoRecibo)
-    //     {
-    //         $recibo = $ultimoRecibo->numeroComprobante + 1;
-    //     }
-
-    //     try
-    //     {
-    //         foreach ($this->comprobante as $id => $comprobante)
-    //         {
-    //             $persona = Persona::findByIdFiscal($comprobante['idComprador']);
-    //             // Recibo C
-    //             $tipoComprobante = TipoComprobante::find(14);
-
-    //             $record= [
-    //                 'cuenta_id'                  => $this->cuenta_id,
-    //                 'fecha'                      => MiDate::fromFormatTo('Ymd', $comprobante['fecha'], 'Y-m-d'),
-    //                 'tipoComprobante_id'         => $comprobante['tipoComprobante'],
-    //                 'puntoVenta'                 => 1,
-    //                 'numeroComprobante'          => $recibo++,
-    //                 'tipoDocumento'              => $persona->tipoDocumento,
-    //                 'identificadorComprador'     => $comprobante['idComprador'],
-    //                 'persona_id'                 => $persona->id,
-    //                 'importe'                    => $comprobante['importe'],
-    //                 'importePercepcion'          => 0,
-    //                 'importeNoGravado'           => 0,
-    //                 'importeExento'              => 0,
-    //                 'importePercepcionNacional'  => 0,
-    //                 'importePercepcionIB'        => 0,
-    //                 'importePercepcionMunicipal' => 0,
-    //                 'importeImpuestoInterno'     => 0,
-    //                 'saldo'                      => $comprobante['importe'],
-    //                 'columna'                    => 'H',
-    //             ];
-
-    //             CuentaCorriente::create($record);
-    //             $cantidad++;
-    //         }
-
-    //         \DB::commit();
-
-    //         $this->updatedMessage = "Se han importado {$cantidad} movimientos de pagos correctamente.";
-    //         return true;
-    //     }
-    //     catch(\Throwable $th)
-    //     {
-    //         \DB::rollback();
-    //         dd($th->getMessage());
-    //     }
-    // }
 }

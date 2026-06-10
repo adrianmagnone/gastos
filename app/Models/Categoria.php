@@ -44,4 +44,12 @@ class Categoria extends Model
                 ->whereRaw('(uso = 2 OR uso = 3)')
                 ->get();
     }
+
+    public static function paraEgresosPorNombre()
+    {
+        return Categoria::where('estado', 1)
+                ->whereRaw('(uso = 2 OR uso = 3)')
+                ->orderBy('nombre')
+                ->get();
+    }
 }

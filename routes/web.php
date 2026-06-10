@@ -62,6 +62,10 @@ Route::get('movimientos/importar_ingresos',     [MovimientosController::class, '
 Route::post('movimientos/lee_ingresos',         [MovimientosController::class, 'readIng']);
 Route::post('movimientos/guarda_ingresos',      [MovimientosController::class, 'storeIng']);
 
+Route::get('movimientos/importar_egresos',      [MovimientosController::class, 'importEgr']);
+Route::post('movimientos/lee_egresos',          [MovimientosController::class, 'readEgr']);
+Route::post('movimientos/guarda_egresos',       [MovimientosController::class, 'storeEgr']);
+
 
 Route::get('movimientos_mensuales',             [MovimientosController::class, 'resumenMensual'])->name('movimientos_mensuales');
 Route::get('movimientos_mes_ing_data',          [MovimientosController::class, 'resumenMensualIngresos']);
