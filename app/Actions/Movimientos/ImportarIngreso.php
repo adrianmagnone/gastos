@@ -65,7 +65,7 @@ class ImportarIngreso extends ImportFileAction
             3 => \App\Lib\ArchivoBancos\LeerRegistros::BancoHipotecario2026($record),
         };
 
-        if ($registro['tipo'] === 'Ingreso')
+        if ($registro && $registro['tipo'] === 'Ingreso')
             $this->data[] = $registro;
     }
 

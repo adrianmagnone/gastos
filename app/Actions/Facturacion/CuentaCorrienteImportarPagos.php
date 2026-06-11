@@ -74,7 +74,7 @@ class CuentaCorrienteImportarPagos extends ImportFileAction
             3 => \App\Lib\ArchivoBancos\LeerRegistros::BancoHipotecario2026($record),
         };
 
-        if ($registro['tipo'] === 'Ingreso')
+        if ($registro && $registro['tipo'] === 'Ingreso')
         {
             $persona = Persona::findByCuit($registro['cuit']);
             $registro['persona'] = ($persona) ? $persona->abreviatura : '';

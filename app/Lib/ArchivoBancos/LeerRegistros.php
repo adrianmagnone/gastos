@@ -17,6 +17,9 @@ class LeerRegistros
     {
         $importe = (float)str_replace (',', '.', $record[3]);
         $cuit    = '';
+
+        if ($importe == 0)
+            return false;
         
         if (preg_match('/[0-9]{8,11}/', $record[2], $matches))
             $cuit = $matches[0];
@@ -58,6 +61,9 @@ class LeerRegistros
         if (preg_match('/[0-9]{8,11}/', $record[3], $matches))
             $cuit = $matches[0];
 
+        if ($importe == 0)
+            return false;
+
         return  [
             'tipo'           => ($importe < 0) ? 'Gasto' : 'Ingreso',
             'importe'        => \abs($importe),
@@ -79,6 +85,9 @@ class LeerRegistros
         $importe = str_replace ('.', '', $record[2]);
         $importe = (float)str_replace (',', '.', $importe);
         $cuit    = '';
+
+        if ($importe == 0)
+            return false;
         
         if (preg_match('/[0-9]{8,11}/', $record[1], $matches))
             $cuit = $matches[0];
