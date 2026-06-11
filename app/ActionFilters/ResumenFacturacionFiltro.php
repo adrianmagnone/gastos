@@ -4,7 +4,7 @@ namespace App\ActionFilters;
 
 use App\Helpers\DateHelper as MiDate;
 
-class ResumenFacturacionFiltro extends \App\Lib\Actions\FilterBase
+class ResumenFacturacionFiltro extends \Aiglos\Lba\Actions\FilterBase
 {
     protected function setFiltersKeys()
     {

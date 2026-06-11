@@ -2,7 +2,7 @@
  
 namespace App\ActionFilters;
 
-class MantenimientoVehiculoFiltro extends \App\Lib\Actions\FilterBase
+class MantenimientoVehiculoFiltro extends \Aiglos\Lba\Actions\FilterBase
 {
     protected function setFiltersKeys()
     {

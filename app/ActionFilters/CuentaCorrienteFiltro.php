@@ -4,7 +4,7 @@ namespace App\ActionFilters;
 
 use App\Helpers\DateHelper as MiDate;
 
-class CuentaCorrienteFiltro extends \App\Lib\Actions\FilterBase
+class CuentaCorrienteFiltro extends \Aiglos\Lba\Actions\FilterBase
 {
     protected function setFiltersKeys()
     {

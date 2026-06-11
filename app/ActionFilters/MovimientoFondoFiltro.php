@@ -2,7 +2,7 @@
  
 namespace App\ActionFilters;
 
-class MovimientoFondoFiltro extends \App\Lib\Actions\FilterBase
+class MovimientoFondoFiltro extends \Aiglos\Lba\Actions\FilterBase
 {
     protected function setFiltersKeys()
     {

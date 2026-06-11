@@ -2,7 +2,7 @@
 
 namespace App\Actions\TiposComprobantes;
 
-use App\Lib\Actions\SelectAction;
+use Aiglos\Lba\Actions\SelectAction;
 use App\Models\TipoComprobante;
  
 class SeleccionarCreditos extends SelectAction

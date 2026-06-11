@@ -3,7 +3,7 @@
 namespace App\ActionFilters;
 
 use App\Helpers\DateHelper as MiDate;
-class GastoTarjetaFiltro extends \App\Lib\Actions\FilterBase
+class GastoTarjetaFiltro extends \Aiglos\Lba\Actions\FilterBase
 {
     protected function setFiltersKeys()
     {

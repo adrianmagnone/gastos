@@ -4,7 +4,7 @@ namespace App\ActionFilters;
 
 use App\Helpers\DateHelper as MiDate;
 
-class CategoriaFiltro extends \App\Lib\Actions\FilterBase
+class CategoriaFiltro extends \Aiglos\Lba\Actions\FilterBase
 {
     protected function setFiltersKeys()
     {

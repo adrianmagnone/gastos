@@ -2,7 +2,7 @@
  
 namespace App\ActionFilters;
 
-class TareaFiltro extends \App\Lib\Actions\FilterBase
+class TareaFiltro extends \Aiglos\Lba\Actions\FilterBase
 {
     protected function setFiltersKeys()
     {

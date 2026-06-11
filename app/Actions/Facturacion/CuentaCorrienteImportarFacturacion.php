@@ -16,12 +16,11 @@ use App\Models\TipoComprobante;
 
 class CuentaCorrienteImportarFacturacion extends ImportFileAction
 {
-    use \App\Lib\Import\ReadTextBase;
+    use \Aiglos\Lba\Import\ReadTextBase;
 
     function __construct()
     {
         $this->model = CuentaCorriente::class;
-        $this->reader = \App\Lib\Import\ReadTextBase::class;
 
         $this->urlList   = route('cuentas_corrientes');
         $this->urlImport = 'cuenta_corriente/archivo_facturacion';

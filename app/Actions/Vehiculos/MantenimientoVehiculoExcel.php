@@ -2,12 +2,12 @@
 
 namespace App\Actions\Vehiculos;
 
-use App\Lib\Excel\ExcelBase;
+use Aiglos\Lba\Excel\ExcelBase;
 use App\Helpers\Formatter;
 
 class MantenimientoVehiculoExcel extends MantenimientoVehiculoLista
 {
-    use \App\Lib\Actions\GenerateTitles;
+    use \Aiglos\Lba\Traits\GenerateTitles;
 
     protected function createFile()
     {

@@ -11,12 +11,11 @@ use App\Models\Movimiento;
 
 class ImportarEgreso extends ImportFileAction
 {
-    use \App\Lib\Import\ReadCsvBase;
+    use \Aiglos\Lba\Import\ReadCsvBase;
 
     function __construct()
     {
         $this->model = Movimiento::class;
-        $this->reader = \App\Lib\Import\ReadCsvBase::class;
 
         $this->urlList   = route('movimientos');
         $this->urlImport = 'movimientos/lee_egresos';

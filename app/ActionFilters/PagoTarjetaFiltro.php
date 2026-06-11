@@ -4,7 +4,7 @@ namespace App\ActionFilters;
 
 use App\Helpers\DateHelper as MiDate;
 
-class PagoTarjetaFiltro extends \App\Lib\Actions\FilterBase
+class PagoTarjetaFiltro extends \Aiglos\Lba\Actions\FilterBase
 {
     protected function setFiltersKeys()
     {
