@@ -66,7 +66,10 @@ class ImportarEgreso extends ImportFileAction
         };
 
         if ( $registro && $registro['tipo'] === 'Gasto')
+        {
+            $registro['sugeridos'] = Movimiento::gastoDesdeImporte($registro['importe'], $registro['fecha']);
             $this->data[] = $registro;
+        }
     }
 
     protected function aditionalDataForEdit(&$entidad = null)

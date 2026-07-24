@@ -20,7 +20,11 @@
             @foreach ($data as $movimiento)
             <tr>
                 <td>
-                    <input class="form-check-input check-ingreso" type="checkbox" name="check[{{ $loop->index }}]" checked >
+                    @if ($movimiento['sugeridos']->count() == 0)
+                        <input class="form-check-input check-ingreso" type="checkbox" name="check[{{ $loop->index }}]" checked >
+                    @else
+                        <input class="form-check-input check-ingreso" type="checkbox" name="check[{{ $loop->index }}]" >
+                    @endif
                     <input type="hidden" name="importe[{{ $loop->index }}]" value="{{ $movimiento['importe'] }}">
                     <input type="hidden" name="fecha[{{ $loop->index }}]" value="{{ $movimiento['fecha'] }}">
                     <input type="hidden" name="descripcion[{{ $loop->index }}]" value="{{ $movimiento['descripcion'] }}">
@@ -44,9 +48,19 @@
                     </select>
                 </td>
                 <td>
-                    <input type="text" class="form-control form-control-sm" name="observacion[{{ $loop->index }}]" maxlength="10" value="" style="width: 200px;" >
+                    <input type="text" class="form-control form-control-sm" name="observacion[{{ $loop->index }}]" maxlength="25" value="" style="width: 200px;" >
                 </td>
             </tr>
+                @if ($movimiento['sugeridos']->count() > 0)
+                    @foreach ($movimiento['sugeridos'] as $sugerido)
+                        <tr>
+                            <td></td>
+                            <td colspan="6">
+                                <strong>Sugerido:</strong> {{ $sugerido->fecha_format }} {{ $sugerido->descripcion_categoria}} {{ $sugerido->descripcion }} {{ $sugerido->descripcion_tipo_pago }}
+                            </td>
+                        </tr>
+                    @endforeach
+                @endif
             @endforeach
         </tbody>
     </table>

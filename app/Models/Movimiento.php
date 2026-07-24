@@ -80,6 +80,13 @@ class Movimiento extends Model
         );
     }
 
+    public function descripcionTipoPago(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => self::TIPOS_PAGOS[$this->tipoPago] ?? 'No definido'
+        );
+    }
+
     public function esIngreso(): Attribute
     {
         return Attribute::make(
@@ -119,5 +126,15 @@ class Movimiento extends Model
                         FROM movimientos
                         WHERE YEAR(fecha) = {$anio}
                         GROUP BY YEAR(fecha), MONTH(fecha), tipo, categoria_id");
+    }
+
+    public static function gastoDesdeImporte($importe, $fecha)
+    {
+        $fecha = MiDate::fromFormatTo('d/m/Y', $fecha, 'Y-m-d'); 
+        
+        return Movimiento::where('tipo', 2)
+                        ->where('importe', $importe)
+                        ->whereRaw("fecha BETWEEN DATE_SUB('{$fecha}', INTERVAL 3 DAY) AND '{$fecha}'")
+                        ->get();
     }
 }
