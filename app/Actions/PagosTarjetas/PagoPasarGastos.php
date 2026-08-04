@@ -40,27 +40,32 @@ class PagoPasarGastos extends ProcessOneAction
         }
 
         // pasamos el seguro de la tarjeta
-        $gastoSeguro = [
-            'fecha'        => $this->entidad->fechaPago,
-            'tipo'         => 2,
-            'categoria_id' => config('define.categorias.seguros'),
-            'descripcion'  => 'Tarjeta',
-            'importe'      => $this->entidad->totalSeguros,
-            'tipoPago'     => Movimiento::TipoPagoFrom('Tarjeta de credito')
-        ];
-        Movimiento::create($gastoSeguro);
+        if ($this->entidad->totalSeguros > 0)
+        {
+            $gastoSeguro = [
+                'fecha'        => $this->entidad->fechaPago,
+                'tipo'         => 2,
+                'categoria_id' => config('define.categorias.seguros'),
+                'descripcion'  => 'Tarjeta',
+                'importe'      => $this->entidad->totalSeguros,
+                'tipoPago'     => Movimiento::TipoPagoFrom('Tarjeta de credito')
+            ];
+            Movimiento::create($gastoSeguro);
+        }
 
         // pasamos los gastos de tarjeta
-        $gastoTarjeta = [
-            'fecha'        => $this->entidad->fechaPago,
-            'tipo'         => 2,
-            'categoria_id' => config('define.categorias.tarjeta'),
-            'descripcion'  => $this->entidad->descripcion_tarjeta,
-            'importe'      => $this->entidad->total_gastos,
-            'tipoPago'     => Movimiento::TipoPagoFrom('Tarjeta de credito')
-        ];
-        Movimiento::create($gastoTarjeta);
-
+        if ($this->entidad->total_gastos > 0)
+        {   
+            $gastoTarjeta = [
+                'fecha'        => $this->entidad->fechaPago,
+                'tipo'         => 2,
+                'categoria_id' => config('define.categorias.tarjeta'),
+                'descripcion'  => $this->entidad->descripcion_tarjeta,
+                'importe'      => $this->entidad->total_gastos,
+                'tipoPago'     => Movimiento::TipoPagoFrom('Tarjeta de credito')
+            ];
+            Movimiento::create($gastoTarjeta);
+        }
         
         $this->entidad->pasadoGasto = 1;
         $this->entidad->save();
