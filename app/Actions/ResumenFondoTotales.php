@@ -90,8 +90,8 @@ class ResumenFondoTotales extends SelectAction
             }
             else
             {
-                $cincoPercert = $record->ingresos * 0.05;
-                if ($ingresoPosible > $cincoPercert)
+                $toleranciaPercert = $record->ingresos * 0.25;
+                if ($ingresoPosible > $toleranciaPercert)
                 {
                     $record->posible_f      = Formatter::moneyArg($ingresoPosible);
                     $this->puedoGastar      = $this->puedoGastar + ($ingresoPosible - $modelData->saldo_ingresos);
