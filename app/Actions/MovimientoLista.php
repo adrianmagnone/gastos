@@ -52,7 +52,7 @@ class MovimientoLista extends SelectAction
         $record->descripcion = $modelData->descripcion;
         $record->importe     = Formatter::moneyArg($modelData->importe);
         $record->tipo        = $modelData->tipo;
-        $record->tipoPago    = Movimiento::TIPOS_PAGOS[$modelData->tipoPago] ?? 'No definido';
+        $record->tipoPago    = $modelData->descripcion_tipo_pago;
         
         return $record;
     }

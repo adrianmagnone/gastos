@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Storage;
 use App\Helpers\DateHelper as MiDate;
 use App\Helpers\Formatter;
 
+use App\Enums\PagosMovimiento;
+use App\Enums\TiposMovimiento;
 use App\Models\Movimiento;
 
 class ImportarEgreso extends ImportFileAction
@@ -76,7 +78,7 @@ class ImportarEgreso extends ImportFileAction
     {
         return [
             'data'        => $this->data,
-            'formasPagos' => Movimiento::TIPOS_PAGOS,
+            'formasPagos' => \App\Enums\PagosMovimiento::toArray(),
             'categorias'  => \App\Models\Categoria::paraEgresosPorNombre(),
         ];
     }
@@ -102,13 +104,13 @@ class ImportarEgreso extends ImportFileAction
         {
             $records[] = [
                 'fecha'        => MiDate::fromFormatTo('d/m/Y', $this->fecha[$index], 'Y-m-d'),
-                'tipo'         => \App\Enums\TiposMovimiento::GASTO,
+                'tipo'         => TiposMovimiento::GASTO,
                 'categoria_id' => (int)$this->categoria[$index],
                 'descripcion'  => ($this->observacion[$index])
                                         ? $this->observacion[$index]
                                         : null,
                 'importe'      => (float)$this->importe[$index],
-                'tipoPago'     => (int)$this->formaPago[$index],
+                'tipoPago'     => PagosMovimiento::tryFrom((int)$this->tipoPago)
             ];
         }
 

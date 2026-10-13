@@ -2,11 +2,15 @@
 
 namespace App\Actions\Movimientos;
 
+use Illuminate\Validation\Rules\Enum;
+
 use Aiglos\Lba\Actions\ImportFileAction;
 use Illuminate\Support\Facades\Storage;
 use App\Helpers\DateHelper as MiDate;
 use App\Helpers\Formatter;
 
+use App\Enums\PagosMovimiento;
+use App\Enums\TiposMovimiento;
 use App\Models\Movimiento;
 
 class ImportarIngreso extends ImportFileAction
@@ -73,7 +77,7 @@ class ImportarIngreso extends ImportFileAction
     {
         return [
             'data' => $this->data,
-            'formasPagos' => Movimiento::TIPOS_PAGOS,
+            'formasPagos' => \App\Enums\PagosMovimiento::toArray(),
         ];
     }
 
@@ -86,7 +90,7 @@ class ImportarIngreso extends ImportFileAction
             // 'fecha.*'      => ['required', 'date_format:d/m/Y'],
             'descripcion'  => ['array'],
             'importe'      => ['required', 'array', 'min:1'],
-            'tipoPago'     => ['required', 'numeric', 'integer', 'in:1,2,3,4,5,6,7,99'],
+            'tipoPago'     => ['required', new Enum(PagosMovimiento::class)]
             // 'importe.*'    => ['required', 'numeric', 'decimal:2'],
         ];
     }
@@ -99,13 +103,13 @@ class ImportarIngreso extends ImportFileAction
         {
             $records[] = [
                 'fecha'        => MiDate::fromFormatTo('d/m/Y', $this->fecha[$index], 'Y-m-d'),
-                'tipo'         => \App\Enums\TiposMovimiento::INGRESO,
+                'tipo'         => TiposMovimiento::INGRESO,
                 'categoria_id' => (int)$this->categoria_id,
                 'descripcion'  => ($this->observacion[$index])
                                         ? $this->descripcion[$index] . ' - ' . $this->observacion[$index]
                                         : $this->descripcion[$index],
                 'importe'      => (float)$this->importe[$index],
-                'tipoPago'     => (int)$this->tipoPago,
+                'tipoPago'     => PagosMovimiento::tryFrom((int)$this->tipoPago)
             ];
         }
 

@@ -8,23 +8,12 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Support\Facades\DB;
 
 use App\Enums\TiposMovimiento;
+use App\Enums\PagosMovimiento;
 use App\Helpers\DateHelper as MiDate;
 use App\Helpers\Formatter;
 
 class Movimiento extends Model
 {
-    const TIPOS_PAGOS = [
-        0 => 'Sin especificar',
-        1 => 'Efectivo',
-        2 => 'Tarjeta de credito',
-        3 => 'Tarjeta de debito',
-        4 => 'Transferencia',
-        5 => 'Cheque',
-        6 => 'Billetera virtual',
-        7 => 'Pago Bancario',
-        99 => 'Otro'
-    ];
-
     protected $table = "movimientos";
 
     protected $fillable = [
@@ -45,7 +34,8 @@ class Movimiento extends Model
     protected function casts(): array
     {
         return [
-            'tipo' => TiposMovimiento::class,
+            'tipo'     => TiposMovimiento::class,
+            'tipoPago' => PagosMovimiento::class
         ];
     }
 
@@ -92,7 +82,7 @@ class Movimiento extends Model
     public function descripcionTipoPago(): Attribute
     {
         return Attribute::make(
-            get: fn () => self::TIPOS_PAGOS[$this->tipoPago] ?? 'No definido'
+            get: fn () => $this->tipoPago->label()
         );
     }
 
@@ -108,13 +98,6 @@ class Movimiento extends Model
         return Attribute::make(
             get: fn () => $this->tipo == TiposMovimiento::GASTO
         );
-    }
-
-    public static function TipoPagoFrom($value = 0)
-    {
-        $keys = \array_keys(self::TIPOS_PAGOS, $value);
-
-        return \array_key_exists(0, $keys) ? $keys[0] : 'No definido';
     }
 
     public static function actualizarResumen($anio)
@@ -136,6 +119,7 @@ class Movimiento extends Model
         
         return Movimiento::where('tipo', 2)
                         ->where('importe', $importe)
+                        ->whereRaw("ticket_id IS NULL")
                         ->whereRaw("fecha BETWEEN DATE_SUB('{$fecha}', INTERVAL 3 DAY) AND '{$fecha}'")
                         ->get();
     }

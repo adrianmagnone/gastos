@@ -7,6 +7,7 @@ use Illuminate\Validation\Rules\Enum;
 use App\Helpers\DateHelper as MiDate;
 use Aiglos\Lba\Actions\EditAction;
 use App\Enums\TiposMovimiento;
+use App\Enums\PagosMovimiento;
 use App\Models\Movimiento;
 
 class MovimientoEditar extends EditAction
@@ -32,16 +33,7 @@ class MovimientoEditar extends EditAction
         return [
             'tipos'      => TiposMovimiento::toArray(),
             'categorias' => \App\Models\Categoria::all(),
-            'tiposPagos' => [
-                [ 'value' => 1,  'text' => Movimiento::TIPOS_PAGOS[1],  'icon' => 'ti ti-cash' ],
-                [ 'value' => 2,  'text' => Movimiento::TIPOS_PAGOS[2],  'icon' => 'ti ti-credit-card' ],
-                [ 'value' => 3,  'text' => Movimiento::TIPOS_PAGOS[3],  'icon' => 'ti ti-credit-card-hand' ],
-                [ 'value' => 4,  'text' => Movimiento::TIPOS_PAGOS[4],  'icon' => 'ti ti-transaction-dollar' ],
-                [ 'value' => 5,  'text' => Movimiento::TIPOS_PAGOS[5],  'icon' => 'ti ti-cash-banknote' ],
-                [ 'value' => 6,  'text' => Movimiento::TIPOS_PAGOS[6],  'icon' => 'ti ti-wallet' ],
-                [ 'value' => 7,  'text' => Movimiento::TIPOS_PAGOS[7],  'icon' => 'ti ti-building-bank' ],
-                [ 'value' => 99, 'text' => Movimiento::TIPOS_PAGOS[99], 'icon' => 'ti ti-coin-off'   ] 
-            ]
+            'tiposPagos' => PagosMovimiento::toIconArray()
         ];
     }
 
@@ -49,7 +41,8 @@ class MovimientoEditar extends EditAction
     {
         $model = new $this->model;
         $model->tipo = TiposMovimiento::GASTO;
-        $model->tipoPago = Movimiento::TipoPagoFrom('Tarjeta de debito');
+        $model->tipoPago = PagosMovimiento::TARJETA_DEBITO;
+
         return $model;
     }
 
@@ -68,7 +61,7 @@ class MovimientoEditar extends EditAction
             'categoria_id' => ['numeric', 'integer', 'required', 'exists:categorias,id'],
             'descripcion'  => ['string', 'nullable' ],
             'importe'      => ['numeric', 'decimal:2', 'required'],
-            'tipoPago'     => ['numeric', 'integer', 'required', 'in:0,1,2,3,4,5,6,7']
+            'tipoPago'     => ['required', new Enum(PagosMovimiento::class)]
         ];
     }
 
@@ -80,7 +73,7 @@ class MovimientoEditar extends EditAction
             'categoria_id' => $this->categoria_id,
             'descripcion'  => $this->descripcion,
             'importe'      => $this->importe,
-            'tipoPago'     => $this->tipoPago
+            'tipoPago'     => $this->request->enum('tipoPago', PagosMovimiento::class)
         ];
 	}
 
