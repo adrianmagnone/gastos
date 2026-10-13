@@ -17,6 +17,10 @@
 			"path": "resources/views"
 		},
 		{
+			"name": "Enums",
+			"path": "app/Enums"
+		},
+		{
 			"name": "Models",
 			"path": "app/Models"
 		},
@@ -41,12 +45,15 @@
 			"path": "database/migrations"
 		},
 		{
+			"name": "config",
 			"path": "config"
 		},
 		{
+			"name": "css",
 			"path": "resources/css"
 		},
 		{
+			"name": "js",
 			"path": "resources/js"
 		}
 	],
