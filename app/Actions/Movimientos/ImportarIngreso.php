@@ -99,7 +99,7 @@ class ImportarIngreso extends ImportFileAction
         {
             $records[] = [
                 'fecha'        => MiDate::fromFormatTo('d/m/Y', $this->fecha[$index], 'Y-m-d'),
-                'tipo'         => Movimiento::TipoFrom('Ingreso'),
+                'tipo'         => \App\Enums\TiposMovimiento::INGRESO,
                 'categoria_id' => (int)$this->categoria_id,
                 'descripcion'  => ($this->observacion[$index])
                                         ? $this->descripcion[$index] . ' - ' . $this->observacion[$index]

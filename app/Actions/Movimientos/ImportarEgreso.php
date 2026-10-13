@@ -102,7 +102,7 @@ class ImportarEgreso extends ImportFileAction
         {
             $records[] = [
                 'fecha'        => MiDate::fromFormatTo('d/m/Y', $this->fecha[$index], 'Y-m-d'),
-                'tipo'         => Movimiento::TipoFrom('Gasto'),
+                'tipo'         => \App\Enums\TiposMovimiento::GASTO,
                 'categoria_id' => (int)$this->categoria[$index],
                 'descripcion'  => ($this->observacion[$index])
                                         ? $this->observacion[$index]

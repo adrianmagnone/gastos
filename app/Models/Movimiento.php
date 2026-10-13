@@ -7,16 +7,12 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 
 use Illuminate\Support\Facades\DB;
 
+use App\Enums\TiposMovimiento;
 use App\Helpers\DateHelper as MiDate;
 use App\Helpers\Formatter;
 
 class Movimiento extends Model
 {
-    const TIPOS = [
-        1 => 'Ingreso',
-        2 => 'Gasto'
-    ];
-
     const TIPOS_PAGOS = [
         0 => 'Sin especificar',
         1 => 'Efectivo',
@@ -37,8 +33,21 @@ class Movimiento extends Model
         'categoria_id',
         'descripcion',
         'importe',
-        'tipoPago'
+        'tipoPago',
+        'ticket_id'
     ];
+
+    /**
+    * Get the attributes that should be cast.
+    *
+    * @return array<string, string>
+    */
+    protected function casts(): array
+    {
+        return [
+            'tipo' => TiposMovimiento::class,
+        ];
+    }
 
     public function categoria() : \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
@@ -76,7 +85,7 @@ class Movimiento extends Model
     public function descripcionTipo(): Attribute
     {
         return Attribute::make(
-            get: fn () => self::TIPOS[$this->tipo] ?? ''
+            get: fn () => $this->tipo->label()
         );
     }
 
@@ -90,22 +99,15 @@ class Movimiento extends Model
     public function esIngreso(): Attribute
     {
         return Attribute::make(
-            get: fn () => $this->tipo == 1
+            get: fn () => $this->tipo == TiposMovimiento::INGRESO
         );
     }
 
     public function esGasto(): Attribute
     {
         return Attribute::make(
-            get: fn () => $this->tipo == 2
+            get: fn () => $this->tipo == TiposMovimiento::GASTO
         );
-    }
-
-    public static function TipoFrom($value)
-    {
-        $keys = \array_keys(self::TIPOS, $value);
-
-        return \array_key_exists(0, $keys) ? $keys[0] : '';
     }
 
     public static function TipoPagoFrom($value = 0)

@@ -34,7 +34,7 @@ class MovimientoLista extends SelectAction
     protected function aditionalDataForList()
     {
         return [
-            'listaTipos'      => Movimiento::TIPOS,
+            'listaTipos'      => \App\Enums\TiposMovimiento::toArray(),
             'listaCategorias' => \App\Models\Categoria::all(),
             'fechaInicial'    => MiDate::object('first day of this month')->format('d/m/Y'),
             'columns'         => 'Fecha|Importe|Tipo|Pago|Categoria|Descripción',

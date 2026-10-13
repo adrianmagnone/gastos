@@ -2,8 +2,11 @@
 
 namespace App\Actions;
 
+use Illuminate\Validation\Rules\Enum;
+
 use App\Helpers\DateHelper as MiDate;
 use Aiglos\Lba\Actions\EditAction;
+use App\Enums\TiposMovimiento;
 use App\Models\Movimiento;
 
 class MovimientoEditar extends EditAction
@@ -27,7 +30,7 @@ class MovimientoEditar extends EditAction
     protected function aditionalDataForEdit(&$entidad = null)
     {
         return [
-            'tipos'      => Movimiento::TIPOS,
+            'tipos'      => TiposMovimiento::toArray(),
             'categorias' => \App\Models\Categoria::all(),
             'tiposPagos' => [
                 [ 'value' => 1,  'text' => Movimiento::TIPOS_PAGOS[1],  'icon' => 'ti ti-cash' ],
@@ -45,7 +48,7 @@ class MovimientoEditar extends EditAction
     protected function _createModel()
     {
         $model = new $this->model;
-        $model->tipo = Movimiento::TipoFrom('Gasto');
+        $model->tipo = TiposMovimiento::GASTO;
         $model->tipoPago = Movimiento::TipoPagoFrom('Tarjeta de debito');
         return $model;
     }
@@ -61,7 +64,7 @@ class MovimientoEditar extends EditAction
     {
         return [
             'fecha'        => ['required', 'date_format:d/m/Y'],
-            'tipo'         => ['required', 'in:1,2'],
+            'tipo'         => ['required', new Enum(TiposMovimiento::class)],
             'categoria_id' => ['numeric', 'integer', 'required', 'exists:categorias,id'],
             'descripcion'  => ['string', 'nullable' ],
             'importe'      => ['numeric', 'decimal:2', 'required'],
@@ -73,7 +76,7 @@ class MovimientoEditar extends EditAction
 	{
         return  [
             'fecha'        => MiDate::fromFormatTo('d/m/Y', $this->fecha, 'Y-m-d'),
-            'tipo'         => $this->tipo,
+            'tipo'         => $this->request->enum('tipo', TiposMovimiento::class),
             'categoria_id' => $this->categoria_id,
             'descripcion'  => $this->descripcion,
             'importe'      => $this->importe,
