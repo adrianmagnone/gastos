@@ -10,7 +10,7 @@
     <div class="row">
         <x-form.date col="2" field="fecha" id="fecha" label="Fecha" :value="$entity->fecha_format" :$action/>
 
-        <x-form.select col="2" label="Tipo" field="tipo" id="tipo" :value="$entity->tipo" :options="$tipos" :$action />
+        <x-form.select col="2" label="Tipo" field="tipo" id="tipo" :value="$entity->tipo->value" :options="$tipos" :$action />
     </div>
 
     <div class="row">
@@ -24,7 +24,7 @@
     </div>
 
     <div class="row">
-        <x-form.toggle-icons col="8" field="tipoPago" label="Tipo de pago" :value="$entity->tipoPago" :options="$tiposPagos" :$action />
+        <x-form.toggle-icons col="8" field="tipoPago" label="Tipo de pago" :value="$entity->tipoPago->value" :options="$tiposPagos" :$action />
     </div>
 @endsection
 
