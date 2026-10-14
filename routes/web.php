@@ -7,6 +7,7 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\CategoriasController;
 use App\Http\Controllers\TarjetasController;
 use App\Http\Controllers\MovimientosController;
+use App\Http\Controllers\TicketsController;
 use App\Http\Controllers\TareasController;
 
 use App\Http\Controllers\GastosTarjetasController;
@@ -77,6 +78,14 @@ Route::get('movimientos_anual_egr_data',        [MovimientosController::class, '
 
 Route::get('actualizar_resumen_anual',          [MovimientosController::class, 'viewActualizarResumen'])->name('ver_actualizar_resumen');
 Route::post('actualizar_resumen_anual',         [MovimientosController::class, 'actualizarResumen'])->name('actualizar_resumen');
+
+
+// TICKETS ----------------------------------------------------- 
+
+Route::get('tickets',                           [TicketsController::class, 'index'])->name('tickets');
+Route::get('tickets_data/{id?}',                [TicketsController::class, 'getData']);
+Route::get('ticket/nuevo',                      [TicketsController::class, 'create']);
+Route::post('ticket/guardar',                   [TicketsController::class, 'store'])->name('ticket.guardar');
 
 // FONDOS  ----------------------------------------------------- 
 Route::get('fondos',                            [FondosController::class, 'index'])->name('fondos');
