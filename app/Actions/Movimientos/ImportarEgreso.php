@@ -10,6 +10,7 @@ use App\Helpers\Formatter;
 use App\Enums\PagosMovimiento;
 use App\Enums\TiposMovimiento;
 use App\Models\Movimiento;
+use App\Models\Ticket;
 
 class ImportarEgreso extends ImportFileAction
 {
@@ -45,7 +46,7 @@ class ImportarEgreso extends ImportFileAction
     public function rulesFile(): array
     {
         return [
-            'banco'        => ['numeric', 'integer', 'in:1,2,3', 'required'],
+            'banco'       => ['numeric', 'integer', 'in:1,2,3', 'required'],
             'fileEgresos' => ['required', 'mimes:csv', 'max:2048'],
         ];
     }
@@ -70,6 +71,9 @@ class ImportarEgreso extends ImportFileAction
         if ( $registro && $registro['tipo'] === 'Gasto')
         {
             $registro['sugeridos'] = Movimiento::gastoDesdeImporte($registro['importe'], $registro['fecha']);
+            if ($registro['sugeridos']->count() == 0)
+                $registro['sugeridos'] = Ticket::gastoDesdeImporte($registro['importe'], $registro['fecha']);
+
             $this->data[] = $registro;
         }
     }
