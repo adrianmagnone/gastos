@@ -53,6 +53,17 @@
         </li>
 
         <li class="nav-item">
+          <a class="nav-link" href="{{ url('ticket/nuevo') }}" >
+            <span class="nav-link-icon d-md-none d-lg-inline-block">
+              <i class="icon ti ti-ticket"></i>
+            </span>
+            <span class="nav-link-title">
+              Agregar Ticket
+            </span>
+          </a>
+        </li>
+
+        <li class="nav-item">
           <a class="nav-link" href="{{ route('tareas') }}" >
             <span class="nav-link-icon d-md-none d-lg-inline-block">
               <i class="icon ti ti-list-check"></i>
