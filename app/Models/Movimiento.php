@@ -117,7 +117,7 @@ class Movimiento extends Model
     {
         $fecha = MiDate::fromFormatTo('d/m/Y', $fecha, 'Y-m-d'); 
         
-        return Movimiento::where('tipo', 2)
+        return Movimiento::where('tipo', TiposMovimiento::GASTO)
                         ->where('importe', $importe)
                         ->whereRaw("ticket_id IS NULL")
                         ->whereRaw("fecha BETWEEN DATE_SUB('{$fecha}', INTERVAL 3 DAY) AND '{$fecha}'")
