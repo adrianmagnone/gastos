@@ -87,6 +87,7 @@
             <div class="dropdown-menu-columns">
               <div class="dropdown-menu-column">
                 <a class="dropdown-item" href="{{ route('movimientos') }}">Movimientos</a>
+                <a class="dropdown-item" href="{{ route('tickets') }}">Tickets</a>
                 <a class="dropdown-item" href="{{ route('movimientos_mensuales') }}">Resumen Mensual</a>
                 <a class="dropdown-item" href="{{ route('movimientos_anuales') }}">Resumen Anual</a>
               </div>

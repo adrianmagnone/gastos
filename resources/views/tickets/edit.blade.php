@@ -31,12 +31,6 @@
     </select>
 
     <div class="row">
-        <em>
-            {{ old("movimientos[1]['categoria']") }}
-        </em>
-    </div>
-
-    <div class="row">
         <div class="col-8">
             <table id="tableMovimientos" class="table compact card-table w-100 table-hover dataTable no-footer" >
                 <thead>

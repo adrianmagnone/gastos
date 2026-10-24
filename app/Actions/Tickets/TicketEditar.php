@@ -34,7 +34,6 @@ class TicketEditar extends EditAction
         return [
             'tipos'      => TiposMovimiento::toArray(),
             'categorias' => \App\Models\Categoria::all(),
-            'tipoPago'   => PagosMovimiento::TARJETA_DEBITO, 
             'tiposPagos' => PagosMovimiento::toIconArray()
         ];
     }
@@ -91,7 +90,7 @@ class TicketEditar extends EditAction
                 'categoria_id' => $movimiento['categoria'],
                 'descripcion'  => $movimiento['observacion'],
                 'importe'      => $this->valueToDecimal($movimiento['importe']),
-                'tipoPago'     => $this->request->enum('tipoPago', PagosMovimiento::class)
+                'tipoPago'     => $entidad->tipoPago
             ];
 
             Movimiento::create($detalle);

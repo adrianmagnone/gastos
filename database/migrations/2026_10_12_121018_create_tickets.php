@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->date('fecha')->index();
             $table->integer('tipo')->index();
+            $table->integer('tipoPago')->nullable()->default(0);
             $table->string('descripcion')->nullable();
             $table->decimal('importe', $precision = 18, $scale = 4)->default(0);
             $table->timestamps();
@@ -26,8 +27,6 @@ return new class extends Migration
             $table->foreign('ticket_id')
                   ->references('id')->on('tickets');
         });
-
-        
     }
 
     /**

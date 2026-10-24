@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 
 use App\Enums\TiposMovimiento;
+use App\Enums\PagosMovimiento;
 use App\Helpers\DateHelper as MiDate;
 use App\Helpers\Formatter;
 
@@ -16,6 +17,7 @@ class Ticket extends Model
     protected $fillable = [
         'fecha',
         'tipo',
+        'tipoPago',
         'descripcion',
         'importe',
     ];
@@ -29,6 +31,7 @@ class Ticket extends Model
     {
         return [
             'tipo' => TiposMovimiento::class,
+            'tipoPago' => PagosMovimiento::class
         ];
     }
 
@@ -57,6 +60,13 @@ class Ticket extends Model
     {
         return Attribute::make(
             get: fn () => $this->tipo->label()
+        );
+    }
+
+    public function descripcionTipoPago(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->tipoPago->label()
         );
     }
 
