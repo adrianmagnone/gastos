@@ -48,6 +48,12 @@
 		},
 		{
 			"path": "resources/js"
+		},
+		{
+			"path": "app/Jobs"
+		},
+		{
+			"path": "resources/assets"
 		}
 	],
 	"settings": {
