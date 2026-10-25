@@ -50,7 +50,7 @@
         let fecha       = new wrapCalendar('fecha'),
             importe     = new wrapMoney("#importe", null);
 
-        $("#select_tipoComprobante").MegaSearch({
+        const search = new OwnSearch("#select_tipoComprobante", {
             titulo: "Seleccionar Tipo Comprobante",
             field: "tipoComprobante",
             openKey: "c",

@@ -26,11 +26,11 @@
 @section('PageJs')
 <script type="text/javascript">
     init = function($) {
-		let $tabla         = $("#grid"),
-			selectTarjeta  = new wrapSelect("#tarjeta",  () => $tabla.MegaDatatable("reload")),
-			totales        = new Totales();
+		const $tabla         = new OwnDatatable("#grid"),
+			  selectTarjeta  = new wrapSelect("#tarjeta",  () => $tabla.reload()),
+			  totales        = new Totales();
 
-		$tabla.MegaDatatable({
+		$tabla.init({
 			pageLength: 100,
 			dom: "rt",
 			scrollX: true,

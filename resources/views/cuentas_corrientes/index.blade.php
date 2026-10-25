@@ -30,12 +30,12 @@
 @section('PageJs')
 <script type="text/javascript">
     init = function($) {
-		let $tabla         = $("#grid"),
-			selectSaldo    = new wrapSelect("#saldo",   () => $tabla.MegaDatatable("reload"))
-			selectCuenta   = new wrapSelect("#cuenta",  () => $tabla.MegaDatatable("reload")),
-			selectPersona  = new wrapSelect("#persona", () => $tabla.MegaDatatable("reload"));
+		let $tabla         = new OwnDatatable("#grid"),
+			selectSaldo    = new wrapSelect("#saldo",   () => $tabla.reload())
+			selectCuenta   = new wrapSelect("#cuenta",  () => $tabla.reload()),
+			selectPersona  = new wrapSelect("#persona", () => $tabla.reload());
 
-		$tabla.MegaDatatable({
+		$tabla.init({
 			dom: "rti",
 			pageLength: 1000,
 			ajaxUrl: "{{ asset('cuentas_corrientes_data') }}",

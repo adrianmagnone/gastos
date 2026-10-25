@@ -29,13 +29,13 @@
 @section('PageJs')
 <script type="text/javascript">
     init = function($) {
-		let $tabla         = $("#grid"),
-			selectCuenta   = new wrapSelect("#cuenta",        () => $tabla.MegaDatatable("reload")),
-			fechaDesde     = new wrapCalendar("fecha_desde",  () => $tabla.MegaDatatable("reload")),
-			fechaHasta     = new wrapCalendar("fecha_hasta",  () => $tabla.MegaDatatable("reload"));
+		const $tabla         = new OwnDatatable("#grid"),
+			  selectCuenta   = new wrapSelect("#cuenta",        () => $tabla.reload()),
+			  fechaDesde     = new wrapCalendar("fecha_desde",  () => $tabla.reload()),
+			  fechaHasta     = new wrapCalendar("fecha_hasta",  () => $tabla.reload());
 			
 
-		$tabla.MegaDatatable({
+		$tabla.init({
 			pageLength: 100,
 			dom: "rt",
 			scrollX: false,

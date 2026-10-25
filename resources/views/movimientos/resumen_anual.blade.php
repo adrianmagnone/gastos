@@ -44,18 +44,19 @@
 @section('PageJs')
 <script type="text/javascript">
     init = function($) {
-		let $tablaIng      = $("#gridIngresos"),
-            $tablaEgr      = $("#gridEgresos"),
-            textPeriodo    = new wrapText('#periodo', function () {
-				$tablaIng.MegaDatatable('reload');
-				$tablaEgr.MegaDatatable('reload');
-			})
-			ingresoMensual = 0,
-            egresoMensual  = 0,
-			totalIng       = new Totales(),
-			totalEgr       = new Totales();
+		const $tablaIng      = new OwnDatatable("#gridIngresos"),
+              $tablaEgr      = new OwnDatatable("#gridEgresos"),
+              textPeriodo    = new wrapText('#periodo', function () {
+			  	$tablaIng.reload();
+			  	$tablaEgr.reload();
+			  })
+			  totalIng       = new Totales(),
+			  totalEgr       = new Totales();
 
-		$tablaIng.MegaDatatable({
+		let ingresoMensual = 0,
+            egresoMensual  = 0;
+
+		$tablaIng.init({
             pageLength: 100,
 			dom: "rt",
 			ajaxUrl: "{{ asset('movimientos_anual_ing_data') }}",
@@ -110,7 +111,7 @@
 			}
 		});
 
-		$tablaEgr.MegaDatatable({
+		$tablaEgr.init({
             pageLength: 100,
 			dom: "rt",
 			ajaxUrl: "{{ asset('movimientos_anual_egr_data') }}",

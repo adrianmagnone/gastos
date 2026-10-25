@@ -22,9 +22,9 @@
 @section('PageJs')
 <script type="text/javascript">
     init = function($) {
-		let $tabla       = $("#grid");
+		const $tabla = new OwnDatatable("#grid");
 
-		$tabla.MegaDatatable({
+		$tabla.init({
 			ajaxUrl: "{{ asset('personas_data') }}",
 			editUrl: "{{ asset('persona/editar') }}",
 			columns: "id|abreviatura|nombre|tipoDocumento~f|identificador|edit~f"

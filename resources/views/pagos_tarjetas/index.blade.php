@@ -28,17 +28,17 @@
 @section('PageJs')
 <script type="text/javascript">
     init = function($) {
-		let $tabla         = $("#grid"),
-			textAnio       = new wrapText("#anio",      () => $tabla.MegaDatatable("reload")),
-			selectTarjeta  = new wrapSelect("#tarjeta", () => $tabla.MegaDatatable("reload")),
-			totales        = {
+		const $tabla         = new OwnDatatable("#grid"),
+		  	  textAnio       = new wrapText("#anio",      () => $tabla.reload()),
+			  selectTarjeta  = new wrapSelect("#tarjeta", () => $tabla.reload()),
+			  totales        = {
 				a: 0,
 				b: 0,
 				c: 0,
 				d: 0
-			};;
+			  };
 
-		$tabla.MegaDatatable({
+		$tabla.init({
 			ajaxUrl: "{{ asset('pagos_tarjetas_data') }}",
 			columns: "id|periodo|fecha_pago~f|total_cuotas~f|total_seguros~f|gastos~f|total_pagado~f|consultar~f",
 			removeClassHeader: "text-nowrap fw-medium font-monospace",

@@ -57,7 +57,7 @@
 
         let tipoPago = new wrapSelect("#tipoPago", null);
         
-        $("#select_categoria").MegaSearch({
+        const search = new OwnSearch("#select_categoria", {
             titulo: "Seleccionar categoria",
             field: "categoria",
             atributoDescripcion : false,

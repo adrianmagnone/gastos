@@ -78,10 +78,7 @@
 @section('PageJs')
 <script type="text/javascript">
     init = function($) {
-        // let fecha  = new wrapCalendar("fecha"),
-        //     lote   = new wrapCalendar("lote"),
-        //     vencim = new wrapCalendar("vencimiento"),
-        //     searchArea    = new wrapSelectSearch("#select_areaAdministrativa", MegaSearchOptions.areas_administrativas("areaAdministrativa"), null);
+        
     }
 </script>
 @endsection

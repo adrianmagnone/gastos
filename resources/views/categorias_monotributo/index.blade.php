@@ -28,9 +28,9 @@
 @section('PageJs')
 <script type="text/javascript">
     init = function($) {
-		let $tabla       = $("#grid");
+		const $tabla = new OwnDatatable("#grid");
 
-		$tabla.MegaDatatable({
+		$tabla.init({
 			dom: "lrtip",
 			ajaxUrl: "{{ asset('monotributo_data') }}",
 			editUrl: "{{ asset('monotributo/editar') }}",
@@ -44,8 +44,7 @@
     				data: "categoria",
     				render: ( data, type, row, meta ) => `${row.categoria} <progress class="progress" value="${row.caracter}" max="11"></progress>`
   				}
-			],
-			stateSave: [			]
+			]
 		});
 	}
 </script>

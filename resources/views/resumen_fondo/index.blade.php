@@ -58,23 +58,24 @@
 @section('PageJs')
 <script type="text/javascript">
     init = function($) {
-        let $tabla              = $("#grid"),
-            $tablaResumen       = $("#gridResumen"),
-            selectFondo         = new wrapSelect("#fondo", function () {
-                $tabla.MegaDatatable("reload");
-                $tablaResumen.MegaDatatable("reload");
-            }),
-            ingreso             = new wrapMoney("#ingreso", () => $tablaResumen.MegaDatatable("reload")),
-            $celdaTotalIngresos = $("#totalIngresos"),
-            $celdaTotalEgresos  = $("#totalEgresos"),
-            $celdaTotalSaldoI   = $("#totalSaldoIngresos"),
-            $celdaTotalSaldoE   = $("#totalSaldoEgresos"),
-            totalSaldoIngresos = 0,
+        const $tabla              = new OwnDatatable("#grid"),
+              $tablaResumen       = new OwnDatatable("#gridResumen"),
+              selectFondo         = new wrapSelect("#fondo", function () {
+                $tabla.reload();
+                $tablaResumen.reload();
+              }),
+              ingreso             = new wrapMoney("#ingreso", () => $tablaResumen.reload()),
+              $celdaTotalIngresos = $("#totalIngresos"),
+              $celdaTotalEgresos  = $("#totalEgresos"),
+              $celdaTotalSaldoI   = $("#totalSaldoIngresos"),
+              $celdaTotalSaldoE   = $("#totalSaldoEgresos");
+              
+        let totalSaldoIngresos = 0,
             totalSaldoEgresos  = 0,
             totalIngresos = 0,
             totalEgresos  = 0;
 
-		$tabla.MegaDatatable({
+		$tabla.init({
             pageLength: 100,
 			dom: "rt",
 			ajaxUrl: "{{ asset('resumen_fondo_data') }}",
@@ -116,12 +117,14 @@
             ]
 		});
 
-        $tablaResumen.MegaDatatable({
+        
+
+        $tablaResumen.init({
             pageLength: 100,
 			dom: "rt",
 			ajaxUrl: "{{ asset('resumen_fondo_mensuales') }}",
 			columns: "mes~f|ingresos_f~f|egresos_f~f|saldo~f|puedoGastar_f~f",
-            removeClassHeader: "text-nowrap fw-medium font-monospace",
+            removeClassHeader: ["text-nowrap", "fw-medium", "font-monospace"],    
             columnDefs: [
                 { data: "mes",            className: "text-nowrap" },
 				{ data: "ingresos_f",     className: "text-end text-nowrap fw-medium font-monospace" },
