@@ -135,123 +135,26 @@ class wrapSelect
         if (this.select)
             this.select.focus();
     }
-};
-
-class wrapSeveralSelect
-{
-	constructor(selector, functionChaged)
-	{
-        document.querySelectorAll(selector).forEach((el)=>{
-			let settings = {
-                    valueField: 'id',
-                    labelField: 'text',
-                    searchField: 'text'
-                },
- 			    mySelect = new TomSelect(el,settings);
-
-            if (typeof functionChaged === 'function')
-            {
-                mySelect.on('change', () => functionChaged());
-            }
-		});
-    }
-
-    getValue()
+    
+    show()
     {
-    	return '';
+        if (this.select)
+        {
+            const eleDiv = this.select.wrapper.closest('.cmp-select');
+
+            if (eleDiv)
+                eleDiv.hidden = false;
+        }
     }
 
-    getText()
+    hide()
     {
-        return '';
-    }
+        if (this.select)
+        {
+            const eleDiv = this.select.wrapper.closest('.cmp-select');
 
-    set(value)
-    {
-    }
-
-    focus()
-    {
-        
-    }
-};
-
-class wrapSelectTag
-{
-	constructor(selector, functionChaged)
-	{
-        this.select = new TomSelect(selector, {
-            plugins: {
-                remove_button:{
-                    title:'Borrar',
-                }
-            },
-            create: false,
-            allowEmptyOption: true,
-            closeAfterSelect: false,
-            valueField:  'id',
-            labelField:  'title',
-            searchField: 'text',
-            maxOptions: 1000,
-        });
-
-        this.select.on('change', function(){
-
-			if (typeof functionChaged === 'function')
-	    	{
-    			functionChaged();
-    		}
-		});
-    }
-
-    getValue()
-    {
-    	return this.select.getValue();
-    }
-
-    getText()
-    {
-        const value = this.getValue();
-
-        return this.select.getOption(value).textContent;
-    }
-
-    set(value)
-    {
-        this.select.setValue(value)
-    }
-
-};
-
-
-class wrapSelectSearch
-{
-    constructor(selector, options, functionChaged)
-    {
-        this.field = options.field;
-        this.selector = selector;
-        this.select = $(selector).MegaSearch({
-            field: options.field,
-            urlInfo: ('urlInfo' in options) ? options.urlInfo : false,
-            dataTableOptions: options.dataTableOptions,
-            onElementoSeleccionado: functionChaged
-        });
-    }
-
-    getValue()
-    {
-        return $(`#${this.field}_id`).val();
-    }
-
-    getText()
-    {
-        return $(`#${this.field}_description`).val();
-    }
-
-    set(value)
-    {
-        $(`#${this.field}_id`).val(value);
-
-        $(this.selector).MegaSearch('loadRecord' , value);
+            if (eleDiv)
+                eleDiv.hidden = true;
+        }
     }
 };
