@@ -5,7 +5,7 @@
     <div class="row gutters-xs">
         <div class="col input-group" id="select_{{ $field }}">
             <input type="text" class="form-control" placeholder="{{ $placeHolder }}" id="{{ $field }}_description" readonly tabindex="-1">
-            <button class="btn" type="button" data-bs-toggle="modal" data-bs-target="#modal_select_{{ $field }}" @if ($autofocus) autofocus @endif>
+            <button class="btn {{ $field }}-select-value" type="button" data-bs-toggle="modal" data-bs-target="#modal_select_{{ $field }}" @if ($autofocus) autofocus @endif>
                 <i class="ti ti-search"></i>
             </button>
             @if ($useInfo)
