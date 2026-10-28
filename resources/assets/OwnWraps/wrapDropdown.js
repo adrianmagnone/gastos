@@ -47,4 +47,20 @@ class wrapDropDown
 
         this.changeSelectedElement($elemento);
     }
+
+    focus()
+    {
+        this.dropdown.focus();
+    }
+
+    show()
+    {
+        this.selectorDropdown.hidden = false;
+    }
+
+    hide()
+    {
+        this.selectorDropdown.hidden = true;
+    }    
+
 };

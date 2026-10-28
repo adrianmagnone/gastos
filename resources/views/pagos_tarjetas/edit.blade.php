@@ -43,21 +43,21 @@
 @section('PageJs')
 <script type="text/javascript">
     init = function($) {
-        let objPago     = new Pago(),
-            $tabla      = $("#grid"),
-            fecha       = new wrapCalendar('fecha'),
-			seguros     = new wrapMoney("#importeSeguros", null),
-			cuotas      = new wrapMoney("#importeCuotas", null),
-			total       = new wrapMoney("#total", null),
-            periodo     = new wrapCalendar('periodo', () => $tabla.MegaDatatable("reload") ),
-            tarjeta     = new wrapSelect('#tarjeta',  () => $tabla.MegaDatatable("reload")  );
+        const objPago     = new Pago(),
+              $tabla      = new OwnDatatable("#grid"),
+              fecha       = new wrapCalendar('fecha'),
+			  seguros     = new wrapMoney("#importeSeguros", null),
+			  cuotas      = new wrapMoney("#importeCuotas", null),
+			  total       = new wrapMoney("#total", null),
+              periodo     = new wrapCalendar('periodo', () => $tabla.reload()),
+              tarjeta     = new wrapSelect('#tarjeta',  () => $tabla.reload());
 
 
         $(document).on("change", ".check-pago", (e) => objPago.sumarMarcas());
         $(document).on("change", ".pagar",      (e) => objPago.sumarMarcas());
 		$(document).on("change", ".cantidad",   (e) => objPago.calcularImporte(e.target));
 
-        $tabla.MegaDatatable({
+        $tabla.init({
 			pageLength: 100,
 			dom: "rt",
 			ajaxUrl: "{{ asset('gastos_tarjetas_a_pagar') }}",

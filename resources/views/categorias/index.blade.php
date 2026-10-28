@@ -28,11 +28,12 @@
 @section('PageJs')
 <script type="text/javascript">
     init = function($) {
-		let $tabla       = $("#grid"),
-		 	selectUso    = new wrapSelect("#uso",      () => $tabla.MegaDatatable("reload")),
-			selectEstado = new wrapSelect("#estado",   () => $tabla.MegaDatatable("reload"));
+		
+		const $tabla = new OwnDatatable('#grid'),
+			  selectUso    = new wrapSelect("#uso",    () => $tabla.reload()),
+			  selectEstado = new wrapSelect("#estado", () => $tabla.reload() );
 
-		$tabla.MegaDatatable({
+		$tabla.init({
 			ajaxUrl: "{{ asset('categorias_data') }}",
 			editUrl: "{{ asset('categoria/editar') }}",
 			deleteUrl: "{{ asset('categoria/borrar') }}",

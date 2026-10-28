@@ -42,8 +42,8 @@
         let fecha       = new wrapCalendar("fecha"),
             importe     = new wrapMoney("#importe", null),
             tipo        = new wrapSelect("#tipo", null);
-            
-        $("#select_categoria").MegaSearch({
+
+        const searchCategoria = new OwnSearch('#select_categoria', {
             titulo: "Seleccionar categoria",
             field: "categoria",
             openKey: "c",

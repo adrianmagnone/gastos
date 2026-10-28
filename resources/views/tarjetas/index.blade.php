@@ -17,9 +17,9 @@
 @section('PageJs')
 <script type="text/javascript">
     init = function($) {
-		let $tabla = $("#grid");
+		const $tabla = new OwnDatatable("#grid");
 
-		$tabla.MegaDatatable({
+		$tabla.init({
 			ajaxUrl: "{{ asset('tarjetas_data') }}",
 			editUrl: "{{ asset('tarjeta/editar') }}",
 			deleteUrl: "{{ asset('tarjeta/borrar') }}",

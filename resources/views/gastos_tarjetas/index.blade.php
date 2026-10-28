@@ -32,11 +32,11 @@
 @section('PageJs')
 <script type="text/javascript">
     init = function($) {
-		let $tabla         = $("#grid"),
-			selectTarjeta  = new wrapSelect("#tarjeta",  () => $tabla.MegaDatatable("reload")),
-			selectEstado   = new wrapSelect("#estado",   () => $tabla.MegaDatatable("reload"));
+		let $tabla         = new OwnDatatable("#grid"),
+			selectTarjeta  = new wrapSelect("#tarjeta",  () => $tabla.reload()),
+			selectEstado   = new wrapSelect("#estado",   () => $tabla.reload());
 
-		$tabla.MegaDatatable({
+		$tabla.init({
 			ajaxUrl: "{{ asset('gastos_tarjetas_data') }}",
 			editUrl: "{{ asset('gasto_tarjeta/editar') }}",
 			deleteUrl: "{{ asset('gasto_tarjeta/borrar') }}",

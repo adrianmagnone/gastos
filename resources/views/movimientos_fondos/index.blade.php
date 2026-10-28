@@ -36,13 +36,13 @@
 @section('PageJs')
 <script type="text/javascript">
     init = function($) {
-		let $tabla         = $("#grid"),
-			selectFondo    = new wrapSelect("#fondo",     () => $tabla.MegaDatatable("reload")),
-			selectTipo     = new wrapSelect("#tipo",      () => $tabla.MegaDatatable("reload")),
-			selectConcepto = new wrapSelect("#concepto",  () => $tabla.MegaDatatable("reload")),
-			selectSaldo    = new wrapSelect("#saldo",     () => $tabla.MegaDatatable("reload"));
+		const $tabla         = new OwnDatatable("#grid"),
+			  selectFondo    = new wrapSelect("#fondo",     () => $tabla.reload()),
+			  selectTipo     = new wrapSelect("#tipo",      () => $tabla.reload()),
+			  selectConcepto = new wrapSelect("#concepto",  () => $tabla.reload()),
+			  selectSaldo    = new wrapSelect("#saldo",     () => $tabla.reload());
 
-		$tabla.MegaDatatable({
+		$tabla.init({
 			ajaxUrl: "{{ asset('movimientos_fondos_data') }}",
 			editUrl: "{{ asset('movimientos_fondos/editar') }}",
 			deleteUrl: "{{ asset('movimientos_fondos/borrar') }}",

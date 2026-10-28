@@ -7,7 +7,9 @@
 <script type="text/javascript">
     initCbu = function($) {
 
-        $("#grid").MegaDatatable({
+		const $table = new OwnDatatable("#grid");
+
+        $table.init({
 			ajaxUrl: "{{ asset($urlConsulta) }}",
 			editUrl: "{{ asset('cbu/editar') }}",
 			deleteUrl: "{{ asset('cbu/borrar') }}",

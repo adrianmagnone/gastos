@@ -38,12 +38,13 @@
 @section('PageJs')
 <script type="text/javascript">
     init = function($) {
-		let $tabla        = $("#grid"),
-			vehiculo      = new wrapSelect("#vehiculo"    ,  () => $tabla.MegaDatatable("reload")),
-			fechaDesde    = new wrapCalendar("fecha_desde",  () => $tabla.MegaDatatable("reload")),
-			fechaHasta    = new wrapCalendar("fecha_hasta",  () => $tabla.MegaDatatable("reload"));
+		const $tabla        = new OwnDatatable("#grid"),
+			  $resumen      = new OwnDatatable("#gridResumen"),
+			  vehiculo      = new wrapSelect("#vehiculo"    ,  () => $tabla.reload()),
+			  fechaDesde    = new wrapCalendar("fecha_desde",  () => $tabla.reload()),
+			  fechaHasta    = new wrapCalendar("fecha_hasta",  () => $tabla.reload());
 
-		$tabla.MegaDatatable({
+		$tabla.init({
 			ajaxUrl: "{{ asset('mantenimiento_vehiculos_data') }}",
 			editUrl: "{{ asset('mantenimiento_vehiculo/editar') }}",
 			deleteUrl: "{{ asset('mantenimiento_vehiculo/borrar') }}",
@@ -60,7 +61,7 @@
 			]
 		});
 
-		$("#gridResumen").MegaDatatable({
+		$resumen.init({
             pageLength: 100,
 			dom: "rt",
 			ajaxUrl: "{{ asset('mantenimiento_vehiculos_anual') }}",
