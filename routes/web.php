@@ -86,6 +86,7 @@ Route::get('tickets',                           [TicketsController::class, 'inde
 Route::get('tickets_data/{id?}',                [TicketsController::class, 'getData']);
 Route::get('ticket/nuevo',                      [TicketsController::class, 'create']);
 Route::post('ticket/guardar',                   [TicketsController::class, 'store'])->name('ticket.guardar');
+Route::get('ticket/editar/{id}',                [TicketsController::class, 'edit']);
 
 // FONDOS  ----------------------------------------------------- 
 Route::get('fondos',                            [FondosController::class, 'index'])->name('fondos');

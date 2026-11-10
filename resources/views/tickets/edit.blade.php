@@ -30,6 +30,7 @@
     @endforeach
     </select>
 
+    @php $movimientos = old('movimientos') ?? $movimientos @endphp
     <div class="row">
         <div class="col-8">
             <table id="tableMovimientos" class="table compact card-table w-100 table-hover dataTable no-footer" >
@@ -55,73 +56,89 @@
 @endsection
 
 @section('Bundles')
-<x-bundle src="wraps|search|dataTable" />
+    <x-bundle src="wraps|search|dataTable" />
 @endsection
 
 @section('PageJs')
 <script type="text/javascript">
     init = function($) {
-        let fecha       = new wrapCalendar("fecha"),
+        let fecha       = new wrapCalendar("fecha", null),
             importe     = new wrapMoney("#importe", null),
             tipo        = new wrapSelect("#tipo", null),
             indice      = 1;
 
         const $tablaMovimientos = $("#tableMovimientos");
+       
+        const movimientos = @js(array_values($movimientos ?? []));
 
-        $("#btnAgregarRenglon").on("click", function() {
+        function agregarRenglon(movimiento = {}) {
             const $categoria = $("#selectCategoria")
                 .clone()
                 .removeAttr("id")
                 .removeClass("d-none")
                 .attr("name", `movimientos[${indice}][categoria]`)
                 .attr("id", `categoria-${indice}`)
-                .val("0");
+                .val(movimiento.categoria ?? "0");
+            // Conserva el ID al editar; las filas nuevas envían el campo vacío.
+            const $id = $("<input>", {
+                type: "hidden",
+                name: `movimientos[${indice}][id]`,
+                value: movimiento.id ?? ""
+            });
             const $importeMovimiento = $("<input>", {
                 type: "text",
                 name: `movimientos[${indice}][importe]`,
                 class: "importeDetalle form-control form-control-sm text-end"
             });
             $importeMovimiento.mask("#.##0,00", {reverse: true, placeholder: "0,00" });
+            $importeMovimiento.val($importeMovimiento.masked(movimiento.importe ?? ""));
             const $observacion = $("<input>", {
                 type: "text",
                 name: `movimientos[${indice}][observacion]`,
-                class: "form-control form-control-sm"
+                class: "form-control form-control-sm",
+                value: movimiento.observacion ?? ""
             });
-            const $eliminar = $("<button>", {
-                type: "button",
-                class: "btn btn-danger btn-sm btnEliminarRenglon",
-                "aria-label": "Eliminar renglon"
-            }).append($("<i>", { class: "icon ti ti-trash" }));
+            const $eliminar = (movimiento.id)
+                                ? $("<span>")
+                                : $("<button>", {
+                                        type: "button",
+                                        class: "btn btn-danger btn-sm btnEliminarRenglon",
+                                        "aria-label": "Eliminar renglon"
+                                    }).append($("<i>", { class: "icon ti ti-trash" }));
 
             $tablaMovimientos.find("tbody").append(
                 $("<tr>").append(
-                    $("<td>").append($categoria),
+                    $("<td>").append($id, $categoria),
                     $("<td>").append($importeMovimiento),
                     $("<td>").append($observacion),
                     $("<td>").append($eliminar)
                 )
             );
 
-            const wr = new wrapSelect(`#categoria-${indice}`);
-            
+            new wrapSelect(`#categoria-${indice}`);
             indice++;
-        });
+        }
 
-        $(document).on("blur", ".importeDetalle", () => sumarImportes());
+        movimientos.forEach(agregarRenglon);
+
+        $("#btnAgregarRenglon").on("click", () => agregarRenglon());
+
+        $tablaMovimientos.on("blur", ".importeDetalle", sumarImportes);
 
         $tablaMovimientos.on("click", ".btnEliminarRenglon", function() {
             $(this).closest("tr").remove();
+            sumarImportes();
         });
 
-        sumarImportes = function(){
+        function sumarImportes() {
             let total = 0;
 
-            $(".importeDetalle").each(function(){
-                total = total + parseFloat($( this ).cleanVal());
+            $tablaMovimientos.find(".importeDetalle").each(function(){
+                total += Number($(this).cleanVal());
             });
 
             importe.set(total);
-        };
+        }
     }
 </script>
 @endsection

@@ -26,6 +26,11 @@ class TicketsController extends Controller
         return $action->runForCreate();
     }
 
+    public function edit(TicketEditar $action, $id = null)
+    {
+        return $action->runForEdit($id);
+    }
+
     public function store(Request $request, TicketEditar $action)
     {
         return $action->runForSave($request);

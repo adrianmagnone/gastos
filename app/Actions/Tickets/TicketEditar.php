@@ -31,10 +31,26 @@ class TicketEditar extends EditAction
 
     protected function aditionalDataForEdit(&$entidad = null)
     {
+        $movimientos = [];
+
+        if ($entidad)
+        {
+            foreach($entidad->detalle as $detalle)
+            {
+                $movimientos[] = [
+                    'id'          => $detalle->id,
+                    'categoria'   => $detalle->categoria_id,
+                    'importe'     => $detalle->importeEdit,
+                    'observacion' => $detalle->descripcion
+                ];
+            }
+        }
+
         return [
-            'tipos'      => TiposMovimiento::toArray(),
-            'categorias' => \App\Models\Categoria::all(),
-            'tiposPagos' => PagosMovimiento::toIconArray()
+            'tipos'       => TiposMovimiento::toArray(),
+            'categorias'  => \App\Models\Categoria::all(),
+            'tiposPagos'  => PagosMovimiento::toIconArray(),
+            'movimientos' => $movimientos
         ];
     }
 
@@ -81,19 +97,29 @@ class TicketEditar extends EditAction
 
     protected function completeUpdate(&$entidad, &$request)
     {
-        foreach ($this->movimientos as $id => $movimiento)
+        foreach ($this->movimientos as $indice => $movimiento)
         {
-            $detalle = [
-                'fecha'        => $entidad->fecha,
-                'tipo'         => $entidad->tipo,
-                'ticket_id'    => $entidad->id,
-                'categoria_id' => $movimiento['categoria'],
-                'descripcion'  => $movimiento['observacion'],
-                'importe'      => $this->valueToDecimal($movimiento['importe']),
-                'tipoPago'     => $entidad->tipoPago
-            ];
+            if (isset($movimiento['id']))
+            {
+                $detalle = Movimiento::find($id);
 
-            Movimiento::create($detalle);
+                $detalle->fill($movimiento);
+                $detalle->save();
+            }
+            else
+            {
+                $detalle = [
+                    'fecha'        => $entidad->fecha,
+                    'tipo'         => $entidad->tipo,
+                    'ticket_id'    => $entidad->id,
+                    'categoria_id' => $movimiento['categoria'],
+                    'descripcion'  => $movimiento['observacion'],
+                    'importe'      => $this->valueToDecimal($movimiento['importe']),
+                    'tipoPago'     => $entidad->tipoPago
+                ];
+
+                Movimiento::create($detalle);
+            }
         } 
     }
 

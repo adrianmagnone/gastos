@@ -35,6 +35,11 @@ class Ticket extends Model
         ];
     }
 
+    public function detalle(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(\App\Models\Movimiento::class, 'ticket_id', 'id');
+    }
+
     public function fechaFormat(): Attribute
     {
         return Attribute::make(
