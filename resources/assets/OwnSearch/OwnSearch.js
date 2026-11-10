@@ -9,7 +9,7 @@ class OwnSearch {
             url: false,
             id_div_principal: '',
             validarAntesAbrir: () => true,
-            focusSearch: false,
+            focusSearch: true,
             onElementoSeleccionado: false,
             atributoId: true,
             atributoDescripcion: true,
@@ -101,8 +101,8 @@ class OwnSearch {
             modalElement.addEventListener('shown.bs.modal', () => {
                 if (this.settings.focusSearch) {
 
-                    const searchElement = document.querySelector(`${this.settings.id_div_principal} > .search-form-control`);
-                
+                    const searchElement = document.querySelector(`#${this.settings.id_div_principal} input[type="search"]`);
+
                     if (searchElement) {
                         searchElement.focus();
                         searchElement.select();
