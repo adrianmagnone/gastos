@@ -27,12 +27,12 @@
 @section('PageJs')
 <script type="text/javascript">
     init = function($) {
-		let $tabla          = $("#grid"),
-			selectTipo      = new wrapSelect("#tipo",         () => $tabla.MegaDatatable("reload")),
-			fechaDesde      = new wrapCalendar("fecha_desde", () => $tabla.MegaDatatable("reload")),
-			fechaHasta      = new wrapCalendar("fecha_hasta", () => $tabla.MegaDatatable("reload"));
+		const $tabla     = new OwnDatatable("#grid");
+			  selectTipo = new wrapSelect("#tipo",         () => $tabla.reload()),
+			  fechaDesde = new wrapCalendar("fecha_desde", () => $tabla.reload()),
+			  fechaHasta = new wrapCalendar("fecha_hasta", () => $tabla.reload());
 
-		$tabla.MegaDatatable({
+		$tabla.init({
 			ajaxUrl: "{{ asset('tickets_data') }}",
 			editUrl: "{{ asset('ticket/editar') }}",
 			deleteUrl: "{{ asset('ticket/borrar') }}",

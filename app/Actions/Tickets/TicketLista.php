@@ -20,10 +20,10 @@ class TicketLista extends SelectAction
         return 'Ticket.Consulta';
     }
 
-    // protected function setFilterClass()
-    // {
-    //     return \App\ActionFilters\TicketFiltro::class;
-    // }
+    protected function setFilterClass()
+    {
+        return \App\ActionFilters\MovimientoFiltro::class;
+    }
 
     protected function setSearchFields()
     {
