@@ -101,7 +101,9 @@ class TicketEditar extends EditAction
         {
             if (isset($movimiento['id']))
             {
-                $detalle = Movimiento::find($id);
+                $detalle = Movimiento::find($movimiento['id']);
+
+                $movimiento['importe'] = $this->valueToDecimal($movimiento['importe']);
 
                 $detalle->fill($movimiento);
                 $detalle->save();
