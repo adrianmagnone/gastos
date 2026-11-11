@@ -237,7 +237,7 @@ class OwnSearch {
               btnClear = document.querySelectorAll(`.${this.settings.field}-clear-value`)[0];
 
         btnClear.classList.add('disabled');
-        btnSelect.innerHTML = '<div class="spinner-border spinner-border-sm"></div>';
+        btnSelect.innerHTML = renderResources.loadingSearch();
         btnSelect.classList.add('disabled');
     }
 
@@ -254,7 +254,7 @@ class OwnSearch {
               btnClear = document.querySelectorAll(`.${this.settings.field}-clear-value`)[0];
 
         btnClear.classList.remove('disabled');
-        btnSelect.innerHTML = '<i class="ti ti-search"></i>';
+        btnSelect.innerHTML = renderResources.iconSearch();
         btnSelect.classList.remove('disabled');
     }
 }

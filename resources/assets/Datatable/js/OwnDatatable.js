@@ -29,8 +29,6 @@ class OwnDatatable {
             },
             language_zeroRecord: false,
             language_emptyTable: false,
-            image_zeroRecord: Main.url('illustrations/undraw_void.svg'),
-            image_emptyTable: Main.url('illustrations/undraw_void.svg'),
             onDraw: false,
             removeClassHeader: false
         };
@@ -46,7 +44,6 @@ class OwnDatatable {
         this.settings = { ...this.defaults, ...options };
         
         this.setupColumns();
-        this.setupLanguage();
         this.createDataTable();
     }
 
@@ -69,7 +66,7 @@ class OwnDatatable {
                 columnData.orderable = !col[1].includes("f");
 
                 if (col[1].includes("c")) {
-                    columnData.render = (data, type, row) => this.renderLink(row[col[0]], row.id);
+                    columnData.render = (data, type, row) => renderResources.link(this.settings.viewUrl, row[col[0]], row.id);
                 }
             }
 
@@ -79,11 +76,11 @@ class OwnDatatable {
             }
 
             if (columnData.name === 'edit') {
-                columnData.render = (data, type, row) => row.puedeEditar ? this.renderEditLink(row.id) : '';
+                columnData.render = (data, type, row) => row.puedeEditar ? renderResources.editLink(this.settings.editUrl, row.id) : '';
             }
 
             if (columnData.name === 'delete') {
-                columnData.render = (data, type, row) => row.puedeEliminar ? this.renderDeleteLink(row.id) : '';
+                columnData.render = (data, type, row) => row.puedeEliminar ? renderResources.deleteLink(this.settings.deleteUrl, row.id) : '';
             }
 
             this.columnsData.push(columnData);
@@ -95,18 +92,6 @@ class OwnDatatable {
                     colDef.targets = this.columnsData.findIndex(column => column.data === colDef.data);
                 }
             }
-        }
-    }
-
-    setupLanguage() {
-        if (!this.settings.language_zeroRecord) {
-            const imgError = this.settings.image_zeroRecord;
-            this.settings.language_zeroRecord = `<img src="${imgError}" style="height: 128px"><h4 class="text-danger">No hay datos disponibles.</strong>`;
-        }
-
-        if (!this.settings.language_emptyTable) {
-            const notFound = this.settings.image_emptyTable;
-            this.settings.language_emptyTable = `<img src="${notFound}" style="height: 128px"><p>Ups! No hay datos disponibles.</p>`;
         }
     }
 
@@ -189,8 +174,8 @@ class OwnDatatable {
         return {
             sProcessing: "Procesando...",
             sLengthMenu: "Mostrar _MENU_ registros",
-            sZeroRecords: this.settings.language_zeroRecord,
-            sEmptyTable: this.settings.language_emptyTable,
+            sZeroRecords: this.settings.language_zeroRecord || renderResources.messageZeroRecordDataTable(),
+            sEmptyTable: this.settings.language_emptyTable || renderResources.messageEmptyDataTable(),
             sInfo: "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
             sInfoEmpty: "",
             sInfoFiltered: "(filtrado de un total de _MAX_ registros)",
@@ -225,22 +210,6 @@ class OwnDatatable {
                 }
             }
         }
-    }
-
-    renderLink(text, id) {
-        return `<a href="${this.settings.viewUrl}/${id}">${text}</a>`;
-    }
-
-    renderEditLink(id) {
-        return `<a href="${this.settings.editUrl}/${id}" title="Editar" class="text-primary">
-                    <i class="icon ti ti-edit"></i>
-                </a>`;
-    }
-
-    renderDeleteLink(id) {
-        return `<a href="${this.settings.deleteUrl}/${id}" title="Eliminar" class="text-danger">
-                    <i class="icon ti ti-trash"></i>
-                </a>`;
     }
 
     reload() {

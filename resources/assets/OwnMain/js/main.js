@@ -1,5 +1,44 @@
 class Main
 {
+    static config = {
+                login : 0,
+                base_url: '',
+                tipo_usuario: 0
+            };
+
+    static init(configuracion)
+    {
+        Main.config = { ...Main.config, ...configuracion };
+    }
+
+    static getBaseUrl()
+    {
+        return Main.config.base_url;
+    }
+    
+    static url(destino)
+    {
+        if (typeof destino === 'undefined')
+        {
+            return Main.config.base_url;
+        }
+        if (destino[0] === '/')
+        {
+            return `${Main.config.base_url}${destino}`;
+        }
+        return `${Main.config.base_url}/${destino}`;
+    }
+    
+    static tipoUsuario()
+    {
+        return Main.config.tipo_usuario;
+    }
+    
+    static redir(newUrl)
+    {
+        window.location = Main.config.base_url + encodeURI(newUrl);
+    }
+
     static soloNumeros (selector) {
         
         document.querySelectorAll(selector).forEach(function(element) {
