@@ -49,14 +49,6 @@
 			"path": "config"
 		},
 		{
-			"name": "css",
-			"path": "resources/css"
-		},
-		{
-			"name": "js",
-			"path": "resources/js"
-		},
-		{
 			"path": "app/Jobs"
 		},
 		{
