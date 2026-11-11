@@ -17,33 +17,35 @@ const files = {
           `${path.node}/jquery/dist/jquery.min.js`
      ],
      cssTabler: [
-          `${path.res_css}/tabler/tom-select.css`,
-          `${path.res_css}/tabler/tabler.css`,
-          `${path.res_css}/tabler/tabler-vendors.css`,
-          `${path.res_css}/tabler/tabler-themes.css`,
-          `${path.res_css}/tabler/demo.css`,
-          `${path.res_css}/tabler/litepicker.css`,
-          `${path.res_css}/megaTabler.css`
+          `${path.assets}/Tabler/css/tom-select.css`,
+          `${path.assets}/Tabler/css/tabler.css`,
+          `${path.assets}/Tabler/css/tabler-vendors.css`,
+          `${path.assets}/Tabler/css/tabler-themes.css`,
+          `${path.assets}/Tabler/css/demo.css`,
+          `${path.assets}/Tabler/css/litepicker.css`,
+          `${path.assets}/Tabler/css/_customTabler.css`
      ],
      jsTabler: [
-          `${path.res_js}/tabler/tabler.js`,
-          `${path.res_js}/tabler/tabler-theme.js`,
-          `${path.res_js}/tabler/tom-select.popular.js`,
-          `${path.res_js}/tabler/litepicker.js`,
+          `${path.assets}/Tabler/js/tabler.js`,
+          `${path.assets}/Tabler/js/tabler-theme.js`,
+          `${path.assets}/Tabler/js/tom-select.popular.js`,
+          `${path.assets}/Tabler/js/litepicker.js`,
           `${path.node}/imask/dist/imask.min.js`,
           `${path.node}/jquery-mask-plugin/dist/jquery.mask.min.js`
      ],
      jsDatatable: [
           `${path.node}/datatables.net/js/jquery.dataTables.min.js`,
+          `${path.assets}/Datatable/js/resourcesBase.js`,
+          `${path.assets}/Datatable/js/renderResourcesTabler.js`,
           `${path.assets}/Datatable/js/OwnDatatable.js`,
-          `${path.res_js}/renderTableCell.js`
+          `${path.assets}/Datatable/js/renderTableCell.js`
      ],
      cssDatatable: [
           `${path.node}/datatables.net-dt/css/jquery.dataTables.min.css`,
-          `${path.res_css}/dataTable.css`
+          `${path.assets}/Datatable/css/_customDataTable.css`
      ],
      jsMain: [
-          `${path.res_js}/main.js`,
+          `${path.assets}/OwnMain/js/main.js`,
           `${path.assets}/OwnMain/js/xhr.js`
      ],
      jsSearch: [
