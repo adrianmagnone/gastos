@@ -17,7 +17,8 @@ class wrapPeriodo
     {
         if (this.month.value)
         {
-            this.functionChaged();
+            if (typeof this.functionChaged === "function")
+                this.functionChaged();
         } 
     }
 
