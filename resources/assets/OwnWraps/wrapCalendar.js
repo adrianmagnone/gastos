@@ -17,7 +17,8 @@ class wrapCalendar
                   evt.preventDefault();
              
                   this.date.clearSelection();
-                  this.functionChaged();
+                  if (typeof this.functionChaged === "function")
+                    this.functionChaged();
                 });
              
                 return btn;
@@ -34,7 +35,8 @@ class wrapCalendar
             {
                 this.currentValue = '';
                 this.date.clearSelection();
-                this.functionChaged();
+                if (typeof this.functionChaged === "function")
+                    this.functionChaged();
             }
         });
 
