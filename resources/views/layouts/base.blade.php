@@ -1,7 +1,7 @@
 <!doctype html>
 <!--
 * Tabler - Premium and Open Source dashboard template with responsive and high quality UI.
-* @version 1.4.0
+* @version 1.5.1
 * @link https://tabler.io
 * Copyright 2018-2023 The Tabler Authors
 * Copyright 2018-2023 codecalm.net Paweł Kuna
@@ -35,14 +35,6 @@
     <div class="page">
       <!-- Navbar -->
       <x-menubar />
-      {{-- <header class="navbar navbar-expand-md navbar-light d-none d-lg-flex d-print-none">
-        <div class="container-xl">
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <x-topbar />
-        </div>
-      </header> --}}
       <div class="page-wrapper">
           @yield('BaseBody')
           @include('layouts.footer')

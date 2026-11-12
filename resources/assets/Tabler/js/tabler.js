@@ -1,13 +1,4678 @@
 /*!
- * Tabler v1.4.0 (https://tabler.io)
- * Copyright 2018-2026 The Tabler Authors
- * Copyright 2018-2026 codecalm.net Paweł Kuna
- * Licensed under MIT (https://github.com/tabler/tabler/blob/master/LICENSE)
- */
-!function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"function"==typeof define&&define.amd?define(["exports"],e):e((t="undefined"!=typeof globalThis?globalThis:t||self).tabler={})}(this,function(t){"use strict";const e=document.querySelectorAll('[data-bs-toggle="autosize"]');e.length&&e.forEach(function(t){window.autosize&&window.autosize(t)});const i=document.querySelectorAll("[data-countup]");i.length&&i.forEach(function(t){let e={};try{const i=t.getAttribute("data-countup")?JSON.parse(t.getAttribute("data-countup")):{};e=Object.assign({enableScrollSpy:!0},i)}catch(t){}const i=parseInt(t.innerHTML,10);if(window.countUp&&window.countUp.CountUp){const n=new window.countUp.CountUp(t,i,e);n.error||n.start()}}),[].slice.call(document.querySelectorAll("[data-mask]")).map(function(t){window.IMask&&new window.IMask(t,{mask:t.dataset.mask,lazy:"true"===t.dataset["mask-visible"]})});var n="top",s="bottom",o="right",r="left",a="auto",l=[n,s,o,r],c="start",h="end",u="clippingParents",d="viewport",f="popper",p="reference",m=l.reduce(function(t,e){return t.concat([e+"-"+c,e+"-"+h])},[]),g=[].concat(l,[a]).reduce(function(t,e){return t.concat([e,e+"-"+c,e+"-"+h])},[]),_="beforeRead",b="read",v="afterRead",y="beforeMain",w="main",A="afterMain",E="beforeWrite",T="write",C="afterWrite",O=[_,b,v,y,w,A,E,T,C];function x(t){return t?(t.nodeName||"").toLowerCase():null}function k(t){if(null==t)return window;if("[object Window]"!==t.toString()){var e=t.ownerDocument;return e&&e.defaultView||window}return t}function S(t){return t instanceof k(t).Element||t instanceof Element}function L(t){return t instanceof k(t).HTMLElement||t instanceof HTMLElement}function $(t){return"undefined"!=typeof ShadowRoot&&(t instanceof k(t).ShadowRoot||t instanceof ShadowRoot)}const D={name:"applyStyles",enabled:!0,phase:"write",fn:function(t){var e=t.state;Object.keys(e.elements).forEach(function(t){var i=e.styles[t]||{},n=e.attributes[t]||{},s=e.elements[t];L(s)&&x(s)&&(Object.assign(s.style,i),Object.keys(n).forEach(function(t){var e=n[t];!1===e?s.removeAttribute(t):s.setAttribute(t,!0===e?"":e)}))})},effect:function(t){var e=t.state,i={popper:{position:e.options.strategy,left:"0",top:"0",margin:"0"},arrow:{position:"absolute"},reference:{}};return Object.assign(e.elements.popper.style,i.popper),e.styles=i,e.elements.arrow&&Object.assign(e.elements.arrow.style,i.arrow),function(){Object.keys(e.elements).forEach(function(t){var n=e.elements[t],s=e.attributes[t]||{},o=Object.keys(e.styles.hasOwnProperty(t)?e.styles[t]:i[t]).reduce(function(t,e){return t[e]="",t},{});L(n)&&x(n)&&(Object.assign(n.style,o),Object.keys(s).forEach(function(t){n.removeAttribute(t)}))})}},requires:["computeStyles"]};function I(t){return t.split("-")[0]}var P=Math.max,N=Math.min,M=Math.round;function j(){var t=navigator.userAgentData;return null!=t&&t.brands&&Array.isArray(t.brands)?t.brands.map(function(t){return t.brand+"/"+t.version}).join(" "):navigator.userAgent}function F(){return!/^((?!chrome|android).)*safari/i.test(j())}function H(t,e,i){void 0===e&&(e=!1),void 0===i&&(i=!1);var n=t.getBoundingClientRect(),s=1,o=1;e&&L(t)&&(s=t.offsetWidth>0&&M(n.width)/t.offsetWidth||1,o=t.offsetHeight>0&&M(n.height)/t.offsetHeight||1);var r=(S(t)?k(t):window).visualViewport,a=!F()&&i,l=(n.left+(a&&r?r.offsetLeft:0))/s,c=(n.top+(a&&r?r.offsetTop:0))/o,h=n.width/s,u=n.height/o;return{width:h,height:u,top:c,right:l+h,bottom:c+u,left:l,x:l,y:c}}function z(t){var e=H(t),i=t.offsetWidth,n=t.offsetHeight;return Math.abs(e.width-i)<=1&&(i=e.width),Math.abs(e.height-n)<=1&&(n=e.height),{x:t.offsetLeft,y:t.offsetTop,width:i,height:n}}function B(t,e){var i=e.getRootNode&&e.getRootNode();if(t.contains(e))return!0;if(i&&$(i)){var n=e;do{if(n&&t.isSameNode(n))return!0;n=n.parentNode||n.host}while(n)}return!1}function W(t){return k(t).getComputedStyle(t)}function q(t){return["table","td","th"].indexOf(x(t))>=0}function R(t){return((S(t)?t.ownerDocument:t.document)||window.document).documentElement}function V(t){return"html"===x(t)?t:t.assignedSlot||t.parentNode||($(t)?t.host:null)||R(t)}function U(t){return L(t)&&"fixed"!==W(t).position?t.offsetParent:null}function K(t){for(var e=k(t),i=U(t);i&&q(i)&&"static"===W(i).position;)i=U(i);return i&&("html"===x(i)||"body"===x(i)&&"static"===W(i).position)?e:i||function(t){var e=/firefox/i.test(j());if(/Trident/i.test(j())&&L(t)&&"fixed"===W(t).position)return null;var i=V(t);for($(i)&&(i=i.host);L(i)&&["html","body"].indexOf(x(i))<0;){var n=W(i);if("none"!==n.transform||"none"!==n.perspective||"paint"===n.contain||-1!==["transform","perspective"].indexOf(n.willChange)||e&&"filter"===n.willChange||e&&n.filter&&"none"!==n.filter)return i;i=i.parentNode}return null}(t)||e}function Q(t){return["top","bottom"].indexOf(t)>=0?"x":"y"}function X(t,e,i){return P(t,N(e,i))}function Y(t){return Object.assign({},{top:0,right:0,bottom:0,left:0},t)}function G(t,e){return e.reduce(function(e,i){return e[i]=t,e},{})}const J={name:"arrow",enabled:!0,phase:"main",fn:function(t){var e,i=t.state,a=t.name,c=t.options,h=i.elements.arrow,u=i.modifiersData.popperOffsets,d=I(i.placement),f=Q(d),p=[r,o].indexOf(d)>=0?"height":"width";if(h&&u){var m=function(t,e){return Y("number"!=typeof(t="function"==typeof t?t(Object.assign({},e.rects,{placement:e.placement})):t)?t:G(t,l))}(c.padding,i),g=z(h),_="y"===f?n:r,b="y"===f?s:o,v=i.rects.reference[p]+i.rects.reference[f]-u[f]-i.rects.popper[p],y=u[f]-i.rects.reference[f],w=K(h),A=w?"y"===f?w.clientHeight||0:w.clientWidth||0:0,E=v/2-y/2,T=m[_],C=A-g[p]-m[b],O=A/2-g[p]/2+E,x=X(T,O,C),k=f;i.modifiersData[a]=((e={})[k]=x,e.centerOffset=x-O,e)}},effect:function(t){var e=t.state,i=t.options.element,n=void 0===i?"[data-popper-arrow]":i;null!=n&&("string"!=typeof n||(n=e.elements.popper.querySelector(n)))&&B(e.elements.popper,n)&&(e.elements.arrow=n)},requires:["popperOffsets"],requiresIfExists:["preventOverflow"]};function Z(t){return t.split("-")[1]}var tt={top:"auto",right:"auto",bottom:"auto",left:"auto"};function et(t){var e,i=t.popper,a=t.popperRect,l=t.placement,c=t.variation,u=t.offsets,d=t.position,f=t.gpuAcceleration,p=t.adaptive,m=t.roundOffsets,g=t.isFixed,_=u.x,b=void 0===_?0:_,v=u.y,y=void 0===v?0:v,w="function"==typeof m?m({x:b,y:y}):{x:b,y:y};b=w.x,y=w.y;var A=u.hasOwnProperty("x"),E=u.hasOwnProperty("y"),T=r,C=n,O=window;if(p){var x=K(i),S="clientHeight",L="clientWidth";x===k(i)&&"static"!==W(x=R(i)).position&&"absolute"===d&&(S="scrollHeight",L="scrollWidth"),(l===n||(l===r||l===o)&&c===h)&&(C=s,y-=(g&&x===O&&O.visualViewport?O.visualViewport.height:x[S])-a.height,y*=f?1:-1),l!==r&&(l!==n&&l!==s||c!==h)||(T=o,b-=(g&&x===O&&O.visualViewport?O.visualViewport.width:x[L])-a.width,b*=f?1:-1)}var $,D=Object.assign({position:d},p&&tt),I=!0===m?function(t,e){var i=t.x,n=t.y,s=e.devicePixelRatio||1;return{x:M(i*s)/s||0,y:M(n*s)/s||0}}({x:b,y:y},k(i)):{x:b,y:y};return b=I.x,y=I.y,f?Object.assign({},D,(($={})[C]=E?"0":"",$[T]=A?"0":"",$.transform=(O.devicePixelRatio||1)<=1?"translate("+b+"px, "+y+"px)":"translate3d("+b+"px, "+y+"px, 0)",$)):Object.assign({},D,((e={})[C]=E?y+"px":"",e[T]=A?b+"px":"",e.transform="",e))}const it={name:"computeStyles",enabled:!0,phase:"beforeWrite",fn:function(t){var e=t.state,i=t.options,n=i.gpuAcceleration,s=void 0===n||n,o=i.adaptive,r=void 0===o||o,a=i.roundOffsets,l=void 0===a||a,c={placement:I(e.placement),variation:Z(e.placement),popper:e.elements.popper,popperRect:e.rects.popper,gpuAcceleration:s,isFixed:"fixed"===e.options.strategy};null!=e.modifiersData.popperOffsets&&(e.styles.popper=Object.assign({},e.styles.popper,et(Object.assign({},c,{offsets:e.modifiersData.popperOffsets,position:e.options.strategy,adaptive:r,roundOffsets:l})))),null!=e.modifiersData.arrow&&(e.styles.arrow=Object.assign({},e.styles.arrow,et(Object.assign({},c,{offsets:e.modifiersData.arrow,position:"absolute",adaptive:!1,roundOffsets:l})))),e.attributes.popper=Object.assign({},e.attributes.popper,{"data-popper-placement":e.placement})},data:{}};var nt={passive:!0};const st={name:"eventListeners",enabled:!0,phase:"write",fn:function(){},effect:function(t){var e=t.state,i=t.instance,n=t.options,s=n.scroll,o=void 0===s||s,r=n.resize,a=void 0===r||r,l=k(e.elements.popper),c=[].concat(e.scrollParents.reference,e.scrollParents.popper);return o&&c.forEach(function(t){t.addEventListener("scroll",i.update,nt)}),a&&l.addEventListener("resize",i.update,nt),function(){o&&c.forEach(function(t){t.removeEventListener("scroll",i.update,nt)}),a&&l.removeEventListener("resize",i.update,nt)}},data:{}};var ot={left:"right",right:"left",bottom:"top",top:"bottom"};function rt(t){return t.replace(/left|right|bottom|top/g,function(t){return ot[t]})}var at={start:"end",end:"start"};function lt(t){return t.replace(/start|end/g,function(t){return at[t]})}function ct(t){var e=k(t);return{scrollLeft:e.pageXOffset,scrollTop:e.pageYOffset}}function ht(t){return H(R(t)).left+ct(t).scrollLeft}function ut(t){var e=W(t),i=e.overflow,n=e.overflowX,s=e.overflowY;return/auto|scroll|overlay|hidden/.test(i+s+n)}function dt(t){return["html","body","#document"].indexOf(x(t))>=0?t.ownerDocument.body:L(t)&&ut(t)?t:dt(V(t))}function ft(t,e){var i;void 0===e&&(e=[]);var n=dt(t),s=n===(null==(i=t.ownerDocument)?void 0:i.body),o=k(n),r=s?[o].concat(o.visualViewport||[],ut(n)?n:[]):n,a=e.concat(r);return s?a:a.concat(ft(V(r)))}function pt(t){return Object.assign({},t,{left:t.x,top:t.y,right:t.x+t.width,bottom:t.y+t.height})}function mt(t,e,i){return e===d?pt(function(t,e){var i=k(t),n=R(t),s=i.visualViewport,o=n.clientWidth,r=n.clientHeight,a=0,l=0;if(s){o=s.width,r=s.height;var c=F();(c||!c&&"fixed"===e)&&(a=s.offsetLeft,l=s.offsetTop)}return{width:o,height:r,x:a+ht(t),y:l}}(t,i)):S(e)?function(t,e){var i=H(t,!1,"fixed"===e);return i.top=i.top+t.clientTop,i.left=i.left+t.clientLeft,i.bottom=i.top+t.clientHeight,i.right=i.left+t.clientWidth,i.width=t.clientWidth,i.height=t.clientHeight,i.x=i.left,i.y=i.top,i}(e,i):pt(function(t){var e,i=R(t),n=ct(t),s=null==(e=t.ownerDocument)?void 0:e.body,o=P(i.scrollWidth,i.clientWidth,s?s.scrollWidth:0,s?s.clientWidth:0),r=P(i.scrollHeight,i.clientHeight,s?s.scrollHeight:0,s?s.clientHeight:0),a=-n.scrollLeft+ht(t),l=-n.scrollTop;return"rtl"===W(s||i).direction&&(a+=P(i.clientWidth,s?s.clientWidth:0)-o),{width:o,height:r,x:a,y:l}}(R(t)))}function gt(t){var e,i=t.reference,a=t.element,l=t.placement,u=l?I(l):null,d=l?Z(l):null,f=i.x+i.width/2-a.width/2,p=i.y+i.height/2-a.height/2;switch(u){case n:e={x:f,y:i.y-a.height};break;case s:e={x:f,y:i.y+i.height};break;case o:e={x:i.x+i.width,y:p};break;case r:e={x:i.x-a.width,y:p};break;default:e={x:i.x,y:i.y}}var m=u?Q(u):null;if(null!=m){var g="y"===m?"height":"width";switch(d){case c:e[m]=e[m]-(i[g]/2-a[g]/2);break;case h:e[m]=e[m]+(i[g]/2-a[g]/2)}}return e}function _t(t,e){void 0===e&&(e={});var i=e,r=i.placement,a=void 0===r?t.placement:r,c=i.strategy,h=void 0===c?t.strategy:c,m=i.boundary,g=void 0===m?u:m,_=i.rootBoundary,b=void 0===_?d:_,v=i.elementContext,y=void 0===v?f:v,w=i.altBoundary,A=void 0!==w&&w,E=i.padding,T=void 0===E?0:E,C=Y("number"!=typeof T?T:G(T,l)),O=y===f?p:f,k=t.rects.popper,$=t.elements[A?O:y],D=function(t,e,i,n){var s="clippingParents"===e?function(t){var e=ft(V(t)),i=["absolute","fixed"].indexOf(W(t).position)>=0&&L(t)?K(t):t;return S(i)?e.filter(function(t){return S(t)&&B(t,i)&&"body"!==x(t)}):[]}(t):[].concat(e),o=[].concat(s,[i]),r=o[0],a=o.reduce(function(e,i){var s=mt(t,i,n);return e.top=P(s.top,e.top),e.right=N(s.right,e.right),e.bottom=N(s.bottom,e.bottom),e.left=P(s.left,e.left),e},mt(t,r,n));return a.width=a.right-a.left,a.height=a.bottom-a.top,a.x=a.left,a.y=a.top,a}(S($)?$:$.contextElement||R(t.elements.popper),g,b,h),I=H(t.elements.reference),M=gt({reference:I,element:k,placement:a}),j=pt(Object.assign({},k,M)),F=y===f?j:I,z={top:D.top-F.top+C.top,bottom:F.bottom-D.bottom+C.bottom,left:D.left-F.left+C.left,right:F.right-D.right+C.right},q=t.modifiersData.offset;if(y===f&&q){var U=q[a];Object.keys(z).forEach(function(t){var e=[o,s].indexOf(t)>=0?1:-1,i=[n,s].indexOf(t)>=0?"y":"x";z[t]+=U[i]*e})}return z}function bt(t,e){void 0===e&&(e={});var i=e,n=i.placement,s=i.boundary,o=i.rootBoundary,r=i.padding,a=i.flipVariations,c=i.allowedAutoPlacements,h=void 0===c?g:c,u=Z(n),d=u?a?m:m.filter(function(t){return Z(t)===u}):l,f=d.filter(function(t){return h.indexOf(t)>=0});0===f.length&&(f=d);var p=f.reduce(function(e,i){return e[i]=_t(t,{placement:i,boundary:s,rootBoundary:o,padding:r})[I(i)],e},{});return Object.keys(p).sort(function(t,e){return p[t]-p[e]})}const vt={name:"flip",enabled:!0,phase:"main",fn:function(t){var e=t.state,i=t.options,l=t.name;if(!e.modifiersData[l]._skip){for(var h=i.mainAxis,u=void 0===h||h,d=i.altAxis,f=void 0===d||d,p=i.fallbackPlacements,m=i.padding,g=i.boundary,_=i.rootBoundary,b=i.altBoundary,v=i.flipVariations,y=void 0===v||v,w=i.allowedAutoPlacements,A=e.options.placement,E=I(A),T=p||(E!==A&&y?function(t){if(I(t)===a)return[];var e=rt(t);return[lt(t),e,lt(e)]}(A):[rt(A)]),C=[A].concat(T).reduce(function(t,i){return t.concat(I(i)===a?bt(e,{placement:i,boundary:g,rootBoundary:_,padding:m,flipVariations:y,allowedAutoPlacements:w}):i)},[]),O=e.rects.reference,x=e.rects.popper,k=new Map,S=!0,L=C[0],$=0;$<C.length;$++){var D=C[$],P=I(D),N=Z(D)===c,M=[n,s].indexOf(P)>=0,j=M?"width":"height",F=_t(e,{placement:D,boundary:g,rootBoundary:_,altBoundary:b,padding:m}),H=M?N?o:r:N?s:n;O[j]>x[j]&&(H=rt(H));var z=rt(H),B=[];if(u&&B.push(F[P]<=0),f&&B.push(F[H]<=0,F[z]<=0),B.every(function(t){return t})){L=D,S=!1;break}k.set(D,B)}if(S)for(var W=function(t){var e=C.find(function(e){var i=k.get(e);if(i)return i.slice(0,t).every(function(t){return t})});if(e)return L=e,"break"},q=y?3:1;q>0&&"break"!==W(q);q--);e.placement!==L&&(e.modifiersData[l]._skip=!0,e.placement=L,e.reset=!0)}},requiresIfExists:["offset"],data:{_skip:!1}};function yt(t,e,i){return void 0===i&&(i={x:0,y:0}),{top:t.top-e.height-i.y,right:t.right-e.width+i.x,bottom:t.bottom-e.height+i.y,left:t.left-e.width-i.x}}function wt(t){return[n,o,s,r].some(function(e){return t[e]>=0})}const At={name:"hide",enabled:!0,phase:"main",requiresIfExists:["preventOverflow"],fn:function(t){var e=t.state,i=t.name,n=e.rects.reference,s=e.rects.popper,o=e.modifiersData.preventOverflow,r=_t(e,{elementContext:"reference"}),a=_t(e,{altBoundary:!0}),l=yt(r,n),c=yt(a,s,o),h=wt(l),u=wt(c);e.modifiersData[i]={referenceClippingOffsets:l,popperEscapeOffsets:c,isReferenceHidden:h,hasPopperEscaped:u},e.attributes.popper=Object.assign({},e.attributes.popper,{"data-popper-reference-hidden":h,"data-popper-escaped":u})}},Et={name:"offset",enabled:!0,phase:"main",requires:["popperOffsets"],fn:function(t){var e=t.state,i=t.options,s=t.name,a=i.offset,l=void 0===a?[0,0]:a,c=g.reduce(function(t,i){return t[i]=function(t,e,i){var s=I(t),a=[r,n].indexOf(s)>=0?-1:1,l="function"==typeof i?i(Object.assign({},e,{placement:t})):i,c=l[0],h=l[1];return c=c||0,h=(h||0)*a,[r,o].indexOf(s)>=0?{x:h,y:c}:{x:c,y:h}}(i,e.rects,l),t},{}),h=c[e.placement],u=h.x,d=h.y;null!=e.modifiersData.popperOffsets&&(e.modifiersData.popperOffsets.x+=u,e.modifiersData.popperOffsets.y+=d),e.modifiersData[s]=c}},Tt={name:"popperOffsets",enabled:!0,phase:"read",fn:function(t){var e=t.state,i=t.name;e.modifiersData[i]=gt({reference:e.rects.reference,element:e.rects.popper,placement:e.placement})},data:{}},Ct={name:"preventOverflow",enabled:!0,phase:"main",fn:function(t){var e=t.state,i=t.options,a=t.name,l=i.mainAxis,h=void 0===l||l,u=i.altAxis,d=void 0!==u&&u,f=i.boundary,p=i.rootBoundary,m=i.altBoundary,g=i.padding,_=i.tether,b=void 0===_||_,v=i.tetherOffset,y=void 0===v?0:v,w=_t(e,{boundary:f,rootBoundary:p,padding:g,altBoundary:m}),A=I(e.placement),E=Z(e.placement),T=!E,C=Q(A),O="x"===C?"y":"x",x=e.modifiersData.popperOffsets,k=e.rects.reference,S=e.rects.popper,L="function"==typeof y?y(Object.assign({},e.rects,{placement:e.placement})):y,$="number"==typeof L?{mainAxis:L,altAxis:L}:Object.assign({mainAxis:0,altAxis:0},L),D=e.modifiersData.offset?e.modifiersData.offset[e.placement]:null,M={x:0,y:0};if(x){if(h){var j,F="y"===C?n:r,H="y"===C?s:o,B="y"===C?"height":"width",W=x[C],q=W+w[F],R=W-w[H],V=b?-S[B]/2:0,U=E===c?k[B]:S[B],Y=E===c?-S[B]:-k[B],G=e.elements.arrow,J=b&&G?z(G):{width:0,height:0},tt=e.modifiersData["arrow#persistent"]?e.modifiersData["arrow#persistent"].padding:{top:0,right:0,bottom:0,left:0},et=tt[F],it=tt[H],nt=X(0,k[B],J[B]),st=T?k[B]/2-V-nt-et-$.mainAxis:U-nt-et-$.mainAxis,ot=T?-k[B]/2+V+nt+it+$.mainAxis:Y+nt+it+$.mainAxis,rt=e.elements.arrow&&K(e.elements.arrow),at=rt?"y"===C?rt.clientTop||0:rt.clientLeft||0:0,lt=null!=(j=null==D?void 0:D[C])?j:0,ct=W+ot-lt,ht=X(b?N(q,W+st-lt-at):q,W,b?P(R,ct):R);x[C]=ht,M[C]=ht-W}if(d){var ut,dt="x"===C?n:r,ft="x"===C?s:o,pt=x[O],mt="y"===O?"height":"width",gt=pt+w[dt],bt=pt-w[ft],vt=-1!==[n,r].indexOf(A),yt=null!=(ut=null==D?void 0:D[O])?ut:0,wt=vt?gt:pt-k[mt]-S[mt]-yt+$.altAxis,At=vt?pt+k[mt]+S[mt]-yt-$.altAxis:bt,Et=b&&vt?function(t,e,i){var n=X(t,e,i);return n>i?i:n}(wt,pt,At):X(b?wt:gt,pt,b?At:bt);x[O]=Et,M[O]=Et-pt}e.modifiersData[a]=M}},requiresIfExists:["offset"]};function Ot(t,e,i){void 0===i&&(i=!1);var n,s,o=L(e),r=L(e)&&function(t){var e=t.getBoundingClientRect(),i=M(e.width)/t.offsetWidth||1,n=M(e.height)/t.offsetHeight||1;return 1!==i||1!==n}(e),a=R(e),l=H(t,r,i),c={scrollLeft:0,scrollTop:0},h={x:0,y:0};return(o||!o&&!i)&&(("body"!==x(e)||ut(a))&&(c=(n=e)!==k(n)&&L(n)?{scrollLeft:(s=n).scrollLeft,scrollTop:s.scrollTop}:ct(n)),L(e)?((h=H(e,!0)).x+=e.clientLeft,h.y+=e.clientTop):a&&(h.x=ht(a))),{x:l.left+c.scrollLeft-h.x,y:l.top+c.scrollTop-h.y,width:l.width,height:l.height}}function xt(t){var e=new Map,i=new Set,n=[];function s(t){i.add(t.name),[].concat(t.requires||[],t.requiresIfExists||[]).forEach(function(t){if(!i.has(t)){var n=e.get(t);n&&s(n)}}),n.push(t)}return t.forEach(function(t){e.set(t.name,t)}),t.forEach(function(t){i.has(t.name)||s(t)}),n}var kt={placement:"bottom",modifiers:[],strategy:"absolute"};function St(){for(var t=arguments.length,e=new Array(t),i=0;i<t;i++)e[i]=arguments[i];return!e.some(function(t){return!(t&&"function"==typeof t.getBoundingClientRect)})}function Lt(t){void 0===t&&(t={});var e=t,i=e.defaultModifiers,n=void 0===i?[]:i,s=e.defaultOptions,o=void 0===s?kt:s;return function(t,e,i){void 0===i&&(i=o);var s,r,a={placement:"bottom",orderedModifiers:[],options:Object.assign({},kt,o),modifiersData:{},elements:{reference:t,popper:e},attributes:{},styles:{}},l=[],c=!1,h={state:a,setOptions:function(i){var s="function"==typeof i?i(a.options):i;u(),a.options=Object.assign({},o,a.options,s),a.scrollParents={reference:S(t)?ft(t):t.contextElement?ft(t.contextElement):[],popper:ft(e)};var r,c,d=function(t){var e=xt(t);return O.reduce(function(t,i){return t.concat(e.filter(function(t){return t.phase===i}))},[])}((r=[].concat(n,a.options.modifiers),c=r.reduce(function(t,e){var i=t[e.name];return t[e.name]=i?Object.assign({},i,e,{options:Object.assign({},i.options,e.options),data:Object.assign({},i.data,e.data)}):e,t},{}),Object.keys(c).map(function(t){return c[t]})));return a.orderedModifiers=d.filter(function(t){return t.enabled}),a.orderedModifiers.forEach(function(t){var e=t.name,i=t.options,n=void 0===i?{}:i,s=t.effect;if("function"==typeof s){var o=s({state:a,name:e,instance:h,options:n});l.push(o||function(){})}}),h.update()},forceUpdate:function(){if(!c){var t=a.elements,e=t.reference,i=t.popper;if(St(e,i)){a.rects={reference:Ot(e,K(i),"fixed"===a.options.strategy),popper:z(i)},a.reset=!1,a.placement=a.options.placement,a.orderedModifiers.forEach(function(t){return a.modifiersData[t.name]=Object.assign({},t.data)});for(var n=0;n<a.orderedModifiers.length;n++)if(!0!==a.reset){var s=a.orderedModifiers[n],o=s.fn,r=s.options,l=void 0===r?{}:r,u=s.name;"function"==typeof o&&(a=o({state:a,options:l,name:u,instance:h})||a)}else a.reset=!1,n=-1}}},update:(s=function(){return new Promise(function(t){h.forceUpdate(),t(a)})},function(){return r||(r=new Promise(function(t){Promise.resolve().then(function(){r=void 0,t(s())})})),r}),destroy:function(){u(),c=!0}};if(!St(t,e))return h;function u(){l.forEach(function(t){return t()}),l=[]}return h.setOptions(i).then(function(t){!c&&i.onFirstUpdate&&i.onFirstUpdate(t)}),h}}var $t=Lt(),Dt=Lt({defaultModifiers:[st,Tt,it,D]}),It=Lt({defaultModifiers:[st,Tt,it,D,Et,vt,Ct,J,At]});const Pt=Object.freeze(Object.defineProperty({__proto__:null,afterMain:A,afterRead:v,afterWrite:C,applyStyles:D,arrow:J,auto:a,basePlacements:l,beforeMain:y,beforeRead:_,beforeWrite:E,bottom:s,clippingParents:u,computeStyles:it,createPopper:It,createPopperBase:$t,createPopperLite:Dt,detectOverflow:_t,end:h,eventListeners:st,flip:vt,hide:At,left:r,main:w,modifierPhases:O,offset:Et,placements:g,popper:f,popperGenerator:Lt,popperOffsets:Tt,preventOverflow:Ct,read:b,reference:p,right:o,start:c,top:n,variationPlacements:m,viewport:d,write:T},Symbol.toStringTag,{value:"Module"})),Nt=new Map,Mt={set(t,e,i){Nt.has(t)||Nt.set(t,new Map);const n=Nt.get(t);n.has(e)||0===n.size?n.set(e,i):console.error(`Bootstrap doesn't allow more than one instance per element. Bound instance: ${Array.from(n.keys())[0]}.`)},get:(t,e)=>Nt.has(t)&&Nt.get(t).get(e)||null,remove(t,e){if(!Nt.has(t))return;const i=Nt.get(t);i.delete(e),0===i.size&&Nt.delete(t)}},jt="transitionend",Ft=t=>(t&&window.CSS&&window.CSS.escape&&(t=t.replace(/#([^\s"#']+)/g,(t,e)=>`#${CSS.escape(e)}`)),t),Ht=t=>null==t?`${t}`:Object.prototype.toString.call(t).match(/\s([a-z]+)/i)[1].toLowerCase(),zt=t=>{t.dispatchEvent(new Event(jt))},Bt=t=>!(!t||"object"!=typeof t)&&(void 0!==t.jquery&&(t=t[0]),void 0!==t.nodeType),Wt=t=>Bt(t)?t.jquery?t[0]:t:"string"==typeof t&&t.length>0?document.querySelector(Ft(t)):null,qt=t=>{if(!Bt(t)||0===t.getClientRects().length)return!1;const e="visible"===getComputedStyle(t).getPropertyValue("visibility"),i=t.closest("details:not([open])");if(!i)return e;if(i!==t){const e=t.closest("summary");if(e&&e.parentNode!==i)return!1;if(null===e)return!1}return e},Rt=t=>!t||t.nodeType!==Node.ELEMENT_NODE||!!t.classList.contains("disabled")||(void 0!==t.disabled?t.disabled:t.hasAttribute("disabled")&&"false"!==t.getAttribute("disabled")),Vt=t=>{if(!document.documentElement.attachShadow)return null;if("function"==typeof t.getRootNode){const e=t.getRootNode();return e instanceof ShadowRoot?e:null}return t instanceof ShadowRoot?t:t.parentNode?Vt(t.parentNode):null},Ut=()=>{},Kt=t=>{t.offsetHeight},Qt=()=>window.jQuery&&!document.body.hasAttribute("data-bs-no-jquery")?window.jQuery:null,Xt=[],Yt=()=>"rtl"===document.documentElement.dir,Gt=t=>{var e;e=()=>{const e=Qt();if(e){const i=t.NAME,n=e.fn[i];e.fn[i]=t.jQueryInterface,e.fn[i].Constructor=t,e.fn[i].noConflict=()=>(e.fn[i]=n,t.jQueryInterface)}},"loading"===document.readyState?(Xt.length||document.addEventListener("DOMContentLoaded",()=>{for(const t of Xt)t()}),Xt.push(e)):e()},Jt=(t,e=[],i=t)=>"function"==typeof t?t.call(...e):i,Zt=(t,e,i=!0)=>{if(!i)return void Jt(t);const n=(t=>{if(!t)return 0;let{transitionDuration:e,transitionDelay:i}=window.getComputedStyle(t);const n=Number.parseFloat(e),s=Number.parseFloat(i);return n||s?(e=e.split(",")[0],i=i.split(",")[0],1e3*(Number.parseFloat(e)+Number.parseFloat(i))):0})(e)+5;let s=!1;const o=({target:i})=>{i===e&&(s=!0,e.removeEventListener(jt,o),Jt(t))};e.addEventListener(jt,o),setTimeout(()=>{s||zt(e)},n)},te=(t,e,i,n)=>{const s=t.length;let o=t.indexOf(e);return-1===o?!i&&n?t[s-1]:t[0]:(o+=i?1:-1,n&&(o=(o+s)%s),t[Math.max(0,Math.min(o,s-1))])},ee=/[^.]*(?=\..*)\.|.*/,ie=/\..*/,ne=/::\d+$/,se={};
-/*!
-	  * Bootstrap v5.3.7 (https://getbootstrap.com/)
-	  * Copyright 2011-2025 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
-	  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
-	  */let oe=1;const re={mouseenter:"mouseover",mouseleave:"mouseout"},ae=new Set(["click","dblclick","mouseup","mousedown","contextmenu","mousewheel","DOMMouseScroll","mouseover","mouseout","mousemove","selectstart","selectend","keydown","keypress","keyup","orientationchange","touchstart","touchmove","touchend","touchcancel","pointerdown","pointermove","pointerup","pointerleave","pointercancel","gesturestart","gesturechange","gestureend","focus","blur","change","reset","select","submit","focusin","focusout","load","unload","beforeunload","resize","move","DOMContentLoaded","readystatechange","error","abort","scroll"]);function le(t,e){return e&&`${e}::${oe++}`||t.uidEvent||oe++}function ce(t){const e=le(t);return t.uidEvent=e,se[e]=se[e]||{},se[e]}function he(t,e,i=null){return Object.values(t).find(t=>t.callable===e&&t.delegationSelector===i)}function ue(t,e,i){const n="string"==typeof e,s=n?i:e||i;let o=me(t);return ae.has(o)||(o=t),[n,s,o]}function de(t,e,i,n,s){if("string"!=typeof e||!t)return;let[o,r,a]=ue(e,i,n);if(e in re){const t=t=>function(e){if(!e.relatedTarget||e.relatedTarget!==e.delegateTarget&&!e.delegateTarget.contains(e.relatedTarget))return t.call(this,e)};r=t(r)}const l=ce(t),c=l[a]||(l[a]={}),h=he(c,r,o?i:null);if(h)return void(h.oneOff=h.oneOff&&s);const u=le(r,e.replace(ee,"")),d=o?function(t,e,i){return function n(s){const o=t.querySelectorAll(e);for(let{target:r}=s;r&&r!==this;r=r.parentNode)for(const a of o)if(a===r)return _e(s,{delegateTarget:r}),n.oneOff&&ge.off(t,s.type,e,i),i.apply(r,[s])}}(t,i,r):function(t,e){return function i(n){return _e(n,{delegateTarget:t}),i.oneOff&&ge.off(t,n.type,e),e.apply(t,[n])}}(t,r);d.delegationSelector=o?i:null,d.callable=r,d.oneOff=s,d.uidEvent=u,c[u]=d,t.addEventListener(a,d,o)}function fe(t,e,i,n,s){const o=he(e[i],n,s);o&&(t.removeEventListener(i,o,Boolean(s)),delete e[i][o.uidEvent])}function pe(t,e,i,n){const s=e[i]||{};for(const[o,r]of Object.entries(s))o.includes(n)&&fe(t,e,i,r.callable,r.delegationSelector)}function me(t){return t=t.replace(ie,""),re[t]||t}const ge={on(t,e,i,n){de(t,e,i,n,!1)},one(t,e,i,n){de(t,e,i,n,!0)},off(t,e,i,n){if("string"!=typeof e||!t)return;const[s,o,r]=ue(e,i,n),a=r!==e,l=ce(t),c=l[r]||{},h=e.startsWith(".");if(void 0===o){if(h)for(const i of Object.keys(l))pe(t,l,i,e.slice(1));for(const[i,n]of Object.entries(c)){const s=i.replace(ne,"");a&&!e.includes(s)||fe(t,l,r,n.callable,n.delegationSelector)}}else{if(!Object.keys(c).length)return;fe(t,l,r,o,s?i:null)}},trigger(t,e,i){if("string"!=typeof e||!t)return null;const n=Qt();let s=null,o=!0,r=!0,a=!1;e!==me(e)&&n&&(s=n.Event(e,i),n(t).trigger(s),o=!s.isPropagationStopped(),r=!s.isImmediatePropagationStopped(),a=s.isDefaultPrevented());const l=_e(new Event(e,{bubbles:o,cancelable:!0}),i);return a&&l.preventDefault(),r&&t.dispatchEvent(l),l.defaultPrevented&&s&&s.preventDefault(),l}};function _e(t,e={}){for(const[i,n]of Object.entries(e))try{t[i]=n}catch(e){Object.defineProperty(t,i,{configurable:!0,get:()=>n})}return t}function be(t){if("true"===t)return!0;if("false"===t)return!1;if(t===Number(t).toString())return Number(t);if(""===t||"null"===t)return null;if("string"!=typeof t)return t;try{return JSON.parse(decodeURIComponent(t))}catch(e){return t}}function ve(t){return t.replace(/[A-Z]/g,t=>`-${t.toLowerCase()}`)}const ye={setDataAttribute(t,e,i){t.setAttribute(`data-bs-${ve(e)}`,i)},removeDataAttribute(t,e){t.removeAttribute(`data-bs-${ve(e)}`)},getDataAttributes(t){if(!t)return{};const e={},i=Object.keys(t.dataset).filter(t=>t.startsWith("bs")&&!t.startsWith("bsConfig"));for(const n of i){let i=n.replace(/^bs/,"");i=i.charAt(0).toLowerCase()+i.slice(1),e[i]=be(t.dataset[n])}return e},getDataAttribute:(t,e)=>be(t.getAttribute(`data-bs-${ve(e)}`))};class we{static get Default(){return{}}static get DefaultType(){return{}}static get NAME(){throw new Error('You have to implement the static method "NAME", for each component!')}_getConfig(t){return t=this._mergeConfigObj(t),t=this._configAfterMerge(t),this._typeCheckConfig(t),t}_configAfterMerge(t){return t}_mergeConfigObj(t,e){const i=Bt(e)?ye.getDataAttribute(e,"config"):{};return{...this.constructor.Default,..."object"==typeof i?i:{},...Bt(e)?ye.getDataAttributes(e):{},..."object"==typeof t?t:{}}}_typeCheckConfig(t,e=this.constructor.DefaultType){for(const[i,n]of Object.entries(e)){const e=t[i],s=Bt(e)?"element":Ht(e);if(!new RegExp(n).test(s))throw new TypeError(`${this.constructor.NAME.toUpperCase()}: Option "${i}" provided type "${s}" but expected type "${n}".`)}}}class Ae extends we{constructor(t,e){super(),(t=Wt(t))&&(this._element=t,this._config=this._getConfig(e),Mt.set(this._element,this.constructor.DATA_KEY,this))}dispose(){Mt.remove(this._element,this.constructor.DATA_KEY),ge.off(this._element,this.constructor.EVENT_KEY);for(const t of Object.getOwnPropertyNames(this))this[t]=null}_queueCallback(t,e,i=!0){Zt(t,e,i)}_getConfig(t){return t=this._mergeConfigObj(t,this._element),t=this._configAfterMerge(t),this._typeCheckConfig(t),t}static getInstance(t){return Mt.get(Wt(t),this.DATA_KEY)}static getOrCreateInstance(t,e={}){return this.getInstance(t)||new this(t,"object"==typeof e?e:null)}static get VERSION(){return"5.3.7"}static get DATA_KEY(){return`bs.${this.NAME}`}static get EVENT_KEY(){return`.${this.DATA_KEY}`}static eventName(t){return`${t}${this.EVENT_KEY}`}}const Ee=t=>{let e=t.getAttribute("data-bs-target");if(!e||"#"===e){let i=t.getAttribute("href");if(!i||!i.includes("#")&&!i.startsWith("."))return null;i.includes("#")&&!i.startsWith("#")&&(i=`#${i.split("#")[1]}`),e=i&&"#"!==i?i.trim():null}return e?e.split(",").map(t=>Ft(t)).join(","):null},Te={find:(t,e=document.documentElement)=>[].concat(...Element.prototype.querySelectorAll.call(e,t)),findOne:(t,e=document.documentElement)=>Element.prototype.querySelector.call(e,t),children:(t,e)=>[].concat(...t.children).filter(t=>t.matches(e)),parents(t,e){const i=[];let n=t.parentNode.closest(e);for(;n;)i.push(n),n=n.parentNode.closest(e);return i},prev(t,e){let i=t.previousElementSibling;for(;i;){if(i.matches(e))return[i];i=i.previousElementSibling}return[]},next(t,e){let i=t.nextElementSibling;for(;i;){if(i.matches(e))return[i];i=i.nextElementSibling}return[]},focusableChildren(t){const e=["a","button","input","textarea","select","details","[tabindex]",'[contenteditable="true"]'].map(t=>`${t}:not([tabindex^="-"])`).join(",");return this.find(e,t).filter(t=>!Rt(t)&&qt(t))},getSelectorFromElement(t){const e=Ee(t);return e&&Te.findOne(e)?e:null},getElementFromSelector(t){const e=Ee(t);return e?Te.findOne(e):null},getMultipleElementsFromSelector(t){const e=Ee(t);return e?Te.find(e):[]}},Ce=(t,e="hide")=>{const i=`click.dismiss${t.EVENT_KEY}`,n=t.NAME;ge.on(document,i,`[data-bs-dismiss="${n}"]`,function(i){if(["A","AREA"].includes(this.tagName)&&i.preventDefault(),Rt(this))return;const s=Te.getElementFromSelector(this)||this.closest(`.${n}`);t.getOrCreateInstance(s)[e]()})},Oe=".bs.alert",xe=`close${Oe}`,ke=`closed${Oe}`;class Se extends Ae{static get NAME(){return"alert"}close(){if(ge.trigger(this._element,xe).defaultPrevented)return;this._element.classList.remove("show");const t=this._element.classList.contains("fade");this._queueCallback(()=>this._destroyElement(),this._element,t)}_destroyElement(){this._element.remove(),ge.trigger(this._element,ke),this.dispose()}static jQueryInterface(t){return this.each(function(){const e=Se.getOrCreateInstance(this);if("string"==typeof t){if(void 0===e[t]||t.startsWith("_")||"constructor"===t)throw new TypeError(`No method named "${t}"`);e[t](this)}})}}Ce(Se,"close"),Gt(Se);const Le='[data-bs-toggle="button"]';class $e extends Ae{static get NAME(){return"button"}toggle(){this._element.setAttribute("aria-pressed",this._element.classList.toggle("active"))}static jQueryInterface(t){return this.each(function(){const e=$e.getOrCreateInstance(this);"toggle"===t&&e[t]()})}}ge.on(document,"click.bs.button.data-api",Le,t=>{t.preventDefault();const e=t.target.closest(Le);$e.getOrCreateInstance(e).toggle()}),Gt($e);const De=".bs.swipe",Ie=`touchstart${De}`,Pe=`touchmove${De}`,Ne=`touchend${De}`,Me=`pointerdown${De}`,je=`pointerup${De}`,Fe={endCallback:null,leftCallback:null,rightCallback:null},He={endCallback:"(function|null)",leftCallback:"(function|null)",rightCallback:"(function|null)"};class ze extends we{constructor(t,e){super(),this._element=t,t&&ze.isSupported()&&(this._config=this._getConfig(e),this._deltaX=0,this._supportPointerEvents=Boolean(window.PointerEvent),this._initEvents())}static get Default(){return Fe}static get DefaultType(){return He}static get NAME(){return"swipe"}dispose(){ge.off(this._element,De)}_start(t){this._supportPointerEvents?this._eventIsPointerPenTouch(t)&&(this._deltaX=t.clientX):this._deltaX=t.touches[0].clientX}_end(t){this._eventIsPointerPenTouch(t)&&(this._deltaX=t.clientX-this._deltaX),this._handleSwipe(),Jt(this._config.endCallback)}_move(t){this._deltaX=t.touches&&t.touches.length>1?0:t.touches[0].clientX-this._deltaX}_handleSwipe(){const t=Math.abs(this._deltaX);if(t<=40)return;const e=t/this._deltaX;this._deltaX=0,e&&Jt(e>0?this._config.rightCallback:this._config.leftCallback)}_initEvents(){this._supportPointerEvents?(ge.on(this._element,Me,t=>this._start(t)),ge.on(this._element,je,t=>this._end(t)),this._element.classList.add("pointer-event")):(ge.on(this._element,Ie,t=>this._start(t)),ge.on(this._element,Pe,t=>this._move(t)),ge.on(this._element,Ne,t=>this._end(t)))}_eventIsPointerPenTouch(t){return this._supportPointerEvents&&("pen"===t.pointerType||"touch"===t.pointerType)}static isSupported(){return"ontouchstart"in document.documentElement||navigator.maxTouchPoints>0}}const Be=".bs.carousel",We=".data-api",qe="ArrowLeft",Re="ArrowRight",Ve="next",Ue="prev",Ke="left",Qe="right",Xe=`slide${Be}`,Ye=`slid${Be}`,Ge=`keydown${Be}`,Je=`mouseenter${Be}`,Ze=`mouseleave${Be}`,ti=`dragstart${Be}`,ei=`load${Be}${We}`,ii=`click${Be}${We}`,ni="carousel",si="active",oi=".active",ri=".carousel-item",ai=oi+ri,li={[qe]:Qe,[Re]:Ke},ci={interval:5e3,keyboard:!0,pause:"hover",ride:!1,touch:!0,wrap:!0},hi={interval:"(number|boolean)",keyboard:"boolean",pause:"(string|boolean)",ride:"(boolean|string)",touch:"boolean",wrap:"boolean"};class ui extends Ae{constructor(t,e){super(t,e),this._interval=null,this._activeElement=null,this._isSliding=!1,this.touchTimeout=null,this._swipeHelper=null,this._indicatorsElement=Te.findOne(".carousel-indicators",this._element),this._addEventListeners(),this._config.ride===ni&&this.cycle()}static get Default(){return ci}static get DefaultType(){return hi}static get NAME(){return"carousel"}next(){this._slide(Ve)}nextWhenVisible(){!document.hidden&&qt(this._element)&&this.next()}prev(){this._slide(Ue)}pause(){this._isSliding&&zt(this._element),this._clearInterval()}cycle(){this._clearInterval(),this._updateInterval(),this._interval=setInterval(()=>this.nextWhenVisible(),this._config.interval)}_maybeEnableCycle(){this._config.ride&&(this._isSliding?ge.one(this._element,Ye,()=>this.cycle()):this.cycle())}to(t){const e=this._getItems();if(t>e.length-1||t<0)return;if(this._isSliding)return void ge.one(this._element,Ye,()=>this.to(t));const i=this._getItemIndex(this._getActive());if(i===t)return;const n=t>i?Ve:Ue;this._slide(n,e[t])}dispose(){this._swipeHelper&&this._swipeHelper.dispose(),super.dispose()}_configAfterMerge(t){return t.defaultInterval=t.interval,t}_addEventListeners(){this._config.keyboard&&ge.on(this._element,Ge,t=>this._keydown(t)),"hover"===this._config.pause&&(ge.on(this._element,Je,()=>this.pause()),ge.on(this._element,Ze,()=>this._maybeEnableCycle())),this._config.touch&&ze.isSupported()&&this._addTouchEventListeners()}_addTouchEventListeners(){for(const t of Te.find(".carousel-item img",this._element))ge.on(t,ti,t=>t.preventDefault());const t={leftCallback:()=>this._slide(this._directionToOrder(Ke)),rightCallback:()=>this._slide(this._directionToOrder(Qe)),endCallback:()=>{"hover"===this._config.pause&&(this.pause(),this.touchTimeout&&clearTimeout(this.touchTimeout),this.touchTimeout=setTimeout(()=>this._maybeEnableCycle(),500+this._config.interval))}};this._swipeHelper=new ze(this._element,t)}_keydown(t){if(/input|textarea/i.test(t.target.tagName))return;const e=li[t.key];e&&(t.preventDefault(),this._slide(this._directionToOrder(e)))}_getItemIndex(t){return this._getItems().indexOf(t)}_setActiveIndicatorElement(t){if(!this._indicatorsElement)return;const e=Te.findOne(oi,this._indicatorsElement);e.classList.remove(si),e.removeAttribute("aria-current");const i=Te.findOne(`[data-bs-slide-to="${t}"]`,this._indicatorsElement);i&&(i.classList.add(si),i.setAttribute("aria-current","true"))}_updateInterval(){const t=this._activeElement||this._getActive();if(!t)return;const e=Number.parseInt(t.getAttribute("data-bs-interval"),10);this._config.interval=e||this._config.defaultInterval}_slide(t,e=null){if(this._isSliding)return;const i=this._getActive(),n=t===Ve,s=e||te(this._getItems(),i,n,this._config.wrap);if(s===i)return;const o=this._getItemIndex(s),r=e=>ge.trigger(this._element,e,{relatedTarget:s,direction:this._orderToDirection(t),from:this._getItemIndex(i),to:o});if(r(Xe).defaultPrevented)return;if(!i||!s)return;const a=Boolean(this._interval);this.pause(),this._isSliding=!0,this._setActiveIndicatorElement(o),this._activeElement=s;const l=n?"carousel-item-start":"carousel-item-end",c=n?"carousel-item-next":"carousel-item-prev";s.classList.add(c),Kt(s),i.classList.add(l),s.classList.add(l),this._queueCallback(()=>{s.classList.remove(l,c),s.classList.add(si),i.classList.remove(si,c,l),this._isSliding=!1,r(Ye)},i,this._isAnimated()),a&&this.cycle()}_isAnimated(){return this._element.classList.contains("slide")}_getActive(){return Te.findOne(ai,this._element)}_getItems(){return Te.find(ri,this._element)}_clearInterval(){this._interval&&(clearInterval(this._interval),this._interval=null)}_directionToOrder(t){return Yt()?t===Ke?Ue:Ve:t===Ke?Ve:Ue}_orderToDirection(t){return Yt()?t===Ue?Ke:Qe:t===Ue?Qe:Ke}static jQueryInterface(t){return this.each(function(){const e=ui.getOrCreateInstance(this,t);if("number"!=typeof t){if("string"==typeof t){if(void 0===e[t]||t.startsWith("_")||"constructor"===t)throw new TypeError(`No method named "${t}"`);e[t]()}}else e.to(t)})}}ge.on(document,ii,"[data-bs-slide], [data-bs-slide-to]",function(t){const e=Te.getElementFromSelector(this);if(!e||!e.classList.contains(ni))return;t.preventDefault();const i=ui.getOrCreateInstance(e),n=this.getAttribute("data-bs-slide-to");return n?(i.to(n),void i._maybeEnableCycle()):"next"===ye.getDataAttribute(this,"slide")?(i.next(),void i._maybeEnableCycle()):(i.prev(),void i._maybeEnableCycle())}),ge.on(window,ei,()=>{const t=Te.find('[data-bs-ride="carousel"]');for(const e of t)ui.getOrCreateInstance(e)}),Gt(ui);const di=".bs.collapse",fi=`show${di}`,pi=`shown${di}`,mi=`hide${di}`,gi=`hidden${di}`,_i=`click${di}.data-api`,bi="show",vi="collapse",yi="collapsing",wi=`:scope .${vi} .${vi}`,Ai='[data-bs-toggle="collapse"]',Ei={parent:null,toggle:!0},Ti={parent:"(null|element)",toggle:"boolean"};class Ci extends Ae{constructor(t,e){super(t,e),this._isTransitioning=!1,this._triggerArray=[];const i=Te.find(Ai);for(const t of i){const e=Te.getSelectorFromElement(t),i=Te.find(e).filter(t=>t===this._element);null!==e&&i.length&&this._triggerArray.push(t)}this._initializeChildren(),this._config.parent||this._addAriaAndCollapsedClass(this._triggerArray,this._isShown()),this._config.toggle&&this.toggle()}static get Default(){return Ei}static get DefaultType(){return Ti}static get NAME(){return"collapse"}toggle(){this._isShown()?this.hide():this.show()}show(){if(this._isTransitioning||this._isShown())return;let t=[];if(this._config.parent&&(t=this._getFirstLevelChildren(".collapse.show, .collapse.collapsing").filter(t=>t!==this._element).map(t=>Ci.getOrCreateInstance(t,{toggle:!1}))),t.length&&t[0]._isTransitioning)return;if(ge.trigger(this._element,fi).defaultPrevented)return;for(const e of t)e.hide();const e=this._getDimension();this._element.classList.remove(vi),this._element.classList.add(yi),this._element.style[e]=0,this._addAriaAndCollapsedClass(this._triggerArray,!0),this._isTransitioning=!0;const i=`scroll${e[0].toUpperCase()+e.slice(1)}`;this._queueCallback(()=>{this._isTransitioning=!1,this._element.classList.remove(yi),this._element.classList.add(vi,bi),this._element.style[e]="",ge.trigger(this._element,pi)},this._element,!0),this._element.style[e]=`${this._element[i]}px`}hide(){if(this._isTransitioning||!this._isShown())return;if(ge.trigger(this._element,mi).defaultPrevented)return;const t=this._getDimension();this._element.style[t]=`${this._element.getBoundingClientRect()[t]}px`,Kt(this._element),this._element.classList.add(yi),this._element.classList.remove(vi,bi);for(const t of this._triggerArray){const e=Te.getElementFromSelector(t);e&&!this._isShown(e)&&this._addAriaAndCollapsedClass([t],!1)}this._isTransitioning=!0,this._element.style[t]="",this._queueCallback(()=>{this._isTransitioning=!1,this._element.classList.remove(yi),this._element.classList.add(vi),ge.trigger(this._element,gi)},this._element,!0)}_isShown(t=this._element){return t.classList.contains(bi)}_configAfterMerge(t){return t.toggle=Boolean(t.toggle),t.parent=Wt(t.parent),t}_getDimension(){return this._element.classList.contains("collapse-horizontal")?"width":"height"}_initializeChildren(){if(!this._config.parent)return;const t=this._getFirstLevelChildren(Ai);for(const e of t){const t=Te.getElementFromSelector(e);t&&this._addAriaAndCollapsedClass([e],this._isShown(t))}}_getFirstLevelChildren(t){const e=Te.find(wi,this._config.parent);return Te.find(t,this._config.parent).filter(t=>!e.includes(t))}_addAriaAndCollapsedClass(t,e){if(t.length)for(const i of t)i.classList.toggle("collapsed",!e),i.setAttribute("aria-expanded",e)}static jQueryInterface(t){const e={};return"string"==typeof t&&/show|hide/.test(t)&&(e.toggle=!1),this.each(function(){const i=Ci.getOrCreateInstance(this,e);if("string"==typeof t){if(void 0===i[t])throw new TypeError(`No method named "${t}"`);i[t]()}})}}ge.on(document,_i,Ai,function(t){("A"===t.target.tagName||t.delegateTarget&&"A"===t.delegateTarget.tagName)&&t.preventDefault();for(const t of Te.getMultipleElementsFromSelector(this))Ci.getOrCreateInstance(t,{toggle:!1}).toggle()}),Gt(Ci);const Oi="dropdown",xi=".bs.dropdown",ki=".data-api",Si="ArrowUp",Li="ArrowDown",$i=`hide${xi}`,Di=`hidden${xi}`,Ii=`show${xi}`,Pi=`shown${xi}`,Ni=`click${xi}${ki}`,Mi=`keydown${xi}${ki}`,ji=`keyup${xi}${ki}`,Fi="show",Hi='[data-bs-toggle="dropdown"]:not(.disabled):not(:disabled)',zi=`${Hi}.${Fi}`,Bi=".dropdown-menu",Wi=Yt()?"top-end":"top-start",qi=Yt()?"top-start":"top-end",Ri=Yt()?"bottom-end":"bottom-start",Vi=Yt()?"bottom-start":"bottom-end",Ui=Yt()?"left-start":"right-start",Ki=Yt()?"right-start":"left-start",Qi={autoClose:!0,boundary:"clippingParents",display:"dynamic",offset:[0,2],popperConfig:null,reference:"toggle"},Xi={autoClose:"(boolean|string)",boundary:"(string|element)",display:"string",offset:"(array|string|function)",popperConfig:"(null|object|function)",reference:"(string|element|object)"};class Yi extends Ae{constructor(t,e){super(t,e),this._popper=null,this._parent=this._element.parentNode,this._menu=Te.next(this._element,Bi)[0]||Te.prev(this._element,Bi)[0]||Te.findOne(Bi,this._parent),this._inNavbar=this._detectNavbar()}static get Default(){return Qi}static get DefaultType(){return Xi}static get NAME(){return Oi}toggle(){return this._isShown()?this.hide():this.show()}show(){if(Rt(this._element)||this._isShown())return;const t={relatedTarget:this._element};if(!ge.trigger(this._element,Ii,t).defaultPrevented){if(this._createPopper(),"ontouchstart"in document.documentElement&&!this._parent.closest(".navbar-nav"))for(const t of[].concat(...document.body.children))ge.on(t,"mouseover",Ut);this._element.focus(),this._element.setAttribute("aria-expanded",!0),this._menu.classList.add(Fi),this._element.classList.add(Fi),ge.trigger(this._element,Pi,t)}}hide(){if(Rt(this._element)||!this._isShown())return;const t={relatedTarget:this._element};this._completeHide(t)}dispose(){this._popper&&this._popper.destroy(),super.dispose()}update(){this._inNavbar=this._detectNavbar(),this._popper&&this._popper.update()}_completeHide(t){if(!ge.trigger(this._element,$i,t).defaultPrevented){if("ontouchstart"in document.documentElement)for(const t of[].concat(...document.body.children))ge.off(t,"mouseover",Ut);this._popper&&this._popper.destroy(),this._menu.classList.remove(Fi),this._element.classList.remove(Fi),this._element.setAttribute("aria-expanded","false"),ye.removeDataAttribute(this._menu,"popper"),ge.trigger(this._element,Di,t),this._element.focus()}}_getConfig(t){if("object"==typeof(t=super._getConfig(t)).reference&&!Bt(t.reference)&&"function"!=typeof t.reference.getBoundingClientRect)throw new TypeError(`${Oi.toUpperCase()}: Option "reference" provided type "object" without a required "getBoundingClientRect" method.`);return t}_createPopper(){if(void 0===Pt)throw new TypeError("Bootstrap's dropdowns require Popper (https://popper.js.org/docs/v2/)");let t=this._element;"parent"===this._config.reference?t=this._parent:Bt(this._config.reference)?t=Wt(this._config.reference):"object"==typeof this._config.reference&&(t=this._config.reference);const e=this._getPopperConfig();this._popper=It(t,this._menu,e)}_isShown(){return this._menu.classList.contains(Fi)}_getPlacement(){const t=this._parent;if(t.classList.contains("dropend"))return Ui;if(t.classList.contains("dropstart"))return Ki;if(t.classList.contains("dropup-center"))return"top";if(t.classList.contains("dropdown-center"))return"bottom";const e="end"===getComputedStyle(this._menu).getPropertyValue("--bs-position").trim();return t.classList.contains("dropup")?e?qi:Wi:e?Vi:Ri}_detectNavbar(){return null!==this._element.closest(".navbar")}_getOffset(){const{offset:t}=this._config;return"string"==typeof t?t.split(",").map(t=>Number.parseInt(t,10)):"function"==typeof t?e=>t(e,this._element):t}_getPopperConfig(){const t={placement:this._getPlacement(),modifiers:[{name:"preventOverflow",options:{boundary:this._config.boundary}},{name:"offset",options:{offset:this._getOffset()}}]};return(this._inNavbar||"static"===this._config.display)&&(ye.setDataAttribute(this._menu,"popper","static"),t.modifiers=[{name:"applyStyles",enabled:!1}]),{...t,...Jt(this._config.popperConfig,[void 0,t])}}_selectMenuItem({key:t,target:e}){const i=Te.find(".dropdown-menu .dropdown-item:not(.disabled):not(:disabled)",this._menu).filter(t=>qt(t));i.length&&te(i,e,t===Li,!i.includes(e)).focus()}static jQueryInterface(t){return this.each(function(){const e=Yi.getOrCreateInstance(this,t);if("string"==typeof t){if(void 0===e[t])throw new TypeError(`No method named "${t}"`);e[t]()}})}static clearMenus(t){if(2===t.button||"keyup"===t.type&&"Tab"!==t.key)return;const e=Te.find(zi);for(const i of e){const e=Yi.getInstance(i);if(!e||!1===e._config.autoClose)continue;const n=t.composedPath(),s=n.includes(e._menu);if(n.includes(e._element)||"inside"===e._config.autoClose&&!s||"outside"===e._config.autoClose&&s)continue;if(e._menu.contains(t.target)&&("keyup"===t.type&&"Tab"===t.key||/input|select|option|textarea|form/i.test(t.target.tagName)))continue;const o={relatedTarget:e._element};"click"===t.type&&(o.clickEvent=t),e._completeHide(o)}}static dataApiKeydownHandler(t){const e=/input|textarea/i.test(t.target.tagName),i="Escape"===t.key,n=[Si,Li].includes(t.key);if(!n&&!i)return;if(e&&!i)return;t.preventDefault();const s=this.matches(Hi)?this:Te.prev(this,Hi)[0]||Te.next(this,Hi)[0]||Te.findOne(Hi,t.delegateTarget.parentNode),o=Yi.getOrCreateInstance(s);if(n)return t.stopPropagation(),o.show(),void o._selectMenuItem(t);o._isShown()&&(t.stopPropagation(),o.hide(),s.focus())}}ge.on(document,Mi,Hi,Yi.dataApiKeydownHandler),ge.on(document,Mi,Bi,Yi.dataApiKeydownHandler),ge.on(document,Ni,Yi.clearMenus),ge.on(document,ji,Yi.clearMenus),ge.on(document,Ni,Hi,function(t){t.preventDefault(),Yi.getOrCreateInstance(this).toggle()}),Gt(Yi);const Gi="backdrop",Ji="show",Zi=`mousedown.bs.${Gi}`,tn={className:"modal-backdrop",clickCallback:null,isAnimated:!1,isVisible:!0,rootElement:"body"},en={className:"string",clickCallback:"(function|null)",isAnimated:"boolean",isVisible:"boolean",rootElement:"(element|string)"};class nn extends we{constructor(t){super(),this._config=this._getConfig(t),this._isAppended=!1,this._element=null}static get Default(){return tn}static get DefaultType(){return en}static get NAME(){return Gi}show(t){if(!this._config.isVisible)return void Jt(t);this._append();const e=this._getElement();this._config.isAnimated&&Kt(e),e.classList.add(Ji),this._emulateAnimation(()=>{Jt(t)})}hide(t){this._config.isVisible?(this._getElement().classList.remove(Ji),this._emulateAnimation(()=>{this.dispose(),Jt(t)})):Jt(t)}dispose(){this._isAppended&&(ge.off(this._element,Zi),this._element.remove(),this._isAppended=!1)}_getElement(){if(!this._element){const t=document.createElement("div");t.className=this._config.className,this._config.isAnimated&&t.classList.add("fade"),this._element=t}return this._element}_configAfterMerge(t){return t.rootElement=Wt(t.rootElement),t}_append(){if(this._isAppended)return;const t=this._getElement();this._config.rootElement.append(t),ge.on(t,Zi,()=>{Jt(this._config.clickCallback)}),this._isAppended=!0}_emulateAnimation(t){Zt(t,this._getElement(),this._config.isAnimated)}}const sn=".bs.focustrap",on=`focusin${sn}`,rn=`keydown.tab${sn}`,an="backward",ln={autofocus:!0,trapElement:null},cn={autofocus:"boolean",trapElement:"element"};class hn extends we{constructor(t){super(),this._config=this._getConfig(t),this._isActive=!1,this._lastTabNavDirection=null}static get Default(){return ln}static get DefaultType(){return cn}static get NAME(){return"focustrap"}activate(){this._isActive||(this._config.autofocus&&this._config.trapElement.focus(),ge.off(document,sn),ge.on(document,on,t=>this._handleFocusin(t)),ge.on(document,rn,t=>this._handleKeydown(t)),this._isActive=!0)}deactivate(){this._isActive&&(this._isActive=!1,ge.off(document,sn))}_handleFocusin(t){const{trapElement:e}=this._config;if(t.target===document||t.target===e||e.contains(t.target))return;const i=Te.focusableChildren(e);0===i.length?e.focus():this._lastTabNavDirection===an?i[i.length-1].focus():i[0].focus()}_handleKeydown(t){"Tab"===t.key&&(this._lastTabNavDirection=t.shiftKey?an:"forward")}}const un=".fixed-top, .fixed-bottom, .is-fixed, .sticky-top",dn=".sticky-top",fn="padding-right",pn="margin-right";class mn{constructor(){this._element=document.body}getWidth(){const t=document.documentElement.clientWidth;return Math.abs(window.innerWidth-t)}hide(){const t=this.getWidth();this._disableOverFlow(),this._setElementAttributes(this._element,fn,e=>e+t),this._setElementAttributes(un,fn,e=>e+t),this._setElementAttributes(dn,pn,e=>e-t)}reset(){this._resetElementAttributes(this._element,"overflow"),this._resetElementAttributes(this._element,fn),this._resetElementAttributes(un,fn),this._resetElementAttributes(dn,pn)}isOverflowing(){return this.getWidth()>0}_disableOverFlow(){this._saveInitialAttribute(this._element,"overflow"),this._element.style.overflow="hidden"}_setElementAttributes(t,e,i){const n=this.getWidth();this._applyManipulationCallback(t,t=>{if(t!==this._element&&window.innerWidth>t.clientWidth+n)return;this._saveInitialAttribute(t,e);const s=window.getComputedStyle(t).getPropertyValue(e);t.style.setProperty(e,`${i(Number.parseFloat(s))}px`)})}_saveInitialAttribute(t,e){const i=t.style.getPropertyValue(e);i&&ye.setDataAttribute(t,e,i)}_resetElementAttributes(t,e){this._applyManipulationCallback(t,t=>{const i=ye.getDataAttribute(t,e);null!==i?(ye.removeDataAttribute(t,e),t.style.setProperty(e,i)):t.style.removeProperty(e)})}_applyManipulationCallback(t,e){if(Bt(t))e(t);else for(const i of Te.find(t,this._element))e(i)}}const gn=".bs.modal",_n=`hide${gn}`,bn=`hidePrevented${gn}`,vn=`hidden${gn}`,yn=`show${gn}`,wn=`shown${gn}`,An=`resize${gn}`,En=`click.dismiss${gn}`,Tn=`mousedown.dismiss${gn}`,Cn=`keydown.dismiss${gn}`,On=`click${gn}.data-api`,xn="modal-open",kn="show",Sn="modal-static",Ln={backdrop:!0,focus:!0,keyboard:!0},$n={backdrop:"(boolean|string)",focus:"boolean",keyboard:"boolean"};class Dn extends Ae{constructor(t,e){super(t,e),this._dialog=Te.findOne(".modal-dialog",this._element),this._backdrop=this._initializeBackDrop(),this._focustrap=this._initializeFocusTrap(),this._isShown=!1,this._isTransitioning=!1,this._scrollBar=new mn,this._addEventListeners()}static get Default(){return Ln}static get DefaultType(){return $n}static get NAME(){return"modal"}toggle(t){return this._isShown?this.hide():this.show(t)}show(t){this._isShown||this._isTransitioning||ge.trigger(this._element,yn,{relatedTarget:t}).defaultPrevented||(this._isShown=!0,this._isTransitioning=!0,this._scrollBar.hide(),document.body.classList.add(xn),this._adjustDialog(),this._backdrop.show(()=>this._showElement(t)))}hide(){this._isShown&&!this._isTransitioning&&(ge.trigger(this._element,_n).defaultPrevented||(this._isShown=!1,this._isTransitioning=!0,this._focustrap.deactivate(),this._element.classList.remove(kn),this._queueCallback(()=>this._hideModal(),this._element,this._isAnimated())))}dispose(){ge.off(window,gn),ge.off(this._dialog,gn),this._backdrop.dispose(),this._focustrap.deactivate(),super.dispose()}handleUpdate(){this._adjustDialog()}_initializeBackDrop(){return new nn({isVisible:Boolean(this._config.backdrop),isAnimated:this._isAnimated()})}_initializeFocusTrap(){return new hn({trapElement:this._element})}_showElement(t){document.body.contains(this._element)||document.body.append(this._element),this._element.style.display="block",this._element.removeAttribute("aria-hidden"),this._element.setAttribute("aria-modal",!0),this._element.setAttribute("role","dialog"),this._element.scrollTop=0;const e=Te.findOne(".modal-body",this._dialog);e&&(e.scrollTop=0),Kt(this._element),this._element.classList.add(kn),this._queueCallback(()=>{this._config.focus&&this._focustrap.activate(),this._isTransitioning=!1,ge.trigger(this._element,wn,{relatedTarget:t})},this._dialog,this._isAnimated())}_addEventListeners(){ge.on(this._element,Cn,t=>{"Escape"===t.key&&(this._config.keyboard?this.hide():this._triggerBackdropTransition())}),ge.on(window,An,()=>{this._isShown&&!this._isTransitioning&&this._adjustDialog()}),ge.on(this._element,Tn,t=>{ge.one(this._element,En,e=>{this._element===t.target&&this._element===e.target&&("static"!==this._config.backdrop?this._config.backdrop&&this.hide():this._triggerBackdropTransition())})})}_hideModal(){this._element.style.display="none",this._element.setAttribute("aria-hidden",!0),this._element.removeAttribute("aria-modal"),this._element.removeAttribute("role"),this._isTransitioning=!1,this._backdrop.hide(()=>{document.body.classList.remove(xn),this._resetAdjustments(),this._scrollBar.reset(),ge.trigger(this._element,vn)})}_isAnimated(){return this._element.classList.contains("fade")}_triggerBackdropTransition(){if(ge.trigger(this._element,bn).defaultPrevented)return;const t=this._element.scrollHeight>document.documentElement.clientHeight,e=this._element.style.overflowY;"hidden"===e||this._element.classList.contains(Sn)||(t||(this._element.style.overflowY="hidden"),this._element.classList.add(Sn),this._queueCallback(()=>{this._element.classList.remove(Sn),this._queueCallback(()=>{this._element.style.overflowY=e},this._dialog)},this._dialog),this._element.focus())}_adjustDialog(){const t=this._element.scrollHeight>document.documentElement.clientHeight,e=this._scrollBar.getWidth(),i=e>0;if(i&&!t){const t=Yt()?"paddingLeft":"paddingRight";this._element.style[t]=`${e}px`}if(!i&&t){const t=Yt()?"paddingRight":"paddingLeft";this._element.style[t]=`${e}px`}}_resetAdjustments(){this._element.style.paddingLeft="",this._element.style.paddingRight=""}static jQueryInterface(t,e){return this.each(function(){const i=Dn.getOrCreateInstance(this,t);if("string"==typeof t){if(void 0===i[t])throw new TypeError(`No method named "${t}"`);i[t](e)}})}}ge.on(document,On,'[data-bs-toggle="modal"]',function(t){const e=Te.getElementFromSelector(this);["A","AREA"].includes(this.tagName)&&t.preventDefault(),ge.one(e,yn,t=>{t.defaultPrevented||ge.one(e,vn,()=>{qt(this)&&this.focus()})});const i=Te.findOne(".modal.show");i&&Dn.getInstance(i).hide(),Dn.getOrCreateInstance(e).toggle(this)}),Ce(Dn),Gt(Dn);const In=".bs.offcanvas",Pn=".data-api",Nn=`load${In}${Pn}`,Mn="show",jn="showing",Fn="hiding",Hn=".offcanvas.show",zn=`show${In}`,Bn=`shown${In}`,Wn=`hide${In}`,qn=`hidePrevented${In}`,Rn=`hidden${In}`,Vn=`resize${In}`,Un=`click${In}${Pn}`,Kn=`keydown.dismiss${In}`,Qn={backdrop:!0,keyboard:!0,scroll:!1},Xn={backdrop:"(boolean|string)",keyboard:"boolean",scroll:"boolean"};class Yn extends Ae{constructor(t,e){super(t,e),this._isShown=!1,this._backdrop=this._initializeBackDrop(),this._focustrap=this._initializeFocusTrap(),this._addEventListeners()}static get Default(){return Qn}static get DefaultType(){return Xn}static get NAME(){return"offcanvas"}toggle(t){return this._isShown?this.hide():this.show(t)}show(t){this._isShown||ge.trigger(this._element,zn,{relatedTarget:t}).defaultPrevented||(this._isShown=!0,this._backdrop.show(),this._config.scroll||(new mn).hide(),this._element.setAttribute("aria-modal",!0),this._element.setAttribute("role","dialog"),this._element.classList.add(jn),this._queueCallback(()=>{this._config.scroll&&!this._config.backdrop||this._focustrap.activate(),this._element.classList.add(Mn),this._element.classList.remove(jn),ge.trigger(this._element,Bn,{relatedTarget:t})},this._element,!0))}hide(){this._isShown&&(ge.trigger(this._element,Wn).defaultPrevented||(this._focustrap.deactivate(),this._element.blur(),this._isShown=!1,this._element.classList.add(Fn),this._backdrop.hide(),this._queueCallback(()=>{this._element.classList.remove(Mn,Fn),this._element.removeAttribute("aria-modal"),this._element.removeAttribute("role"),this._config.scroll||(new mn).reset(),ge.trigger(this._element,Rn)},this._element,!0)))}dispose(){this._backdrop.dispose(),this._focustrap.deactivate(),super.dispose()}_initializeBackDrop(){const t=Boolean(this._config.backdrop);return new nn({className:"offcanvas-backdrop",isVisible:t,isAnimated:!0,rootElement:this._element.parentNode,clickCallback:t?()=>{"static"!==this._config.backdrop?this.hide():ge.trigger(this._element,qn)}:null})}_initializeFocusTrap(){return new hn({trapElement:this._element})}_addEventListeners(){ge.on(this._element,Kn,t=>{"Escape"===t.key&&(this._config.keyboard?this.hide():ge.trigger(this._element,qn))})}static jQueryInterface(t){return this.each(function(){const e=Yn.getOrCreateInstance(this,t);if("string"==typeof t){if(void 0===e[t]||t.startsWith("_")||"constructor"===t)throw new TypeError(`No method named "${t}"`);e[t](this)}})}}ge.on(document,Un,'[data-bs-toggle="offcanvas"]',function(t){const e=Te.getElementFromSelector(this);if(["A","AREA"].includes(this.tagName)&&t.preventDefault(),Rt(this))return;ge.one(e,Rn,()=>{qt(this)&&this.focus()});const i=Te.findOne(Hn);i&&i!==e&&Yn.getInstance(i).hide(),Yn.getOrCreateInstance(e).toggle(this)}),ge.on(window,Nn,()=>{for(const t of Te.find(Hn))Yn.getOrCreateInstance(t).show()}),ge.on(window,Vn,()=>{for(const t of Te.find("[aria-modal][class*=show][class*=offcanvas-]"))"fixed"!==getComputedStyle(t).position&&Yn.getOrCreateInstance(t).hide()}),Ce(Yn),Gt(Yn);const Gn={"*":["class","dir","id","lang","role",/^aria-[\w-]*$/i],a:["target","href","title","rel"],area:[],b:[],br:[],col:[],code:[],dd:[],div:[],dl:[],dt:[],em:[],hr:[],h1:[],h2:[],h3:[],h4:[],h5:[],h6:[],i:[],img:["src","srcset","alt","title","width","height"],li:[],ol:[],p:[],pre:[],s:[],small:[],span:[],sub:[],sup:[],strong:[],u:[],ul:[]},Jn=new Set(["background","cite","href","itemtype","longdesc","poster","src","xlink:href"]),Zn=/^(?!javascript:)(?:[a-z0-9+.-]+:|[^&:/?#]*(?:[/?#]|$))/i,ts=(t,e)=>{const i=t.nodeName.toLowerCase();return e.includes(i)?!Jn.has(i)||Boolean(Zn.test(t.nodeValue)):e.filter(t=>t instanceof RegExp).some(t=>t.test(i))},es={allowList:Gn,content:{},extraClass:"",html:!1,sanitize:!0,sanitizeFn:null,template:"<div></div>"},is={allowList:"object",content:"object",extraClass:"(string|function)",html:"boolean",sanitize:"boolean",sanitizeFn:"(null|function)",template:"string"},ns={entry:"(string|element|function|null)",selector:"(string|element)"};class ss extends we{constructor(t){super(),this._config=this._getConfig(t)}static get Default(){return es}static get DefaultType(){return is}static get NAME(){return"TemplateFactory"}getContent(){return Object.values(this._config.content).map(t=>this._resolvePossibleFunction(t)).filter(Boolean)}hasContent(){return this.getContent().length>0}changeContent(t){return this._checkContent(t),this._config.content={...this._config.content,...t},this}toHtml(){const t=document.createElement("div");t.innerHTML=this._maybeSanitize(this._config.template);for(const[e,i]of Object.entries(this._config.content))this._setContent(t,i,e);const e=t.children[0],i=this._resolvePossibleFunction(this._config.extraClass);return i&&e.classList.add(...i.split(" ")),e}_typeCheckConfig(t){super._typeCheckConfig(t),this._checkContent(t.content)}_checkContent(t){for(const[e,i]of Object.entries(t))super._typeCheckConfig({selector:e,entry:i},ns)}_setContent(t,e,i){const n=Te.findOne(i,t);n&&((e=this._resolvePossibleFunction(e))?Bt(e)?this._putElementInTemplate(Wt(e),n):this._config.html?n.innerHTML=this._maybeSanitize(e):n.textContent=e:n.remove())}_maybeSanitize(t){return this._config.sanitize?function(t,e,i){if(!t.length)return t;if(i&&"function"==typeof i)return i(t);const n=(new window.DOMParser).parseFromString(t,"text/html"),s=[].concat(...n.body.querySelectorAll("*"));for(const t of s){const i=t.nodeName.toLowerCase();if(!Object.keys(e).includes(i)){t.remove();continue}const n=[].concat(...t.attributes),s=[].concat(e["*"]||[],e[i]||[]);for(const e of n)ts(e,s)||t.removeAttribute(e.nodeName)}return n.body.innerHTML}(t,this._config.allowList,this._config.sanitizeFn):t}_resolvePossibleFunction(t){return Jt(t,[void 0,this])}_putElementInTemplate(t,e){if(this._config.html)return e.innerHTML="",void e.append(t);e.textContent=t.textContent}}const os=new Set(["sanitize","allowList","sanitizeFn"]),rs="fade",as="show",ls=".tooltip-inner",cs=".modal",hs="hide.bs.modal",us="hover",ds="focus",fs="click",ps={AUTO:"auto",TOP:"top",RIGHT:Yt()?"left":"right",BOTTOM:"bottom",LEFT:Yt()?"right":"left"},ms={allowList:Gn,animation:!0,boundary:"clippingParents",container:!1,customClass:"",delay:0,fallbackPlacements:["top","right","bottom","left"],html:!1,offset:[0,6],placement:"top",popperConfig:null,sanitize:!0,sanitizeFn:null,selector:!1,template:'<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>',title:"",trigger:"hover focus"},gs={allowList:"object",animation:"boolean",boundary:"(string|element)",container:"(string|element|boolean)",customClass:"(string|function)",delay:"(number|object)",fallbackPlacements:"array",html:"boolean",offset:"(array|string|function)",placement:"(string|function)",popperConfig:"(null|object|function)",sanitize:"boolean",sanitizeFn:"(null|function)",selector:"(string|boolean)",template:"string",title:"(string|element|function)",trigger:"string"};class _s extends Ae{constructor(t,e){if(void 0===Pt)throw new TypeError("Bootstrap's tooltips require Popper (https://popper.js.org/docs/v2/)");super(t,e),this._isEnabled=!0,this._timeout=0,this._isHovered=null,this._activeTrigger={},this._popper=null,this._templateFactory=null,this._newContent=null,this.tip=null,this._setListeners(),this._config.selector||this._fixTitle()}static get Default(){return ms}static get DefaultType(){return gs}static get NAME(){return"tooltip"}enable(){this._isEnabled=!0}disable(){this._isEnabled=!1}toggleEnabled(){this._isEnabled=!this._isEnabled}toggle(){this._isEnabled&&(this._isShown()?this._leave():this._enter())}dispose(){clearTimeout(this._timeout),ge.off(this._element.closest(cs),hs,this._hideModalHandler),this._element.getAttribute("data-bs-original-title")&&this._element.setAttribute("title",this._element.getAttribute("data-bs-original-title")),this._disposePopper(),super.dispose()}show(){if("none"===this._element.style.display)throw new Error("Please use show on visible elements");if(!this._isWithContent()||!this._isEnabled)return;const t=ge.trigger(this._element,this.constructor.eventName("show")),e=(Vt(this._element)||this._element.ownerDocument.documentElement).contains(this._element);if(t.defaultPrevented||!e)return;this._disposePopper();const i=this._getTipElement();this._element.setAttribute("aria-describedby",i.getAttribute("id"));const{container:n}=this._config;if(this._element.ownerDocument.documentElement.contains(this.tip)||(n.append(i),ge.trigger(this._element,this.constructor.eventName("inserted"))),this._popper=this._createPopper(i),i.classList.add(as),"ontouchstart"in document.documentElement)for(const t of[].concat(...document.body.children))ge.on(t,"mouseover",Ut);this._queueCallback(()=>{ge.trigger(this._element,this.constructor.eventName("shown")),!1===this._isHovered&&this._leave(),this._isHovered=!1},this.tip,this._isAnimated())}hide(){if(this._isShown()&&!ge.trigger(this._element,this.constructor.eventName("hide")).defaultPrevented){if(this._getTipElement().classList.remove(as),"ontouchstart"in document.documentElement)for(const t of[].concat(...document.body.children))ge.off(t,"mouseover",Ut);this._activeTrigger[fs]=!1,this._activeTrigger[ds]=!1,this._activeTrigger[us]=!1,this._isHovered=null,this._queueCallback(()=>{this._isWithActiveTrigger()||(this._isHovered||this._disposePopper(),this._element.removeAttribute("aria-describedby"),ge.trigger(this._element,this.constructor.eventName("hidden")))},this.tip,this._isAnimated())}}update(){this._popper&&this._popper.update()}_isWithContent(){return Boolean(this._getTitle())}_getTipElement(){return this.tip||(this.tip=this._createTipElement(this._newContent||this._getContentForTemplate())),this.tip}_createTipElement(t){const e=this._getTemplateFactory(t).toHtml();if(!e)return null;e.classList.remove(rs,as),e.classList.add(`bs-${this.constructor.NAME}-auto`);const i=(t=>{do{t+=Math.floor(1e6*Math.random())}while(document.getElementById(t));return t})(this.constructor.NAME).toString();return e.setAttribute("id",i),this._isAnimated()&&e.classList.add(rs),e}setContent(t){this._newContent=t,this._isShown()&&(this._disposePopper(),this.show())}_getTemplateFactory(t){return this._templateFactory?this._templateFactory.changeContent(t):this._templateFactory=new ss({...this._config,content:t,extraClass:this._resolvePossibleFunction(this._config.customClass)}),this._templateFactory}_getContentForTemplate(){return{[ls]:this._getTitle()}}_getTitle(){return this._resolvePossibleFunction(this._config.title)||this._element.getAttribute("data-bs-original-title")}_initializeOnDelegatedTarget(t){return this.constructor.getOrCreateInstance(t.delegateTarget,this._getDelegateConfig())}_isAnimated(){return this._config.animation||this.tip&&this.tip.classList.contains(rs)}_isShown(){return this.tip&&this.tip.classList.contains(as)}_createPopper(t){const e=Jt(this._config.placement,[this,t,this._element]),i=ps[e.toUpperCase()];return It(this._element,t,this._getPopperConfig(i))}_getOffset(){const{offset:t}=this._config;return"string"==typeof t?t.split(",").map(t=>Number.parseInt(t,10)):"function"==typeof t?e=>t(e,this._element):t}_resolvePossibleFunction(t){return Jt(t,[this._element,this._element])}_getPopperConfig(t){const e={placement:t,modifiers:[{name:"flip",options:{fallbackPlacements:this._config.fallbackPlacements}},{name:"offset",options:{offset:this._getOffset()}},{name:"preventOverflow",options:{boundary:this._config.boundary}},{name:"arrow",options:{element:`.${this.constructor.NAME}-arrow`}},{name:"preSetPlacement",enabled:!0,phase:"beforeMain",fn:t=>{this._getTipElement().setAttribute("data-popper-placement",t.state.placement)}}]};return{...e,...Jt(this._config.popperConfig,[void 0,e])}}_setListeners(){const t=this._config.trigger.split(" ");for(const e of t)if("click"===e)ge.on(this._element,this.constructor.eventName("click"),this._config.selector,t=>{const e=this._initializeOnDelegatedTarget(t);e._activeTrigger[fs]=!(e._isShown()&&e._activeTrigger[fs]),e.toggle()});else if("manual"!==e){const t=e===us?this.constructor.eventName("mouseenter"):this.constructor.eventName("focusin"),i=e===us?this.constructor.eventName("mouseleave"):this.constructor.eventName("focusout");ge.on(this._element,t,this._config.selector,t=>{const e=this._initializeOnDelegatedTarget(t);e._activeTrigger["focusin"===t.type?ds:us]=!0,e._enter()}),ge.on(this._element,i,this._config.selector,t=>{const e=this._initializeOnDelegatedTarget(t);e._activeTrigger["focusout"===t.type?ds:us]=e._element.contains(t.relatedTarget),e._leave()})}this._hideModalHandler=()=>{this._element&&this.hide()},ge.on(this._element.closest(cs),hs,this._hideModalHandler)}_fixTitle(){const t=this._element.getAttribute("title");t&&(this._element.getAttribute("aria-label")||this._element.textContent.trim()||this._element.setAttribute("aria-label",t),this._element.setAttribute("data-bs-original-title",t),this._element.removeAttribute("title"))}_enter(){this._isShown()||this._isHovered?this._isHovered=!0:(this._isHovered=!0,this._setTimeout(()=>{this._isHovered&&this.show()},this._config.delay.show))}_leave(){this._isWithActiveTrigger()||(this._isHovered=!1,this._setTimeout(()=>{this._isHovered||this.hide()},this._config.delay.hide))}_setTimeout(t,e){clearTimeout(this._timeout),this._timeout=setTimeout(t,e)}_isWithActiveTrigger(){return Object.values(this._activeTrigger).includes(!0)}_getConfig(t){const e=ye.getDataAttributes(this._element);for(const t of Object.keys(e))os.has(t)&&delete e[t];return t={...e,..."object"==typeof t&&t?t:{}},t=this._mergeConfigObj(t),t=this._configAfterMerge(t),this._typeCheckConfig(t),t}_configAfterMerge(t){return t.container=!1===t.container?document.body:Wt(t.container),"number"==typeof t.delay&&(t.delay={show:t.delay,hide:t.delay}),"number"==typeof t.title&&(t.title=t.title.toString()),"number"==typeof t.content&&(t.content=t.content.toString()),t}_getDelegateConfig(){const t={};for(const[e,i]of Object.entries(this._config))this.constructor.Default[e]!==i&&(t[e]=i);return t.selector=!1,t.trigger="manual",t}_disposePopper(){this._popper&&(this._popper.destroy(),this._popper=null),this.tip&&(this.tip.remove(),this.tip=null)}static jQueryInterface(t){return this.each(function(){const e=_s.getOrCreateInstance(this,t);if("string"==typeof t){if(void 0===e[t])throw new TypeError(`No method named "${t}"`);e[t]()}})}}Gt(_s);const bs=".popover-header",vs=".popover-body",ys={..._s.Default,content:"",offset:[0,8],placement:"right",template:'<div class="popover" role="tooltip"><div class="popover-arrow"></div><h3 class="popover-header"></h3><div class="popover-body"></div></div>',trigger:"click"},ws={..._s.DefaultType,content:"(null|string|element|function)"};class As extends _s{static get Default(){return ys}static get DefaultType(){return ws}static get NAME(){return"popover"}_isWithContent(){return this._getTitle()||this._getContent()}_getContentForTemplate(){return{[bs]:this._getTitle(),[vs]:this._getContent()}}_getContent(){return this._resolvePossibleFunction(this._config.content)}static jQueryInterface(t){return this.each(function(){const e=As.getOrCreateInstance(this,t);if("string"==typeof t){if(void 0===e[t])throw new TypeError(`No method named "${t}"`);e[t]()}})}}Gt(As);const Es=".bs.scrollspy",Ts=`activate${Es}`,Cs=`click${Es}`,Os=`load${Es}.data-api`,xs="active",ks="[href]",Ss=".nav-link",Ls=`${Ss}, .nav-item > ${Ss}, .list-group-item`,$s={offset:null,rootMargin:"0px 0px -25%",smoothScroll:!1,target:null,threshold:[.1,.5,1]},Ds={offset:"(number|null)",rootMargin:"string",smoothScroll:"boolean",target:"element",threshold:"array"};class Is extends Ae{constructor(t,e){super(t,e),this._targetLinks=new Map,this._observableSections=new Map,this._rootElement="visible"===getComputedStyle(this._element).overflowY?null:this._element,this._activeTarget=null,this._observer=null,this._previousScrollData={visibleEntryTop:0,parentScrollTop:0},this.refresh()}static get Default(){return $s}static get DefaultType(){return Ds}static get NAME(){return"scrollspy"}refresh(){this._initializeTargetsAndObservables(),this._maybeEnableSmoothScroll(),this._observer?this._observer.disconnect():this._observer=this._getNewObserver();for(const t of this._observableSections.values())this._observer.observe(t)}dispose(){this._observer.disconnect(),super.dispose()}_configAfterMerge(t){return t.target=Wt(t.target)||document.body,t.rootMargin=t.offset?`${t.offset}px 0px -30%`:t.rootMargin,"string"==typeof t.threshold&&(t.threshold=t.threshold.split(",").map(t=>Number.parseFloat(t))),t}_maybeEnableSmoothScroll(){this._config.smoothScroll&&(ge.off(this._config.target,Cs),ge.on(this._config.target,Cs,ks,t=>{const e=this._observableSections.get(t.target.hash);if(e){t.preventDefault();const i=this._rootElement||window,n=e.offsetTop-this._element.offsetTop;if(i.scrollTo)return void i.scrollTo({top:n,behavior:"smooth"});i.scrollTop=n}}))}_getNewObserver(){const t={root:this._rootElement,threshold:this._config.threshold,rootMargin:this._config.rootMargin};return new IntersectionObserver(t=>this._observerCallback(t),t)}_observerCallback(t){const e=t=>this._targetLinks.get(`#${t.target.id}`),i=t=>{this._previousScrollData.visibleEntryTop=t.target.offsetTop,this._process(e(t))},n=(this._rootElement||document.documentElement).scrollTop,s=n>=this._previousScrollData.parentScrollTop;this._previousScrollData.parentScrollTop=n;for(const o of t){if(!o.isIntersecting){this._activeTarget=null,this._clearActiveClass(e(o));continue}const t=o.target.offsetTop>=this._previousScrollData.visibleEntryTop;if(s&&t){if(i(o),!n)return}else s||t||i(o)}}_initializeTargetsAndObservables(){this._targetLinks=new Map,this._observableSections=new Map;const t=Te.find(ks,this._config.target);for(const e of t){if(!e.hash||Rt(e))continue;const t=Te.findOne(decodeURI(e.hash),this._element);qt(t)&&(this._targetLinks.set(decodeURI(e.hash),e),this._observableSections.set(e.hash,t))}}_process(t){this._activeTarget!==t&&(this._clearActiveClass(this._config.target),this._activeTarget=t,t.classList.add(xs),this._activateParents(t),ge.trigger(this._element,Ts,{relatedTarget:t}))}_activateParents(t){if(t.classList.contains("dropdown-item"))Te.findOne(".dropdown-toggle",t.closest(".dropdown")).classList.add(xs);else for(const e of Te.parents(t,".nav, .list-group"))for(const t of Te.prev(e,Ls))t.classList.add(xs)}_clearActiveClass(t){t.classList.remove(xs);const e=Te.find(`${ks}.${xs}`,t);for(const t of e)t.classList.remove(xs)}static jQueryInterface(t){return this.each(function(){const e=Is.getOrCreateInstance(this,t);if("string"==typeof t){if(void 0===e[t]||t.startsWith("_")||"constructor"===t)throw new TypeError(`No method named "${t}"`);e[t]()}})}}ge.on(window,Os,()=>{for(const t of Te.find('[data-bs-spy="scroll"]'))Is.getOrCreateInstance(t)}),Gt(Is);const Ps=".bs.tab",Ns=`hide${Ps}`,Ms=`hidden${Ps}`,js=`show${Ps}`,Fs=`shown${Ps}`,Hs=`click${Ps}`,zs=`keydown${Ps}`,Bs=`load${Ps}`,Ws="ArrowLeft",qs="ArrowRight",Rs="ArrowUp",Vs="ArrowDown",Us="Home",Ks="End",Qs="active",Xs="fade",Ys="show",Gs=".dropdown-toggle",Js=`:not(${Gs})`,Zs='[data-bs-toggle="tab"], [data-bs-toggle="pill"], [data-bs-toggle="list"]',to=`.nav-link${Js}, .list-group-item${Js}, [role="tab"]${Js}, ${Zs}`,eo=`.${Qs}[data-bs-toggle="tab"], .${Qs}[data-bs-toggle="pill"], .${Qs}[data-bs-toggle="list"]`;class io extends Ae{constructor(t){super(t),this._parent=this._element.closest('.list-group, .nav, [role="tablist"]'),this._parent&&(this._setInitialAttributes(this._parent,this._getChildren()),ge.on(this._element,zs,t=>this._keydown(t)))}static get NAME(){return"tab"}show(){const t=this._element;if(this._elemIsActive(t))return;const e=this._getActiveElem(),i=e?ge.trigger(e,Ns,{relatedTarget:t}):null;ge.trigger(t,js,{relatedTarget:e}).defaultPrevented||i&&i.defaultPrevented||(this._deactivate(e,t),this._activate(t,e))}_activate(t,e){t&&(t.classList.add(Qs),this._activate(Te.getElementFromSelector(t)),this._queueCallback(()=>{"tab"===t.getAttribute("role")?(t.removeAttribute("tabindex"),t.setAttribute("aria-selected",!0),this._toggleDropDown(t,!0),ge.trigger(t,Fs,{relatedTarget:e})):t.classList.add(Ys)},t,t.classList.contains(Xs)))}_deactivate(t,e){t&&(t.classList.remove(Qs),t.blur(),this._deactivate(Te.getElementFromSelector(t)),this._queueCallback(()=>{"tab"===t.getAttribute("role")?(t.setAttribute("aria-selected",!1),t.setAttribute("tabindex","-1"),this._toggleDropDown(t,!1),ge.trigger(t,Ms,{relatedTarget:e})):t.classList.remove(Ys)},t,t.classList.contains(Xs)))}_keydown(t){if(![Ws,qs,Rs,Vs,Us,Ks].includes(t.key))return;t.stopPropagation(),t.preventDefault();const e=this._getChildren().filter(t=>!Rt(t));let i;if([Us,Ks].includes(t.key))i=e[t.key===Us?0:e.length-1];else{const n=[qs,Vs].includes(t.key);i=te(e,t.target,n,!0)}i&&(i.focus({preventScroll:!0}),io.getOrCreateInstance(i).show())}_getChildren(){return Te.find(to,this._parent)}_getActiveElem(){return this._getChildren().find(t=>this._elemIsActive(t))||null}_setInitialAttributes(t,e){this._setAttributeIfNotExists(t,"role","tablist");for(const t of e)this._setInitialAttributesOnChild(t)}_setInitialAttributesOnChild(t){t=this._getInnerElement(t);const e=this._elemIsActive(t),i=this._getOuterElement(t);t.setAttribute("aria-selected",e),i!==t&&this._setAttributeIfNotExists(i,"role","presentation"),e||t.setAttribute("tabindex","-1"),this._setAttributeIfNotExists(t,"role","tab"),this._setInitialAttributesOnTargetPanel(t)}_setInitialAttributesOnTargetPanel(t){const e=Te.getElementFromSelector(t);e&&(this._setAttributeIfNotExists(e,"role","tabpanel"),t.id&&this._setAttributeIfNotExists(e,"aria-labelledby",`${t.id}`))}_toggleDropDown(t,e){const i=this._getOuterElement(t);if(!i.classList.contains("dropdown"))return;const n=(t,n)=>{const s=Te.findOne(t,i);s&&s.classList.toggle(n,e)};n(Gs,Qs),n(".dropdown-menu",Ys),i.setAttribute("aria-expanded",e)}_setAttributeIfNotExists(t,e,i){t.hasAttribute(e)||t.setAttribute(e,i)}_elemIsActive(t){return t.classList.contains(Qs)}_getInnerElement(t){return t.matches(to)?t:Te.findOne(to,t)}_getOuterElement(t){return t.closest(".nav-item, .list-group-item")||t}static jQueryInterface(t){return this.each(function(){const e=io.getOrCreateInstance(this);if("string"==typeof t){if(void 0===e[t]||t.startsWith("_")||"constructor"===t)throw new TypeError(`No method named "${t}"`);e[t]()}})}}ge.on(document,Hs,Zs,function(t){["A","AREA"].includes(this.tagName)&&t.preventDefault(),Rt(this)||io.getOrCreateInstance(this).show()}),ge.on(window,Bs,()=>{for(const t of Te.find(eo))io.getOrCreateInstance(t)}),Gt(io);const no=".bs.toast",so=`mouseover${no}`,oo=`mouseout${no}`,ro=`focusin${no}`,ao=`focusout${no}`,lo=`hide${no}`,co=`hidden${no}`,ho=`show${no}`,uo=`shown${no}`,fo="hide",po="show",mo="showing",go={animation:"boolean",autohide:"boolean",delay:"number"},_o={animation:!0,autohide:!0,delay:5e3};class bo extends Ae{constructor(t,e){super(t,e),this._timeout=null,this._hasMouseInteraction=!1,this._hasKeyboardInteraction=!1,this._setListeners()}static get Default(){return _o}static get DefaultType(){return go}static get NAME(){return"toast"}show(){ge.trigger(this._element,ho).defaultPrevented||(this._clearTimeout(),this._config.animation&&this._element.classList.add("fade"),this._element.classList.remove(fo),Kt(this._element),this._element.classList.add(po,mo),this._queueCallback(()=>{this._element.classList.remove(mo),ge.trigger(this._element,uo),this._maybeScheduleHide()},this._element,this._config.animation))}hide(){this.isShown()&&(ge.trigger(this._element,lo).defaultPrevented||(this._element.classList.add(mo),this._queueCallback(()=>{this._element.classList.add(fo),this._element.classList.remove(mo,po),ge.trigger(this._element,co)},this._element,this._config.animation)))}dispose(){this._clearTimeout(),this.isShown()&&this._element.classList.remove(po),super.dispose()}isShown(){return this._element.classList.contains(po)}_maybeScheduleHide(){this._config.autohide&&(this._hasMouseInteraction||this._hasKeyboardInteraction||(this._timeout=setTimeout(()=>{this.hide()},this._config.delay)))}_onInteraction(t,e){switch(t.type){case"mouseover":case"mouseout":this._hasMouseInteraction=e;break;case"focusin":case"focusout":this._hasKeyboardInteraction=e}if(e)return void this._clearTimeout();const i=t.relatedTarget;this._element===i||this._element.contains(i)||this._maybeScheduleHide()}_setListeners(){ge.on(this._element,so,t=>this._onInteraction(t,!0)),ge.on(this._element,oo,t=>this._onInteraction(t,!1)),ge.on(this._element,ro,t=>this._onInteraction(t,!0)),ge.on(this._element,ao,t=>this._onInteraction(t,!1))}_clearTimeout(){clearTimeout(this._timeout),this._timeout=null}static jQueryInterface(t){return this.each(function(){const e=bo.getOrCreateInstance(this,t);if("string"==typeof t){if(void 0===e[t])throw new TypeError(`No method named "${t}"`);e[t](this)}})}}Ce(bo),Gt(bo);const vo=Object.freeze(Object.defineProperty({__proto__:null,Alert:Se,Button:$e,Carousel:ui,Collapse:Ci,Dropdown:Yi,Modal:Dn,Offcanvas:Yn,Popover:As,ScrollSpy:Is,Tab:io,Toast:bo,Tooltip:_s},Symbol.toStringTag,{value:"Module"}));[].slice.call(document.querySelectorAll('[data-bs-toggle="dropdown"]')).map(function(t){let e={boundary:"viewport"===t.getAttribute("data-bs-boundary")?document.querySelector(".btn"):"clippingParents"};return new Yi(t,e)}),[].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]')).map(function(t){let e={delay:{show:50,hide:50},html:"true"===t.getAttribute("data-bs-html")??!1,placement:t.getAttribute("data-bs-placement")??"auto"};return new _s(t,e)}),[].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]')).map(function(t){let e={delay:{show:50,hide:50},html:"true"===t.getAttribute("data-bs-html")??!1,placement:t.getAttribute("data-bs-placement")??"auto"};return new As(t,e)}),[].slice.call(document.querySelectorAll('[data-bs-toggle="switch-icon"]')).map(function(t){t.addEventListener("click",e=>{e.stopPropagation(),t.classList.toggle("active")})}),(()=>{const t=window.location.hash;t&&[].slice.call(document.querySelectorAll('[data-bs-toggle="tab"]')).filter(e=>e.hash===t).map(t=>{new io(t).show()})})(),[].slice.call(document.querySelectorAll('[data-bs-toggle="toast"]')).map(function(t){if(!t.hasAttribute("data-bs-target"))return;const e=new bo(t.getAttribute("data-bs-target"));t.addEventListener("click",()=>{e.show()})});const yo="tblr-",wo=(t,e)=>{const i=/^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(t);return i?`rgba(${parseInt(i[1],16)}, ${parseInt(i[2],16)}, ${parseInt(i[3],16)}, ${e})`:null},Ao=Object.freeze(Object.defineProperty({__proto__:null,getColor:(t,e=1)=>{const i=getComputedStyle(document.body).getPropertyValue(`--${yo}${t}`).trim();return 1!==e?wo(i,e):i},hexToRgba:wo,prefix:yo},Symbol.toStringTag,{value:"Module"}));t.Alert=Se,t.Button=$e,t.Carousel=ui,t.Collapse=Ci,t.Dropdown=Yi,t.Modal=Dn,t.Offcanvas=Yn,t.Popover=As,t.ScrollSpy=Is,t.Tab=io,t.Toast=bo,t.Tooltip=_s,t.bootstrap=vo,t.tabler=Ao,Object.defineProperty(t,Symbol.toStringTag,{value:"Module"})});
-//# sourceMappingURL=tabler.min.js.map
+* Tabler v1.5.1 (https://tabler.io)
+* Copyright 2018-2026 The Tabler Authors
+* Copyright 2018-2026 codecalm.net Paweł Kuna
+* Licensed under MIT (https://github.com/tabler/tabler/blob/master/LICENSE)
+*/
+(function(global, factory) {
+	typeof exports === "object" && typeof module !== "undefined" ? factory(exports) : typeof define === "function" && define.amd ? define(["exports"], factory) : (global = typeof globalThis !== "undefined" ? globalThis : global || self, factory(global.tabler = {}));
+})(this, function(exports) {
+	Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+	//#region \0rolldown/runtime.js
+	var __defProp = Object.defineProperty;
+	var __exportAll = (all, no_symbols) => {
+		let target = {};
+		for (var name in all) __defProp(target, name, {
+			get: all[name],
+			enumerable: true
+		});
+		if (!no_symbols) __defProp(target, Symbol.toStringTag, { value: "Module" });
+		return target;
+	};
+	//#endregion
+	//#region js/src/autosize.ts
+	var autosizeElements = document.querySelectorAll("[data-bs-toggle=\"autosize\"]");
+	if (autosizeElements.length) autosizeElements.forEach(function(element) {
+		if (window.autosize) window.autosize(element);
+	});
+	//#endregion
+	//#region js/src/countup.ts
+	var countupElements = document.querySelectorAll("[data-countup]");
+	if (countupElements.length) countupElements.forEach(function(element) {
+		var _element$textContent;
+		let options = {};
+		try {
+			const dataOptions = element.getAttribute("data-countup") ? JSON.parse(element.getAttribute("data-countup")) : {};
+			options = Object.assign({ enableScrollSpy: true }, dataOptions);
+		} catch (error) {}
+		const value = parseFloat(((_element$textContent = element.textContent) !== null && _element$textContent !== void 0 ? _element$textContent : "").replace(/[^0-9.-]/g, ""));
+		if (!Number.isNaN(value) && window.countUp && window.countUp.CountUp) {
+			const countUp = new window.countUp.CountUp(element, value, options);
+			if (!countUp.error && !options.enableScrollSpy) countUp.start();
+		}
+	});
+	//#endregion
+	//#region js/src/input-mask.ts
+	[].slice.call(document.querySelectorAll("[data-mask]")).map(function(maskEl) {
+		window.IMask && new window.IMask(maskEl, {
+			mask: maskEl.dataset.mask,
+			lazy: maskEl.dataset.maskVisible !== "true"
+		});
+	});
+	var bottom = "bottom";
+	var right = "right";
+	var left = "left";
+	var auto = "auto";
+	var basePlacements = [
+		"top",
+		bottom,
+		right,
+		left
+	];
+	var start = "start";
+	var clippingParents = "clippingParents";
+	var viewport = "viewport";
+	var popper = "popper";
+	var reference = "reference";
+	var variationPlacements = /*#__PURE__*/ basePlacements.reduce(function(acc, placement) {
+		return acc.concat([placement + "-" + start, placement + "-end"]);
+	}, []);
+	var placements = /*#__PURE__*/ [].concat(basePlacements, [auto]).reduce(function(acc, placement) {
+		return acc.concat([
+			placement,
+			placement + "-" + start,
+			placement + "-end"
+		]);
+	}, []);
+	var beforeRead = "beforeRead";
+	var read = "read";
+	var afterRead = "afterRead";
+	var beforeMain = "beforeMain";
+	var main = "main";
+	var afterMain = "afterMain";
+	var beforeWrite = "beforeWrite";
+	var write = "write";
+	var afterWrite = "afterWrite";
+	var modifierPhases = [
+		beforeRead,
+		read,
+		afterRead,
+		beforeMain,
+		main,
+		afterMain,
+		beforeWrite,
+		write,
+		afterWrite
+	];
+	//#endregion
+	//#region ../node_modules/.pnpm/@popperjs+core@2.11.8/node_modules/@popperjs/core/lib/dom-utils/getNodeName.js
+	function getNodeName(element) {
+		return element ? (element.nodeName || "").toLowerCase() : null;
+	}
+	//#endregion
+	//#region ../node_modules/.pnpm/@popperjs+core@2.11.8/node_modules/@popperjs/core/lib/dom-utils/getWindow.js
+	function getWindow(node) {
+		if (node == null) return window;
+		if (node.toString() !== "[object Window]") {
+			var ownerDocument = node.ownerDocument;
+			return ownerDocument ? ownerDocument.defaultView || window : window;
+		}
+		return node;
+	}
+	//#endregion
+	//#region ../node_modules/.pnpm/@popperjs+core@2.11.8/node_modules/@popperjs/core/lib/dom-utils/instanceOf.js
+	function isElement$1(node) {
+		return node instanceof getWindow(node).Element || node instanceof Element;
+	}
+	function isHTMLElement(node) {
+		return node instanceof getWindow(node).HTMLElement || node instanceof HTMLElement;
+	}
+	function isShadowRoot(node) {
+		if (typeof ShadowRoot === "undefined") return false;
+		return node instanceof getWindow(node).ShadowRoot || node instanceof ShadowRoot;
+	}
+	//#endregion
+	//#region ../node_modules/.pnpm/@popperjs+core@2.11.8/node_modules/@popperjs/core/lib/modifiers/applyStyles.js
+	function applyStyles(_ref) {
+		var state = _ref.state;
+		Object.keys(state.elements).forEach(function(name) {
+			var style = state.styles[name] || {};
+			var attributes = state.attributes[name] || {};
+			var element = state.elements[name];
+			if (!isHTMLElement(element) || !getNodeName(element)) return;
+			Object.assign(element.style, style);
+			Object.keys(attributes).forEach(function(name) {
+				var value = attributes[name];
+				if (value === false) element.removeAttribute(name);
+				else element.setAttribute(name, value === true ? "" : value);
+			});
+		});
+	}
+	function effect$2(_ref2) {
+		var state = _ref2.state;
+		var initialStyles = {
+			popper: {
+				position: state.options.strategy,
+				left: "0",
+				top: "0",
+				margin: "0"
+			},
+			arrow: { position: "absolute" },
+			reference: {}
+		};
+		Object.assign(state.elements.popper.style, initialStyles.popper);
+		state.styles = initialStyles;
+		if (state.elements.arrow) Object.assign(state.elements.arrow.style, initialStyles.arrow);
+		return function() {
+			Object.keys(state.elements).forEach(function(name) {
+				var element = state.elements[name];
+				var attributes = state.attributes[name] || {};
+				var style = Object.keys(state.styles.hasOwnProperty(name) ? state.styles[name] : initialStyles[name]).reduce(function(style, property) {
+					style[property] = "";
+					return style;
+				}, {});
+				if (!isHTMLElement(element) || !getNodeName(element)) return;
+				Object.assign(element.style, style);
+				Object.keys(attributes).forEach(function(attribute) {
+					element.removeAttribute(attribute);
+				});
+			});
+		};
+	}
+	var applyStyles_default = {
+		name: "applyStyles",
+		enabled: true,
+		phase: "write",
+		fn: applyStyles,
+		effect: effect$2,
+		requires: ["computeStyles"]
+	};
+	//#endregion
+	//#region ../node_modules/.pnpm/@popperjs+core@2.11.8/node_modules/@popperjs/core/lib/utils/getBasePlacement.js
+	function getBasePlacement(placement) {
+		return placement.split("-")[0];
+	}
+	//#endregion
+	//#region ../node_modules/.pnpm/@popperjs+core@2.11.8/node_modules/@popperjs/core/lib/utils/math.js
+	var max = Math.max;
+	var min = Math.min;
+	var round = Math.round;
+	//#endregion
+	//#region ../node_modules/.pnpm/@popperjs+core@2.11.8/node_modules/@popperjs/core/lib/utils/userAgent.js
+	function getUAString() {
+		var uaData = navigator.userAgentData;
+		if (uaData != null && uaData.brands && Array.isArray(uaData.brands)) return uaData.brands.map(function(item) {
+			return item.brand + "/" + item.version;
+		}).join(" ");
+		return navigator.userAgent;
+	}
+	//#endregion
+	//#region ../node_modules/.pnpm/@popperjs+core@2.11.8/node_modules/@popperjs/core/lib/dom-utils/isLayoutViewport.js
+	function isLayoutViewport() {
+		return !/^((?!chrome|android).)*safari/i.test(getUAString());
+	}
+	//#endregion
+	//#region ../node_modules/.pnpm/@popperjs+core@2.11.8/node_modules/@popperjs/core/lib/dom-utils/getBoundingClientRect.js
+	function getBoundingClientRect(element, includeScale, isFixedStrategy) {
+		if (includeScale === void 0) includeScale = false;
+		if (isFixedStrategy === void 0) isFixedStrategy = false;
+		var clientRect = element.getBoundingClientRect();
+		var scaleX = 1;
+		var scaleY = 1;
+		if (includeScale && isHTMLElement(element)) {
+			scaleX = element.offsetWidth > 0 ? round(clientRect.width) / element.offsetWidth || 1 : 1;
+			scaleY = element.offsetHeight > 0 ? round(clientRect.height) / element.offsetHeight || 1 : 1;
+		}
+		var visualViewport = (isElement$1(element) ? getWindow(element) : window).visualViewport;
+		var addVisualOffsets = !isLayoutViewport() && isFixedStrategy;
+		var x = (clientRect.left + (addVisualOffsets && visualViewport ? visualViewport.offsetLeft : 0)) / scaleX;
+		var y = (clientRect.top + (addVisualOffsets && visualViewport ? visualViewport.offsetTop : 0)) / scaleY;
+		var width = clientRect.width / scaleX;
+		var height = clientRect.height / scaleY;
+		return {
+			width,
+			height,
+			top: y,
+			right: x + width,
+			bottom: y + height,
+			left: x,
+			x,
+			y
+		};
+	}
+	//#endregion
+	//#region ../node_modules/.pnpm/@popperjs+core@2.11.8/node_modules/@popperjs/core/lib/dom-utils/getLayoutRect.js
+	function getLayoutRect(element) {
+		var clientRect = getBoundingClientRect(element);
+		var width = element.offsetWidth;
+		var height = element.offsetHeight;
+		if (Math.abs(clientRect.width - width) <= 1) width = clientRect.width;
+		if (Math.abs(clientRect.height - height) <= 1) height = clientRect.height;
+		return {
+			x: element.offsetLeft,
+			y: element.offsetTop,
+			width,
+			height
+		};
+	}
+	//#endregion
+	//#region ../node_modules/.pnpm/@popperjs+core@2.11.8/node_modules/@popperjs/core/lib/dom-utils/contains.js
+	function contains(parent, child) {
+		var rootNode = child.getRootNode && child.getRootNode();
+		if (parent.contains(child)) return true;
+		else if (rootNode && isShadowRoot(rootNode)) {
+			var next = child;
+			do {
+				if (next && parent.isSameNode(next)) return true;
+				next = next.parentNode || next.host;
+			} while (next);
+		}
+		return false;
+	}
+	//#endregion
+	//#region ../node_modules/.pnpm/@popperjs+core@2.11.8/node_modules/@popperjs/core/lib/dom-utils/getComputedStyle.js
+	function getComputedStyle$1(element) {
+		return getWindow(element).getComputedStyle(element);
+	}
+	//#endregion
+	//#region ../node_modules/.pnpm/@popperjs+core@2.11.8/node_modules/@popperjs/core/lib/dom-utils/isTableElement.js
+	function isTableElement(element) {
+		return [
+			"table",
+			"td",
+			"th"
+		].indexOf(getNodeName(element)) >= 0;
+	}
+	//#endregion
+	//#region ../node_modules/.pnpm/@popperjs+core@2.11.8/node_modules/@popperjs/core/lib/dom-utils/getDocumentElement.js
+	function getDocumentElement(element) {
+		return ((isElement$1(element) ? element.ownerDocument : element.document) || window.document).documentElement;
+	}
+	//#endregion
+	//#region ../node_modules/.pnpm/@popperjs+core@2.11.8/node_modules/@popperjs/core/lib/dom-utils/getParentNode.js
+	function getParentNode(element) {
+		if (getNodeName(element) === "html") return element;
+		return element.assignedSlot || element.parentNode || (isShadowRoot(element) ? element.host : null) || getDocumentElement(element);
+	}
+	//#endregion
+	//#region ../node_modules/.pnpm/@popperjs+core@2.11.8/node_modules/@popperjs/core/lib/dom-utils/getOffsetParent.js
+	function getTrueOffsetParent(element) {
+		if (!isHTMLElement(element) || getComputedStyle$1(element).position === "fixed") return null;
+		return element.offsetParent;
+	}
+	function getContainingBlock(element) {
+		var isFirefox = /firefox/i.test(getUAString());
+		if (/Trident/i.test(getUAString()) && isHTMLElement(element)) {
+			if (getComputedStyle$1(element).position === "fixed") return null;
+		}
+		var currentNode = getParentNode(element);
+		if (isShadowRoot(currentNode)) currentNode = currentNode.host;
+		while (isHTMLElement(currentNode) && ["html", "body"].indexOf(getNodeName(currentNode)) < 0) {
+			var css = getComputedStyle$1(currentNode);
+			if (css.transform !== "none" || css.perspective !== "none" || css.contain === "paint" || ["transform", "perspective"].indexOf(css.willChange) !== -1 || isFirefox && css.willChange === "filter" || isFirefox && css.filter && css.filter !== "none") return currentNode;
+			else currentNode = currentNode.parentNode;
+		}
+		return null;
+	}
+	function getOffsetParent(element) {
+		var window = getWindow(element);
+		var offsetParent = getTrueOffsetParent(element);
+		while (offsetParent && isTableElement(offsetParent) && getComputedStyle$1(offsetParent).position === "static") offsetParent = getTrueOffsetParent(offsetParent);
+		if (offsetParent && (getNodeName(offsetParent) === "html" || getNodeName(offsetParent) === "body" && getComputedStyle$1(offsetParent).position === "static")) return window;
+		return offsetParent || getContainingBlock(element) || window;
+	}
+	//#endregion
+	//#region ../node_modules/.pnpm/@popperjs+core@2.11.8/node_modules/@popperjs/core/lib/utils/getMainAxisFromPlacement.js
+	function getMainAxisFromPlacement(placement) {
+		return ["top", "bottom"].indexOf(placement) >= 0 ? "x" : "y";
+	}
+	//#endregion
+	//#region ../node_modules/.pnpm/@popperjs+core@2.11.8/node_modules/@popperjs/core/lib/utils/within.js
+	function within(min$2, value, max$2) {
+		return max(min$2, min(value, max$2));
+	}
+	function withinMaxClamp(min, value, max) {
+		var v = within(min, value, max);
+		return v > max ? max : v;
+	}
+	//#endregion
+	//#region ../node_modules/.pnpm/@popperjs+core@2.11.8/node_modules/@popperjs/core/lib/utils/getFreshSideObject.js
+	function getFreshSideObject() {
+		return {
+			top: 0,
+			right: 0,
+			bottom: 0,
+			left: 0
+		};
+	}
+	//#endregion
+	//#region ../node_modules/.pnpm/@popperjs+core@2.11.8/node_modules/@popperjs/core/lib/utils/mergePaddingObject.js
+	function mergePaddingObject(paddingObject) {
+		return Object.assign({}, getFreshSideObject(), paddingObject);
+	}
+	//#endregion
+	//#region ../node_modules/.pnpm/@popperjs+core@2.11.8/node_modules/@popperjs/core/lib/utils/expandToHashMap.js
+	function expandToHashMap(value, keys) {
+		return keys.reduce(function(hashMap, key) {
+			hashMap[key] = value;
+			return hashMap;
+		}, {});
+	}
+	//#endregion
+	//#region ../node_modules/.pnpm/@popperjs+core@2.11.8/node_modules/@popperjs/core/lib/modifiers/arrow.js
+	var toPaddingObject = function toPaddingObject(padding, state) {
+		padding = typeof padding === "function" ? padding(Object.assign({}, state.rects, { placement: state.placement })) : padding;
+		return mergePaddingObject(typeof padding !== "number" ? padding : expandToHashMap(padding, basePlacements));
+	};
+	function arrow(_ref) {
+		var _state$modifiersData$;
+		var state = _ref.state, name = _ref.name, options = _ref.options;
+		var arrowElement = state.elements.arrow;
+		var popperOffsets = state.modifiersData.popperOffsets;
+		var basePlacement = getBasePlacement(state.placement);
+		var axis = getMainAxisFromPlacement(basePlacement);
+		var len = ["left", "right"].indexOf(basePlacement) >= 0 ? "height" : "width";
+		if (!arrowElement || !popperOffsets) return;
+		var paddingObject = toPaddingObject(options.padding, state);
+		var arrowRect = getLayoutRect(arrowElement);
+		var minProp = axis === "y" ? "top" : left;
+		var maxProp = axis === "y" ? bottom : right;
+		var endDiff = state.rects.reference[len] + state.rects.reference[axis] - popperOffsets[axis] - state.rects.popper[len];
+		var startDiff = popperOffsets[axis] - state.rects.reference[axis];
+		var arrowOffsetParent = getOffsetParent(arrowElement);
+		var clientSize = arrowOffsetParent ? axis === "y" ? arrowOffsetParent.clientHeight || 0 : arrowOffsetParent.clientWidth || 0 : 0;
+		var centerToReference = endDiff / 2 - startDiff / 2;
+		var min = paddingObject[minProp];
+		var max = clientSize - arrowRect[len] - paddingObject[maxProp];
+		var center = clientSize / 2 - arrowRect[len] / 2 + centerToReference;
+		var offset = within(min, center, max);
+		var axisProp = axis;
+		state.modifiersData[name] = (_state$modifiersData$ = {}, _state$modifiersData$[axisProp] = offset, _state$modifiersData$.centerOffset = offset - center, _state$modifiersData$);
+	}
+	function effect$1(_ref2) {
+		var state = _ref2.state;
+		var _options$element = _ref2.options.element, arrowElement = _options$element === void 0 ? "[data-popper-arrow]" : _options$element;
+		if (arrowElement == null) return;
+		if (typeof arrowElement === "string") {
+			arrowElement = state.elements.popper.querySelector(arrowElement);
+			if (!arrowElement) return;
+		}
+		if (!contains(state.elements.popper, arrowElement)) return;
+		state.elements.arrow = arrowElement;
+	}
+	var arrow_default = {
+		name: "arrow",
+		enabled: true,
+		phase: "main",
+		fn: arrow,
+		effect: effect$1,
+		requires: ["popperOffsets"],
+		requiresIfExists: ["preventOverflow"]
+	};
+	//#endregion
+	//#region ../node_modules/.pnpm/@popperjs+core@2.11.8/node_modules/@popperjs/core/lib/utils/getVariation.js
+	function getVariation(placement) {
+		return placement.split("-")[1];
+	}
+	//#endregion
+	//#region ../node_modules/.pnpm/@popperjs+core@2.11.8/node_modules/@popperjs/core/lib/modifiers/computeStyles.js
+	var unsetSides = {
+		top: "auto",
+		right: "auto",
+		bottom: "auto",
+		left: "auto"
+	};
+	function roundOffsetsByDPR(_ref, win) {
+		var x = _ref.x, y = _ref.y;
+		var dpr = win.devicePixelRatio || 1;
+		return {
+			x: round(x * dpr) / dpr || 0,
+			y: round(y * dpr) / dpr || 0
+		};
+	}
+	function mapToStyles(_ref2) {
+		var _Object$assign2;
+		var popper = _ref2.popper, popperRect = _ref2.popperRect, placement = _ref2.placement, variation = _ref2.variation, offsets = _ref2.offsets, position = _ref2.position, gpuAcceleration = _ref2.gpuAcceleration, adaptive = _ref2.adaptive, roundOffsets = _ref2.roundOffsets, isFixed = _ref2.isFixed;
+		var _offsets$x = offsets.x, x = _offsets$x === void 0 ? 0 : _offsets$x, _offsets$y = offsets.y, y = _offsets$y === void 0 ? 0 : _offsets$y;
+		var _ref3 = typeof roundOffsets === "function" ? roundOffsets({
+			x,
+			y
+		}) : {
+			x,
+			y
+		};
+		x = _ref3.x;
+		y = _ref3.y;
+		var hasX = offsets.hasOwnProperty("x");
+		var hasY = offsets.hasOwnProperty("y");
+		var sideX = left;
+		var sideY = "top";
+		var win = window;
+		if (adaptive) {
+			var offsetParent = getOffsetParent(popper);
+			var heightProp = "clientHeight";
+			var widthProp = "clientWidth";
+			if (offsetParent === getWindow(popper)) {
+				offsetParent = getDocumentElement(popper);
+				if (getComputedStyle$1(offsetParent).position !== "static" && position === "absolute") {
+					heightProp = "scrollHeight";
+					widthProp = "scrollWidth";
+				}
+			}
+			offsetParent = offsetParent;
+			if (placement === "top" || (placement === "left" || placement === "right") && variation === "end") {
+				sideY = bottom;
+				var offsetY = isFixed && offsetParent === win && win.visualViewport ? win.visualViewport.height : offsetParent[heightProp];
+				y -= offsetY - popperRect.height;
+				y *= gpuAcceleration ? 1 : -1;
+			}
+			if (placement === "left" || (placement === "top" || placement === "bottom") && variation === "end") {
+				sideX = right;
+				var offsetX = isFixed && offsetParent === win && win.visualViewport ? win.visualViewport.width : offsetParent[widthProp];
+				x -= offsetX - popperRect.width;
+				x *= gpuAcceleration ? 1 : -1;
+			}
+		}
+		var commonStyles = Object.assign({ position }, adaptive && unsetSides);
+		var _ref4 = roundOffsets === true ? roundOffsetsByDPR({
+			x,
+			y
+		}, getWindow(popper)) : {
+			x,
+			y
+		};
+		x = _ref4.x;
+		y = _ref4.y;
+		if (gpuAcceleration) {
+			var _Object$assign;
+			return Object.assign({}, commonStyles, (_Object$assign = {}, _Object$assign[sideY] = hasY ? "0" : "", _Object$assign[sideX] = hasX ? "0" : "", _Object$assign.transform = (win.devicePixelRatio || 1) <= 1 ? "translate(" + x + "px, " + y + "px)" : "translate3d(" + x + "px, " + y + "px, 0)", _Object$assign));
+		}
+		return Object.assign({}, commonStyles, (_Object$assign2 = {}, _Object$assign2[sideY] = hasY ? y + "px" : "", _Object$assign2[sideX] = hasX ? x + "px" : "", _Object$assign2.transform = "", _Object$assign2));
+	}
+	function computeStyles(_ref5) {
+		var state = _ref5.state, options = _ref5.options;
+		var _options$gpuAccelerat = options.gpuAcceleration, gpuAcceleration = _options$gpuAccelerat === void 0 ? true : _options$gpuAccelerat, _options$adaptive = options.adaptive, adaptive = _options$adaptive === void 0 ? true : _options$adaptive, _options$roundOffsets = options.roundOffsets, roundOffsets = _options$roundOffsets === void 0 ? true : _options$roundOffsets;
+		var commonStyles = {
+			placement: getBasePlacement(state.placement),
+			variation: getVariation(state.placement),
+			popper: state.elements.popper,
+			popperRect: state.rects.popper,
+			gpuAcceleration,
+			isFixed: state.options.strategy === "fixed"
+		};
+		if (state.modifiersData.popperOffsets != null) state.styles.popper = Object.assign({}, state.styles.popper, mapToStyles(Object.assign({}, commonStyles, {
+			offsets: state.modifiersData.popperOffsets,
+			position: state.options.strategy,
+			adaptive,
+			roundOffsets
+		})));
+		if (state.modifiersData.arrow != null) state.styles.arrow = Object.assign({}, state.styles.arrow, mapToStyles(Object.assign({}, commonStyles, {
+			offsets: state.modifiersData.arrow,
+			position: "absolute",
+			adaptive: false,
+			roundOffsets
+		})));
+		state.attributes.popper = Object.assign({}, state.attributes.popper, { "data-popper-placement": state.placement });
+	}
+	var computeStyles_default = {
+		name: "computeStyles",
+		enabled: true,
+		phase: "beforeWrite",
+		fn: computeStyles,
+		data: {}
+	};
+	//#endregion
+	//#region ../node_modules/.pnpm/@popperjs+core@2.11.8/node_modules/@popperjs/core/lib/modifiers/eventListeners.js
+	var passive = { passive: true };
+	function effect(_ref) {
+		var state = _ref.state, instance = _ref.instance, options = _ref.options;
+		var _options$scroll = options.scroll, scroll = _options$scroll === void 0 ? true : _options$scroll, _options$resize = options.resize, resize = _options$resize === void 0 ? true : _options$resize;
+		var window = getWindow(state.elements.popper);
+		var scrollParents = [].concat(state.scrollParents.reference, state.scrollParents.popper);
+		if (scroll) scrollParents.forEach(function(scrollParent) {
+			scrollParent.addEventListener("scroll", instance.update, passive);
+		});
+		if (resize) window.addEventListener("resize", instance.update, passive);
+		return function() {
+			if (scroll) scrollParents.forEach(function(scrollParent) {
+				scrollParent.removeEventListener("scroll", instance.update, passive);
+			});
+			if (resize) window.removeEventListener("resize", instance.update, passive);
+		};
+	}
+	var eventListeners_default = {
+		name: "eventListeners",
+		enabled: true,
+		phase: "write",
+		fn: function fn() {},
+		effect,
+		data: {}
+	};
+	//#endregion
+	//#region ../node_modules/.pnpm/@popperjs+core@2.11.8/node_modules/@popperjs/core/lib/utils/getOppositePlacement.js
+	var hash$1 = {
+		left: "right",
+		right: "left",
+		bottom: "top",
+		top: "bottom"
+	};
+	function getOppositePlacement(placement) {
+		return placement.replace(/left|right|bottom|top/g, function(matched) {
+			return hash$1[matched];
+		});
+	}
+	//#endregion
+	//#region ../node_modules/.pnpm/@popperjs+core@2.11.8/node_modules/@popperjs/core/lib/utils/getOppositeVariationPlacement.js
+	var hash = {
+		start: "end",
+		end: "start"
+	};
+	function getOppositeVariationPlacement(placement) {
+		return placement.replace(/start|end/g, function(matched) {
+			return hash[matched];
+		});
+	}
+	//#endregion
+	//#region ../node_modules/.pnpm/@popperjs+core@2.11.8/node_modules/@popperjs/core/lib/dom-utils/getWindowScroll.js
+	function getWindowScroll(node) {
+		var win = getWindow(node);
+		return {
+			scrollLeft: win.pageXOffset,
+			scrollTop: win.pageYOffset
+		};
+	}
+	//#endregion
+	//#region ../node_modules/.pnpm/@popperjs+core@2.11.8/node_modules/@popperjs/core/lib/dom-utils/getWindowScrollBarX.js
+	function getWindowScrollBarX(element) {
+		return getBoundingClientRect(getDocumentElement(element)).left + getWindowScroll(element).scrollLeft;
+	}
+	//#endregion
+	//#region ../node_modules/.pnpm/@popperjs+core@2.11.8/node_modules/@popperjs/core/lib/dom-utils/getViewportRect.js
+	function getViewportRect(element, strategy) {
+		var win = getWindow(element);
+		var html = getDocumentElement(element);
+		var visualViewport = win.visualViewport;
+		var width = html.clientWidth;
+		var height = html.clientHeight;
+		var x = 0;
+		var y = 0;
+		if (visualViewport) {
+			width = visualViewport.width;
+			height = visualViewport.height;
+			var layoutViewport = isLayoutViewport();
+			if (layoutViewport || !layoutViewport && strategy === "fixed") {
+				x = visualViewport.offsetLeft;
+				y = visualViewport.offsetTop;
+			}
+		}
+		return {
+			width,
+			height,
+			x: x + getWindowScrollBarX(element),
+			y
+		};
+	}
+	//#endregion
+	//#region ../node_modules/.pnpm/@popperjs+core@2.11.8/node_modules/@popperjs/core/lib/dom-utils/getDocumentRect.js
+	function getDocumentRect(element) {
+		var _element$ownerDocumen;
+		var html = getDocumentElement(element);
+		var winScroll = getWindowScroll(element);
+		var body = (_element$ownerDocumen = element.ownerDocument) == null ? void 0 : _element$ownerDocumen.body;
+		var width = max(html.scrollWidth, html.clientWidth, body ? body.scrollWidth : 0, body ? body.clientWidth : 0);
+		var height = max(html.scrollHeight, html.clientHeight, body ? body.scrollHeight : 0, body ? body.clientHeight : 0);
+		var x = -winScroll.scrollLeft + getWindowScrollBarX(element);
+		var y = -winScroll.scrollTop;
+		if (getComputedStyle$1(body || html).direction === "rtl") x += max(html.clientWidth, body ? body.clientWidth : 0) - width;
+		return {
+			width,
+			height,
+			x,
+			y
+		};
+	}
+	//#endregion
+	//#region ../node_modules/.pnpm/@popperjs+core@2.11.8/node_modules/@popperjs/core/lib/dom-utils/isScrollParent.js
+	function isScrollParent(element) {
+		var _getComputedStyle = getComputedStyle$1(element), overflow = _getComputedStyle.overflow, overflowX = _getComputedStyle.overflowX, overflowY = _getComputedStyle.overflowY;
+		return /auto|scroll|overlay|hidden/.test(overflow + overflowY + overflowX);
+	}
+	//#endregion
+	//#region ../node_modules/.pnpm/@popperjs+core@2.11.8/node_modules/@popperjs/core/lib/dom-utils/getScrollParent.js
+	function getScrollParent(node) {
+		if ([
+			"html",
+			"body",
+			"#document"
+		].indexOf(getNodeName(node)) >= 0) return node.ownerDocument.body;
+		if (isHTMLElement(node) && isScrollParent(node)) return node;
+		return getScrollParent(getParentNode(node));
+	}
+	//#endregion
+	//#region ../node_modules/.pnpm/@popperjs+core@2.11.8/node_modules/@popperjs/core/lib/dom-utils/listScrollParents.js
+	function listScrollParents(element, list) {
+		var _element$ownerDocumen;
+		if (list === void 0) list = [];
+		var scrollParent = getScrollParent(element);
+		var isBody = scrollParent === ((_element$ownerDocumen = element.ownerDocument) == null ? void 0 : _element$ownerDocumen.body);
+		var win = getWindow(scrollParent);
+		var target = isBody ? [win].concat(win.visualViewport || [], isScrollParent(scrollParent) ? scrollParent : []) : scrollParent;
+		var updatedList = list.concat(target);
+		return isBody ? updatedList : updatedList.concat(listScrollParents(getParentNode(target)));
+	}
+	//#endregion
+	//#region ../node_modules/.pnpm/@popperjs+core@2.11.8/node_modules/@popperjs/core/lib/utils/rectToClientRect.js
+	function rectToClientRect(rect) {
+		return Object.assign({}, rect, {
+			left: rect.x,
+			top: rect.y,
+			right: rect.x + rect.width,
+			bottom: rect.y + rect.height
+		});
+	}
+	//#endregion
+	//#region ../node_modules/.pnpm/@popperjs+core@2.11.8/node_modules/@popperjs/core/lib/dom-utils/getClippingRect.js
+	function getInnerBoundingClientRect(element, strategy) {
+		var rect = getBoundingClientRect(element, false, strategy === "fixed");
+		rect.top = rect.top + element.clientTop;
+		rect.left = rect.left + element.clientLeft;
+		rect.bottom = rect.top + element.clientHeight;
+		rect.right = rect.left + element.clientWidth;
+		rect.width = element.clientWidth;
+		rect.height = element.clientHeight;
+		rect.x = rect.left;
+		rect.y = rect.top;
+		return rect;
+	}
+	function getClientRectFromMixedType(element, clippingParent, strategy) {
+		return clippingParent === "viewport" ? rectToClientRect(getViewportRect(element, strategy)) : isElement$1(clippingParent) ? getInnerBoundingClientRect(clippingParent, strategy) : rectToClientRect(getDocumentRect(getDocumentElement(element)));
+	}
+	function getClippingParents(element) {
+		var clippingParents = listScrollParents(getParentNode(element));
+		var clipperElement = ["absolute", "fixed"].indexOf(getComputedStyle$1(element).position) >= 0 && isHTMLElement(element) ? getOffsetParent(element) : element;
+		if (!isElement$1(clipperElement)) return [];
+		return clippingParents.filter(function(clippingParent) {
+			return isElement$1(clippingParent) && contains(clippingParent, clipperElement) && getNodeName(clippingParent) !== "body";
+		});
+	}
+	function getClippingRect(element, boundary, rootBoundary, strategy) {
+		var mainClippingParents = boundary === "clippingParents" ? getClippingParents(element) : [].concat(boundary);
+		var clippingParents = [].concat(mainClippingParents, [rootBoundary]);
+		var firstClippingParent = clippingParents[0];
+		var clippingRect = clippingParents.reduce(function(accRect, clippingParent) {
+			var rect = getClientRectFromMixedType(element, clippingParent, strategy);
+			accRect.top = max(rect.top, accRect.top);
+			accRect.right = min(rect.right, accRect.right);
+			accRect.bottom = min(rect.bottom, accRect.bottom);
+			accRect.left = max(rect.left, accRect.left);
+			return accRect;
+		}, getClientRectFromMixedType(element, firstClippingParent, strategy));
+		clippingRect.width = clippingRect.right - clippingRect.left;
+		clippingRect.height = clippingRect.bottom - clippingRect.top;
+		clippingRect.x = clippingRect.left;
+		clippingRect.y = clippingRect.top;
+		return clippingRect;
+	}
+	//#endregion
+	//#region ../node_modules/.pnpm/@popperjs+core@2.11.8/node_modules/@popperjs/core/lib/utils/computeOffsets.js
+	function computeOffsets(_ref) {
+		var reference = _ref.reference, element = _ref.element, placement = _ref.placement;
+		var basePlacement = placement ? getBasePlacement(placement) : null;
+		var variation = placement ? getVariation(placement) : null;
+		var commonX = reference.x + reference.width / 2 - element.width / 2;
+		var commonY = reference.y + reference.height / 2 - element.height / 2;
+		var offsets;
+		switch (basePlacement) {
+			case "top":
+				offsets = {
+					x: commonX,
+					y: reference.y - element.height
+				};
+				break;
+			case bottom:
+				offsets = {
+					x: commonX,
+					y: reference.y + reference.height
+				};
+				break;
+			case right:
+				offsets = {
+					x: reference.x + reference.width,
+					y: commonY
+				};
+				break;
+			case left:
+				offsets = {
+					x: reference.x - element.width,
+					y: commonY
+				};
+				break;
+			default: offsets = {
+				x: reference.x,
+				y: reference.y
+			};
+		}
+		var mainAxis = basePlacement ? getMainAxisFromPlacement(basePlacement) : null;
+		if (mainAxis != null) {
+			var len = mainAxis === "y" ? "height" : "width";
+			switch (variation) {
+				case start:
+					offsets[mainAxis] = offsets[mainAxis] - (reference[len] / 2 - element[len] / 2);
+					break;
+				case "end": offsets[mainAxis] = offsets[mainAxis] + (reference[len] / 2 - element[len] / 2);
+			}
+		}
+		return offsets;
+	}
+	//#endregion
+	//#region ../node_modules/.pnpm/@popperjs+core@2.11.8/node_modules/@popperjs/core/lib/utils/detectOverflow.js
+	function detectOverflow(state, options) {
+		if (options === void 0) options = {};
+		var _options = options, _options$placement = _options.placement, placement = _options$placement === void 0 ? state.placement : _options$placement, _options$strategy = _options.strategy, strategy = _options$strategy === void 0 ? state.strategy : _options$strategy, _options$boundary = _options.boundary, boundary = _options$boundary === void 0 ? clippingParents : _options$boundary, _options$rootBoundary = _options.rootBoundary, rootBoundary = _options$rootBoundary === void 0 ? viewport : _options$rootBoundary, _options$elementConte = _options.elementContext, elementContext = _options$elementConte === void 0 ? popper : _options$elementConte, _options$altBoundary = _options.altBoundary, altBoundary = _options$altBoundary === void 0 ? false : _options$altBoundary, _options$padding = _options.padding, padding = _options$padding === void 0 ? 0 : _options$padding;
+		var paddingObject = mergePaddingObject(typeof padding !== "number" ? padding : expandToHashMap(padding, basePlacements));
+		var altContext = elementContext === "popper" ? reference : popper;
+		var popperRect = state.rects.popper;
+		var element = state.elements[altBoundary ? altContext : elementContext];
+		var clippingClientRect = getClippingRect(isElement$1(element) ? element : element.contextElement || getDocumentElement(state.elements.popper), boundary, rootBoundary, strategy);
+		var referenceClientRect = getBoundingClientRect(state.elements.reference);
+		var popperOffsets = computeOffsets({
+			reference: referenceClientRect,
+			element: popperRect,
+			strategy: "absolute",
+			placement
+		});
+		var popperClientRect = rectToClientRect(Object.assign({}, popperRect, popperOffsets));
+		var elementClientRect = elementContext === "popper" ? popperClientRect : referenceClientRect;
+		var overflowOffsets = {
+			top: clippingClientRect.top - elementClientRect.top + paddingObject.top,
+			bottom: elementClientRect.bottom - clippingClientRect.bottom + paddingObject.bottom,
+			left: clippingClientRect.left - elementClientRect.left + paddingObject.left,
+			right: elementClientRect.right - clippingClientRect.right + paddingObject.right
+		};
+		var offsetData = state.modifiersData.offset;
+		if (elementContext === "popper" && offsetData) {
+			var offset = offsetData[placement];
+			Object.keys(overflowOffsets).forEach(function(key) {
+				var multiply = ["right", "bottom"].indexOf(key) >= 0 ? 1 : -1;
+				var axis = ["top", "bottom"].indexOf(key) >= 0 ? "y" : "x";
+				overflowOffsets[key] += offset[axis] * multiply;
+			});
+		}
+		return overflowOffsets;
+	}
+	//#endregion
+	//#region ../node_modules/.pnpm/@popperjs+core@2.11.8/node_modules/@popperjs/core/lib/utils/computeAutoPlacement.js
+	function computeAutoPlacement(state, options) {
+		if (options === void 0) options = {};
+		var _options = options, placement = _options.placement, boundary = _options.boundary, rootBoundary = _options.rootBoundary, padding = _options.padding, flipVariations = _options.flipVariations, _options$allowedAutoP = _options.allowedAutoPlacements, allowedAutoPlacements = _options$allowedAutoP === void 0 ? placements : _options$allowedAutoP;
+		var variation = getVariation(placement);
+		var placements$1 = variation ? flipVariations ? variationPlacements : variationPlacements.filter(function(placement) {
+			return getVariation(placement) === variation;
+		}) : basePlacements;
+		var allowedPlacements = placements$1.filter(function(placement) {
+			return allowedAutoPlacements.indexOf(placement) >= 0;
+		});
+		if (allowedPlacements.length === 0) allowedPlacements = placements$1;
+		var overflows = allowedPlacements.reduce(function(acc, placement) {
+			acc[placement] = detectOverflow(state, {
+				placement,
+				boundary,
+				rootBoundary,
+				padding
+			})[getBasePlacement(placement)];
+			return acc;
+		}, {});
+		return Object.keys(overflows).sort(function(a, b) {
+			return overflows[a] - overflows[b];
+		});
+	}
+	//#endregion
+	//#region ../node_modules/.pnpm/@popperjs+core@2.11.8/node_modules/@popperjs/core/lib/modifiers/flip.js
+	function getExpandedFallbackPlacements(placement) {
+		if (getBasePlacement(placement) === "auto") return [];
+		var oppositePlacement = getOppositePlacement(placement);
+		return [
+			getOppositeVariationPlacement(placement),
+			oppositePlacement,
+			getOppositeVariationPlacement(oppositePlacement)
+		];
+	}
+	function flip(_ref) {
+		var state = _ref.state, options = _ref.options, name = _ref.name;
+		if (state.modifiersData[name]._skip) return;
+		var _options$mainAxis = options.mainAxis, checkMainAxis = _options$mainAxis === void 0 ? true : _options$mainAxis, _options$altAxis = options.altAxis, checkAltAxis = _options$altAxis === void 0 ? true : _options$altAxis, specifiedFallbackPlacements = options.fallbackPlacements, padding = options.padding, boundary = options.boundary, rootBoundary = options.rootBoundary, altBoundary = options.altBoundary, _options$flipVariatio = options.flipVariations, flipVariations = _options$flipVariatio === void 0 ? true : _options$flipVariatio, allowedAutoPlacements = options.allowedAutoPlacements;
+		var preferredPlacement = state.options.placement;
+		var isBasePlacement = getBasePlacement(preferredPlacement) === preferredPlacement;
+		var fallbackPlacements = specifiedFallbackPlacements || (isBasePlacement || !flipVariations ? [getOppositePlacement(preferredPlacement)] : getExpandedFallbackPlacements(preferredPlacement));
+		var placements = [preferredPlacement].concat(fallbackPlacements).reduce(function(acc, placement) {
+			return acc.concat(getBasePlacement(placement) === "auto" ? computeAutoPlacement(state, {
+				placement,
+				boundary,
+				rootBoundary,
+				padding,
+				flipVariations,
+				allowedAutoPlacements
+			}) : placement);
+		}, []);
+		var referenceRect = state.rects.reference;
+		var popperRect = state.rects.popper;
+		var checksMap = /* @__PURE__ */ new Map();
+		var makeFallbackChecks = true;
+		var firstFittingPlacement = placements[0];
+		for (var i = 0; i < placements.length; i++) {
+			var placement = placements[i];
+			var _basePlacement = getBasePlacement(placement);
+			var isStartVariation = getVariation(placement) === start;
+			var isVertical = ["top", bottom].indexOf(_basePlacement) >= 0;
+			var len = isVertical ? "width" : "height";
+			var overflow = detectOverflow(state, {
+				placement,
+				boundary,
+				rootBoundary,
+				altBoundary,
+				padding
+			});
+			var mainVariationSide = isVertical ? isStartVariation ? right : left : isStartVariation ? bottom : "top";
+			if (referenceRect[len] > popperRect[len]) mainVariationSide = getOppositePlacement(mainVariationSide);
+			var altVariationSide = getOppositePlacement(mainVariationSide);
+			var checks = [];
+			if (checkMainAxis) checks.push(overflow[_basePlacement] <= 0);
+			if (checkAltAxis) checks.push(overflow[mainVariationSide] <= 0, overflow[altVariationSide] <= 0);
+			if (checks.every(function(check) {
+				return check;
+			})) {
+				firstFittingPlacement = placement;
+				makeFallbackChecks = false;
+				break;
+			}
+			checksMap.set(placement, checks);
+		}
+		if (makeFallbackChecks) {
+			var numberOfChecks = flipVariations ? 3 : 1;
+			var _loop = function _loop(_i) {
+				var fittingPlacement = placements.find(function(placement) {
+					var checks = checksMap.get(placement);
+					if (checks) return checks.slice(0, _i).every(function(check) {
+						return check;
+					});
+				});
+				if (fittingPlacement) {
+					firstFittingPlacement = fittingPlacement;
+					return "break";
+				}
+			};
+			for (var _i = numberOfChecks; _i > 0; _i--) if (_loop(_i) === "break") break;
+		}
+		if (state.placement !== firstFittingPlacement) {
+			state.modifiersData[name]._skip = true;
+			state.placement = firstFittingPlacement;
+			state.reset = true;
+		}
+	}
+	var flip_default = {
+		name: "flip",
+		enabled: true,
+		phase: "main",
+		fn: flip,
+		requiresIfExists: ["offset"],
+		data: { _skip: false }
+	};
+	//#endregion
+	//#region ../node_modules/.pnpm/@popperjs+core@2.11.8/node_modules/@popperjs/core/lib/modifiers/hide.js
+	function getSideOffsets(overflow, rect, preventedOffsets) {
+		if (preventedOffsets === void 0) preventedOffsets = {
+			x: 0,
+			y: 0
+		};
+		return {
+			top: overflow.top - rect.height - preventedOffsets.y,
+			right: overflow.right - rect.width + preventedOffsets.x,
+			bottom: overflow.bottom - rect.height + preventedOffsets.y,
+			left: overflow.left - rect.width - preventedOffsets.x
+		};
+	}
+	function isAnySideFullyClipped(overflow) {
+		return [
+			"top",
+			right,
+			bottom,
+			left
+		].some(function(side) {
+			return overflow[side] >= 0;
+		});
+	}
+	function hide(_ref) {
+		var state = _ref.state, name = _ref.name;
+		var referenceRect = state.rects.reference;
+		var popperRect = state.rects.popper;
+		var preventedOffsets = state.modifiersData.preventOverflow;
+		var referenceOverflow = detectOverflow(state, { elementContext: "reference" });
+		var popperAltOverflow = detectOverflow(state, { altBoundary: true });
+		var referenceClippingOffsets = getSideOffsets(referenceOverflow, referenceRect);
+		var popperEscapeOffsets = getSideOffsets(popperAltOverflow, popperRect, preventedOffsets);
+		var isReferenceHidden = isAnySideFullyClipped(referenceClippingOffsets);
+		var hasPopperEscaped = isAnySideFullyClipped(popperEscapeOffsets);
+		state.modifiersData[name] = {
+			referenceClippingOffsets,
+			popperEscapeOffsets,
+			isReferenceHidden,
+			hasPopperEscaped
+		};
+		state.attributes.popper = Object.assign({}, state.attributes.popper, {
+			"data-popper-reference-hidden": isReferenceHidden,
+			"data-popper-escaped": hasPopperEscaped
+		});
+	}
+	var hide_default = {
+		name: "hide",
+		enabled: true,
+		phase: "main",
+		requiresIfExists: ["preventOverflow"],
+		fn: hide
+	};
+	//#endregion
+	//#region ../node_modules/.pnpm/@popperjs+core@2.11.8/node_modules/@popperjs/core/lib/modifiers/offset.js
+	function distanceAndSkiddingToXY(placement, rects, offset) {
+		var basePlacement = getBasePlacement(placement);
+		var invertDistance = ["left", "top"].indexOf(basePlacement) >= 0 ? -1 : 1;
+		var _ref = typeof offset === "function" ? offset(Object.assign({}, rects, { placement })) : offset, skidding = _ref[0], distance = _ref[1];
+		skidding = skidding || 0;
+		distance = (distance || 0) * invertDistance;
+		return ["left", "right"].indexOf(basePlacement) >= 0 ? {
+			x: distance,
+			y: skidding
+		} : {
+			x: skidding,
+			y: distance
+		};
+	}
+	function offset(_ref2) {
+		var state = _ref2.state, options = _ref2.options, name = _ref2.name;
+		var _options$offset = options.offset, offset = _options$offset === void 0 ? [0, 0] : _options$offset;
+		var data = placements.reduce(function(acc, placement) {
+			acc[placement] = distanceAndSkiddingToXY(placement, state.rects, offset);
+			return acc;
+		}, {});
+		var _data$state$placement = data[state.placement], x = _data$state$placement.x, y = _data$state$placement.y;
+		if (state.modifiersData.popperOffsets != null) {
+			state.modifiersData.popperOffsets.x += x;
+			state.modifiersData.popperOffsets.y += y;
+		}
+		state.modifiersData[name] = data;
+	}
+	var offset_default = {
+		name: "offset",
+		enabled: true,
+		phase: "main",
+		requires: ["popperOffsets"],
+		fn: offset
+	};
+	//#endregion
+	//#region ../node_modules/.pnpm/@popperjs+core@2.11.8/node_modules/@popperjs/core/lib/modifiers/popperOffsets.js
+	function popperOffsets(_ref) {
+		var state = _ref.state, name = _ref.name;
+		state.modifiersData[name] = computeOffsets({
+			reference: state.rects.reference,
+			element: state.rects.popper,
+			strategy: "absolute",
+			placement: state.placement
+		});
+	}
+	var popperOffsets_default = {
+		name: "popperOffsets",
+		enabled: true,
+		phase: "read",
+		fn: popperOffsets,
+		data: {}
+	};
+	//#endregion
+	//#region ../node_modules/.pnpm/@popperjs+core@2.11.8/node_modules/@popperjs/core/lib/utils/getAltAxis.js
+	function getAltAxis(axis) {
+		return axis === "x" ? "y" : "x";
+	}
+	//#endregion
+	//#region ../node_modules/.pnpm/@popperjs+core@2.11.8/node_modules/@popperjs/core/lib/modifiers/preventOverflow.js
+	function preventOverflow(_ref) {
+		var state = _ref.state, options = _ref.options, name = _ref.name;
+		var _options$mainAxis = options.mainAxis, checkMainAxis = _options$mainAxis === void 0 ? true : _options$mainAxis, _options$altAxis = options.altAxis, checkAltAxis = _options$altAxis === void 0 ? false : _options$altAxis, boundary = options.boundary, rootBoundary = options.rootBoundary, altBoundary = options.altBoundary, padding = options.padding, _options$tether = options.tether, tether = _options$tether === void 0 ? true : _options$tether, _options$tetherOffset = options.tetherOffset, tetherOffset = _options$tetherOffset === void 0 ? 0 : _options$tetherOffset;
+		var overflow = detectOverflow(state, {
+			boundary,
+			rootBoundary,
+			padding,
+			altBoundary
+		});
+		var basePlacement = getBasePlacement(state.placement);
+		var variation = getVariation(state.placement);
+		var isBasePlacement = !variation;
+		var mainAxis = getMainAxisFromPlacement(basePlacement);
+		var altAxis = getAltAxis(mainAxis);
+		var popperOffsets = state.modifiersData.popperOffsets;
+		var referenceRect = state.rects.reference;
+		var popperRect = state.rects.popper;
+		var tetherOffsetValue = typeof tetherOffset === "function" ? tetherOffset(Object.assign({}, state.rects, { placement: state.placement })) : tetherOffset;
+		var normalizedTetherOffsetValue = typeof tetherOffsetValue === "number" ? {
+			mainAxis: tetherOffsetValue,
+			altAxis: tetherOffsetValue
+		} : Object.assign({
+			mainAxis: 0,
+			altAxis: 0
+		}, tetherOffsetValue);
+		var offsetModifierState = state.modifiersData.offset ? state.modifiersData.offset[state.placement] : null;
+		var data = {
+			x: 0,
+			y: 0
+		};
+		if (!popperOffsets) return;
+		if (checkMainAxis) {
+			var _offsetModifierState$;
+			var mainSide = mainAxis === "y" ? "top" : left;
+			var altSide = mainAxis === "y" ? bottom : right;
+			var len = mainAxis === "y" ? "height" : "width";
+			var offset = popperOffsets[mainAxis];
+			var min$1 = offset + overflow[mainSide];
+			var max$1 = offset - overflow[altSide];
+			var additive = tether ? -popperRect[len] / 2 : 0;
+			var minLen = variation === "start" ? referenceRect[len] : popperRect[len];
+			var maxLen = variation === "start" ? -popperRect[len] : -referenceRect[len];
+			var arrowElement = state.elements.arrow;
+			var arrowRect = tether && arrowElement ? getLayoutRect(arrowElement) : {
+				width: 0,
+				height: 0
+			};
+			var arrowPaddingObject = state.modifiersData["arrow#persistent"] ? state.modifiersData["arrow#persistent"].padding : getFreshSideObject();
+			var arrowPaddingMin = arrowPaddingObject[mainSide];
+			var arrowPaddingMax = arrowPaddingObject[altSide];
+			var arrowLen = within(0, referenceRect[len], arrowRect[len]);
+			var minOffset = isBasePlacement ? referenceRect[len] / 2 - additive - arrowLen - arrowPaddingMin - normalizedTetherOffsetValue.mainAxis : minLen - arrowLen - arrowPaddingMin - normalizedTetherOffsetValue.mainAxis;
+			var maxOffset = isBasePlacement ? -referenceRect[len] / 2 + additive + arrowLen + arrowPaddingMax + normalizedTetherOffsetValue.mainAxis : maxLen + arrowLen + arrowPaddingMax + normalizedTetherOffsetValue.mainAxis;
+			var arrowOffsetParent = state.elements.arrow && getOffsetParent(state.elements.arrow);
+			var clientOffset = arrowOffsetParent ? mainAxis === "y" ? arrowOffsetParent.clientTop || 0 : arrowOffsetParent.clientLeft || 0 : 0;
+			var offsetModifierValue = (_offsetModifierState$ = offsetModifierState == null ? void 0 : offsetModifierState[mainAxis]) != null ? _offsetModifierState$ : 0;
+			var tetherMin = offset + minOffset - offsetModifierValue - clientOffset;
+			var tetherMax = offset + maxOffset - offsetModifierValue;
+			var preventedOffset = within(tether ? min(min$1, tetherMin) : min$1, offset, tether ? max(max$1, tetherMax) : max$1);
+			popperOffsets[mainAxis] = preventedOffset;
+			data[mainAxis] = preventedOffset - offset;
+		}
+		if (checkAltAxis) {
+			var _offsetModifierState$2;
+			var _mainSide = mainAxis === "x" ? "top" : left;
+			var _altSide = mainAxis === "x" ? bottom : right;
+			var _offset = popperOffsets[altAxis];
+			var _len = altAxis === "y" ? "height" : "width";
+			var _min = _offset + overflow[_mainSide];
+			var _max = _offset - overflow[_altSide];
+			var isOriginSide = ["top", left].indexOf(basePlacement) !== -1;
+			var _offsetModifierValue = (_offsetModifierState$2 = offsetModifierState == null ? void 0 : offsetModifierState[altAxis]) != null ? _offsetModifierState$2 : 0;
+			var _tetherMin = isOriginSide ? _min : _offset - referenceRect[_len] - popperRect[_len] - _offsetModifierValue + normalizedTetherOffsetValue.altAxis;
+			var _tetherMax = isOriginSide ? _offset + referenceRect[_len] + popperRect[_len] - _offsetModifierValue - normalizedTetherOffsetValue.altAxis : _max;
+			var _preventedOffset = tether && isOriginSide ? withinMaxClamp(_tetherMin, _offset, _tetherMax) : within(tether ? _tetherMin : _min, _offset, tether ? _tetherMax : _max);
+			popperOffsets[altAxis] = _preventedOffset;
+			data[altAxis] = _preventedOffset - _offset;
+		}
+		state.modifiersData[name] = data;
+	}
+	var preventOverflow_default = {
+		name: "preventOverflow",
+		enabled: true,
+		phase: "main",
+		fn: preventOverflow,
+		requiresIfExists: ["offset"]
+	};
+	//#endregion
+	//#region ../node_modules/.pnpm/@popperjs+core@2.11.8/node_modules/@popperjs/core/lib/dom-utils/getHTMLElementScroll.js
+	function getHTMLElementScroll(element) {
+		return {
+			scrollLeft: element.scrollLeft,
+			scrollTop: element.scrollTop
+		};
+	}
+	//#endregion
+	//#region ../node_modules/.pnpm/@popperjs+core@2.11.8/node_modules/@popperjs/core/lib/dom-utils/getNodeScroll.js
+	function getNodeScroll(node) {
+		if (node === getWindow(node) || !isHTMLElement(node)) return getWindowScroll(node);
+		else return getHTMLElementScroll(node);
+	}
+	//#endregion
+	//#region ../node_modules/.pnpm/@popperjs+core@2.11.8/node_modules/@popperjs/core/lib/dom-utils/getCompositeRect.js
+	function isElementScaled(element) {
+		var rect = element.getBoundingClientRect();
+		var scaleX = round(rect.width) / element.offsetWidth || 1;
+		var scaleY = round(rect.height) / element.offsetHeight || 1;
+		return scaleX !== 1 || scaleY !== 1;
+	}
+	function getCompositeRect(elementOrVirtualElement, offsetParent, isFixed) {
+		if (isFixed === void 0) isFixed = false;
+		var isOffsetParentAnElement = isHTMLElement(offsetParent);
+		var offsetParentIsScaled = isHTMLElement(offsetParent) && isElementScaled(offsetParent);
+		var documentElement = getDocumentElement(offsetParent);
+		var rect = getBoundingClientRect(elementOrVirtualElement, offsetParentIsScaled, isFixed);
+		var scroll = {
+			scrollLeft: 0,
+			scrollTop: 0
+		};
+		var offsets = {
+			x: 0,
+			y: 0
+		};
+		if (isOffsetParentAnElement || !isOffsetParentAnElement && !isFixed) {
+			if (getNodeName(offsetParent) !== "body" || isScrollParent(documentElement)) scroll = getNodeScroll(offsetParent);
+			if (isHTMLElement(offsetParent)) {
+				offsets = getBoundingClientRect(offsetParent, true);
+				offsets.x += offsetParent.clientLeft;
+				offsets.y += offsetParent.clientTop;
+			} else if (documentElement) offsets.x = getWindowScrollBarX(documentElement);
+		}
+		return {
+			x: rect.left + scroll.scrollLeft - offsets.x,
+			y: rect.top + scroll.scrollTop - offsets.y,
+			width: rect.width,
+			height: rect.height
+		};
+	}
+	//#endregion
+	//#region ../node_modules/.pnpm/@popperjs+core@2.11.8/node_modules/@popperjs/core/lib/utils/orderModifiers.js
+	function order(modifiers) {
+		var map = /* @__PURE__ */ new Map();
+		var visited = /* @__PURE__ */ new Set();
+		var result = [];
+		modifiers.forEach(function(modifier) {
+			map.set(modifier.name, modifier);
+		});
+		function sort(modifier) {
+			visited.add(modifier.name);
+			[].concat(modifier.requires || [], modifier.requiresIfExists || []).forEach(function(dep) {
+				if (!visited.has(dep)) {
+					var depModifier = map.get(dep);
+					if (depModifier) sort(depModifier);
+				}
+			});
+			result.push(modifier);
+		}
+		modifiers.forEach(function(modifier) {
+			if (!visited.has(modifier.name)) sort(modifier);
+		});
+		return result;
+	}
+	function orderModifiers(modifiers) {
+		var orderedModifiers = order(modifiers);
+		return modifierPhases.reduce(function(acc, phase) {
+			return acc.concat(orderedModifiers.filter(function(modifier) {
+				return modifier.phase === phase;
+			}));
+		}, []);
+	}
+	//#endregion
+	//#region ../node_modules/.pnpm/@popperjs+core@2.11.8/node_modules/@popperjs/core/lib/utils/debounce.js
+	function debounce(fn) {
+		var pending;
+		return function() {
+			if (!pending) pending = new Promise(function(resolve) {
+				Promise.resolve().then(function() {
+					pending = void 0;
+					resolve(fn());
+				});
+			});
+			return pending;
+		};
+	}
+	//#endregion
+	//#region ../node_modules/.pnpm/@popperjs+core@2.11.8/node_modules/@popperjs/core/lib/utils/mergeByName.js
+	function mergeByName(modifiers) {
+		var merged = modifiers.reduce(function(merged, current) {
+			var existing = merged[current.name];
+			merged[current.name] = existing ? Object.assign({}, existing, current, {
+				options: Object.assign({}, existing.options, current.options),
+				data: Object.assign({}, existing.data, current.data)
+			}) : current;
+			return merged;
+		}, {});
+		return Object.keys(merged).map(function(key) {
+			return merged[key];
+		});
+	}
+	//#endregion
+	//#region ../node_modules/.pnpm/@popperjs+core@2.11.8/node_modules/@popperjs/core/lib/createPopper.js
+	var DEFAULT_OPTIONS = {
+		placement: "bottom",
+		modifiers: [],
+		strategy: "absolute"
+	};
+	function areValidElements() {
+		for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) args[_key] = arguments[_key];
+		return !args.some(function(element) {
+			return !(element && typeof element.getBoundingClientRect === "function");
+		});
+	}
+	function popperGenerator(generatorOptions) {
+		if (generatorOptions === void 0) generatorOptions = {};
+		var _generatorOptions = generatorOptions, _generatorOptions$def = _generatorOptions.defaultModifiers, defaultModifiers = _generatorOptions$def === void 0 ? [] : _generatorOptions$def, _generatorOptions$def2 = _generatorOptions.defaultOptions, defaultOptions = _generatorOptions$def2 === void 0 ? DEFAULT_OPTIONS : _generatorOptions$def2;
+		return function createPopper(reference, popper, options) {
+			if (options === void 0) options = defaultOptions;
+			var state = {
+				placement: "bottom",
+				orderedModifiers: [],
+				options: Object.assign({}, DEFAULT_OPTIONS, defaultOptions),
+				modifiersData: {},
+				elements: {
+					reference,
+					popper
+				},
+				attributes: {},
+				styles: {}
+			};
+			var effectCleanupFns = [];
+			var isDestroyed = false;
+			var instance = {
+				state,
+				setOptions: function setOptions(setOptionsAction) {
+					var options = typeof setOptionsAction === "function" ? setOptionsAction(state.options) : setOptionsAction;
+					cleanupModifierEffects();
+					state.options = Object.assign({}, defaultOptions, state.options, options);
+					state.scrollParents = {
+						reference: isElement$1(reference) ? listScrollParents(reference) : reference.contextElement ? listScrollParents(reference.contextElement) : [],
+						popper: listScrollParents(popper)
+					};
+					var orderedModifiers = orderModifiers(mergeByName([].concat(defaultModifiers, state.options.modifiers)));
+					state.orderedModifiers = orderedModifiers.filter(function(m) {
+						return m.enabled;
+					});
+					runModifierEffects();
+					return instance.update();
+				},
+				forceUpdate: function forceUpdate() {
+					if (isDestroyed) return;
+					var _state$elements = state.elements, reference = _state$elements.reference, popper = _state$elements.popper;
+					if (!areValidElements(reference, popper)) return;
+					state.rects = {
+						reference: getCompositeRect(reference, getOffsetParent(popper), state.options.strategy === "fixed"),
+						popper: getLayoutRect(popper)
+					};
+					state.reset = false;
+					state.placement = state.options.placement;
+					state.orderedModifiers.forEach(function(modifier) {
+						return state.modifiersData[modifier.name] = Object.assign({}, modifier.data);
+					});
+					for (var index = 0; index < state.orderedModifiers.length; index++) {
+						if (state.reset === true) {
+							state.reset = false;
+							index = -1;
+							continue;
+						}
+						var _state$orderedModifie = state.orderedModifiers[index], fn = _state$orderedModifie.fn, _state$orderedModifie2 = _state$orderedModifie.options, _options = _state$orderedModifie2 === void 0 ? {} : _state$orderedModifie2, name = _state$orderedModifie.name;
+						if (typeof fn === "function") state = fn({
+							state,
+							options: _options,
+							name,
+							instance
+						}) || state;
+					}
+				},
+				update: debounce(function() {
+					return new Promise(function(resolve) {
+						instance.forceUpdate();
+						resolve(state);
+					});
+				}),
+				destroy: function destroy() {
+					cleanupModifierEffects();
+					isDestroyed = true;
+				}
+			};
+			if (!areValidElements(reference, popper)) return instance;
+			instance.setOptions(options).then(function(state) {
+				if (!isDestroyed && options.onFirstUpdate) options.onFirstUpdate(state);
+			});
+			function runModifierEffects() {
+				state.orderedModifiers.forEach(function(_ref) {
+					var name = _ref.name, _ref$options = _ref.options, options = _ref$options === void 0 ? {} : _ref$options, effect = _ref.effect;
+					if (typeof effect === "function") {
+						var cleanupFn = effect({
+							state,
+							name,
+							instance,
+							options
+						});
+						effectCleanupFns.push(cleanupFn || function noopFn() {});
+					}
+				});
+			}
+			function cleanupModifierEffects() {
+				effectCleanupFns.forEach(function(fn) {
+					return fn();
+				});
+				effectCleanupFns = [];
+			}
+			return instance;
+		};
+	}
+	var createPopper$2 = /*#__PURE__*/ popperGenerator();
+	var createPopper$1 = /*#__PURE__*/ popperGenerator({ defaultModifiers: [
+		eventListeners_default,
+		popperOffsets_default,
+		computeStyles_default,
+		applyStyles_default
+	] });
+	var createPopper = /*#__PURE__*/ popperGenerator({ defaultModifiers: [
+		eventListeners_default,
+		popperOffsets_default,
+		computeStyles_default,
+		applyStyles_default,
+		offset_default,
+		flip_default,
+		preventOverflow_default,
+		arrow_default,
+		hide_default
+	] });
+	//#endregion
+	//#region ../node_modules/.pnpm/@popperjs+core@2.11.8/node_modules/@popperjs/core/lib/index.js
+	var lib_exports = /* @__PURE__ */ __exportAll({
+		afterMain: () => afterMain,
+		afterRead: () => afterRead,
+		afterWrite: () => afterWrite,
+		applyStyles: () => applyStyles_default,
+		arrow: () => arrow_default,
+		auto: () => auto,
+		basePlacements: () => basePlacements,
+		beforeMain: () => beforeMain,
+		beforeRead: () => beforeRead,
+		beforeWrite: () => beforeWrite,
+		bottom: () => bottom,
+		clippingParents: () => clippingParents,
+		computeStyles: () => computeStyles_default,
+		createPopper: () => createPopper,
+		createPopperBase: () => createPopper$2,
+		createPopperLite: () => createPopper$1,
+		detectOverflow: () => detectOverflow,
+		end: () => "end",
+		eventListeners: () => eventListeners_default,
+		flip: () => flip_default,
+		hide: () => hide_default,
+		left: () => left,
+		main: () => main,
+		modifierPhases: () => modifierPhases,
+		offset: () => offset_default,
+		placements: () => placements,
+		popper: () => popper,
+		popperGenerator: () => popperGenerator,
+		popperOffsets: () => popperOffsets_default,
+		preventOverflow: () => preventOverflow_default,
+		read: () => read,
+		reference: () => reference,
+		right: () => right,
+		start: () => start,
+		top: () => "top",
+		variationPlacements: () => variationPlacements,
+		viewport: () => viewport,
+		write: () => write
+	});
+	//#endregion
+	//#region js/src/bootstrap/dom/data.ts
+	/**
+	* --------------------------------------------------------------------------
+	* Bootstrap dom/data.ts
+	* Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+	* --------------------------------------------------------------------------
+	*/
+	var elementMap = /* @__PURE__ */ new Map();
+	var Data = {
+		set(element, key, instance) {
+			if (!elementMap.has(element)) elementMap.set(element, /* @__PURE__ */ new Map());
+			const instanceMap = elementMap.get(element);
+			if (!instanceMap.has(key) && instanceMap.size !== 0) {
+				console.error(`Bootstrap doesn't allow more than one instance per element. Bound instance: ${Array.from(instanceMap.keys())[0]}.`);
+				return;
+			}
+			instanceMap.set(key, instance);
+		},
+		get(element, key) {
+			if (elementMap.has(element)) return elementMap.get(element).get(key) || null;
+			return null;
+		},
+		remove(element, key) {
+			if (!elementMap.has(element)) return;
+			const instanceMap = elementMap.get(element);
+			instanceMap.delete(key);
+			if (instanceMap.size === 0) elementMap.delete(element);
+		}
+	};
+	//#endregion
+	//#region js/src/bootstrap/dom/event-handler.ts
+	var namespaceRegex = /[^.]*(?=\..*)\.|.*/;
+	var stripNameRegex = /\..*/;
+	var stripUidRegex = /::\d+$/;
+	var eventRegistry = {};
+	var uidEvent = 1;
+	var customEvents = {
+		mouseenter: "mouseover",
+		mouseleave: "mouseout"
+	};
+	var nativeEvents = /* @__PURE__ */ new Set([
+		"click",
+		"dblclick",
+		"mouseup",
+		"mousedown",
+		"contextmenu",
+		"mousewheel",
+		"DOMMouseScroll",
+		"mouseover",
+		"mouseout",
+		"mousemove",
+		"selectstart",
+		"selectend",
+		"keydown",
+		"keypress",
+		"keyup",
+		"orientationchange",
+		"touchstart",
+		"touchmove",
+		"touchend",
+		"touchcancel",
+		"pointerdown",
+		"pointermove",
+		"pointerup",
+		"pointerleave",
+		"pointercancel",
+		"gesturestart",
+		"gesturechange",
+		"gestureend",
+		"focus",
+		"blur",
+		"change",
+		"reset",
+		"select",
+		"submit",
+		"focusin",
+		"focusout",
+		"load",
+		"unload",
+		"beforeunload",
+		"resize",
+		"move",
+		"DOMContentLoaded",
+		"readystatechange",
+		"error",
+		"abort",
+		"scroll"
+	]);
+	function makeEventUid(element, uid) {
+		return uid && `${uid}::${uidEvent++}` || element.uidEvent || uidEvent++;
+	}
+	function getElementEvents(element) {
+		const uid = makeEventUid(element);
+		element.uidEvent = uid;
+		eventRegistry[uid] = eventRegistry[uid] || {};
+		return eventRegistry[uid];
+	}
+	function bootstrapHandler(element, fn) {
+		return function handler(event) {
+			hydrateObj(event, { delegateTarget: element });
+			if (handler.oneOff) EventHandler.off(element, event.type, fn);
+			return fn.apply(element, [event]);
+		};
+	}
+	function bootstrapDelegationHandler(element, selector, fn) {
+		return function handler(event) {
+			const domElements = element.querySelectorAll(selector);
+			for (let { target } = event; target && target !== this; target = target.parentNode) for (const domElement of domElements) {
+				if (domElement !== target) continue;
+				hydrateObj(event, { delegateTarget: target });
+				if (handler.oneOff) EventHandler.off(element, event.type, selector, fn);
+				return fn.apply(target, [event]);
+			}
+		};
+	}
+	function findHandler(events, callable, delegationSelector = null) {
+		return Object.values(events).find((event) => event.callable === callable && event.delegationSelector === delegationSelector);
+	}
+	function normalizeParameters(originalTypeEvent, handler, delegationFunction) {
+		const isDelegated = typeof handler === "string";
+		const callable = isDelegated ? delegationFunction : handler || delegationFunction;
+		let typeEvent = getTypeEvent(originalTypeEvent);
+		if (!nativeEvents.has(typeEvent)) typeEvent = originalTypeEvent;
+		return [
+			isDelegated,
+			callable,
+			typeEvent
+		];
+	}
+	function addHandler(element, originalTypeEvent, handler, delegationFunction, oneOff) {
+		if (typeof originalTypeEvent !== "string" || !element) return;
+		let [isDelegated, callable, typeEvent] = normalizeParameters(originalTypeEvent, handler, delegationFunction);
+		if (originalTypeEvent in customEvents) {
+			const wrapFunction = (fn) => {
+				return function(event) {
+					const evt = event;
+					if (!evt.relatedTarget || evt.relatedTarget !== evt.delegateTarget && !evt.delegateTarget.contains(evt.relatedTarget)) return fn.call(this, event);
+				};
+			};
+			callable = wrapFunction(callable);
+		}
+		const events = getElementEvents(element);
+		const handlers = events[typeEvent] || (events[typeEvent] = {});
+		const previousFunction = findHandler(handlers, callable, isDelegated ? handler : null);
+		if (previousFunction) {
+			previousFunction.oneOff = previousFunction.oneOff && oneOff;
+			return;
+		}
+		const uid = makeEventUid(callable, originalTypeEvent.replace(namespaceRegex, ""));
+		const fn = isDelegated ? bootstrapDelegationHandler(element, handler, callable) : bootstrapHandler(element, callable);
+		fn.delegationSelector = isDelegated ? handler : null;
+		fn.callable = callable;
+		fn.oneOff = oneOff;
+		fn.uidEvent = uid;
+		handlers[uid] = fn;
+		element.addEventListener(typeEvent, fn, isDelegated);
+	}
+	function removeHandler(element, events, typeEvent, handler, delegationSelector) {
+		const fn = findHandler(events[typeEvent], handler, delegationSelector !== null && delegationSelector !== void 0 ? delegationSelector : null);
+		if (!fn) return;
+		element.removeEventListener(typeEvent, fn, Boolean(delegationSelector));
+		delete events[typeEvent][fn.uidEvent];
+	}
+	function removeNamespacedHandlers(element, events, typeEvent, namespace) {
+		const storeElementEvent = events[typeEvent] || {};
+		for (const [handlerKey, event] of Object.entries(storeElementEvent)) if (handlerKey.includes(namespace)) removeHandler(element, events, typeEvent, event.callable, event.delegationSelector);
+	}
+	function getTypeEvent(event) {
+		event = event.replace(stripNameRegex, "");
+		return customEvents[event] || event;
+	}
+	var EventHandler = {
+		on(element, event, handler, delegationFunction) {
+			addHandler(element, event, handler, delegationFunction, false);
+		},
+		one(element, event, handler, delegationFunction) {
+			addHandler(element, event, handler, delegationFunction, true);
+		},
+		off(element, originalTypeEvent, handler, delegationFunction) {
+			if (typeof originalTypeEvent !== "string" || !element) return;
+			const [isDelegated, callable, typeEvent] = normalizeParameters(originalTypeEvent, handler, delegationFunction);
+			const inNamespace = typeEvent !== originalTypeEvent;
+			const events = getElementEvents(element);
+			const storeElementEvent = events[typeEvent] || {};
+			const isNamespace = originalTypeEvent.startsWith(".");
+			if (typeof callable !== "undefined") {
+				if (!Object.keys(storeElementEvent).length) return;
+				removeHandler(element, events, typeEvent, callable, isDelegated ? handler : null);
+				return;
+			}
+			if (isNamespace) for (const elementEvent of Object.keys(events)) removeNamespacedHandlers(element, events, elementEvent, originalTypeEvent.slice(1));
+			for (const [keyHandlers, event] of Object.entries(storeElementEvent)) {
+				const handlerKey = keyHandlers.replace(stripUidRegex, "");
+				if (!inNamespace || originalTypeEvent.includes(handlerKey)) removeHandler(element, events, typeEvent, event.callable, event.delegationSelector);
+			}
+		},
+		trigger(element, event, args) {
+			if (typeof event !== "string" || !element) return null;
+			const evt = hydrateObj(new Event(event, {
+				bubbles: true,
+				cancelable: true
+			}), args);
+			element.dispatchEvent(evt);
+			return evt;
+		}
+	};
+	function hydrateObj(obj, meta = {}) {
+		for (const [key, value] of Object.entries(meta)) try {
+			obj[key] = value;
+		} catch (_unused) {
+			Object.defineProperty(obj, key, {
+				configurable: true,
+				get() {
+					return value;
+				}
+			});
+		}
+		return obj;
+	}
+	//#endregion
+	//#region js/src/bootstrap/dom/manipulator.ts
+	function normalizeData(value) {
+		if (value === "true") return true;
+		if (value === "false") return false;
+		if (value === Number(value).toString()) return Number(value);
+		if (value === "" || value === "null") return null;
+		if (typeof value !== "string") return value;
+		try {
+			return JSON.parse(decodeURIComponent(value));
+		} catch (_unused) {
+			return value;
+		}
+	}
+	function normalizeDataKey(key) {
+		return key.replace(/[A-Z]/g, (chr) => `-${chr.toLowerCase()}`);
+	}
+	var PREFIXES = ["tblr", "bs"];
+	var Manipulator = {
+		setDataAttribute(element, key, value) {
+			element.setAttribute(`data-tblr-${normalizeDataKey(key)}`, value);
+		},
+		removeDataAttribute(element, key) {
+			for (const prefix of PREFIXES) element.removeAttribute(`data-${prefix}-${normalizeDataKey(key)}`);
+		},
+		getDataAttributes(element) {
+			if (!element) return {};
+			const attributes = {};
+			for (const prefix of PREFIXES) {
+				const keys = Object.keys(element.dataset).filter((key) => key.startsWith(prefix) && !key.startsWith(`${prefix}Config`));
+				for (const key of keys) {
+					let pureKey = key.replace(new RegExp(`^${prefix}`), "");
+					pureKey = pureKey.charAt(0).toLowerCase() + pureKey.slice(1);
+					if (!(pureKey in attributes)) attributes[pureKey] = normalizeData(element.dataset[key]);
+				}
+			}
+			return attributes;
+		},
+		getDataAttribute(element, key) {
+			for (const prefix of PREFIXES) {
+				const value = element.getAttribute(`data-${prefix}-${normalizeDataKey(key)}`);
+				if (value !== null) return normalizeData(value);
+			}
+			return null;
+		}
+	};
+	//#endregion
+	//#region js/src/bootstrap/util/index.ts
+	/**
+	* --------------------------------------------------------------------------
+	* Bootstrap util/index.ts
+	* Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+	* --------------------------------------------------------------------------
+	*/
+	var MAX_UID = 1e6;
+	var MILLISECONDS_MULTIPLIER = 1e3;
+	var TRANSITION_END = "transitionend";
+	var parseSelector = (selector) => {
+		if (selector && window.CSS && window.CSS.escape) selector = selector.replace(/#([^\s"#']+)/g, (match, id) => `#${CSS.escape(id)}`);
+		return selector;
+	};
+	var toType = (object) => {
+		if (object === null || object === void 0) return `${object}`;
+		return Object.prototype.toString.call(object).match(/\s([a-z]+)/i)[1].toLowerCase();
+	};
+	var getUID = (prefix) => {
+		do
+			prefix += Math.floor(Math.random() * MAX_UID);
+		while (document.getElementById(prefix));
+		return prefix;
+	};
+	var getTransitionDurationFromElement = (element) => {
+		if (!element) return 0;
+		let { transitionDuration, transitionDelay } = window.getComputedStyle(element);
+		if (!Number.parseFloat(transitionDuration) && !Number.parseFloat(transitionDelay)) return 0;
+		transitionDuration = transitionDuration.split(",")[0];
+		transitionDelay = transitionDelay.split(",")[0];
+		return (Number.parseFloat(transitionDuration) + Number.parseFloat(transitionDelay)) * MILLISECONDS_MULTIPLIER;
+	};
+	var triggerTransitionEnd = (element) => {
+		element.dispatchEvent(new Event(TRANSITION_END));
+	};
+	var isElement = (object) => {
+		if (!object || typeof object !== "object") return false;
+		return typeof object.nodeType !== "undefined";
+	};
+	var getElement = (object) => {
+		if (isElement(object)) return object;
+		if (typeof object === "string" && object.length > 0) return document.querySelector(parseSelector(object));
+		return null;
+	};
+	var isVisible = (element) => {
+		if (!isElement(element) || element.getClientRects().length === 0) return false;
+		const elementIsVisible = getComputedStyle(element).getPropertyValue("visibility") === "visible";
+		const closedDetails = element.closest("details:not([open])");
+		if (!closedDetails) return elementIsVisible;
+		if (closedDetails !== element) {
+			const summary = element.closest("summary");
+			if (summary && summary.parentNode !== closedDetails) return false;
+			if (summary === null) return false;
+		}
+		return elementIsVisible;
+	};
+	var isDisabled = (element) => {
+		if (!element || element.nodeType !== Node.ELEMENT_NODE) return true;
+		if (element.classList.contains("disabled")) return true;
+		if ("disabled" in element && typeof element.disabled !== "undefined") return Boolean(element.disabled);
+		return element.hasAttribute("disabled") && element.getAttribute("disabled") !== "false";
+	};
+	var findShadowRoot = (element) => {
+		if (!document.documentElement.attachShadow) return null;
+		if (typeof element.getRootNode === "function") {
+			const root = element.getRootNode();
+			return root instanceof ShadowRoot ? root : null;
+		}
+		if (element instanceof ShadowRoot) return element;
+		if (!element.parentNode) return null;
+		return findShadowRoot(element.parentNode);
+	};
+	var noop = () => {};
+	/**
+	* Trick to restart an element's animation
+	*
+	* @see https://www.harrytheo.com/blog/2021/02/restart-a-css-animation-with-javascript/#restarting-a-css-animation
+	*/
+	var reflow = (element) => {
+		element.offsetHeight;
+	};
+	var isRTL = () => document.documentElement.dir === "rtl";
+	var execute = (possibleCallback, args = [], defaultValue = possibleCallback) => {
+		return typeof possibleCallback === "function" ? possibleCallback.call(args[0], ...args.slice(1)) : defaultValue;
+	};
+	var executeAfterTransition = (callback, transitionElement, waitForTransition = true) => {
+		if (!waitForTransition) {
+			execute(callback);
+			return;
+		}
+		const emulatedDuration = getTransitionDurationFromElement(transitionElement) + 5;
+		let called = false;
+		const handler = ({ target }) => {
+			if (target !== transitionElement) return;
+			called = true;
+			transitionElement.removeEventListener(TRANSITION_END, handler);
+			execute(callback);
+		};
+		transitionElement.addEventListener(TRANSITION_END, handler);
+		setTimeout(() => {
+			if (!called) triggerTransitionEnd(transitionElement);
+		}, emulatedDuration);
+	};
+	var getNextActiveElement = (list, activeElement, shouldGetNext, isCycleAllowed) => {
+		const listLength = list.length;
+		let index = list.indexOf(activeElement);
+		if (index === -1) return !shouldGetNext && isCycleAllowed ? list[listLength - 1] : list[0];
+		index += shouldGetNext ? 1 : -1;
+		if (isCycleAllowed) index = (index + listLength) % listLength;
+		return list[Math.max(0, Math.min(index, listLength - 1))];
+	};
+	//#endregion
+	//#region \0@oxc-project+runtime@0.147.0/helpers/esm/typeof.js
+	function _typeof(o) {
+		"@babel/helpers - typeof";
+		return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
+			return typeof o;
+		} : function(o) {
+			return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
+		}, _typeof(o);
+	}
+	//#endregion
+	//#region \0@oxc-project+runtime@0.147.0/helpers/esm/toPrimitive.js
+	function toPrimitive(t, r) {
+		if ("object" != _typeof(t) || !t) return t;
+		var e = t[Symbol.toPrimitive];
+		if (void 0 !== e) {
+			var i = e.call(t, r || "default");
+			if ("object" != _typeof(i)) return i;
+			throw new TypeError("@@toPrimitive must return a primitive value.");
+		}
+		return ("string" === r ? String : Number)(t);
+	}
+	//#endregion
+	//#region \0@oxc-project+runtime@0.147.0/helpers/esm/toPropertyKey.js
+	function toPropertyKey(t) {
+		var i = toPrimitive(t, "string");
+		return "symbol" == _typeof(i) ? i : i + "";
+	}
+	//#endregion
+	//#region \0@oxc-project+runtime@0.147.0/helpers/esm/defineProperty.js
+	function _defineProperty(e, r, t) {
+		return (r = toPropertyKey(r)) in e ? Object.defineProperty(e, r, {
+			value: t,
+			enumerable: !0,
+			configurable: !0,
+			writable: !0
+		}) : e[r] = t, e;
+	}
+	//#endregion
+	//#region \0@oxc-project+runtime@0.147.0/helpers/esm/objectSpread2.js
+	function ownKeys(e, r) {
+		var t = Object.keys(e);
+		if (Object.getOwnPropertySymbols) {
+			var o = Object.getOwnPropertySymbols(e);
+			r && (o = o.filter(function(r) {
+				return Object.getOwnPropertyDescriptor(e, r).enumerable;
+			})), t.push.apply(t, o);
+		}
+		return t;
+	}
+	function _objectSpread2(e) {
+		for (var r = 1; r < arguments.length; r++) {
+			var t = null != arguments[r] ? arguments[r] : {};
+			r % 2 ? ownKeys(Object(t), !0).forEach(function(r) {
+				_defineProperty(e, r, t[r]);
+			}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function(r) {
+				Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
+			});
+		}
+		return e;
+	}
+	//#endregion
+	//#region js/src/bootstrap/util/config.ts
+	/**
+	* --------------------------------------------------------------------------
+	* Bootstrap util/config.ts
+	* Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+	* --------------------------------------------------------------------------
+	*/
+	var Config = class {
+		static get Default() {
+			return {};
+		}
+		static get DefaultType() {
+			return {};
+		}
+		static get NAME() {
+			throw new Error("You have to implement the static method \"NAME\", for each component!");
+		}
+		_getConfig(config) {
+			config = this._mergeConfigObj(config);
+			config = this._configAfterMerge(config);
+			this._typeCheckConfig(config);
+			return config;
+		}
+		_configAfterMerge(config) {
+			return config;
+		}
+		_mergeConfigObj(config, element) {
+			const jsonConfig = isElement(element) ? Manipulator.getDataAttribute(element, "config") : {};
+			const ctor = this.constructor;
+			return _objectSpread2(_objectSpread2(_objectSpread2(_objectSpread2({}, ctor.Default), typeof jsonConfig === "object" ? jsonConfig : {}), isElement(element) ? Manipulator.getDataAttributes(element) : {}), typeof config === "object" ? config : {});
+		}
+		_typeCheckConfig(config, configTypes) {
+			const ctor = this.constructor;
+			const types = configTypes || ctor.DefaultType;
+			for (const [property, expectedTypes] of Object.entries(types)) {
+				const value = config[property];
+				const valueType = isElement(value) ? "element" : toType(value);
+				if (!new RegExp(expectedTypes).test(valueType)) throw new TypeError(`${ctor.NAME.toUpperCase()}: Option "${property}" provided type "${valueType}" but expected type "${expectedTypes}".`);
+			}
+		}
+	};
+	//#endregion
+	//#region js/src/bootstrap/base-component.ts
+	/**
+	* --------------------------------------------------------------------------
+	* Bootstrap base-component.ts
+	* Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+	* --------------------------------------------------------------------------
+	*/
+	var VERSION = "5.3.8";
+	var BaseComponent = class extends Config {
+		constructor(element, config) {
+			super();
+			const resolved = getElement(element);
+			if (!resolved) return;
+			this._element = resolved;
+			this._config = this._getConfig(config);
+			const ctor = this.constructor;
+			Data.set(this._element, ctor.DATA_KEY, this);
+		}
+		dispose() {
+			const ctor = this.constructor;
+			Data.remove(this._element, ctor.DATA_KEY);
+			EventHandler.off(this._element, ctor.EVENT_KEY);
+			for (const propertyName of Object.getOwnPropertyNames(this)) this[propertyName] = null;
+		}
+		_queueCallback(callback, element, isAnimated = true) {
+			executeAfterTransition(callback, element, isAnimated);
+		}
+		_getConfig(config) {
+			config = this._mergeConfigObj(config, this._element);
+			config = this._configAfterMerge(config);
+			this._typeCheckConfig(config);
+			return config;
+		}
+		static getInstance(element) {
+			return Data.get(getElement(element), this.DATA_KEY);
+		}
+		static getOrCreateInstance(element, config = {}) {
+			return this.getInstance(element) || new this(element, typeof config === "object" ? config : null);
+		}
+		static get VERSION() {
+			return VERSION;
+		}
+		static get DATA_KEY() {
+			return `bs.${this.NAME}`;
+		}
+		static get EVENT_KEY() {
+			return `.${this.DATA_KEY}`;
+		}
+		static eventName(name) {
+			return `${name}${this.EVENT_KEY}`;
+		}
+	};
+	//#endregion
+	//#region js/src/bootstrap/dom/selector-engine.ts
+	/**
+	* --------------------------------------------------------------------------
+	* Bootstrap dom/selector-engine.ts
+	* Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+	* --------------------------------------------------------------------------
+	*/
+	var getSelector = (element) => {
+		let selector = element.getAttribute("data-tblr-target") || element.getAttribute("data-bs-target");
+		if (!selector || selector === "#") {
+			let hrefAttribute = element.getAttribute("href");
+			if (!hrefAttribute || !hrefAttribute.includes("#") && !hrefAttribute.startsWith(".")) return null;
+			if (hrefAttribute.includes("#") && !hrefAttribute.startsWith("#")) hrefAttribute = `#${hrefAttribute.split("#")[1]}`;
+			selector = hrefAttribute && hrefAttribute !== "#" ? hrefAttribute.trim() : null;
+		}
+		return selector ? selector.split(",").map((sel) => parseSelector(sel)).join(",") : null;
+	};
+	var SelectorEngine = {
+		find(selector, element = document.documentElement) {
+			return Array.from(element.querySelectorAll(selector));
+		},
+		findOne(selector, element = document.documentElement) {
+			return element.querySelector(selector);
+		},
+		children(element, selector) {
+			return Array.from(element.children).filter((child) => child.matches(selector));
+		},
+		parents(element, selector) {
+			const parents = [];
+			let ancestor = element.parentNode && element.parentNode.closest(selector);
+			while (ancestor) {
+				parents.push(ancestor);
+				ancestor = ancestor.parentNode && ancestor.parentNode.closest(selector);
+			}
+			return parents;
+		},
+		prev(element, selector) {
+			let previous = element.previousElementSibling;
+			while (previous) {
+				if (previous.matches(selector)) return [previous];
+				previous = previous.previousElementSibling;
+			}
+			return [];
+		},
+		next(element, selector) {
+			let next = element.nextElementSibling;
+			while (next) {
+				if (next.matches(selector)) return [next];
+				next = next.nextElementSibling;
+			}
+			return [];
+		},
+		focusableChildren(element) {
+			const focusables = [
+				"a",
+				"button",
+				"input",
+				"textarea",
+				"select",
+				"details",
+				"[tabindex]",
+				"[contenteditable=\"true\"]"
+			].map((selector) => `${selector}:not([tabindex^="-"])`).join(",");
+			return this.find(focusables, element).filter((el) => !isDisabled(el) && isVisible(el));
+		},
+		getSelectorFromElement(element) {
+			const selector = getSelector(element);
+			if (selector) return SelectorEngine.findOne(selector) ? selector : null;
+			return null;
+		},
+		getElementFromSelector(element) {
+			const selector = getSelector(element);
+			return selector ? SelectorEngine.findOne(selector) : null;
+		},
+		getMultipleElementsFromSelector(element) {
+			const selector = getSelector(element);
+			return selector ? SelectorEngine.find(selector) : [];
+		}
+	};
+	//#endregion
+	//#region js/src/bootstrap/util/component-functions.ts
+	/**
+	* --------------------------------------------------------------------------
+	* Bootstrap util/component-functions.ts
+	* Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+	* --------------------------------------------------------------------------
+	*/
+	var enableDismissTrigger = (component, method = "hide") => {
+		const clickEvent = `click.dismiss${component.EVENT_KEY}`;
+		const name = component.NAME;
+		EventHandler.on(document, clickEvent, `[data-bs-dismiss="${name}"], [data-tblr-dismiss="${name}"]`, function(event) {
+			if (["A", "AREA"].includes(this.tagName)) event.preventDefault();
+			if (isDisabled(this)) return;
+			const target = SelectorEngine.getElementFromSelector(this) || this.closest(`.${name}`);
+			component.getOrCreateInstance(target)[method]();
+		});
+	};
+	//#endregion
+	//#region js/src/bootstrap/alert.ts
+	/**
+	* --------------------------------------------------------------------------
+	* Bootstrap alert.ts
+	* Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+	* --------------------------------------------------------------------------
+	*/
+	var NAME$15 = "alert";
+	var EVENT_KEY$11 = `.bs.alert`;
+	var EVENT_CLOSE = `close${EVENT_KEY$11}`;
+	var EVENT_CLOSED = `closed${EVENT_KEY$11}`;
+	var CLASS_NAME_FADE$5 = "fade";
+	var CLASS_NAME_SHOW$8 = "show";
+	var Alert = class extends BaseComponent {
+		static get NAME() {
+			return NAME$15;
+		}
+		close() {
+			const closeEvent = EventHandler.trigger(this._element, EVENT_CLOSE);
+			if (closeEvent === null || closeEvent === void 0 ? void 0 : closeEvent.defaultPrevented) return;
+			this._element.classList.remove(CLASS_NAME_SHOW$8);
+			const isAnimated = this._element.classList.contains(CLASS_NAME_FADE$5);
+			this._queueCallback(() => this._destroyElement(), this._element, isAnimated);
+		}
+		_destroyElement() {
+			this._element.remove();
+			EventHandler.trigger(this._element, EVENT_CLOSED);
+			this.dispose();
+		}
+	};
+	enableDismissTrigger(Alert, "close");
+	//#endregion
+	//#region js/src/bootstrap/button.ts
+	/**
+	* --------------------------------------------------------------------------
+	* Bootstrap button.ts
+	* Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+	* --------------------------------------------------------------------------
+	*/
+	var NAME$14 = "button";
+	var EVENT_KEY$10 = `.bs.button`;
+	var DATA_API_KEY$6 = ".data-api";
+	var CLASS_NAME_ACTIVE$3 = "active";
+	var SELECTOR_DATA_TOGGLE$5 = "[data-bs-toggle=\"button\"], [data-tblr-toggle=\"button\"]";
+	var EVENT_CLICK_DATA_API$6 = `click${EVENT_KEY$10}${DATA_API_KEY$6}`;
+	var Button = class extends BaseComponent {
+		static get NAME() {
+			return NAME$14;
+		}
+		toggle() {
+			this._element.setAttribute("aria-pressed", String(this._element.classList.toggle(CLASS_NAME_ACTIVE$3)));
+		}
+	};
+	EventHandler.on(document, EVENT_CLICK_DATA_API$6, SELECTOR_DATA_TOGGLE$5, (event) => {
+		var _event$target;
+		event.preventDefault();
+		const target = (_event$target = event.target) === null || _event$target === void 0 ? void 0 : _event$target.closest(SELECTOR_DATA_TOGGLE$5);
+		if (!target) return;
+		Button.getOrCreateInstance(target).toggle();
+	});
+	//#endregion
+	//#region js/src/bootstrap/util/swipe.ts
+	/**
+	* --------------------------------------------------------------------------
+	* Bootstrap util/swipe.ts
+	* Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+	* --------------------------------------------------------------------------
+	*/
+	var NAME$13 = "swipe";
+	var EVENT_KEY$9 = ".bs.swipe";
+	var EVENT_TOUCHSTART = `touchstart${EVENT_KEY$9}`;
+	var EVENT_TOUCHMOVE = `touchmove${EVENT_KEY$9}`;
+	var EVENT_TOUCHEND = `touchend${EVENT_KEY$9}`;
+	var EVENT_POINTERDOWN = `pointerdown${EVENT_KEY$9}`;
+	var EVENT_POINTERUP = `pointerup${EVENT_KEY$9}`;
+	var POINTER_TYPE_TOUCH = "touch";
+	var POINTER_TYPE_PEN = "pen";
+	var CLASS_NAME_POINTER_EVENT = "pointer-event";
+	var SWIPE_THRESHOLD = 40;
+	var Default$12 = {
+		endCallback: null,
+		leftCallback: null,
+		rightCallback: null
+	};
+	var DefaultType$12 = {
+		endCallback: "(function|null)",
+		leftCallback: "(function|null)",
+		rightCallback: "(function|null)"
+	};
+	var Swipe = class Swipe extends Config {
+		constructor(element, config) {
+			super();
+			this._element = element;
+			if (!element || !Swipe.isSupported()) return;
+			this._config = this._getConfig(config);
+			this._deltaX = 0;
+			this._supportPointerEvents = Boolean(window.PointerEvent);
+			this._initEvents();
+		}
+		static get Default() {
+			return Default$12;
+		}
+		static get DefaultType() {
+			return DefaultType$12;
+		}
+		static get NAME() {
+			return NAME$13;
+		}
+		dispose() {
+			EventHandler.off(this._element, EVENT_KEY$9);
+		}
+		_start(event) {
+			if (!this._supportPointerEvents) {
+				this._deltaX = event.touches[0].clientX;
+				return;
+			}
+			if (this._eventIsPointerPenTouch(event)) this._deltaX = event.clientX;
+		}
+		_end(event) {
+			if (this._eventIsPointerPenTouch(event)) this._deltaX = event.clientX - this._deltaX;
+			this._handleSwipe();
+			execute(this._config.endCallback);
+		}
+		_move(event) {
+			this._deltaX = event.touches && event.touches.length > 1 ? 0 : event.touches[0].clientX - this._deltaX;
+		}
+		_handleSwipe() {
+			const absDeltaX = Math.abs(this._deltaX);
+			if (absDeltaX <= SWIPE_THRESHOLD) return;
+			const direction = absDeltaX / this._deltaX;
+			this._deltaX = 0;
+			if (!direction) return;
+			execute(direction > 0 ? this._config.rightCallback : this._config.leftCallback);
+		}
+		_initEvents() {
+			if (this._supportPointerEvents) {
+				EventHandler.on(this._element, EVENT_POINTERDOWN, (event) => this._start(event));
+				EventHandler.on(this._element, EVENT_POINTERUP, (event) => this._end(event));
+				this._element.classList.add(CLASS_NAME_POINTER_EVENT);
+			} else {
+				EventHandler.on(this._element, EVENT_TOUCHSTART, (event) => this._start(event));
+				EventHandler.on(this._element, EVENT_TOUCHMOVE, (event) => this._move(event));
+				EventHandler.on(this._element, EVENT_TOUCHEND, (event) => this._end(event));
+			}
+		}
+		_eventIsPointerPenTouch(event) {
+			return this._supportPointerEvents && (event.pointerType === POINTER_TYPE_PEN || event.pointerType === POINTER_TYPE_TOUCH);
+		}
+		static isSupported() {
+			return "ontouchstart" in document.documentElement || navigator.maxTouchPoints > 0;
+		}
+	};
+	//#endregion
+	//#region js/src/bootstrap/carousel.ts
+	/**
+	* --------------------------------------------------------------------------
+	* Bootstrap carousel.ts
+	* Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+	* --------------------------------------------------------------------------
+	*/
+	var NAME$12 = "carousel";
+	var EVENT_KEY$8 = `.bs.carousel`;
+	var DATA_API_KEY$5 = ".data-api";
+	var ARROW_LEFT_KEY$1 = "ArrowLeft";
+	var ARROW_RIGHT_KEY$1 = "ArrowRight";
+	var TOUCHEVENT_COMPAT_WAIT = 500;
+	var ORDER_NEXT = "next";
+	var ORDER_PREV = "prev";
+	var DIRECTION_LEFT = "left";
+	var DIRECTION_RIGHT = "right";
+	var EVENT_SLIDE = `slide${EVENT_KEY$8}`;
+	var EVENT_SLID = `slid${EVENT_KEY$8}`;
+	var EVENT_KEYDOWN$1 = `keydown${EVENT_KEY$8}`;
+	var EVENT_MOUSEENTER$1 = `mouseenter${EVENT_KEY$8}`;
+	var EVENT_MOUSELEAVE$1 = `mouseleave${EVENT_KEY$8}`;
+	var EVENT_DRAG_START = `dragstart${EVENT_KEY$8}`;
+	var EVENT_LOAD_DATA_API$3 = `load${EVENT_KEY$8}${DATA_API_KEY$5}`;
+	var EVENT_CLICK_DATA_API$5 = `click${EVENT_KEY$8}${DATA_API_KEY$5}`;
+	var CLASS_NAME_CAROUSEL = "carousel";
+	var CLASS_NAME_ACTIVE$2 = "active";
+	var CLASS_NAME_SLIDE = "slide";
+	var CLASS_NAME_END = "carousel-item-end";
+	var CLASS_NAME_START = "carousel-item-start";
+	var CLASS_NAME_NEXT = "carousel-item-next";
+	var CLASS_NAME_PREV = "carousel-item-prev";
+	var SELECTOR_ACTIVE = ".active";
+	var SELECTOR_ITEM = ".carousel-item";
+	var SELECTOR_ACTIVE_ITEM = ".active.carousel-item";
+	var SELECTOR_ITEM_IMG = ".carousel-item img";
+	var SELECTOR_INDICATORS = ".carousel-indicators";
+	var SELECTOR_DATA_SLIDE = "[data-bs-slide], [data-bs-slide-to], [data-tblr-slide], [data-tblr-slide-to]";
+	var SELECTOR_DATA_RIDE = "[data-bs-ride=\"carousel\"], [data-tblr-ride=\"carousel\"]";
+	var KEY_TO_DIRECTION = {
+		[ARROW_LEFT_KEY$1]: DIRECTION_RIGHT,
+		[ARROW_RIGHT_KEY$1]: DIRECTION_LEFT
+	};
+	var Default$11 = {
+		interval: 5e3,
+		keyboard: true,
+		pause: "hover",
+		ride: false,
+		touch: true,
+		wrap: true
+	};
+	var DefaultType$11 = {
+		interval: "(number|boolean)",
+		keyboard: "boolean",
+		pause: "(string|boolean)",
+		ride: "(boolean|string)",
+		touch: "boolean",
+		wrap: "boolean"
+	};
+	var Carousel = class extends BaseComponent {
+		constructor(element, config) {
+			super(element, config);
+			this._interval = null;
+			this._activeElement = null;
+			this._isSliding = false;
+			this.touchTimeout = null;
+			this._swipeHelper = null;
+			this._indicatorsElement = SelectorEngine.findOne(SELECTOR_INDICATORS, this._element);
+			this._addEventListeners();
+			if (this._config.ride === CLASS_NAME_CAROUSEL) this.cycle();
+		}
+		static get Default() {
+			return Default$11;
+		}
+		static get DefaultType() {
+			return DefaultType$11;
+		}
+		static get NAME() {
+			return NAME$12;
+		}
+		next() {
+			this._slide(ORDER_NEXT);
+		}
+		nextWhenVisible() {
+			if (!document.hidden && isVisible(this._element)) this.next();
+		}
+		prev() {
+			this._slide(ORDER_PREV);
+		}
+		pause() {
+			if (this._isSliding) triggerTransitionEnd(this._element);
+			this._clearInterval();
+		}
+		cycle() {
+			this._clearInterval();
+			this._updateInterval();
+			this._interval = setInterval(() => this.nextWhenVisible(), this._config.interval);
+		}
+		_maybeEnableCycle() {
+			if (!this._config.ride) return;
+			if (this._isSliding) {
+				EventHandler.one(this._element, EVENT_SLID, () => this.cycle());
+				return;
+			}
+			this.cycle();
+		}
+		to(index) {
+			const items = this._getItems();
+			if (index > items.length - 1 || index < 0) return;
+			if (this._isSliding) {
+				EventHandler.one(this._element, EVENT_SLID, () => this.to(index));
+				return;
+			}
+			const activeIndex = this._getItemIndex(this._getActive());
+			if (activeIndex === index) return;
+			const order = index > activeIndex ? ORDER_NEXT : ORDER_PREV;
+			this._slide(order, items[index]);
+		}
+		dispose() {
+			if (this._swipeHelper) this._swipeHelper.dispose();
+			super.dispose();
+		}
+		_configAfterMerge(config) {
+			config.defaultInterval = config.interval;
+			return config;
+		}
+		_addEventListeners() {
+			if (this._config.keyboard) EventHandler.on(this._element, EVENT_KEYDOWN$1, (event) => this._keydown(event));
+			if (this._config.pause === "hover") {
+				EventHandler.on(this._element, EVENT_MOUSEENTER$1, () => this.pause());
+				EventHandler.on(this._element, EVENT_MOUSELEAVE$1, () => this._maybeEnableCycle());
+			}
+			if (this._config.touch && Swipe.isSupported()) this._addTouchEventListeners();
+		}
+		_addTouchEventListeners() {
+			for (const img of SelectorEngine.find(SELECTOR_ITEM_IMG, this._element)) EventHandler.on(img, EVENT_DRAG_START, (event) => event.preventDefault());
+			const endCallBack = () => {
+				if (this._config.pause !== "hover") return;
+				this.pause();
+				if (this.touchTimeout) clearTimeout(this.touchTimeout);
+				this.touchTimeout = setTimeout(() => this._maybeEnableCycle(), TOUCHEVENT_COMPAT_WAIT + this._config.interval);
+			};
+			const swipeConfig = {
+				leftCallback: () => this._slide(this._directionToOrder(DIRECTION_LEFT)),
+				rightCallback: () => this._slide(this._directionToOrder(DIRECTION_RIGHT)),
+				endCallback: endCallBack
+			};
+			this._swipeHelper = new Swipe(this._element, swipeConfig);
+		}
+		_keydown(event) {
+			if (/input|textarea/i.test(event.target.tagName)) return;
+			const direction = KEY_TO_DIRECTION[event.key];
+			if (direction) {
+				event.preventDefault();
+				this._slide(this._directionToOrder(direction));
+			}
+		}
+		_getItemIndex(element) {
+			return this._getItems().indexOf(element);
+		}
+		_setActiveIndicatorElement(index) {
+			if (!this._indicatorsElement) return;
+			const activeIndicator = SelectorEngine.findOne(SELECTOR_ACTIVE, this._indicatorsElement);
+			activeIndicator.classList.remove(CLASS_NAME_ACTIVE$2);
+			activeIndicator.removeAttribute("aria-current");
+			const newActiveIndicator = SelectorEngine.findOne(`[data-bs-slide-to="${index}"], [data-tblr-slide-to="${index}"]`, this._indicatorsElement);
+			if (newActiveIndicator) {
+				newActiveIndicator.classList.add(CLASS_NAME_ACTIVE$2);
+				newActiveIndicator.setAttribute("aria-current", "true");
+			}
+		}
+		_updateInterval() {
+			const element = this._activeElement || this._getActive();
+			if (!element) return;
+			const elementInterval = Number.parseInt(element.getAttribute("data-bs-interval") || element.getAttribute("data-tblr-interval") || "", 10);
+			this._config.interval = elementInterval || this._config.defaultInterval;
+		}
+		_slide(order, element = null) {
+			if (this._isSliding) return;
+			const activeElement = this._getActive();
+			const isNext = order === ORDER_NEXT;
+			const nextElement = element || getNextActiveElement(this._getItems(), activeElement, isNext, this._config.wrap);
+			if (nextElement === activeElement) return;
+			const nextElementIndex = this._getItemIndex(nextElement);
+			const triggerEvent = (eventName) => {
+				return EventHandler.trigger(this._element, eventName, {
+					relatedTarget: nextElement,
+					direction: this._orderToDirection(order),
+					from: this._getItemIndex(activeElement),
+					to: nextElementIndex
+				});
+			};
+			if (triggerEvent(EVENT_SLIDE).defaultPrevented) return;
+			if (!activeElement || !nextElement) return;
+			const isCycling = Boolean(this._interval);
+			this.pause();
+			this._isSliding = true;
+			this._setActiveIndicatorElement(nextElementIndex);
+			this._activeElement = nextElement;
+			const directionalClassName = isNext ? CLASS_NAME_START : CLASS_NAME_END;
+			const orderClassName = isNext ? CLASS_NAME_NEXT : CLASS_NAME_PREV;
+			nextElement.classList.add(orderClassName);
+			reflow(nextElement);
+			activeElement.classList.add(directionalClassName);
+			nextElement.classList.add(directionalClassName);
+			const completeCallBack = () => {
+				nextElement.classList.remove(directionalClassName, orderClassName);
+				nextElement.classList.add(CLASS_NAME_ACTIVE$2);
+				activeElement.classList.remove(CLASS_NAME_ACTIVE$2, orderClassName, directionalClassName);
+				this._isSliding = false;
+				triggerEvent(EVENT_SLID);
+			};
+			this._queueCallback(completeCallBack, activeElement, this._isAnimated());
+			if (isCycling) this.cycle();
+		}
+		_isAnimated() {
+			return this._element.classList.contains(CLASS_NAME_SLIDE);
+		}
+		_getActive() {
+			return SelectorEngine.findOne(SELECTOR_ACTIVE_ITEM, this._element);
+		}
+		_getItems() {
+			return SelectorEngine.find(SELECTOR_ITEM, this._element);
+		}
+		_clearInterval() {
+			if (this._interval) {
+				clearInterval(this._interval);
+				this._interval = null;
+			}
+		}
+		_directionToOrder(direction) {
+			if (isRTL()) return direction === DIRECTION_LEFT ? ORDER_PREV : ORDER_NEXT;
+			return direction === DIRECTION_LEFT ? ORDER_NEXT : ORDER_PREV;
+		}
+		_orderToDirection(order) {
+			if (isRTL()) return order === ORDER_PREV ? DIRECTION_LEFT : DIRECTION_RIGHT;
+			return order === ORDER_PREV ? DIRECTION_RIGHT : DIRECTION_LEFT;
+		}
+	};
+	EventHandler.on(document, EVENT_CLICK_DATA_API$5, SELECTOR_DATA_SLIDE, function(event) {
+		const target = SelectorEngine.getElementFromSelector(this);
+		if (!target || !target.classList.contains(CLASS_NAME_CAROUSEL)) return;
+		event.preventDefault();
+		const carousel = Carousel.getOrCreateInstance(target);
+		const slideIndex = this.getAttribute("data-bs-slide-to") || this.getAttribute("data-tblr-slide-to");
+		if (slideIndex) {
+			carousel.to(Number(slideIndex));
+			carousel._maybeEnableCycle();
+			return;
+		}
+		if (Manipulator.getDataAttribute(this, "slide") === "next") {
+			carousel.next();
+			carousel._maybeEnableCycle();
+			return;
+		}
+		carousel.prev();
+		carousel._maybeEnableCycle();
+	});
+	EventHandler.on(window, EVENT_LOAD_DATA_API$3, () => {
+		const carousels = SelectorEngine.find(SELECTOR_DATA_RIDE);
+		for (const carousel of carousels) Carousel.getOrCreateInstance(carousel);
+	});
+	//#endregion
+	//#region js/src/bootstrap/collapse.ts
+	/**
+	* --------------------------------------------------------------------------
+	* Bootstrap collapse.ts
+	* Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+	* --------------------------------------------------------------------------
+	*/
+	var NAME$11 = "collapse";
+	var EVENT_KEY$7 = `.bs.collapse`;
+	var DATA_API_KEY$4 = ".data-api";
+	var EVENT_SHOW$6 = `show${EVENT_KEY$7}`;
+	var EVENT_SHOWN$6 = `shown${EVENT_KEY$7}`;
+	var EVENT_HIDE$6 = `hide${EVENT_KEY$7}`;
+	var EVENT_HIDDEN$6 = `hidden${EVENT_KEY$7}`;
+	var EVENT_CLICK_DATA_API$4 = `click${EVENT_KEY$7}${DATA_API_KEY$4}`;
+	var CLASS_NAME_SHOW$7 = "show";
+	var CLASS_NAME_COLLAPSE = "collapse";
+	var CLASS_NAME_COLLAPSING = "collapsing";
+	var CLASS_NAME_COLLAPSED = "collapsed";
+	var CLASS_NAME_DEEPER_CHILDREN = `:scope .${CLASS_NAME_COLLAPSE} .${CLASS_NAME_COLLAPSE}`;
+	var CLASS_NAME_HORIZONTAL = "collapse-horizontal";
+	var WIDTH = "width";
+	var HEIGHT = "height";
+	var SELECTOR_ACTIVES = ".collapse.show, .collapse.collapsing";
+	var SELECTOR_DATA_TOGGLE$4 = "[data-bs-toggle=\"collapse\"], [data-tblr-toggle=\"collapse\"]";
+	var Default$10 = {
+		parent: null,
+		toggle: true
+	};
+	var DefaultType$10 = {
+		parent: "(null|element)",
+		toggle: "boolean"
+	};
+	var Collapse = class Collapse extends BaseComponent {
+		constructor(element, config) {
+			super(element, config);
+			this._isTransitioning = false;
+			this._triggerArray = [];
+			const toggleList = SelectorEngine.find(SELECTOR_DATA_TOGGLE$4);
+			for (const elem of toggleList) {
+				const selector = SelectorEngine.getSelectorFromElement(elem);
+				const filterElement = SelectorEngine.find(selector).filter((foundElement) => foundElement === this._element);
+				if (selector !== null && filterElement.length) this._triggerArray.push(elem);
+			}
+			this._initializeChildren();
+			if (!this._config.parent) this._addAriaAndCollapsedClass(this._triggerArray, this._isShown());
+			if (this._config.toggle) this.toggle();
+		}
+		static get Default() {
+			return Default$10;
+		}
+		static get DefaultType() {
+			return DefaultType$10;
+		}
+		static get NAME() {
+			return NAME$11;
+		}
+		toggle() {
+			if (this._isShown()) this.hide();
+			else this.show();
+		}
+		show() {
+			if (this._isTransitioning || this._isShown()) return;
+			let activeChildren = [];
+			if (this._config.parent) activeChildren = this._getFirstLevelChildren(SELECTOR_ACTIVES).filter((element) => element !== this._element).map((element) => Collapse.getOrCreateInstance(element, { toggle: false }));
+			if (activeChildren.length && activeChildren[0]._isTransitioning) return;
+			const startEvent = EventHandler.trigger(this._element, EVENT_SHOW$6);
+			if (startEvent === null || startEvent === void 0 ? void 0 : startEvent.defaultPrevented) return;
+			for (const activeInstance of activeChildren) activeInstance.hide();
+			const dimension = this._getDimension();
+			this._element.classList.remove(CLASS_NAME_COLLAPSE);
+			this._element.classList.add(CLASS_NAME_COLLAPSING);
+			this._element.style[dimension] = "0";
+			this._addAriaAndCollapsedClass(this._triggerArray, true);
+			this._isTransitioning = true;
+			const complete = () => {
+				this._isTransitioning = false;
+				this._element.classList.remove(CLASS_NAME_COLLAPSING);
+				this._element.classList.add(CLASS_NAME_COLLAPSE, CLASS_NAME_SHOW$7);
+				this._element.style[dimension] = "";
+				EventHandler.trigger(this._element, EVENT_SHOWN$6);
+			};
+			const scrollSize = `scroll${dimension[0].toUpperCase() + dimension.slice(1)}`;
+			this._queueCallback(complete, this._element, true);
+			this._element.style[dimension] = `${this._element[scrollSize]}px`;
+		}
+		hide() {
+			if (this._isTransitioning || !this._isShown()) return;
+			const startEvent = EventHandler.trigger(this._element, EVENT_HIDE$6);
+			if (startEvent === null || startEvent === void 0 ? void 0 : startEvent.defaultPrevented) return;
+			const dimension = this._getDimension();
+			this._element.style[dimension] = `${this._element.getBoundingClientRect()[dimension]}px`;
+			reflow(this._element);
+			this._element.classList.add(CLASS_NAME_COLLAPSING);
+			this._element.classList.remove(CLASS_NAME_COLLAPSE, CLASS_NAME_SHOW$7);
+			for (const trigger of this._triggerArray) {
+				const element = SelectorEngine.getElementFromSelector(trigger);
+				if (element && !this._isShown(element)) this._addAriaAndCollapsedClass([trigger], false);
+			}
+			this._isTransitioning = true;
+			const complete = () => {
+				this._isTransitioning = false;
+				this._element.classList.remove(CLASS_NAME_COLLAPSING);
+				this._element.classList.add(CLASS_NAME_COLLAPSE);
+				EventHandler.trigger(this._element, EVENT_HIDDEN$6);
+			};
+			this._element.style[dimension] = "";
+			this._queueCallback(complete, this._element, true);
+		}
+		_isShown(element = this._element) {
+			return element.classList.contains(CLASS_NAME_SHOW$7);
+		}
+		_configAfterMerge(config) {
+			config.toggle = Boolean(config.toggle);
+			config.parent = getElement(config.parent);
+			return config;
+		}
+		_getDimension() {
+			return this._element.classList.contains(CLASS_NAME_HORIZONTAL) ? WIDTH : HEIGHT;
+		}
+		_initializeChildren() {
+			if (!this._config.parent) return;
+			const children = this._getFirstLevelChildren(SELECTOR_DATA_TOGGLE$4);
+			for (const element of children) {
+				const selected = SelectorEngine.getElementFromSelector(element);
+				if (selected) this._addAriaAndCollapsedClass([element], this._isShown(selected));
+			}
+		}
+		_getFirstLevelChildren(selector) {
+			const children = SelectorEngine.find(CLASS_NAME_DEEPER_CHILDREN, this._config.parent);
+			return SelectorEngine.find(selector, this._config.parent).filter((element) => !children.includes(element));
+		}
+		_addAriaAndCollapsedClass(triggerArray, isOpen) {
+			if (!triggerArray.length) return;
+			for (const element of triggerArray) {
+				element.classList.toggle(CLASS_NAME_COLLAPSED, !isOpen);
+				element.setAttribute("aria-expanded", String(isOpen));
+			}
+		}
+	};
+	EventHandler.on(document, EVENT_CLICK_DATA_API$4, SELECTOR_DATA_TOGGLE$4, function(event) {
+		if (event.target.tagName === "A" || event.delegateTarget && event.delegateTarget.tagName === "A") event.preventDefault();
+		for (const element of SelectorEngine.getMultipleElementsFromSelector(this)) Collapse.getOrCreateInstance(element, { toggle: false }).toggle();
+	});
+	//#endregion
+	//#region js/src/bootstrap/dropdown.ts
+	/**
+	* --------------------------------------------------------------------------
+	* Bootstrap dropdown.ts
+	* Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+	* --------------------------------------------------------------------------
+	*/
+	var NAME$10 = "dropdown";
+	var EVENT_KEY$6 = `.bs.dropdown`;
+	var DATA_API_KEY$3 = ".data-api";
+	var ESCAPE_KEY$2 = "Escape";
+	var TAB_KEY$1 = "Tab";
+	var ARROW_UP_KEY$1 = "ArrowUp";
+	var ARROW_DOWN_KEY$1 = "ArrowDown";
+	var RIGHT_MOUSE_BUTTON = 2;
+	var EVENT_HIDE$5 = `hide${EVENT_KEY$6}`;
+	var EVENT_HIDDEN$5 = `hidden${EVENT_KEY$6}`;
+	var EVENT_SHOW$5 = `show${EVENT_KEY$6}`;
+	var EVENT_SHOWN$5 = `shown${EVENT_KEY$6}`;
+	var EVENT_CLICK_DATA_API$3 = `click${EVENT_KEY$6}${DATA_API_KEY$3}`;
+	var EVENT_KEYDOWN_DATA_API = `keydown${EVENT_KEY$6}${DATA_API_KEY$3}`;
+	var EVENT_KEYUP_DATA_API = `keyup${EVENT_KEY$6}${DATA_API_KEY$3}`;
+	var CLASS_NAME_SHOW$6 = "show";
+	var CLASS_NAME_DROPUP = "dropup";
+	var CLASS_NAME_DROPEND = "dropend";
+	var CLASS_NAME_DROPSTART = "dropstart";
+	var CLASS_NAME_DROPUP_CENTER = "dropup-center";
+	var CLASS_NAME_DROPDOWN_CENTER = "dropdown-center";
+	var SELECTOR_DATA_TOGGLE$3 = "[data-bs-toggle=\"dropdown\"]:not(.disabled):not(:disabled), [data-tblr-toggle=\"dropdown\"]:not(.disabled):not(:disabled)";
+	var SELECTOR_DATA_TOGGLE_SHOWN = `.${CLASS_NAME_SHOW$6}[data-bs-toggle="dropdown"], .${CLASS_NAME_SHOW$6}[data-tblr-toggle="dropdown"]`;
+	var SELECTOR_MENU = ".dropdown-menu";
+	var SELECTOR_NAVBAR = ".navbar";
+	var SELECTOR_NAVBAR_NAV = ".navbar-nav";
+	var SELECTOR_VISIBLE_ITEMS = ".dropdown-menu .dropdown-item:not(.disabled):not(:disabled)";
+	var PLACEMENT_TOP = isRTL() ? "top-end" : "top-start";
+	var PLACEMENT_TOPEND = isRTL() ? "top-start" : "top-end";
+	var PLACEMENT_BOTTOM = isRTL() ? "bottom-end" : "bottom-start";
+	var PLACEMENT_BOTTOMEND = isRTL() ? "bottom-start" : "bottom-end";
+	var PLACEMENT_RIGHT = isRTL() ? "left-start" : "right-start";
+	var PLACEMENT_LEFT = isRTL() ? "right-start" : "left-start";
+	var PLACEMENT_TOPCENTER = "top";
+	var PLACEMENT_BOTTOMCENTER = "bottom";
+	var Default$9 = {
+		autoClose: true,
+		boundary: "clippingParents",
+		display: "dynamic",
+		offset: [0, 2],
+		popperConfig: null,
+		reference: "toggle"
+	};
+	var DefaultType$9 = {
+		autoClose: "(boolean|string)",
+		boundary: "(string|element)",
+		display: "string",
+		offset: "(array|string|function)",
+		popperConfig: "(null|object|function)",
+		reference: "(string|element|object)"
+	};
+	var Dropdown = class Dropdown extends BaseComponent {
+		constructor(element, config) {
+			super(element, config);
+			this._popper = null;
+			this._parent = this._element.parentNode;
+			this._menu = SelectorEngine.next(this._element, SELECTOR_MENU)[0] || SelectorEngine.prev(this._element, SELECTOR_MENU)[0] || SelectorEngine.findOne(SELECTOR_MENU, this._parent);
+			this._inNavbar = this._detectNavbar();
+		}
+		static get Default() {
+			return Default$9;
+		}
+		static get DefaultType() {
+			return DefaultType$9;
+		}
+		static get NAME() {
+			return NAME$10;
+		}
+		toggle() {
+			this._isShown() ? this.hide() : this.show();
+		}
+		show() {
+			if (isDisabled(this._element) || this._isShown()) return;
+			const relatedTarget = { relatedTarget: this._element };
+			if (EventHandler.trigger(this._element, EVENT_SHOW$5, relatedTarget).defaultPrevented) return;
+			this._createPopper();
+			if ("ontouchstart" in document.documentElement && !this._parent.closest(SELECTOR_NAVBAR_NAV)) for (const element of [].concat(...document.body.children)) EventHandler.on(element, "mouseover", noop);
+			this._element.focus();
+			this._element.setAttribute("aria-expanded", "true");
+			this._menu.classList.add(CLASS_NAME_SHOW$6);
+			this._element.classList.add(CLASS_NAME_SHOW$6);
+			EventHandler.trigger(this._element, EVENT_SHOWN$5, relatedTarget);
+		}
+		hide() {
+			if (isDisabled(this._element) || !this._isShown()) return;
+			const relatedTarget = { relatedTarget: this._element };
+			this._completeHide(relatedTarget);
+		}
+		dispose() {
+			if (this._popper) this._popper.destroy();
+			super.dispose();
+		}
+		update() {
+			this._inNavbar = this._detectNavbar();
+			if (this._popper) this._popper.update();
+		}
+		_completeHide(relatedTarget) {
+			if (EventHandler.trigger(this._element, EVENT_HIDE$5, relatedTarget).defaultPrevented) return;
+			if ("ontouchstart" in document.documentElement) for (const element of [].concat(...document.body.children)) EventHandler.off(element, "mouseover", noop);
+			if (this._popper) this._popper.destroy();
+			this._menu.classList.remove(CLASS_NAME_SHOW$6);
+			this._element.classList.remove(CLASS_NAME_SHOW$6);
+			this._element.setAttribute("aria-expanded", "false");
+			Manipulator.removeDataAttribute(this._menu, "popper");
+			EventHandler.trigger(this._element, EVENT_HIDDEN$5, relatedTarget);
+		}
+		_getConfig(config) {
+			config = super._getConfig(config);
+			if (typeof config.reference === "object" && !isElement(config.reference) && typeof config.reference.getBoundingClientRect !== "function") throw new TypeError(`${NAME$10.toUpperCase()}: Option "reference" provided type "object" without a required "getBoundingClientRect" method.`);
+			return config;
+		}
+		_createPopper() {
+			if (typeof lib_exports === "undefined") throw new TypeError("Bootstrap's dropdowns require Popper (https://popper.js.org/docs/v2/)");
+			let referenceElement = this._element;
+			if (this._config.reference === "parent") referenceElement = this._parent;
+			else if (isElement(this._config.reference)) referenceElement = getElement(this._config.reference);
+			else if (typeof this._config.reference === "object") referenceElement = this._config.reference;
+			const popperConfig = this._getPopperConfig();
+			this._popper = createPopper(referenceElement, this._menu, popperConfig);
+		}
+		_isShown() {
+			return this._menu.classList.contains(CLASS_NAME_SHOW$6);
+		}
+		_getPlacement() {
+			const parentDropdown = this._parent;
+			if (parentDropdown.classList.contains(CLASS_NAME_DROPEND)) return PLACEMENT_RIGHT;
+			if (parentDropdown.classList.contains(CLASS_NAME_DROPSTART)) return PLACEMENT_LEFT;
+			if (parentDropdown.classList.contains(CLASS_NAME_DROPUP_CENTER)) return PLACEMENT_TOPCENTER;
+			if (parentDropdown.classList.contains(CLASS_NAME_DROPDOWN_CENTER)) return PLACEMENT_BOTTOMCENTER;
+			const isEnd = getComputedStyle(this._menu).getPropertyValue("--bs-position").trim() === "end";
+			if (parentDropdown.classList.contains(CLASS_NAME_DROPUP)) return isEnd ? PLACEMENT_TOPEND : PLACEMENT_TOP;
+			return isEnd ? PLACEMENT_BOTTOMEND : PLACEMENT_BOTTOM;
+		}
+		_detectNavbar() {
+			return this._element.closest(SELECTOR_NAVBAR) !== null;
+		}
+		_getOffset() {
+			const { offset } = this._config;
+			if (typeof offset === "string") return offset.split(",").map((value) => Number.parseInt(value, 10));
+			if (typeof offset === "function") return (popperData) => offset(popperData, this._element);
+			return offset;
+		}
+		_getPopperConfig() {
+			const defaultBsPopperConfig = {
+				placement: this._getPlacement(),
+				modifiers: [{
+					name: "preventOverflow",
+					options: { boundary: this._config.boundary }
+				}, {
+					name: "offset",
+					options: { offset: this._getOffset() }
+				}]
+			};
+			if (this._inNavbar || this._config.display === "static") {
+				Manipulator.setDataAttribute(this._menu, "popper", "static");
+				defaultBsPopperConfig.modifiers = [{
+					name: "applyStyles",
+					enabled: false
+				}];
+			}
+			const popperConfig = execute(this._config.popperConfig, [void 0, defaultBsPopperConfig]);
+			return _objectSpread2(_objectSpread2({}, defaultBsPopperConfig), typeof popperConfig === "object" && popperConfig !== null ? popperConfig : {});
+		}
+		_selectMenuItem({ key, target }) {
+			const items = SelectorEngine.find(SELECTOR_VISIBLE_ITEMS, this._menu).filter((element) => isVisible(element));
+			if (!items.length) return;
+			getNextActiveElement(items, target, key === ARROW_DOWN_KEY$1, !items.includes(target)).focus();
+		}
+		static clearMenus(event) {
+			if (event.button === RIGHT_MOUSE_BUTTON || event.type === "keyup" && event.key !== TAB_KEY$1) return;
+			const openToggles = SelectorEngine.find(SELECTOR_DATA_TOGGLE_SHOWN);
+			for (const toggle of openToggles) {
+				const context = Dropdown.getInstance(toggle);
+				if (!context || context._config.autoClose === false) continue;
+				const composedPath = event.composedPath();
+				const isMenuTarget = composedPath.includes(context._menu);
+				if (composedPath.includes(context._element) || context._config.autoClose === "inside" && !isMenuTarget || context._config.autoClose === "outside" && isMenuTarget) continue;
+				if (context._menu.contains(event.target) && (event.type === "keyup" && event.key === TAB_KEY$1 || /input|select|option|textarea|form/i.test(event.target.tagName))) continue;
+				const relatedTarget = { relatedTarget: context._element };
+				if (event.type === "click") relatedTarget.clickEvent = event;
+				context._completeHide(relatedTarget);
+			}
+		}
+		static dataApiKeydownHandler(event) {
+			const isInput = /input|textarea/i.test(event.target.tagName);
+			const isEscapeEvent = event.key === ESCAPE_KEY$2;
+			const isUpOrDownEvent = [ARROW_UP_KEY$1, ARROW_DOWN_KEY$1].includes(event.key);
+			if (!isUpOrDownEvent && !isEscapeEvent) return;
+			if (isInput && !isEscapeEvent) return;
+			event.preventDefault();
+			const getToggleButton = this.matches(SELECTOR_DATA_TOGGLE$3) ? this : SelectorEngine.prev(this, SELECTOR_DATA_TOGGLE$3)[0] || SelectorEngine.next(this, SELECTOR_DATA_TOGGLE$3)[0] || SelectorEngine.findOne(SELECTOR_DATA_TOGGLE$3, event.delegateTarget.parentNode);
+			const instance = Dropdown.getOrCreateInstance(getToggleButton);
+			if (isUpOrDownEvent) {
+				event.stopPropagation();
+				instance.show();
+				instance._selectMenuItem(event);
+				return;
+			}
+			if (instance._isShown()) {
+				event.stopPropagation();
+				instance.hide();
+				getToggleButton.focus();
+			}
+		}
+	};
+	EventHandler.on(document, EVENT_KEYDOWN_DATA_API, SELECTOR_DATA_TOGGLE$3, Dropdown.dataApiKeydownHandler);
+	EventHandler.on(document, EVENT_KEYDOWN_DATA_API, SELECTOR_MENU, Dropdown.dataApiKeydownHandler);
+	EventHandler.on(document, EVENT_CLICK_DATA_API$3, Dropdown.clearMenus);
+	EventHandler.on(document, EVENT_KEYUP_DATA_API, Dropdown.clearMenus);
+	EventHandler.on(document, EVENT_CLICK_DATA_API$3, SELECTOR_DATA_TOGGLE$3, function(event) {
+		event.preventDefault();
+		Dropdown.getOrCreateInstance(this).toggle();
+	});
+	//#endregion
+	//#region js/src/bootstrap/util/backdrop.ts
+	/**
+	* --------------------------------------------------------------------------
+	* Bootstrap util/backdrop.ts
+	* Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+	* --------------------------------------------------------------------------
+	*/
+	var NAME$9 = "backdrop";
+	var CLASS_NAME_FADE$4 = "fade";
+	var CLASS_NAME_SHOW$5 = "show";
+	var EVENT_MOUSEDOWN = `mousedown.bs.${NAME$9}`;
+	var Default$8 = {
+		className: "modal-backdrop",
+		clickCallback: null,
+		isAnimated: false,
+		isVisible: true,
+		rootElement: "body"
+	};
+	var DefaultType$8 = {
+		className: "string",
+		clickCallback: "(function|null)",
+		isAnimated: "boolean",
+		isVisible: "boolean",
+		rootElement: "(element|string)"
+	};
+	var Backdrop = class extends Config {
+		constructor(config) {
+			super();
+			this._config = this._getConfig(config);
+			this._isAppended = false;
+			this._element = null;
+		}
+		static get Default() {
+			return Default$8;
+		}
+		static get DefaultType() {
+			return DefaultType$8;
+		}
+		static get NAME() {
+			return NAME$9;
+		}
+		show(callback) {
+			if (!this._config.isVisible) {
+				execute(callback);
+				return;
+			}
+			this._append();
+			const element = this._getElement();
+			if (this._config.isAnimated) reflow(element);
+			element.classList.add(CLASS_NAME_SHOW$5);
+			this._emulateAnimation(() => {
+				execute(callback);
+			});
+		}
+		hide(callback) {
+			if (!this._config.isVisible) {
+				execute(callback);
+				return;
+			}
+			this._getElement().classList.remove(CLASS_NAME_SHOW$5);
+			this._emulateAnimation(() => {
+				this.dispose();
+				execute(callback);
+			});
+		}
+		dispose() {
+			if (!this._isAppended) return;
+			EventHandler.off(this._element, EVENT_MOUSEDOWN);
+			this._element.remove();
+			this._isAppended = false;
+		}
+		_getElement() {
+			if (!this._element) {
+				const backdrop = document.createElement("div");
+				backdrop.className = this._config.className;
+				if (this._config.isAnimated) backdrop.classList.add(CLASS_NAME_FADE$4);
+				this._element = backdrop;
+			}
+			return this._element;
+		}
+		_configAfterMerge(config) {
+			config.rootElement = getElement(config.rootElement);
+			return config;
+		}
+		_append() {
+			if (this._isAppended) return;
+			const element = this._getElement();
+			this._config.rootElement.append(element);
+			EventHandler.on(element, EVENT_MOUSEDOWN, () => {
+				execute(this._config.clickCallback);
+			});
+			this._isAppended = true;
+		}
+		_emulateAnimation(callback) {
+			executeAfterTransition(callback, this._getElement(), this._config.isAnimated);
+		}
+	};
+	//#endregion
+	//#region js/src/bootstrap/util/focustrap.ts
+	/**
+	* --------------------------------------------------------------------------
+	* Bootstrap util/focustrap.ts
+	* Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+	* --------------------------------------------------------------------------
+	*/
+	var NAME$8 = "focustrap";
+	var EVENT_KEY$5 = `.bs.focustrap`;
+	var EVENT_FOCUSIN$2 = `focusin${EVENT_KEY$5}`;
+	var EVENT_KEYDOWN_TAB = `keydown.tab${EVENT_KEY$5}`;
+	var TAB_KEY = "Tab";
+	var TAB_NAV_FORWARD = "forward";
+	var TAB_NAV_BACKWARD = "backward";
+	var Default$7 = {
+		autofocus: true,
+		trapElement: null
+	};
+	var DefaultType$7 = {
+		autofocus: "boolean",
+		trapElement: "element"
+	};
+	var FocusTrap = class extends Config {
+		constructor(config) {
+			super();
+			this._config = this._getConfig(config);
+			this._isActive = false;
+			this._lastTabNavDirection = null;
+		}
+		static get Default() {
+			return Default$7;
+		}
+		static get DefaultType() {
+			return DefaultType$7;
+		}
+		static get NAME() {
+			return NAME$8;
+		}
+		activate() {
+			if (this._isActive) return;
+			if (this._config.autofocus) this._config.trapElement.focus();
+			EventHandler.off(document, EVENT_KEY$5);
+			EventHandler.on(document, EVENT_FOCUSIN$2, (event) => this._handleFocusin(event));
+			EventHandler.on(document, EVENT_KEYDOWN_TAB, (event) => this._handleKeydown(event));
+			this._isActive = true;
+		}
+		deactivate() {
+			if (!this._isActive) return;
+			this._isActive = false;
+			EventHandler.off(document, EVENT_KEY$5);
+		}
+		_handleFocusin(event) {
+			const { trapElement } = this._config;
+			if (event.target === document || event.target === trapElement || trapElement.contains(event.target)) return;
+			const elements = SelectorEngine.focusableChildren(trapElement);
+			if (elements.length === 0) trapElement.focus();
+			else if (this._lastTabNavDirection === TAB_NAV_BACKWARD) elements[elements.length - 1].focus();
+			else elements[0].focus();
+		}
+		_handleKeydown(event) {
+			if (event.key !== TAB_KEY) return;
+			this._lastTabNavDirection = event.shiftKey ? TAB_NAV_BACKWARD : TAB_NAV_FORWARD;
+		}
+	};
+	//#endregion
+	//#region js/src/bootstrap/util/scrollbar.ts
+	/**
+	* --------------------------------------------------------------------------
+	* Bootstrap util/scrollbar.ts
+	* Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+	* --------------------------------------------------------------------------
+	*/
+	var SELECTOR_FIXED_CONTENT = ".fixed-top, .fixed-bottom, .is-fixed, .sticky-top";
+	var SELECTOR_STICKY_CONTENT = ".sticky-top";
+	var PROPERTY_PADDING = "padding-right";
+	var PROPERTY_MARGIN = "margin-right";
+	var ScrollBarHelper = class {
+		constructor() {
+			this._element = document.body;
+		}
+		getWidth() {
+			const documentWidth = document.documentElement.clientWidth;
+			return Math.abs(window.innerWidth - documentWidth);
+		}
+		hide() {
+			const width = this.getWidth();
+			this._disableOverFlow();
+			this._setElementAttributes(this._element, PROPERTY_PADDING, (calculatedValue) => calculatedValue + width);
+			this._setElementAttributes(SELECTOR_FIXED_CONTENT, PROPERTY_PADDING, (calculatedValue) => calculatedValue + width);
+			this._setElementAttributes(SELECTOR_STICKY_CONTENT, PROPERTY_MARGIN, (calculatedValue) => calculatedValue - width);
+		}
+		reset() {
+			this._resetElementAttributes(this._element, "overflow");
+			this._resetElementAttributes(this._element, PROPERTY_PADDING);
+			this._resetElementAttributes(SELECTOR_FIXED_CONTENT, PROPERTY_PADDING);
+			this._resetElementAttributes(SELECTOR_STICKY_CONTENT, PROPERTY_MARGIN);
+		}
+		isOverflowing() {
+			return this.getWidth() > 0;
+		}
+		_disableOverFlow() {
+			this._saveInitialAttribute(this._element, "overflow");
+			this._element.style.overflow = "hidden";
+		}
+		_setElementAttributes(selector, styleProperty, callback) {
+			const scrollbarWidth = this.getWidth();
+			const manipulationCallBack = (element) => {
+				if (element !== this._element && window.innerWidth > element.clientWidth + scrollbarWidth) return;
+				this._saveInitialAttribute(element, styleProperty);
+				const calculatedValue = window.getComputedStyle(element).getPropertyValue(styleProperty);
+				element.style.setProperty(styleProperty, `${callback(Number.parseFloat(calculatedValue))}px`);
+			};
+			this._applyManipulationCallback(selector, manipulationCallBack);
+		}
+		_saveInitialAttribute(element, styleProperty) {
+			const actualValue = element.style.getPropertyValue(styleProperty);
+			if (actualValue) Manipulator.setDataAttribute(element, styleProperty, actualValue);
+		}
+		_resetElementAttributes(selector, styleProperty) {
+			const manipulationCallBack = (element) => {
+				const value = Manipulator.getDataAttribute(element, styleProperty);
+				if (value === null) {
+					element.style.removeProperty(styleProperty);
+					return;
+				}
+				Manipulator.removeDataAttribute(element, styleProperty);
+				element.style.setProperty(styleProperty, String(value));
+			};
+			this._applyManipulationCallback(selector, manipulationCallBack);
+		}
+		_applyManipulationCallback(selector, callBack) {
+			if (isElement(selector)) {
+				callBack(selector);
+				return;
+			}
+			for (const sel of SelectorEngine.find(selector, this._element)) callBack(sel);
+		}
+	};
+	//#endregion
+	//#region js/src/bootstrap/modal.ts
+	/**
+	* --------------------------------------------------------------------------
+	* Bootstrap modal.ts
+	* Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+	* --------------------------------------------------------------------------
+	*/
+	/**
+	* Constants
+	*/
+	var NAME$7 = "modal";
+	var EVENT_KEY$4 = `.bs.modal`;
+	var DATA_API_KEY$2 = ".data-api";
+	var ESCAPE_KEY$1 = "Escape";
+	var EVENT_HIDE$4 = `hide${EVENT_KEY$4}`;
+	var EVENT_HIDE_PREVENTED$1 = `hidePrevented${EVENT_KEY$4}`;
+	var EVENT_HIDDEN$4 = `hidden${EVENT_KEY$4}`;
+	var EVENT_SHOW$4 = `show${EVENT_KEY$4}`;
+	var EVENT_SHOWN$4 = `shown${EVENT_KEY$4}`;
+	var EVENT_RESIZE$1 = `resize${EVENT_KEY$4}`;
+	var EVENT_CLICK_DISMISS = `click.dismiss${EVENT_KEY$4}`;
+	var EVENT_MOUSEDOWN_DISMISS = `mousedown.dismiss${EVENT_KEY$4}`;
+	var EVENT_KEYDOWN_DISMISS$1 = `keydown.dismiss${EVENT_KEY$4}`;
+	var EVENT_CLICK_DATA_API$2 = `click${EVENT_KEY$4}${DATA_API_KEY$2}`;
+	var CLASS_NAME_OPEN = "modal-open";
+	var CLASS_NAME_FADE$3 = "fade";
+	var CLASS_NAME_SHOW$4 = "show";
+	var CLASS_NAME_STATIC = "modal-static";
+	var OPEN_SELECTOR$1 = ".modal.show";
+	var SELECTOR_DIALOG = ".modal-dialog";
+	var SELECTOR_MODAL_BODY = ".modal-body";
+	var SELECTOR_DATA_TOGGLE$2 = "[data-bs-toggle=\"modal\"], [data-tblr-toggle=\"modal\"]";
+	var Default$6 = {
+		backdrop: true,
+		focus: true,
+		keyboard: true
+	};
+	var DefaultType$6 = {
+		backdrop: "(boolean|string)",
+		focus: "boolean",
+		keyboard: "boolean"
+	};
+	/**
+	* Class definition
+	*/
+	var Modal = class extends BaseComponent {
+		constructor(element, config) {
+			super(element, config);
+			this._dialog = SelectorEngine.findOne(SELECTOR_DIALOG, this._element);
+			this._backdrop = this._initializeBackDrop();
+			this._focustrap = this._initializeFocusTrap();
+			this._isShown = false;
+			this._isTransitioning = false;
+			this._scrollBar = new ScrollBarHelper();
+			this._addEventListeners();
+		}
+		static get Default() {
+			return Default$6;
+		}
+		static get DefaultType() {
+			return DefaultType$6;
+		}
+		static get NAME() {
+			return NAME$7;
+		}
+		toggle(relatedTarget) {
+			return this._isShown ? this.hide() : this.show(relatedTarget);
+		}
+		show(relatedTarget) {
+			if (this._isShown || this._isTransitioning) return;
+			if (EventHandler.trigger(this._element, EVENT_SHOW$4, { relatedTarget }).defaultPrevented) return;
+			this._isShown = true;
+			this._isTransitioning = true;
+			this._scrollBar.hide();
+			document.body.classList.add(CLASS_NAME_OPEN);
+			this._adjustDialog();
+			this._backdrop.show(() => this._showElement(relatedTarget));
+		}
+		hide() {
+			if (!this._isShown || this._isTransitioning) return;
+			if (EventHandler.trigger(this._element, EVENT_HIDE$4).defaultPrevented) return;
+			this._isShown = false;
+			this._isTransitioning = true;
+			this._focustrap.deactivate();
+			this._element.classList.remove(CLASS_NAME_SHOW$4);
+			this._queueCallback(() => this._hideModal(), this._element, this._isAnimated());
+		}
+		dispose() {
+			EventHandler.off(window, EVENT_KEY$4);
+			EventHandler.off(this._dialog, EVENT_KEY$4);
+			this._backdrop.dispose();
+			this._focustrap.deactivate();
+			super.dispose();
+		}
+		handleUpdate() {
+			this._adjustDialog();
+		}
+		_initializeBackDrop() {
+			return new Backdrop({
+				isVisible: Boolean(this._config.backdrop),
+				isAnimated: this._isAnimated()
+			});
+		}
+		_initializeFocusTrap() {
+			return new FocusTrap({ trapElement: this._element });
+		}
+		_showElement(relatedTarget) {
+			if (!document.body.contains(this._element)) document.body.append(this._element);
+			this._element.style.display = "block";
+			this._element.removeAttribute("aria-hidden");
+			this._element.setAttribute("aria-modal", "true");
+			this._element.setAttribute("role", "dialog");
+			this._element.scrollTop = 0;
+			const modalBody = SelectorEngine.findOne(SELECTOR_MODAL_BODY, this._dialog);
+			if (modalBody) modalBody.scrollTop = 0;
+			reflow(this._element);
+			this._element.classList.add(CLASS_NAME_SHOW$4);
+			const transitionComplete = () => {
+				if (this._config.focus) this._focustrap.activate();
+				this._isTransitioning = false;
+				EventHandler.trigger(this._element, EVENT_SHOWN$4, { relatedTarget });
+			};
+			this._queueCallback(transitionComplete, this._dialog, this._isAnimated());
+		}
+		_addEventListeners() {
+			EventHandler.on(this._element, EVENT_KEYDOWN_DISMISS$1, (event) => {
+				if (event.key !== ESCAPE_KEY$1) return;
+				if (this._config.keyboard) {
+					this.hide();
+					return;
+				}
+				this._triggerBackdropTransition();
+			});
+			EventHandler.on(window, EVENT_RESIZE$1, () => {
+				if (this._isShown && !this._isTransitioning) this._adjustDialog();
+			});
+			EventHandler.on(this._element, EVENT_MOUSEDOWN_DISMISS, (event) => {
+				EventHandler.one(this._element, EVENT_CLICK_DISMISS, (event2) => {
+					if (this._element !== event.target || this._element !== event2.target) return;
+					if (this._config.backdrop === "static") {
+						this._triggerBackdropTransition();
+						return;
+					}
+					if (this._config.backdrop) this.hide();
+				});
+			});
+		}
+		_hideModal() {
+			this._element.style.display = "none";
+			this._element.setAttribute("aria-hidden", "true");
+			this._element.removeAttribute("aria-modal");
+			this._element.removeAttribute("role");
+			this._isTransitioning = false;
+			this._backdrop.hide(() => {
+				document.body.classList.remove(CLASS_NAME_OPEN);
+				this._resetAdjustments();
+				this._scrollBar.reset();
+				EventHandler.trigger(this._element, EVENT_HIDDEN$4);
+			});
+		}
+		_isAnimated() {
+			return this._element.classList.contains(CLASS_NAME_FADE$3);
+		}
+		_triggerBackdropTransition() {
+			if (EventHandler.trigger(this._element, EVENT_HIDE_PREVENTED$1).defaultPrevented) return;
+			const isModalOverflowing = this._element.scrollHeight > document.documentElement.clientHeight;
+			const initialOverflowY = this._element.style.overflowY;
+			if (initialOverflowY === "hidden" || this._element.classList.contains(CLASS_NAME_STATIC)) return;
+			if (!isModalOverflowing) this._element.style.overflowY = "hidden";
+			this._element.classList.add(CLASS_NAME_STATIC);
+			this._queueCallback(() => {
+				this._element.classList.remove(CLASS_NAME_STATIC);
+				this._queueCallback(() => {
+					this._element.style.overflowY = initialOverflowY;
+				}, this._dialog);
+			}, this._dialog);
+			this._element.focus();
+		}
+		_adjustDialog() {
+			const isModalOverflowing = this._element.scrollHeight > document.documentElement.clientHeight;
+			const scrollbarWidth = this._scrollBar.getWidth();
+			const isBodyOverflowing = scrollbarWidth > 0;
+			if (isBodyOverflowing && !isModalOverflowing) {
+				const property = isRTL() ? "paddingLeft" : "paddingRight";
+				this._element.style[property] = `${scrollbarWidth}px`;
+			}
+			if (!isBodyOverflowing && isModalOverflowing) {
+				const property = isRTL() ? "paddingRight" : "paddingLeft";
+				this._element.style[property] = `${scrollbarWidth}px`;
+			}
+		}
+		_resetAdjustments() {
+			this._element.style.paddingLeft = "";
+			this._element.style.paddingRight = "";
+		}
+	};
+	/**
+	* Data API implementation
+	*/
+	EventHandler.on(document, EVENT_CLICK_DATA_API$2, SELECTOR_DATA_TOGGLE$2, function(event) {
+		const target = SelectorEngine.getElementFromSelector(this);
+		if (["A", "AREA"].includes(this.tagName)) event.preventDefault();
+		EventHandler.one(target, EVENT_SHOW$4, (showEvent) => {
+			if (showEvent.defaultPrevented) return;
+			EventHandler.one(target, EVENT_HIDDEN$4, () => {
+				if (isVisible(this)) this.focus();
+			});
+		});
+		const alreadyOpen = SelectorEngine.findOne(OPEN_SELECTOR$1);
+		if (alreadyOpen) Modal.getInstance(alreadyOpen).hide();
+		Modal.getOrCreateInstance(target).toggle(this);
+	});
+	enableDismissTrigger(Modal);
+	//#endregion
+	//#region js/src/bootstrap/offcanvas.ts
+	/**
+	* --------------------------------------------------------------------------
+	* Bootstrap offcanvas.ts
+	* Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+	* --------------------------------------------------------------------------
+	*/
+	/**
+	* Constants
+	*/
+	var NAME$6 = "offcanvas";
+	var EVENT_KEY$3 = `.bs.offcanvas`;
+	var DATA_API_KEY$1 = ".data-api";
+	var EVENT_LOAD_DATA_API$2 = `load${EVENT_KEY$3}${DATA_API_KEY$1}`;
+	var ESCAPE_KEY = "Escape";
+	var CLASS_NAME_SHOW$3 = "show";
+	var CLASS_NAME_SHOWING$1 = "showing";
+	var CLASS_NAME_HIDING = "hiding";
+	var CLASS_NAME_BACKDROP = "offcanvas-backdrop";
+	var OPEN_SELECTOR = ".offcanvas.show";
+	var EVENT_SHOW$3 = `show${EVENT_KEY$3}`;
+	var EVENT_SHOWN$3 = `shown${EVENT_KEY$3}`;
+	var EVENT_HIDE$3 = `hide${EVENT_KEY$3}`;
+	var EVENT_HIDE_PREVENTED = `hidePrevented${EVENT_KEY$3}`;
+	var EVENT_HIDDEN$3 = `hidden${EVENT_KEY$3}`;
+	var EVENT_RESIZE = `resize${EVENT_KEY$3}`;
+	var EVENT_CLICK_DATA_API$1 = `click${EVENT_KEY$3}${DATA_API_KEY$1}`;
+	var EVENT_KEYDOWN_DISMISS = `keydown.dismiss${EVENT_KEY$3}`;
+	var SELECTOR_DATA_TOGGLE$1 = "[data-bs-toggle=\"offcanvas\"], [data-tblr-toggle=\"offcanvas\"]";
+	var Default$5 = {
+		backdrop: true,
+		keyboard: true,
+		scroll: false
+	};
+	var DefaultType$5 = {
+		backdrop: "(boolean|string)",
+		keyboard: "boolean",
+		scroll: "boolean"
+	};
+	/**
+	* Class definition
+	*/
+	var Offcanvas = class extends BaseComponent {
+		constructor(element, config) {
+			super(element, config);
+			this._isShown = false;
+			this._backdrop = this._initializeBackDrop();
+			this._focustrap = this._initializeFocusTrap();
+			this._addEventListeners();
+		}
+		static get Default() {
+			return Default$5;
+		}
+		static get DefaultType() {
+			return DefaultType$5;
+		}
+		static get NAME() {
+			return NAME$6;
+		}
+		toggle(relatedTarget) {
+			return this._isShown ? this.hide() : this.show(relatedTarget);
+		}
+		show(relatedTarget) {
+			if (this._isShown) return;
+			if (EventHandler.trigger(this._element, EVENT_SHOW$3, { relatedTarget }).defaultPrevented) return;
+			this._isShown = true;
+			this._backdrop.show();
+			if (!this._config.scroll) new ScrollBarHelper().hide();
+			this._element.setAttribute("aria-modal", "true");
+			this._element.setAttribute("role", "dialog");
+			this._element.classList.add(CLASS_NAME_SHOWING$1);
+			const completeCallBack = () => {
+				if (!this._config.scroll || this._config.backdrop) this._focustrap.activate();
+				this._element.classList.add(CLASS_NAME_SHOW$3);
+				this._element.classList.remove(CLASS_NAME_SHOWING$1);
+				EventHandler.trigger(this._element, EVENT_SHOWN$3, { relatedTarget });
+			};
+			this._queueCallback(completeCallBack, this._element, true);
+		}
+		hide() {
+			if (!this._isShown) return;
+			if (EventHandler.trigger(this._element, EVENT_HIDE$3).defaultPrevented) return;
+			this._focustrap.deactivate();
+			this._element.blur();
+			this._isShown = false;
+			this._element.classList.add(CLASS_NAME_HIDING);
+			this._backdrop.hide();
+			const completeCallback = () => {
+				this._element.classList.remove(CLASS_NAME_SHOW$3, CLASS_NAME_HIDING);
+				this._element.removeAttribute("aria-modal");
+				this._element.removeAttribute("role");
+				if (!this._config.scroll) new ScrollBarHelper().reset();
+				EventHandler.trigger(this._element, EVENT_HIDDEN$3);
+			};
+			this._queueCallback(completeCallback, this._element, true);
+		}
+		dispose() {
+			this._backdrop.dispose();
+			this._focustrap.deactivate();
+			super.dispose();
+		}
+		_initializeBackDrop() {
+			const clickCallback = () => {
+				if (this._config.backdrop === "static") {
+					EventHandler.trigger(this._element, EVENT_HIDE_PREVENTED);
+					return;
+				}
+				this.hide();
+			};
+			const isBackdropVisible = Boolean(this._config.backdrop);
+			return new Backdrop({
+				className: CLASS_NAME_BACKDROP,
+				isVisible: isBackdropVisible,
+				isAnimated: true,
+				rootElement: this._element.parentNode,
+				clickCallback: isBackdropVisible ? clickCallback : null
+			});
+		}
+		_initializeFocusTrap() {
+			return new FocusTrap({ trapElement: this._element });
+		}
+		_addEventListeners() {
+			EventHandler.on(this._element, EVENT_KEYDOWN_DISMISS, (event) => {
+				if (event.key !== ESCAPE_KEY) return;
+				if (this._config.keyboard) {
+					this.hide();
+					return;
+				}
+				EventHandler.trigger(this._element, EVENT_HIDE_PREVENTED);
+			});
+		}
+	};
+	/**
+	* Data API implementation
+	*/
+	EventHandler.on(document, EVENT_CLICK_DATA_API$1, SELECTOR_DATA_TOGGLE$1, function(event) {
+		const target = SelectorEngine.getElementFromSelector(this);
+		if (["A", "AREA"].includes(this.tagName)) event.preventDefault();
+		if (isDisabled(this)) return;
+		EventHandler.one(target, EVENT_HIDDEN$3, () => {
+			if (isVisible(this)) this.focus();
+		});
+		const alreadyOpen = SelectorEngine.findOne(OPEN_SELECTOR);
+		if (alreadyOpen && alreadyOpen !== target) Offcanvas.getInstance(alreadyOpen).hide();
+		Offcanvas.getOrCreateInstance(target).toggle(this);
+	});
+	EventHandler.on(window, EVENT_LOAD_DATA_API$2, () => {
+		for (const selector of SelectorEngine.find(OPEN_SELECTOR)) Offcanvas.getOrCreateInstance(selector).show();
+	});
+	EventHandler.on(window, EVENT_RESIZE, () => {
+		for (const element of SelectorEngine.find("[aria-modal][class*=show][class*=offcanvas-]")) if (getComputedStyle(element).position !== "fixed") Offcanvas.getOrCreateInstance(element).hide();
+	});
+	enableDismissTrigger(Offcanvas);
+	var DefaultAllowlist = {
+		"*": [
+			"class",
+			"dir",
+			"id",
+			"lang",
+			"role",
+			/^aria-[\w-]*$/i
+		],
+		"a": [
+			"target",
+			"href",
+			"title",
+			"rel"
+		],
+		"area": [],
+		"b": [],
+		"br": [],
+		"col": [],
+		"code": [],
+		"dd": [],
+		"div": [],
+		"dl": [],
+		"dt": [],
+		"em": [],
+		"hr": [],
+		"h1": [],
+		"h2": [],
+		"h3": [],
+		"h4": [],
+		"h5": [],
+		"h6": [],
+		"i": [],
+		"img": [
+			"src",
+			"srcset",
+			"alt",
+			"title",
+			"width",
+			"height"
+		],
+		"li": [],
+		"ol": [],
+		"p": [],
+		"pre": [],
+		"s": [],
+		"small": [],
+		"span": [],
+		"sub": [],
+		"sup": [],
+		"strong": [],
+		"u": [],
+		"ul": []
+	};
+	var uriAttributes = /* @__PURE__ */ new Set([
+		"background",
+		"cite",
+		"href",
+		"itemtype",
+		"longdesc",
+		"poster",
+		"src",
+		"xlink:href"
+	]);
+	var SAFE_URL_PATTERN = /^(?!javascript:)(?:[a-z0-9+.-]+:|[^&:/?#]*(?:[/?#]|$))/i;
+	var allowedAttribute = (attribute, allowedAttributeList) => {
+		const attributeName = attribute.nodeName.toLowerCase();
+		if (allowedAttributeList.includes(attributeName)) {
+			if (uriAttributes.has(attributeName)) return Boolean(SAFE_URL_PATTERN.test(attribute.nodeValue));
+			return true;
+		}
+		return allowedAttributeList.filter((attributeRegex) => attributeRegex instanceof RegExp).some((regex) => regex.test(attributeName));
+	};
+	function sanitizeHtml(unsafeHtml, allowList, sanitizeFunction) {
+		if (!unsafeHtml.length) return unsafeHtml;
+		if (sanitizeFunction && typeof sanitizeFunction === "function") return sanitizeFunction(unsafeHtml);
+		const createdDocument = new window.DOMParser().parseFromString(unsafeHtml, "text/html");
+		const elements = Array.from(createdDocument.body.querySelectorAll("*"));
+		for (const element of elements) {
+			const elementName = element.nodeName.toLowerCase();
+			if (!Object.keys(allowList).includes(elementName)) {
+				element.remove();
+				continue;
+			}
+			const attributeList = Array.from(element.attributes);
+			const allowedAttributes = [...allowList["*"] || [], ...allowList[elementName] || []];
+			for (const attribute of attributeList) if (!allowedAttribute(attribute, allowedAttributes)) element.removeAttribute(attribute.nodeName);
+		}
+		return createdDocument.body.innerHTML;
+	}
+	//#endregion
+	//#region js/src/bootstrap/util/template-factory.ts
+	/**
+	* --------------------------------------------------------------------------
+	* Bootstrap util/template-factory.ts
+	* Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+	* --------------------------------------------------------------------------
+	*/
+	var NAME$5 = "TemplateFactory";
+	var Default$4 = {
+		allowList: DefaultAllowlist,
+		content: {},
+		extraClass: "",
+		html: false,
+		sanitize: true,
+		sanitizeFn: null,
+		template: "<div></div>"
+	};
+	var DefaultType$4 = {
+		allowList: "object",
+		content: "object",
+		extraClass: "(string|function)",
+		html: "boolean",
+		sanitize: "boolean",
+		sanitizeFn: "(null|function)",
+		template: "string"
+	};
+	var DefaultContentType = {
+		entry: "(string|element|function|null)",
+		selector: "(string|element)"
+	};
+	var TemplateFactory = class extends Config {
+		constructor(config) {
+			super();
+			this._config = this._getConfig(config);
+		}
+		static get Default() {
+			return Default$4;
+		}
+		static get DefaultType() {
+			return DefaultType$4;
+		}
+		static get NAME() {
+			return NAME$5;
+		}
+		getContent() {
+			return Object.values(this._config.content).map((config) => this._resolvePossibleFunction(config)).filter(Boolean);
+		}
+		hasContent() {
+			return this.getContent().length > 0;
+		}
+		changeContent(content) {
+			this._checkContent(content);
+			this._config.content = _objectSpread2(_objectSpread2({}, this._config.content), content);
+			return this;
+		}
+		toHtml() {
+			const templateWrapper = document.createElement("div");
+			templateWrapper.innerHTML = this._maybeSanitize(this._config.template);
+			for (const [selector, text] of Object.entries(this._config.content)) this._setContent(templateWrapper, text, selector);
+			const template = templateWrapper.children[0];
+			const extraClass = this._resolvePossibleFunction(this._config.extraClass);
+			if (extraClass) template.classList.add(...extraClass.split(" "));
+			return template;
+		}
+		_typeCheckConfig(config) {
+			super._typeCheckConfig(config);
+			this._checkContent(config.content);
+		}
+		_checkContent(arg) {
+			for (const [selector, content] of Object.entries(arg)) super._typeCheckConfig({
+				selector,
+				entry: content
+			}, DefaultContentType);
+		}
+		_setContent(template, content, selector) {
+			const templateElement = SelectorEngine.findOne(selector, template);
+			if (!templateElement) return;
+			content = this._resolvePossibleFunction(content);
+			if (!content) {
+				templateElement.remove();
+				return;
+			}
+			if (isElement(content)) {
+				this._putElementInTemplate(getElement(content), templateElement);
+				return;
+			}
+			if (this._config.html) {
+				templateElement.innerHTML = this._maybeSanitize(content);
+				return;
+			}
+			templateElement.textContent = content;
+		}
+		_maybeSanitize(arg) {
+			return this._config.sanitize ? sanitizeHtml(arg, this._config.allowList, this._config.sanitizeFn) : arg;
+		}
+		_resolvePossibleFunction(arg) {
+			return execute(arg, [void 0, this]);
+		}
+		_putElementInTemplate(element, templateElement) {
+			if (this._config.html) {
+				templateElement.innerHTML = "";
+				templateElement.append(element);
+				return;
+			}
+			templateElement.textContent = element.textContent;
+		}
+	};
+	//#endregion
+	//#region js/src/bootstrap/tooltip.ts
+	/**
+	* --------------------------------------------------------------------------
+	* Bootstrap tooltip.ts
+	* Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+	* --------------------------------------------------------------------------
+	*/
+	/**
+	* Constants
+	*/
+	var NAME$4 = "tooltip";
+	var DISALLOWED_ATTRIBUTES = /* @__PURE__ */ new Set([
+		"sanitize",
+		"allowList",
+		"sanitizeFn"
+	]);
+	var CLASS_NAME_FADE$2 = "fade";
+	var CLASS_NAME_MODAL = "modal";
+	var CLASS_NAME_SHOW$2 = "show";
+	var SELECTOR_TOOLTIP_INNER = ".tooltip-inner";
+	var SELECTOR_MODAL = `.${CLASS_NAME_MODAL}`;
+	var EVENT_MODAL_HIDE = "hide.bs.modal";
+	var TRIGGER_HOVER = "hover";
+	var TRIGGER_FOCUS = "focus";
+	var TRIGGER_CLICK = "click";
+	var TRIGGER_MANUAL = "manual";
+	var EVENT_HIDE$2 = "hide";
+	var EVENT_HIDDEN$2 = "hidden";
+	var EVENT_SHOW$2 = "show";
+	var EVENT_SHOWN$2 = "shown";
+	var EVENT_INSERTED = "inserted";
+	var EVENT_CLICK$1 = "click";
+	var EVENT_FOCUSIN$1 = "focusin";
+	var EVENT_FOCUSOUT$1 = "focusout";
+	var EVENT_MOUSEENTER = "mouseenter";
+	var EVENT_MOUSELEAVE = "mouseleave";
+	var AttachmentMap = {
+		AUTO: "auto",
+		TOP: "top",
+		RIGHT: isRTL() ? "left" : "right",
+		BOTTOM: "bottom",
+		LEFT: isRTL() ? "right" : "left"
+	};
+	var Default$3 = {
+		allowList: DefaultAllowlist,
+		animation: true,
+		boundary: "clippingParents",
+		container: false,
+		customClass: "",
+		delay: 0,
+		fallbackPlacements: [
+			"top",
+			"right",
+			"bottom",
+			"left"
+		],
+		html: false,
+		offset: [0, 6],
+		placement: "top",
+		popperConfig: null,
+		sanitize: true,
+		sanitizeFn: null,
+		selector: false,
+		template: "<div class=\"tooltip\" role=\"tooltip\"><div class=\"tooltip-arrow\"></div><div class=\"tooltip-inner\"></div></div>",
+		title: "",
+		trigger: "hover focus"
+	};
+	var DefaultType$3 = {
+		allowList: "object",
+		animation: "boolean",
+		boundary: "(string|element)",
+		container: "(string|element|boolean)",
+		customClass: "(string|function)",
+		delay: "(number|object)",
+		fallbackPlacements: "array",
+		html: "boolean",
+		offset: "(array|string|function)",
+		placement: "(string|function)",
+		popperConfig: "(null|object|function)",
+		sanitize: "boolean",
+		sanitizeFn: "(null|function)",
+		selector: "(string|boolean)",
+		template: "string",
+		title: "(string|element|function)",
+		trigger: "string"
+	};
+	/**
+	* Class definition
+	*/
+	var Tooltip = class extends BaseComponent {
+		constructor(element, config) {
+			if (typeof lib_exports === "undefined") throw new TypeError("Bootstrap's tooltips require Popper (https://popper.js.org/docs/v2/)");
+			super(element, config);
+			this._isEnabled = true;
+			this._timeout = 0;
+			this._isHovered = null;
+			this._activeTrigger = {};
+			this._popper = null;
+			this._templateFactory = null;
+			this._newContent = null;
+			this.tip = null;
+			this._hideModalHandler = null;
+			this._setListeners();
+			if (!this._config.selector) this._fixTitle();
+		}
+		static get Default() {
+			return Default$3;
+		}
+		static get DefaultType() {
+			return DefaultType$3;
+		}
+		static get NAME() {
+			return NAME$4;
+		}
+		enable() {
+			this._isEnabled = true;
+		}
+		disable() {
+			this._isEnabled = false;
+		}
+		toggleEnabled() {
+			this._isEnabled = !this._isEnabled;
+		}
+		toggle() {
+			if (!this._isEnabled) return;
+			if (this._isShown()) {
+				this._leave();
+				return;
+			}
+			this._enter();
+		}
+		dispose() {
+			clearTimeout(this._timeout);
+			EventHandler.off(this._element.closest(SELECTOR_MODAL), EVENT_MODAL_HIDE, this._hideModalHandler);
+			if (this._element.getAttribute("data-bs-original-title") || this._element.getAttribute("data-tblr-original-title")) this._element.setAttribute("title", this._element.getAttribute("data-bs-original-title") || this._element.getAttribute("data-tblr-original-title") || "");
+			this._disposePopper();
+			super.dispose();
+		}
+		show() {
+			if (this._element.style.display === "none") throw new Error("Please use show on visible elements");
+			if (!(this._isWithContent() && this._isEnabled)) return;
+			const showEvent = EventHandler.trigger(this._element, this.constructor.eventName(EVENT_SHOW$2));
+			const isInTheDom = (findShadowRoot(this._element) || this._element.ownerDocument.documentElement).contains(this._element);
+			if (showEvent.defaultPrevented || !isInTheDom) return;
+			this._disposePopper();
+			const tip = this._getTipElement();
+			this._element.setAttribute("aria-describedby", tip.getAttribute("id"));
+			const { container } = this._config;
+			if (!this._element.ownerDocument.documentElement.contains(this.tip)) {
+				container.append(tip);
+				EventHandler.trigger(this._element, this.constructor.eventName(EVENT_INSERTED));
+			}
+			this._popper = this._createPopper(tip);
+			tip.classList.add(CLASS_NAME_SHOW$2);
+			if ("ontouchstart" in document.documentElement) for (const element of [].concat(...document.body.children)) EventHandler.on(element, "mouseover", noop);
+			const complete = () => {
+				EventHandler.trigger(this._element, this.constructor.eventName(EVENT_SHOWN$2));
+				if (this._isHovered === false) this._leave();
+				this._isHovered = false;
+			};
+			this._queueCallback(complete, this.tip, this._isAnimated());
+		}
+		hide() {
+			if (!this._isShown()) return;
+			if (EventHandler.trigger(this._element, this.constructor.eventName(EVENT_HIDE$2)).defaultPrevented) return;
+			this._getTipElement().classList.remove(CLASS_NAME_SHOW$2);
+			if ("ontouchstart" in document.documentElement) for (const element of [].concat(...document.body.children)) EventHandler.off(element, "mouseover", noop);
+			this._activeTrigger[TRIGGER_CLICK] = false;
+			this._activeTrigger[TRIGGER_FOCUS] = false;
+			this._activeTrigger[TRIGGER_HOVER] = false;
+			this._isHovered = null;
+			const complete = () => {
+				if (this._isWithActiveTrigger()) return;
+				if (!this._isHovered) this._disposePopper();
+				this._element.removeAttribute("aria-describedby");
+				EventHandler.trigger(this._element, this.constructor.eventName(EVENT_HIDDEN$2));
+			};
+			this._queueCallback(complete, this.tip, this._isAnimated());
+		}
+		update() {
+			if (this._popper) this._popper.update();
+		}
+		_isWithContent() {
+			return Boolean(this._getTitle());
+		}
+		_getTipElement() {
+			if (!this.tip) this.tip = this._createTipElement(this._newContent || this._getContentForTemplate());
+			return this.tip;
+		}
+		_createTipElement(content) {
+			const tip = this._getTemplateFactory(content).toHtml();
+			if (!tip) return null;
+			tip.classList.remove(CLASS_NAME_FADE$2, CLASS_NAME_SHOW$2);
+			tip.classList.add(`bs-${this.constructor.NAME}-auto`);
+			const tipId = getUID(this.constructor.NAME).toString();
+			tip.setAttribute("id", tipId);
+			if (this._isAnimated()) tip.classList.add(CLASS_NAME_FADE$2);
+			return tip;
+		}
+		setContent(content) {
+			this._newContent = content;
+			if (this._isShown()) {
+				this._disposePopper();
+				this.show();
+			}
+		}
+		_getTemplateFactory(content) {
+			if (this._templateFactory) this._templateFactory.changeContent(content);
+			else this._templateFactory = new TemplateFactory(_objectSpread2(_objectSpread2({}, this._config), {}, {
+				content,
+				extraClass: this._resolvePossibleFunction(this._config.customClass)
+			}));
+			return this._templateFactory;
+		}
+		_getContentForTemplate() {
+			return { [SELECTOR_TOOLTIP_INNER]: this._getTitle() };
+		}
+		_getTitle() {
+			return this._resolvePossibleFunction(this._config.title) || this._element.getAttribute("data-bs-original-title") || this._element.getAttribute("data-tblr-original-title") || "";
+		}
+		_initializeOnDelegatedTarget(event) {
+			return this.constructor.getOrCreateInstance(event.delegateTarget, this._getDelegateConfig());
+		}
+		_isAnimated() {
+			return this._config.animation || this.tip !== null && this.tip.classList.contains(CLASS_NAME_FADE$2);
+		}
+		_isShown() {
+			return this.tip !== null && this.tip.classList.contains(CLASS_NAME_SHOW$2);
+		}
+		_createPopper(tip) {
+			const attachment = AttachmentMap[execute(this._config.placement, [
+				this,
+				tip,
+				this._element
+			]).toUpperCase()];
+			return createPopper(this._element, tip, this._getPopperConfig(attachment));
+		}
+		_getOffset() {
+			const { offset } = this._config;
+			if (typeof offset === "string") return offset.split(",").map((value) => Number.parseInt(value, 10));
+			if (typeof offset === "function") return (popperData) => offset(popperData, this._element);
+			return offset;
+		}
+		_resolvePossibleFunction(arg) {
+			return execute(arg, [this._element, this._element]);
+		}
+		_getPopperConfig(attachment) {
+			const defaultBsPopperConfig = {
+				placement: attachment,
+				modifiers: [
+					{
+						name: "flip",
+						options: { fallbackPlacements: this._config.fallbackPlacements }
+					},
+					{
+						name: "offset",
+						options: { offset: this._getOffset() }
+					},
+					{
+						name: "preventOverflow",
+						options: { boundary: this._config.boundary }
+					},
+					{
+						name: "arrow",
+						options: { element: `.${this.constructor.NAME}-arrow` }
+					},
+					{
+						name: "preSetPlacement",
+						enabled: true,
+						phase: "beforeMain",
+						fn: (data) => {
+							this._getTipElement().setAttribute("data-popper-placement", data.state.placement);
+						}
+					}
+				]
+			};
+			const popperConfig = execute(this._config.popperConfig, [void 0, defaultBsPopperConfig]);
+			return _objectSpread2(_objectSpread2({}, defaultBsPopperConfig), typeof popperConfig === "object" && popperConfig !== null ? popperConfig : {});
+		}
+		_setListeners() {
+			const triggers = this._config.trigger.split(" ");
+			for (const trigger of triggers) if (trigger === "click") EventHandler.on(this._element, this.constructor.eventName(EVENT_CLICK$1), this._config.selector, (event) => {
+				const context = this._initializeOnDelegatedTarget(event);
+				context._activeTrigger[TRIGGER_CLICK] = !(context._isShown() && context._activeTrigger[TRIGGER_CLICK]);
+				context.toggle();
+			});
+			else if (trigger !== TRIGGER_MANUAL) {
+				const eventIn = trigger === TRIGGER_HOVER ? this.constructor.eventName(EVENT_MOUSEENTER) : this.constructor.eventName(EVENT_FOCUSIN$1);
+				const eventOut = trigger === TRIGGER_HOVER ? this.constructor.eventName(EVENT_MOUSELEAVE) : this.constructor.eventName(EVENT_FOCUSOUT$1);
+				EventHandler.on(this._element, eventIn, this._config.selector, (event) => {
+					const context = this._initializeOnDelegatedTarget(event);
+					context._activeTrigger[event.type === "focusin" ? TRIGGER_FOCUS : TRIGGER_HOVER] = true;
+					context._enter();
+				});
+				EventHandler.on(this._element, eventOut, this._config.selector, (event) => {
+					const context = this._initializeOnDelegatedTarget(event);
+					context._activeTrigger[event.type === "focusout" ? TRIGGER_FOCUS : TRIGGER_HOVER] = context._element.contains(event.relatedTarget);
+					context._leave();
+				});
+			}
+			this._hideModalHandler = () => {
+				if (this._element) this.hide();
+			};
+			EventHandler.on(this._element.closest(SELECTOR_MODAL), EVENT_MODAL_HIDE, this._hideModalHandler);
+		}
+		_fixTitle() {
+			const title = this._element.getAttribute("title");
+			if (!title) return;
+			if (!this._element.getAttribute("aria-label") && !this._element.textContent.trim()) this._element.setAttribute("aria-label", title);
+			this._element.setAttribute("data-bs-original-title", title);
+			this._element.removeAttribute("title");
+		}
+		_enter() {
+			if (this._isShown() || this._isHovered) {
+				this._isHovered = true;
+				return;
+			}
+			this._isHovered = true;
+			this._setTimeout(() => {
+				if (this._isHovered) this.show();
+			}, this._config.delay.show);
+		}
+		_leave() {
+			if (this._isWithActiveTrigger()) return;
+			this._isHovered = false;
+			this._setTimeout(() => {
+				if (!this._isHovered) this.hide();
+			}, this._config.delay.hide);
+		}
+		_setTimeout(handler, timeout) {
+			clearTimeout(this._timeout);
+			this._timeout = setTimeout(handler, timeout);
+		}
+		_isWithActiveTrigger() {
+			return Object.values(this._activeTrigger).includes(true);
+		}
+		_getConfig(config) {
+			const dataAttributes = Manipulator.getDataAttributes(this._element);
+			for (const dataAttribute of Object.keys(dataAttributes)) if (DISALLOWED_ATTRIBUTES.has(dataAttribute)) delete dataAttributes[dataAttribute];
+			config = _objectSpread2(_objectSpread2({}, dataAttributes), typeof config === "object" && config ? config : {});
+			config = this._mergeConfigObj(config);
+			config = this._configAfterMerge(config);
+			this._typeCheckConfig(config);
+			return config;
+		}
+		_configAfterMerge(config) {
+			config.container = config.container === false ? document.body : getElement(config.container);
+			if (typeof config.delay === "number") config.delay = {
+				show: config.delay,
+				hide: config.delay
+			};
+			if (typeof config.title === "number") config.title = config.title.toString();
+			if (typeof config.content === "number") config.content = config.content.toString();
+			return config;
+		}
+		_getDelegateConfig() {
+			const config = {};
+			for (const [key, value] of Object.entries(this._config)) if (this.constructor.Default[key] !== value) config[key] = value;
+			config.selector = false;
+			config.trigger = "manual";
+			return config;
+		}
+		_disposePopper() {
+			if (this._popper) {
+				this._popper.destroy();
+				this._popper = null;
+			}
+			if (this.tip) {
+				this.tip.remove();
+				this.tip = null;
+			}
+		}
+	};
+	//#endregion
+	//#region js/src/bootstrap/popover.ts
+	/**
+	* --------------------------------------------------------------------------
+	* Bootstrap popover.ts
+	* Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+	* --------------------------------------------------------------------------
+	*/
+	/**
+	* Constants
+	*/
+	var NAME$3 = "popover";
+	var SELECTOR_TITLE = ".popover-header";
+	var SELECTOR_CONTENT = ".popover-body";
+	var Default$2 = _objectSpread2(_objectSpread2({}, Tooltip.Default), {}, {
+		content: "",
+		offset: [0, 8],
+		placement: "right",
+		template: "<div class=\"popover\" role=\"tooltip\"><div class=\"popover-arrow\"></div><h3 class=\"popover-header\"></h3><div class=\"popover-body\"></div></div>",
+		trigger: "click"
+	});
+	var DefaultType$2 = _objectSpread2(_objectSpread2({}, Tooltip.DefaultType), {}, { content: "(null|string|element|function)" });
+	/**
+	* Class definition
+	*/
+	var Popover = class extends Tooltip {
+		static get Default() {
+			return Default$2;
+		}
+		static get DefaultType() {
+			return DefaultType$2;
+		}
+		static get NAME() {
+			return NAME$3;
+		}
+		_isWithContent() {
+			return Boolean(this._getTitle() || this._getContent());
+		}
+		_getContentForTemplate() {
+			return {
+				[SELECTOR_TITLE]: this._getTitle(),
+				[SELECTOR_CONTENT]: this._getContent()
+			};
+		}
+		_getContent() {
+			return this._resolvePossibleFunction(this._config.content);
+		}
+	};
+	//#endregion
+	//#region js/src/bootstrap/scrollspy.ts
+	/**
+	* --------------------------------------------------------------------------
+	* Bootstrap scrollspy.ts
+	* Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+	* --------------------------------------------------------------------------
+	*/
+	var NAME$2 = "scrollspy";
+	var EVENT_KEY$2 = `.bs.scrollspy`;
+	var DATA_API_KEY = ".data-api";
+	var EVENT_ACTIVATE = `activate${EVENT_KEY$2}`;
+	var EVENT_CLICK = `click${EVENT_KEY$2}`;
+	var EVENT_LOAD_DATA_API$1 = `load${EVENT_KEY$2}${DATA_API_KEY}`;
+	var CLASS_NAME_DROPDOWN_ITEM = "dropdown-item";
+	var CLASS_NAME_ACTIVE$1 = "active";
+	var SELECTOR_DATA_SPY = "[data-bs-spy=\"scroll\"], [data-tblr-spy=\"scroll\"]";
+	var SELECTOR_TARGET_LINKS = "[href]";
+	var SELECTOR_NAV_LIST_GROUP = ".nav, .list-group";
+	var SELECTOR_NAV_LINKS = ".nav-link";
+	var SELECTOR_LINK_ITEMS = `${SELECTOR_NAV_LINKS}, .nav-item > ${SELECTOR_NAV_LINKS}, .list-group-item`;
+	var SELECTOR_DROPDOWN = ".dropdown";
+	var SELECTOR_DROPDOWN_TOGGLE$1 = ".dropdown-toggle";
+	var Default$1 = {
+		offset: null,
+		rootMargin: "0px 0px -25%",
+		smoothScroll: false,
+		target: null,
+		threshold: [
+			.1,
+			.5,
+			1
+		]
+	};
+	var DefaultType$1 = {
+		offset: "(number|null)",
+		rootMargin: "string",
+		smoothScroll: "boolean",
+		target: "element",
+		threshold: "array"
+	};
+	var ScrollSpy = class extends BaseComponent {
+		constructor(element, config) {
+			super(element, config);
+			this._targetLinks = /* @__PURE__ */ new Map();
+			this._observableSections = /* @__PURE__ */ new Map();
+			this._rootElement = getComputedStyle(this._element).overflowY === "visible" ? null : this._element;
+			this._activeTarget = null;
+			this._observer = null;
+			this._previousScrollData = {
+				visibleEntryTop: 0,
+				parentScrollTop: 0
+			};
+			this.refresh();
+		}
+		static get Default() {
+			return Default$1;
+		}
+		static get DefaultType() {
+			return DefaultType$1;
+		}
+		static get NAME() {
+			return NAME$2;
+		}
+		refresh() {
+			this._initializeTargetsAndObservables();
+			this._maybeEnableSmoothScroll();
+			if (this._observer) this._observer.disconnect();
+			else this._observer = this._getNewObserver();
+			for (const section of this._observableSections.values()) this._observer.observe(section);
+		}
+		dispose() {
+			this._observer.disconnect();
+			super.dispose();
+		}
+		_configAfterMerge(config) {
+			config.target = getElement(config.target) || document.body;
+			config.rootMargin = config.offset ? `${config.offset}px 0px -30%` : config.rootMargin;
+			if (typeof config.threshold === "string") config.threshold = config.threshold.split(",").map((value) => Number.parseFloat(value));
+			return config;
+		}
+		_maybeEnableSmoothScroll() {
+			if (!this._config.smoothScroll) return;
+			EventHandler.off(this._config.target, EVENT_CLICK);
+			EventHandler.on(this._config.target, EVENT_CLICK, SELECTOR_TARGET_LINKS, (event) => {
+				const observableSection = this._observableSections.get(event.target.hash);
+				if (observableSection) {
+					event.preventDefault();
+					const root = this._rootElement || window;
+					const height = observableSection.offsetTop - this._element.offsetTop;
+					if ("scrollTo" in root) {
+						root.scrollTo({
+							top: height,
+							behavior: "smooth"
+						});
+						return;
+					}
+					root.scrollTop = height;
+				}
+			});
+		}
+		_getNewObserver() {
+			const options = {
+				root: this._rootElement,
+				threshold: this._config.threshold,
+				rootMargin: this._config.rootMargin
+			};
+			return new IntersectionObserver((entries) => this._observerCallback(entries), options);
+		}
+		_observerCallback(entries) {
+			const targetElement = (entry) => this._targetLinks.get(`#${entry.target.id}`);
+			const activate = (entry) => {
+				this._previousScrollData.visibleEntryTop = entry.target.offsetTop;
+				this._process(targetElement(entry));
+			};
+			const parentScrollTop = (this._rootElement || document.documentElement).scrollTop;
+			const userScrollsDown = parentScrollTop >= this._previousScrollData.parentScrollTop;
+			this._previousScrollData.parentScrollTop = parentScrollTop;
+			for (const entry of entries) {
+				if (!entry.isIntersecting) {
+					this._activeTarget = null;
+					this._clearActiveClass(targetElement(entry));
+					continue;
+				}
+				const entryIsLowerThanPrevious = entry.target.offsetTop >= this._previousScrollData.visibleEntryTop;
+				if (userScrollsDown && entryIsLowerThanPrevious) {
+					activate(entry);
+					if (!parentScrollTop) return;
+					continue;
+				}
+				if (!userScrollsDown && !entryIsLowerThanPrevious) activate(entry);
+			}
+		}
+		_initializeTargetsAndObservables() {
+			this._targetLinks = /* @__PURE__ */ new Map();
+			this._observableSections = /* @__PURE__ */ new Map();
+			const targetLinks = SelectorEngine.find(SELECTOR_TARGET_LINKS, this._config.target);
+			for (const anchor of targetLinks) {
+				if (!anchor.hash || isDisabled(anchor)) continue;
+				const observableSection = SelectorEngine.findOne(parseSelector(decodeURI(anchor.hash)), this._element);
+				if (isVisible(observableSection)) {
+					this._targetLinks.set(decodeURI(anchor.hash), anchor);
+					this._observableSections.set(anchor.hash, observableSection);
+				}
+			}
+		}
+		_process(target) {
+			if (this._activeTarget === target) return;
+			this._clearActiveClass(this._config.target);
+			this._activeTarget = target;
+			target.classList.add(CLASS_NAME_ACTIVE$1);
+			this._activateParents(target);
+			EventHandler.trigger(this._element, EVENT_ACTIVATE, { relatedTarget: target });
+		}
+		_activateParents(target) {
+			if (target.classList.contains(CLASS_NAME_DROPDOWN_ITEM)) {
+				SelectorEngine.findOne(SELECTOR_DROPDOWN_TOGGLE$1, target.closest(SELECTOR_DROPDOWN)).classList.add(CLASS_NAME_ACTIVE$1);
+				return;
+			}
+			for (const listGroup of SelectorEngine.parents(target, SELECTOR_NAV_LIST_GROUP)) for (const item of SelectorEngine.prev(listGroup, SELECTOR_LINK_ITEMS)) item.classList.add(CLASS_NAME_ACTIVE$1);
+		}
+		_clearActiveClass(parent) {
+			parent.classList.remove(CLASS_NAME_ACTIVE$1);
+			const activeNodes = SelectorEngine.find(`${SELECTOR_TARGET_LINKS}.${CLASS_NAME_ACTIVE$1}`, parent);
+			for (const node of activeNodes) node.classList.remove(CLASS_NAME_ACTIVE$1);
+		}
+	};
+	EventHandler.on(window, EVENT_LOAD_DATA_API$1, () => {
+		for (const spy of SelectorEngine.find(SELECTOR_DATA_SPY)) ScrollSpy.getOrCreateInstance(spy);
+	});
+	//#endregion
+	//#region js/src/bootstrap/tab.ts
+	/**
+	* --------------------------------------------------------------------------
+	* Bootstrap tab.ts
+	* Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+	* --------------------------------------------------------------------------
+	*/
+	var NAME$1 = "tab";
+	var EVENT_KEY$1 = `.bs.tab`;
+	var EVENT_HIDE$1 = `hide${EVENT_KEY$1}`;
+	var EVENT_HIDDEN$1 = `hidden${EVENT_KEY$1}`;
+	var EVENT_SHOW$1 = `show${EVENT_KEY$1}`;
+	var EVENT_SHOWN$1 = `shown${EVENT_KEY$1}`;
+	var EVENT_CLICK_DATA_API = `click${EVENT_KEY$1}`;
+	var EVENT_KEYDOWN = `keydown${EVENT_KEY$1}`;
+	var EVENT_LOAD_DATA_API = `load${EVENT_KEY$1}`;
+	var ARROW_LEFT_KEY = "ArrowLeft";
+	var ARROW_RIGHT_KEY = "ArrowRight";
+	var ARROW_UP_KEY = "ArrowUp";
+	var ARROW_DOWN_KEY = "ArrowDown";
+	var HOME_KEY = "Home";
+	var END_KEY = "End";
+	var CLASS_NAME_ACTIVE = "active";
+	var CLASS_NAME_FADE$1 = "fade";
+	var CLASS_NAME_SHOW$1 = "show";
+	var CLASS_DROPDOWN = "dropdown";
+	var SELECTOR_DROPDOWN_TOGGLE = ".dropdown-toggle";
+	var SELECTOR_DROPDOWN_MENU = ".dropdown-menu";
+	var NOT_SELECTOR_DROPDOWN_TOGGLE = `:not(${SELECTOR_DROPDOWN_TOGGLE})`;
+	var SELECTOR_TAB_PANEL = ".list-group, .nav, [role=\"tablist\"]";
+	var SELECTOR_OUTER = ".nav-item, .list-group-item";
+	var SELECTOR_INNER = `.nav-link${NOT_SELECTOR_DROPDOWN_TOGGLE}, .list-group-item${NOT_SELECTOR_DROPDOWN_TOGGLE}, [role="tab"]${NOT_SELECTOR_DROPDOWN_TOGGLE}`;
+	var SELECTOR_DATA_TOGGLE = "[data-bs-toggle=\"tab\"], [data-bs-toggle=\"pill\"], [data-bs-toggle=\"list\"], [data-tblr-toggle=\"tab\"], [data-tblr-toggle=\"pill\"], [data-tblr-toggle=\"list\"]";
+	var SELECTOR_INNER_ELEM = `${SELECTOR_INNER}, ${SELECTOR_DATA_TOGGLE}`;
+	var SELECTOR_DATA_TOGGLE_ACTIVE = `.${CLASS_NAME_ACTIVE}[data-bs-toggle="tab"], .${CLASS_NAME_ACTIVE}[data-bs-toggle="pill"], .${CLASS_NAME_ACTIVE}[data-bs-toggle="list"], .${CLASS_NAME_ACTIVE}[data-tblr-toggle="tab"], .${CLASS_NAME_ACTIVE}[data-tblr-toggle="pill"], .${CLASS_NAME_ACTIVE}[data-tblr-toggle="list"]`;
+	var Tab = class Tab extends BaseComponent {
+		constructor(element) {
+			super(element);
+			this._parent = this._element.closest(SELECTOR_TAB_PANEL);
+			if (!this._parent) return;
+			this._setInitialAttributes(this._parent, this._getChildren());
+			EventHandler.on(this._element, EVENT_KEYDOWN, (event) => this._keydown(event));
+		}
+		static get NAME() {
+			return NAME$1;
+		}
+		show() {
+			const innerElem = this._element;
+			if (this._elemIsActive(innerElem)) return;
+			const active = this._getActiveElem();
+			const hideEvent = active ? EventHandler.trigger(active, EVENT_HIDE$1, { relatedTarget: innerElem }) : null;
+			const showEvent = EventHandler.trigger(innerElem, EVENT_SHOW$1, { relatedTarget: active });
+			if ((showEvent === null || showEvent === void 0 ? void 0 : showEvent.defaultPrevented) || (hideEvent === null || hideEvent === void 0 ? void 0 : hideEvent.defaultPrevented)) return;
+			this._deactivate(active, innerElem);
+			this._activate(innerElem, active);
+		}
+		_activate(element, relatedElem) {
+			if (!element) return;
+			element.classList.add(CLASS_NAME_ACTIVE);
+			this._activate(SelectorEngine.getElementFromSelector(element));
+			const complete = () => {
+				if (element.getAttribute("role") !== "tab") {
+					element.classList.add(CLASS_NAME_SHOW$1);
+					return;
+				}
+				element.removeAttribute("tabindex");
+				element.setAttribute("aria-selected", "true");
+				this._toggleDropDown(element, true);
+				EventHandler.trigger(element, EVENT_SHOWN$1, { relatedTarget: relatedElem });
+			};
+			this._queueCallback(complete, element, element.classList.contains(CLASS_NAME_FADE$1));
+		}
+		_deactivate(element, relatedElem) {
+			if (!element) return;
+			element.classList.remove(CLASS_NAME_ACTIVE);
+			element.blur();
+			this._deactivate(SelectorEngine.getElementFromSelector(element));
+			const complete = () => {
+				if (element.getAttribute("role") !== "tab") {
+					element.classList.remove(CLASS_NAME_SHOW$1);
+					return;
+				}
+				element.setAttribute("aria-selected", "false");
+				element.setAttribute("tabindex", "-1");
+				this._toggleDropDown(element, false);
+				EventHandler.trigger(element, EVENT_HIDDEN$1, { relatedTarget: relatedElem });
+			};
+			this._queueCallback(complete, element, element.classList.contains(CLASS_NAME_FADE$1));
+		}
+		_keydown(event) {
+			if (![
+				ARROW_LEFT_KEY,
+				ARROW_RIGHT_KEY,
+				ARROW_UP_KEY,
+				ARROW_DOWN_KEY,
+				HOME_KEY,
+				END_KEY
+			].includes(event.key)) return;
+			event.stopPropagation();
+			event.preventDefault();
+			const children = this._getChildren().filter((element) => !isDisabled(element));
+			let nextActiveElement;
+			if ([HOME_KEY, END_KEY].includes(event.key)) nextActiveElement = children[event.key === HOME_KEY ? 0 : children.length - 1];
+			else {
+				const isNext = [ARROW_RIGHT_KEY, ARROW_DOWN_KEY].includes(event.key);
+				nextActiveElement = getNextActiveElement(children, event.target, isNext, true);
+			}
+			if (nextActiveElement) {
+				nextActiveElement.focus({ preventScroll: true });
+				Tab.getOrCreateInstance(nextActiveElement).show();
+			}
+		}
+		_getChildren() {
+			return SelectorEngine.find(SELECTOR_INNER_ELEM, this._parent);
+		}
+		_getActiveElem() {
+			return this._getChildren().find((child) => this._elemIsActive(child)) || null;
+		}
+		_setInitialAttributes(parent, children) {
+			this._setAttributeIfNotExists(parent, "role", "tablist");
+			for (const child of children) this._setInitialAttributesOnChild(child);
+		}
+		_setInitialAttributesOnChild(child) {
+			child = this._getInnerElement(child);
+			const isActive = this._elemIsActive(child);
+			const outerElem = this._getOuterElement(child);
+			child.setAttribute("aria-selected", String(isActive));
+			if (outerElem !== child) this._setAttributeIfNotExists(outerElem, "role", "presentation");
+			if (!isActive) child.setAttribute("tabindex", "-1");
+			this._setAttributeIfNotExists(child, "role", "tab");
+			this._setInitialAttributesOnTargetPanel(child);
+		}
+		_setInitialAttributesOnTargetPanel(child) {
+			const target = SelectorEngine.getElementFromSelector(child);
+			if (!target) return;
+			this._setAttributeIfNotExists(target, "role", "tabpanel");
+			if (child.id) this._setAttributeIfNotExists(target, "aria-labelledby", `${child.id}`);
+		}
+		_toggleDropDown(element, open) {
+			const outerElem = this._getOuterElement(element);
+			if (!outerElem.classList.contains(CLASS_DROPDOWN)) return;
+			const toggle = (selector, className) => {
+				const el = SelectorEngine.findOne(selector, outerElem);
+				if (el) el.classList.toggle(className, open);
+			};
+			toggle(SELECTOR_DROPDOWN_TOGGLE, CLASS_NAME_ACTIVE);
+			toggle(SELECTOR_DROPDOWN_MENU, CLASS_NAME_SHOW$1);
+			outerElem.setAttribute("aria-expanded", String(open));
+		}
+		_setAttributeIfNotExists(element, attribute, value) {
+			if (!element.hasAttribute(attribute)) element.setAttribute(attribute, value);
+		}
+		_elemIsActive(elem) {
+			return elem.classList.contains(CLASS_NAME_ACTIVE);
+		}
+		_getInnerElement(elem) {
+			return elem.matches(SELECTOR_INNER_ELEM) ? elem : SelectorEngine.findOne(SELECTOR_INNER_ELEM, elem);
+		}
+		_getOuterElement(elem) {
+			return elem.closest(SELECTOR_OUTER) || elem;
+		}
+	};
+	EventHandler.on(document, EVENT_CLICK_DATA_API, SELECTOR_DATA_TOGGLE, function(event) {
+		if (["A", "AREA"].includes(this.tagName)) event.preventDefault();
+		if (isDisabled(this)) return;
+		Tab.getOrCreateInstance(this).show();
+	});
+	EventHandler.on(window, EVENT_LOAD_DATA_API, () => {
+		for (const element of SelectorEngine.find(SELECTOR_DATA_TOGGLE_ACTIVE)) Tab.getOrCreateInstance(element);
+	});
+	//#endregion
+	//#region js/src/bootstrap/toast.ts
+	/**
+	* --------------------------------------------------------------------------
+	* Bootstrap toast.ts
+	* Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+	* --------------------------------------------------------------------------
+	*/
+	var NAME = "toast";
+	var EVENT_KEY = `.bs.toast`;
+	var EVENT_MOUSEOVER = `mouseover${EVENT_KEY}`;
+	var EVENT_MOUSEOUT = `mouseout${EVENT_KEY}`;
+	var EVENT_FOCUSIN = `focusin${EVENT_KEY}`;
+	var EVENT_FOCUSOUT = `focusout${EVENT_KEY}`;
+	var EVENT_HIDE = `hide${EVENT_KEY}`;
+	var EVENT_HIDDEN = `hidden${EVENT_KEY}`;
+	var EVENT_SHOW = `show${EVENT_KEY}`;
+	var EVENT_SHOWN = `shown${EVENT_KEY}`;
+	var CLASS_NAME_FADE = "fade";
+	var CLASS_NAME_HIDE = "hide";
+	var CLASS_NAME_SHOW = "show";
+	var CLASS_NAME_SHOWING = "showing";
+	var DefaultType = {
+		animation: "boolean",
+		autohide: "boolean",
+		delay: "number"
+	};
+	var Default = {
+		animation: true,
+		autohide: true,
+		delay: 5e3
+	};
+	var Toast = class extends BaseComponent {
+		constructor(element, config) {
+			super(element, config);
+			this._timeout = null;
+			this._hasMouseInteraction = false;
+			this._hasKeyboardInteraction = false;
+			this._setListeners();
+		}
+		static get Default() {
+			return Default;
+		}
+		static get DefaultType() {
+			return DefaultType;
+		}
+		static get NAME() {
+			return NAME;
+		}
+		show() {
+			const showEvent = EventHandler.trigger(this._element, EVENT_SHOW);
+			if (showEvent === null || showEvent === void 0 ? void 0 : showEvent.defaultPrevented) return;
+			this._clearTimeout();
+			if (this._config.animation) this._element.classList.add(CLASS_NAME_FADE);
+			const complete = () => {
+				this._element.classList.remove(CLASS_NAME_SHOWING);
+				EventHandler.trigger(this._element, EVENT_SHOWN);
+				this._maybeScheduleHide();
+			};
+			this._element.classList.remove(CLASS_NAME_HIDE);
+			reflow(this._element);
+			this._element.classList.add(CLASS_NAME_SHOW, CLASS_NAME_SHOWING);
+			this._queueCallback(complete, this._element, this._config.animation);
+		}
+		hide() {
+			if (!this.isShown()) return;
+			const hideEvent = EventHandler.trigger(this._element, EVENT_HIDE);
+			if (hideEvent === null || hideEvent === void 0 ? void 0 : hideEvent.defaultPrevented) return;
+			const complete = () => {
+				this._element.classList.add(CLASS_NAME_HIDE);
+				this._element.classList.remove(CLASS_NAME_SHOWING, CLASS_NAME_SHOW);
+				EventHandler.trigger(this._element, EVENT_HIDDEN);
+			};
+			this._element.classList.add(CLASS_NAME_SHOWING);
+			this._queueCallback(complete, this._element, this._config.animation);
+		}
+		dispose() {
+			this._clearTimeout();
+			if (this.isShown()) this._element.classList.remove(CLASS_NAME_SHOW);
+			super.dispose();
+		}
+		isShown() {
+			return this._element.classList.contains(CLASS_NAME_SHOW);
+		}
+		_maybeScheduleHide() {
+			if (!this._config.autohide) return;
+			if (this._hasMouseInteraction || this._hasKeyboardInteraction) return;
+			this._timeout = setTimeout(() => {
+				this.hide();
+			}, this._config.delay);
+		}
+		_onInteraction(event, isInteracting) {
+			switch (event.type) {
+				case "mouseover":
+				case "mouseout":
+					this._hasMouseInteraction = isInteracting;
+					break;
+				case "focusin":
+				case "focusout": this._hasKeyboardInteraction = isInteracting;
+			}
+			if (isInteracting) {
+				this._clearTimeout();
+				return;
+			}
+			const nextElement = event.relatedTarget;
+			if (this._element === nextElement || this._element.contains(nextElement)) return;
+			this._maybeScheduleHide();
+		}
+		_setListeners() {
+			EventHandler.on(this._element, EVENT_MOUSEOVER, (event) => this._onInteraction(event, true));
+			EventHandler.on(this._element, EVENT_MOUSEOUT, (event) => this._onInteraction(event, false));
+			EventHandler.on(this._element, EVENT_FOCUSIN, (event) => this._onInteraction(event, true));
+			EventHandler.on(this._element, EVENT_FOCUSOUT, (event) => this._onInteraction(event, false));
+		}
+		_clearTimeout() {
+			clearTimeout(this._timeout);
+			this._timeout = null;
+		}
+	};
+	enableDismissTrigger(Toast);
+	//#endregion
+	//#region js/src/bootstrap.ts
+	var bootstrap = {
+		Alert,
+		Button,
+		Carousel,
+		Collapse,
+		Dropdown,
+		Modal,
+		Offcanvas,
+		Popover,
+		ScrollSpy,
+		Tab,
+		Toast,
+		Tooltip
+	};
+	//#endregion
+	//#region js/src/dropdown.ts
+	[].slice.call(document.querySelectorAll("[data-bs-toggle=\"dropdown\"]")).map(function(dropdownTriggerEl) {
+		return new Dropdown(dropdownTriggerEl, { boundary: dropdownTriggerEl.getAttribute("data-bs-boundary") === "viewport" ? document.documentElement : "clippingParents" });
+	});
+	//#endregion
+	//#region js/src/sidebar.ts
+	var syncSidebarToggles = (folded) => {
+		for (const toggle of document.querySelectorAll("[data-bs-toggle=\"sidebar-folded\"]")) toggle.setAttribute("aria-pressed", String(folded));
+	};
+	var sidebarIsFolded = () => {
+		var _document$documentEle;
+		return ((_document$documentEle = document.documentElement.getAttribute("data-bs-sidebar")) !== null && _document$documentEle !== void 0 ? _document$documentEle : "").startsWith("folded") || !!document.querySelector(".navbar-vertical.navbar-folded, .navbar-vertical.navbar-folded-hover");
+	};
+	var hideSidebarDropdowns = (except) => {
+		for (const toggle of document.querySelectorAll(".navbar-vertical [data-bs-toggle=\"dropdown\"][aria-expanded=\"true\"]")) if (toggle !== except) {
+			var _Dropdown$getInstance;
+			(_Dropdown$getInstance = Dropdown.getInstance(toggle)) === null || _Dropdown$getInstance === void 0 || _Dropdown$getInstance.hide();
+		}
+	};
+	document.addEventListener("click", (event) => {
+		if (!sidebarIsFolded()) return;
+		const target = event.target;
+		if (target.closest(".navbar-vertical .dropdown-menu")) return;
+		hideSidebarDropdowns(target.closest(".navbar-vertical [data-bs-toggle=\"dropdown\"]"));
+	});
+	document.addEventListener("mouseleave", (event) => {
+		const target = event.target;
+		if (!(target instanceof Element) || !target.matches(".navbar-vertical")) return;
+		if (document.documentElement.getAttribute("data-bs-sidebar") === "folded-hover" || target.classList.contains("navbar-folded-hover")) hideSidebarDropdowns();
+	}, true);
+	document.addEventListener("DOMContentLoaded", () => {
+		var _document$documentEle2;
+		const folded = ((_document$documentEle2 = document.documentElement.getAttribute("data-bs-sidebar")) !== null && _document$documentEle2 !== void 0 ? _document$documentEle2 : "").startsWith("folded");
+		syncSidebarToggles(folded);
+		if (folded) for (const menu of document.querySelectorAll(".navbar-vertical .dropdown-menu.show")) {
+			var _menu$parentElement;
+			menu.classList.remove("show");
+			(_menu$parentElement = menu.parentElement) === null || _menu$parentElement === void 0 || (_menu$parentElement = _menu$parentElement.querySelector("[data-bs-toggle=\"dropdown\"]")) === null || _menu$parentElement === void 0 || _menu$parentElement.setAttribute("aria-expanded", "false");
+		}
+	});
+	document.addEventListener("click", (event) => {
+		var _html$getAttribute;
+		if (!event.target.closest("[data-bs-toggle=\"sidebar-folded\"]")) return;
+		const html = document.documentElement;
+		const willFold = !((_html$getAttribute = html.getAttribute("data-bs-sidebar")) !== null && _html$getAttribute !== void 0 ? _html$getAttribute : "").startsWith("folded");
+		if (willFold) html.setAttribute("data-bs-sidebar", "folded-hover");
+		else html.removeAttribute("data-bs-sidebar");
+		localStorage.setItem("tabler-sidebar", willFold ? "folded-hover" : "default");
+		syncSidebarToggles(willFold);
+		hideSidebarDropdowns();
+		document.dispatchEvent(new CustomEvent("tabler:sidebar-folded", { detail: { folded: willFold } }));
+	});
+	//#endregion
+	//#region js/src/tooltip.ts
+	[].slice.call(document.querySelectorAll("[data-bs-toggle=\"tooltip\"]")).map(function(tooltipTriggerEl) {
+		var _tooltipTriggerEl$get;
+		return new Tooltip(tooltipTriggerEl, {
+			delay: {
+				show: 50,
+				hide: 50
+			},
+			html: tooltipTriggerEl.getAttribute("data-bs-html") === "true",
+			placement: (_tooltipTriggerEl$get = tooltipTriggerEl.getAttribute("data-bs-placement")) !== null && _tooltipTriggerEl$get !== void 0 ? _tooltipTriggerEl$get : "auto"
+		});
+	});
+	//#endregion
+	//#region js/src/popover.ts
+	[].slice.call(document.querySelectorAll("[data-bs-toggle=\"popover\"]")).map(function(popoverTriggerEl) {
+		var _popoverTriggerEl$get;
+		return new Popover(popoverTriggerEl, {
+			delay: {
+				show: 50,
+				hide: 50
+			},
+			html: popoverTriggerEl.getAttribute("data-bs-html") === "true",
+			placement: (_popoverTriggerEl$get = popoverTriggerEl.getAttribute("data-bs-placement")) !== null && _popoverTriggerEl$get !== void 0 ? _popoverTriggerEl$get : "auto"
+		});
+	});
+	//#endregion
+	//#region js/src/switch-icon.ts
+	[].slice.call(document.querySelectorAll("[data-bs-toggle=\"switch-icon\"]")).map(function(switchTriggerEl) {
+		switchTriggerEl.addEventListener("click", (e) => {
+			e.stopPropagation();
+			const active = switchTriggerEl.classList.toggle("active");
+			switchTriggerEl.setAttribute("aria-pressed", active ? "true" : "false");
+		});
+	});
+	//#endregion
+	//#region js/src/tab.ts
+	var EnableActivationTabsFromLocationHash = () => {
+		const locationHash = window.location.hash;
+		if (locationHash) [].slice.call(document.querySelectorAll("[data-bs-toggle=\"tab\"]")).filter((tab) => tab.hash === locationHash).map((tab) => {
+			new Tab(tab).show();
+		});
+	};
+	EnableActivationTabsFromLocationHash();
+	//#endregion
+	//#region js/src/toast.ts
+	[].slice.call(document.querySelectorAll("[data-bs-toggle=\"toast\"]")).map(function(toastTriggerEl) {
+		const target = toastTriggerEl.getAttribute("data-bs-target");
+		if (target === null) return;
+		const toastEl = new Toast(target);
+		toastTriggerEl.addEventListener("click", () => {
+			toastEl.show();
+		});
+	});
+	//#endregion
+	//#region js/src/sortable.ts
+	var sortableElements = document.querySelectorAll("[data-sortable]");
+	if (sortableElements.length) sortableElements.forEach(function(element) {
+		let options = {};
+		try {
+			const rawOptions = element.getAttribute("data-sortable");
+			options = rawOptions ? JSON.parse(rawOptions) : {};
+		} catch (e) {}
+		if (window.Sortable) new window.Sortable(element, options);
+	});
+	//#endregion
+	//#region js/src/tabler.ts
+	var tabler_exports = /* @__PURE__ */ __exportAll({
+		getColor: () => getColor,
+		hexToRgba: () => hexToRgba,
+		prefix: () => prefix
+	});
+	var prefix = "tblr-";
+	var hexToRgba = (hex, opacity) => {
+		const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+		return result ? `rgba(${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}, ${opacity})` : null;
+	};
+	var getColor = (color, opacity = 1) => {
+		const c = getComputedStyle(document.body).getPropertyValue(`--${prefix}${color}`).trim();
+		if (opacity !== 1) return hexToRgba(c, opacity);
+		return c;
+	};
+	//#endregion
+	exports.Alert = Alert;
+	exports.Button = Button;
+	exports.Carousel = Carousel;
+	exports.Collapse = Collapse;
+	exports.Dropdown = Dropdown;
+	exports.Modal = Modal;
+	exports.Offcanvas = Offcanvas;
+	exports.Popover = Popover;
+	Object.defineProperty(exports, "Popper", {
+		enumerable: true,
+		get: function() {
+			return lib_exports;
+		}
+	});
+	exports.ScrollSpy = ScrollSpy;
+	exports.Tab = Tab;
+	exports.Toast = Toast;
+	exports.Tooltip = Tooltip;
+	exports.bootstrap = bootstrap;
+	Object.defineProperty(exports, "tabler", {
+		enumerable: true,
+		get: function() {
+			return tabler_exports;
+		}
+	});
+});
+
+//# sourceMappingURL=tabler.js.map

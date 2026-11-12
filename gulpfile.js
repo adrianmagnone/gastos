@@ -28,7 +28,7 @@ const files = {
      jsTabler: [
           `${path.assets}/Tabler/js/tabler.js`,
           `${path.assets}/Tabler/js/tabler-theme.js`,
-          `${path.assets}/Tabler/js/tom-select.popular.js`,
+          `${path.assets}/Tabler/js/tom-select.base.js`,
           `${path.assets}/Tabler/js/litepicker.js`,
           `${path.node}/imask/dist/imask.min.js`,
           `${path.node}/jquery-mask-plugin/dist/jquery.mask.min.js`

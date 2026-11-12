@@ -54,17 +54,6 @@
   </div>
 
 </div>
-    <!-- <div class="col-lg-6 col-xl-6">
-        <div class="card">
-        <div class="card-body">
-            <h3 class="card-title">Deuda Tarjetas</h3>
-            <div id="chart-deuda-tarjetas">
-            </div>
-        </div>
-        </div>
-    </div> -->
-
-</div>
 
 @endsection
 

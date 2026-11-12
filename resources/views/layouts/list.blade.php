@@ -57,13 +57,6 @@ Consulta
     </div>
 </div>
 
-<!-- Page Footer -->
-<footer class="footer footer-transparent d-print-none">
-    <div class="container-xl">
-        @yield('ListFooter')
-    </div>
-</footer>
-
 <script type="text/javascript">
     toggleFilterSection = function()
     {
