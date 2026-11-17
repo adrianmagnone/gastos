@@ -24,8 +24,12 @@ class OwnDatatable {
             keys: false,
             scrollY: "",
             scrollCollapse: false,
+            searchDelay: 350,
             search: {
                 return: false
+            },
+            paging: {
+                type: 'full_numbers'
             },
             language_zeroRecord: false,
             language_emptyTable: false,
@@ -42,9 +46,12 @@ class OwnDatatable {
     init(options) {
         
         this.settings = { ...this.defaults, ...options };
-        
+        this.settings.layout = DatatableLayout.fromDom(this.settings.dom);
+
         this.setupColumns();
         this.createDataTable();
+
+        renderResources.ajustDataTableTheme();
     }
 
     setupColumns() {
@@ -98,7 +105,7 @@ class OwnDatatable {
     createDataTable() {
         const tableElement = document.querySelector(this.selector);
         this.dataTable = new DataTable(tableElement, {
-            dom: this.settings.dom,
+            layout: this.settings.layout,
             pageLength: this.settings.pageLength,
             keys: this.settings.keys,
             scrollY: this.settings.scrollY,
@@ -106,8 +113,11 @@ class OwnDatatable {
             stateSave: true,
             processing: true,
             serverSide: true,
-            searchDelay: 350,
+            searchDelay: this.settings.searchDelay,
             responsive: false,
+            order: this.settings.defaultOrder,
+            deferLoading: this.settings.deferLoading,
+            search: this.settings.search,
             ajax: {
                 url: this.settings.ajaxUrl,
                 data: (d) => this.getAjaxData(d),
@@ -172,24 +182,24 @@ class OwnDatatable {
 
     getLanguageSettings() {
         return {
-            sProcessing: "Procesando...",
-            sLengthMenu: "Mostrar _MENU_ registros",
-            sZeroRecords: this.settings.language_zeroRecord || renderResources.messageZeroRecordDataTable(),
-            sEmptyTable: this.settings.language_emptyTable || renderResources.messageEmptyDataTable(),
-            sInfo: "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-            sInfoEmpty: "",
-            sInfoFiltered: "(filtrado de un total de _MAX_ registros)",
-            sSearch: "Buscar:",
-            sLoadingRecords: "Cargando...",
-            oPaginate: {
-                sFirst: "Primero",
-                sLast: "Último",
-                sNext: "Siguiente",
-                sPrevious: "Anterior"
+            processing: "Procesando...",
+            lengthMenu: "Mostrar _MENU_ registros",
+            zeroRecords: this.settings.language_zeroRecord || renderResources.messageZeroRecordDataTable(),
+            emptyTable: this.settings.language_emptyTable || renderResources.messageEmptyDataTable(),
+            info: "Mostrando del _START_ al _END_ de un total de _TOTAL_.",
+            infoEmpty: "",
+            infoFiltered: "(filtrado de un total de _MAX_ registros)",
+            search: "Buscar:",
+            loadingRecords: "Cargando...",
+            paginate: {
+                first: "<<",
+                last: ">>",
+                next: ">",
+                previous: "<"
             },
-            oAria: {
-                sSortAscending: ": Ordenar la columna de manera ascendente",
-                sSortDescending: ": Ordenar la columna de manera descendente"
+            aria: {
+                sortAscending: ": Ordenar la columna de manera ascendente",
+                sortDescending: ": Ordenar la columna de manera descendente"
             }
         };
     }
@@ -225,11 +235,10 @@ class OwnDatatable {
     }
 
     ajaxUrl(newUrl) {
-        if (this.dataTable) {
-            if (typeof newUrl === "undefined") {
-                return this.dataTable.ajax.url();
-            }
+        if (this.dataTable) 
             this.dataTable.ajax.url(newUrl).load();
-        }
+        else
+            this.settings.ajaxUrl = newUrl;
+            
     }
 }

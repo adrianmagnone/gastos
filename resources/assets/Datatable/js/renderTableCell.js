@@ -6,10 +6,10 @@ class renderTableCell
         {
             if (element.condicion)
             {
-                let icono = 'fa fa-circle',
+                let icono = renderResources.iconSignal(),
                     clase = renderResources.type(element.tipo);
 
-                return `<span title="${element.titulo}" class="${clase}"><i class="${icono}" aria-hidden="true"></i></span>`;
+                return `<span title="${element.titulo}" class="${clase}">${icono}</span>`;
             }
         };
     	return '';

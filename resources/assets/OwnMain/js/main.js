@@ -3,7 +3,8 @@ class Main
     static config = {
                 login : 0,
                 base_url: '',
-                tipo_usuario: 0
+                tipo_usuario: 0,
+                ellipsis_max: 30
             };
 
     static init(configuracion)
@@ -93,5 +94,30 @@ class Main
         return d.getDate() == f[0]  &&
                d.getMonth() == f[1] &&
                d.getFullYear() == f[2];
+    }
+
+    static ellipsisMax()
+    {
+        return Main.config.ellipsis_max;
+    }
+
+    static showModal(selector)
+    {
+        const idModal = document.getElementById(selector);
+
+        if (idModal) {
+            const modal = tabler.Modal.getOrCreateInstance(idModal);
+            modal.show();
+        }
+    }
+
+    static hideModal(selector)
+    {
+        const idModal = document.getElementById(selector);
+
+        if (idModal) {
+            const modal = tabler.Modal.getOrCreateInstance(idModal);
+            modal.hide();
+        }
     }
 }

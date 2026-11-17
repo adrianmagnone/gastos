@@ -40,17 +40,16 @@ class wrapCalendar
             }
         });
 
-        if (typeof this.functionChaged === 'function')
-        {
-            this.date.on('selected', (date1, date2) => {
-                if (this.currentValue != date1)
+        this.date.on('selected', (date1, date2) => {
+            if (this.currentValue != date1)
+            {
+                this.currentValue = date1;
+                if (typeof this.functionChaged === 'function')
                 {
-                    this.currentValue = date1;
                     this.functionChaged();
                 }
-            });
-        }
-        
+            }
+        });
 
         $(`#${selector}`).mask('00/00/0000');
     }

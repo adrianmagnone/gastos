@@ -8,11 +8,6 @@ class wrapSelectTag
             return
 
         this.select = new TomSelect(selector, {
-            plugins: {
-                remove_button:{
-                    title:'Borrar',
-                }
-            },
             create: false,
             allowEmptyOption: true,
             closeAfterSelect: false,

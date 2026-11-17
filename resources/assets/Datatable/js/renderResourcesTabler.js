@@ -34,7 +34,13 @@ class renderResources extends resourcesBase
             star: 'icon ti ti-star',
             keyboard: 'icon ti ti-keyboard',
             import: 'icon ti ti-file-import',
-            print: 'icon ti ti-printer'
+            print: 'icon ti ti-printer',
+            download: 'icon ti ti-download',
+            cheque: 'icon ti ti-cash-banknote',
+            transferencia: 'icon ti ti-receipt-refund',
+            pagodirecto: 'icon ti ti-receipt-2',
+            replace: 'icon ti ti-replace',
+            setting: 'icon ti ti-settings'
         }
 
         return icons[element] ?? element;
@@ -81,5 +87,16 @@ class renderResources extends resourcesBase
     static iconSearch()
     {
         return '<i class="ti ti-search"></i>';
+    }
+
+    static iconSignal()
+    {
+        return '<i class="icon ti ti-circle-filled" aria-hidden="true"></i>';
+    }
+
+    static ajustDataTableTheme()
+    {
+        $("#grid_length").addClass('text-muted');
+        $('input', '.dt-search').addClass('search-form-control');
     }
 }

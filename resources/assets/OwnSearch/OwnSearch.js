@@ -15,7 +15,9 @@ class OwnSearch {
             atributoDescripcion: true,
             openKey: false,
             field: '',
-            dataTableOptions: {}
+            dataTableOptions: {
+                pageLength: 10,
+            }
         };
 
         this.settings = {
@@ -40,7 +42,8 @@ class OwnSearch {
 
         const idModal = document.getElementById(this.settings.id_div_principal);
 
-        this.modal = tabler.Modal.getOrCreateInstance(idModal);
+        if (idModal)
+            this.modal = tabler.Modal.getOrCreateInstance(idModal);
 
         this.configureFieldSelectors();
         this.bindEvents();
@@ -121,7 +124,7 @@ class OwnSearch {
 
         if (this.settings.openKey) {
             document.addEventListener('keyup', (event) => {
-                if (event.altKey) {
+                if (this.modal && event.altKey) {
                     if (event.key.toLowerCase() === this.settings.openKey.toLowerCase()) {
                         this.modal.show();
                     }
@@ -183,8 +186,8 @@ class OwnSearch {
             this.settings.onElementoSeleccionado(dataRow);
         }
 
-        
-        this.modal.hide();
+        if (this.modal)
+            this.modal.hide();
     }
 
     limpiarElementoSeleccionado() {
@@ -192,14 +195,17 @@ class OwnSearch {
     }
 
     changeUrl(newUrl) {
-        if (this.datatable) {
+        if (this.datatable) 
             this.datatable.ajaxUrl(newUrl);
-        }
+        else
+            this.settings.dataTableOptions.ajaxUrl = newUrl;
     }
 
     loadRecord(idEntidad) {
-        if (!idEntidad && idEntidad !== 0)
+        if (!idEntidad) {
+            this.limpiarElementoSeleccionado();
             return;
+        }
 
         const ajaxUrl = this.settings.dataTableOptions && this.settings.dataTableOptions.ajaxUrl;
 
@@ -229,32 +235,45 @@ class OwnSearch {
             return this;
         }
 
-        this.modal.show();
+        if (this.modal)
+            this.modal.show();
     }
 
     loading() {
         const btnSelect = document.querySelectorAll(`.${this.settings.field}-select-value`)[0],
               btnClear = document.querySelectorAll(`.${this.settings.field}-clear-value`)[0];
 
-        btnClear.classList.add('disabled');
-        btnSelect.innerHTML = renderResources.loadingSearch();
-        btnSelect.classList.add('disabled');
+        if (btnClear) {
+            btnClear.classList.add('disabled');
+        }
+        if (btnSelect) {
+            btnSelect.innerHTML = renderResources.loadingSearch();
+            btnSelect.classList.add('disabled');
+        }
     }
 
     disable() {
         const btnSelect = document.querySelectorAll(`.${this.settings.field}-select-value`)[0],
               btnClear = document.querySelectorAll(`.${this.settings.field}-clear-value`)[0];
 
-        btnClear.classList.add('disabled');
-        btnSelect.classList.add('disabled');
+        if (btnClear) {
+            btnClear.classList.add('disabled');
+        }
+        if (btnSelect) { 
+            btnSelect.classList.add('disabled');
+        }
     }
 
     enable() {
         const btnSelect = document.querySelectorAll(`.${this.settings.field}-select-value`)[0],
               btnClear = document.querySelectorAll(`.${this.settings.field}-clear-value`)[0];
 
-        btnClear.classList.remove('disabled');
-        btnSelect.innerHTML = renderResources.iconSearch();
-        btnSelect.classList.remove('disabled');
+        if (btnClear) {
+            btnClear.classList.remove('disabled');
+        }
+        if (btnSelect) {
+            btnSelect.innerHTML = renderResources.iconSearch();
+            btnSelect.classList.remove('disabled');
+        }
     }
 }

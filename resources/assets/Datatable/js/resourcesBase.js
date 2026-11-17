@@ -51,4 +51,13 @@ class resourcesBase
         throw new Error("El método estático 'iconSearch()' debe ser implementado.");
     }
 
+    static iconSignal()
+    {
+        throw new Error("El método estático 'iconSignal()' debe ser implementado.");
+    }
+
+    static ajustDataTableTheme()
+    {
+        throw new Error("El método estático 'ajustDataTableTheme()' debe ser implementado.");
+    }
 }

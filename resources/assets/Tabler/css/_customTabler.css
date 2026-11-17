@@ -4,8 +4,17 @@
 	--tblr-body-font-size: 0.75rem;
 }
 
+.col-15 {
+  flex: 0 0 auto;
+  width: 12.5%;
+}
+
 .invalid-feedback {
     display: block;
+}
+
+.page-body {
+	margin-top: 0.15rem !important;
 }
 
 .dropdown-title {
@@ -23,6 +32,22 @@
 	background-color: transparent;
 	border: 0;
 }
+
+.form-label {
+  	font-size: 0.75rem !important;
+	margin-bottom: 0.15rem;
+}
+
+.table-disabled {
+    opacity: 0.5 !important;
+    pointer-events: none;
+}
+
+.table-mono {
+	font-variant-numeric: tabular-nums;
+}
+
 .form-control {
 	font-size: 0.75rem !important;
+	box-shadow: none !important;
 }
