@@ -26,6 +26,10 @@
 
     <!-- Libs CSS - JS  -->
     @yield('Bundles')
+    <script>
+      /*to prevent Firefox FOUC, this must be here*/
+      let FF_FOUC_FIX;
+    </script>
   </head>
   <body  class=" border-top-wide border-primary d-flex flex-column">
     <div class="page page-center">
