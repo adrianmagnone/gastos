@@ -7,7 +7,7 @@ use Aiglos\Lba\Actions\ProcessOneAction;
 
 use App\Models\PagoTarjeta;
 use App\Models\Movimiento;
-use App\Enum\PagosMovimiento;
+use App\Enums\PagosMovimiento;
 
 class PagoPasarGastos extends ProcessOneAction
 {
