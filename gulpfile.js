@@ -34,14 +34,15 @@ const files = {
           `${path.node}/jquery-mask-plugin/dist/jquery.mask.min.js`
      ],
      jsDatatable: [
-          `${path.node}/datatables.net/js/jquery.dataTables.min.js`,
+          `${path.node}/datatables.net/js/dataTables.min.js`,
           `${path.assets}/Datatable/js/resourcesBase.js`,
           `${path.assets}/Datatable/js/renderResourcesTabler.js`,
+          `${path.assets}/Datatable/js/DatatableLayout.js`,
           `${path.assets}/Datatable/js/OwnDatatable.js`,
           `${path.assets}/Datatable/js/renderTableCell.js`
      ],
      cssDatatable: [
-          `${path.node}/datatables.net-dt/css/jquery.dataTables.min.css`,
+          `${path.node}/datatables.net-dt/css/dataTables.dataTables.min.css`,
           `${path.assets}/Datatable/css/_customDataTable.css`
      ],
      jsMain: [
