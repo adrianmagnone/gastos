@@ -7,6 +7,7 @@ use Aiglos\Lba\Actions\ProcessOneAction;
 
 use App\Models\PagoTarjeta;
 use App\Models\Movimiento;
+use App\Enum\PagosMovimiento;
 
 class PagoPasarGastos extends ProcessOneAction
 {
@@ -34,7 +35,7 @@ class PagoPasarGastos extends ProcessOneAction
                 'categoria_id' => $detalle->categoria_id,
                 'descripcion'  => $detalle->compra_descripcion,
                 'importe'      => $detalle->importe,
-                'tipoPago'     => Movimiento::TipoPagoFrom('Tarjeta de credito')
+                'tipoPago'     => PagosMovimiento::TARJETA_CREDITO
             ];
             Movimiento::create($gasto);
         }
@@ -48,7 +49,7 @@ class PagoPasarGastos extends ProcessOneAction
                 'categoria_id' => config('define.categorias.seguros'),
                 'descripcion'  => 'Tarjeta',
                 'importe'      => $this->entidad->totalSeguros,
-                'tipoPago'     => Movimiento::TipoPagoFrom('Tarjeta de credito')
+                'tipoPago'     => PagosMovimiento::TARJETA_CREDITO
             ];
             Movimiento::create($gastoSeguro);
         }
@@ -62,7 +63,7 @@ class PagoPasarGastos extends ProcessOneAction
                 'categoria_id' => config('define.categorias.tarjeta'),
                 'descripcion'  => $this->entidad->descripcion_tarjeta,
                 'importe'      => $this->entidad->total_gastos,
-                'tipoPago'     => Movimiento::TipoPagoFrom('Tarjeta de credito')
+                'tipoPago'     => PagosMovimiento::TARJETA_CREDITO
             ];
             Movimiento::create($gastoTarjeta);
         }
