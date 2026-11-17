@@ -18,7 +18,7 @@
 @endsection
 
 @section('ListBody')
-<x-list.table columns="Periodo|Fecha Pago|Total Cuotas|Total Seguros|Gastos|Importe" acciones="1" :footer="true" />
+<x-list.table columns="Periodo|Fecha Pago|Total Cuotas|Total Seguros|Gastos|Importe" acciones="0" :footer="true" />
 @endsection
 
 @section('ListBundles')
@@ -40,17 +40,14 @@
 
 		$tabla.init({
 			ajaxUrl: "{{ asset('pagos_tarjetas_data') }}",
-			columns: "id|periodo|fecha_pago~f|total_cuotas~f|total_seguros~f|gastos~f|total_pagado~f|consultar~f",
+			viewUrl: "{{ asset('pago_tarjeta/consultar') }}",
+			columns: "id|periodo~c|fecha_pago~f|total_cuotas~f|total_seguros~f|gastos~f|total_pagado~f",
 			removeClassHeader: "text-nowrap fw-medium font-monospace",
 			columnDefs: [
 				{ data: "total_cuotas",      className: "text-end text-nowrap font-monospace fw-medium"    },
 				{ data: "total_seguros",     className: "text-end text-nowrap font-monospace fw-medium"    },
 				{ data: "total_pagado",      className: "text-end text-nowrap font-monospace fw-medium"    },
 				{ data: "gastos",            className: "text-end text-nowrap font-monospace fw-medium"    },
-				{
-    				data: "consultar",
-    				render: ( data, type, row, meta ) => renderTableCell.urlConsultIcon({ condicion: true, url: `pago_tarjeta/consultar/${row.id}` })
-  				}
 			],
 			stateSave: [
                 { key: "tarjeta",       control: selectTarjeta       },
